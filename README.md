@@ -1,2 +1,2 @@
 # amandata.dev
-my first research portfolio 
+research stuff 
