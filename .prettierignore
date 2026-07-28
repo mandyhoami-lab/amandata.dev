@@ -1,0 +1,5 @@
+# index.html is generated output, written by tools/mirror.sh from the live site.
+# It is minified on purpose: the mirror diffs it against a fresh minified fetch,
+# and prettifying it would make every future sync an unreadable diff.
+index.html
+assets/

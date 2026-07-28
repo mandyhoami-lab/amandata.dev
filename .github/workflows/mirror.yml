@@ -1,0 +1,55 @@
+name: Mirror amandata.dev
+
+# Re-fetches the live site, sanitizes it, and commits if anything changed.
+# tools/mirror.sh aborts non-zero on a bad fetch (non-200, undersized body, or
+# missing site markers), so a Cloudflare challenge page fails the run loudly
+# instead of being committed over a good mirror.
+
+on:
+  schedule:
+    # 07:00 UTC daily. GitHub cron is UTC and can run late under load; that is
+    # fine for a mirror.
+    - cron: '0 7 * * *'
+  workflow_dispatch:        # lets you trigger a sync by hand from the Actions tab
+
+permissions:
+  contents: write
+
+concurrency:
+  group: mirror
+  cancel-in-progress: false
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run mirror
+        run: bash tools/mirror.sh
+
+      - name: Commit if changed
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "No changes -- live site matches the mirror."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Sync mirror with live amandata.dev ($(date -u +%Y-%m-%d))"
+          git push
+          echo "Mirror updated."
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "### Mirror run"
+            echo ""
+            if [ -n "$(git log --oneline -1 --grep='Sync mirror' --since='5 minutes ago')" ]; then
+              echo "Committed an update from the live site."
+            else
+              echo "No change, or the run failed before committing."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
