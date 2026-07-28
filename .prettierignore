@@ -1,5 +1,11 @@
-# index.html is generated output, written by tools/mirror.sh from the live site.
-# It is minified on purpose: the mirror diffs it against a fresh minified fetch,
-# and prettifying it would make every future sync an unreadable diff.
+# index.html is hand-edited now, but it stays minified and stays ignored here.
+# Reformatting it once would rewrite all 90KB and bury every real change in that
+# diff, and it would also break the --check re-pull, which compares it against a
+# freshly minified fetch. If we ever split it into readable sources plus a build
+# step, that is the moment to drop this entry.
 index.html
 assets/
+
+# The upstream baseline must stay byte-identical to what the live site serves,
+# or --check reports drift that isn't there.
+upstream/

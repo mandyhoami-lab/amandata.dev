@@ -1,14 +1,20 @@
 #!/usr/bin/env bash
 #
-# Mirror the live amandata.dev into this repo.
+# Pull the live amandata.dev into this repo.
 #
 # Fetches the deployed site, validates it really is the site (not a Cloudflare
 # challenge or an error page), applies the sanitation steps below, and writes
 # index.html plus every referenced asset into the repo root.
 #
 # The transformation is deterministic and idempotent: running it twice over the
-# same upstream HTML produces byte-identical output. Do not hand-edit index.html
-# or assets/ -- the next run overwrites them. Every change belongs in here.
+# same upstream HTML produces byte-identical output.
+#
+# NOTE ON SCOPE: this seeded the repo, it no longer maintains it. index.html and
+# assets/ are hand-edited now (see README) and this script overwrites them
+# wholesale, discarding those edits. That is what it is for -- a deliberate reset
+# to upstream -- so run it knowingly, not routinely. Use --check for the everyday
+# question of whether the live site has moved. Nothing runs the destructive form
+# on a schedule.
 #
 # Sanitation applied:
 #   1. Cloudflare email obfuscation -> plain mailto:. The hex payload is XOR'd
@@ -22,18 +28,39 @@
 # it from minified generated JS is not reliably scriptable, and a rewrite is not
 # a mirror.
 #
-# Usage: tools/mirror.sh [--check]
-#   --check  fetch and sanitize, report whether output differs, write nothing
+# THE UPSTREAM BASELINE
+#
+# upstream/index.html is the last sanitized copy of the live site we looked at.
+# It exists because index.html is hand-edited and therefore useless as a
+# comparison point: diffing a fresh fetch against our own edits would report
+# drift every single day forever, whether or not Carrd moved. --check diffs
+# against the baseline instead, so "drift" means the live site actually changed.
+# Nothing but this script writes it, and it is never served -- it is a record.
+#
+# Usage: tools/mirror.sh [--check | --baseline]
+#   --check     fetch and sanitize, report whether the live site has drifted from
+#               upstream/index.html, write nothing. Safe; this is the daily job.
+#   --baseline  update upstream/index.html only. Says "I have seen this upstream
+#               change and decided what to do about it" -- silences the drift
+#               report without touching our index.html.
+#   (no flag)   DESTRUCTIVE reset: overwrite index.html and assets/ from live,
+#               discarding hand edits, and refresh the baseline to match.
 
 set -euo pipefail
 
 SITE="https://amandata.dev"
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+BASELINE="$REPO_ROOT/upstream/index.html"
 WORK="$(mktemp -d)"
 trap 'rm -rf "$WORK"' EXIT
 
-CHECK_ONLY=0
-[ "${1:-}" = "--check" ] && CHECK_ONLY=1
+MODE="reset"
+case "${1:-}" in
+  --check)    MODE="check" ;;
+  --baseline) MODE="baseline" ;;
+  "")         MODE="reset" ;;
+  *)          printf 'usage: %s [--check | --baseline]\n' "$0" >&2; exit 2 ;;
+esac
 
 log() { printf '%s\n' "$*" >&2; }
 die() { printf 'ERROR: %s\n' "$*" >&2; exit 1; }
@@ -150,12 +177,24 @@ done < "$WORK/assets.txt"
 
 # --- report / install -----------------------------------------------------
 
-if [ "$CHECK_ONLY" -eq 1 ]; then
-  if diff -q "$WORK/index.html" "$REPO_ROOT/index.html" >/dev/null 2>&1; then
-    log "==> no change"
+# Compared against the baseline, never against index.html -- see the note at the
+# top of this file for why.
+if [ "$MODE" = "check" ]; then
+  [ -f "$BASELINE" ] \
+    || die "no baseline at upstream/index.html -- run 'tools/mirror.sh --baseline' to seed it"
+  if diff -q "$WORK/index.html" "$BASELINE" >/dev/null 2>&1; then
+    log "==> no change: live site matches the baseline"
   else
-    log "==> index.html WOULD CHANGE"
+    log "==> UPSTREAM DRIFT: the live site differs from upstream/index.html"
   fi
+  exit 0
+fi
+
+mkdir -p "$(dirname "$BASELINE")"
+cp "$WORK/index.html" "$BASELINE"
+
+if [ "$MODE" = "baseline" ]; then
+  log "==> baseline updated (index.html and assets/ left alone)"
   exit 0
 fi
 
@@ -166,4 +205,4 @@ while IFS= read -r rel; do
   cp "$WORK/$rel" "$REPO_ROOT/$rel"
 done < "$WORK/assets.txt"
 
-log "==> mirror updated"
+log "==> reset to upstream: index.html, assets/, and the baseline all rewritten"

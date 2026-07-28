@@ -5,6 +5,14 @@
 *.yml   text eol=lf
 *.yaml  text eol=lf
 
-# Generated mirror output: keep byte-exact, and don't let it skew language stats.
-index.html    -text linguist-generated
+# index.html: keep byte-exact. It began as generated output, and a --check
+# re-pull still diffs it against a fresh minified fetch, so no eol conversion.
+# It is NOT marked linguist-generated anymore -- that collapsed it by default in
+# diffs and pull requests, which is precisely the review we now want to see.
+index.html    -text
 assets/**     binary
+
+# upstream/index.html is the last-seen sanitized upstream HTML, kept only so
+# --check has something honest to diff against. Byte-exact for the same reason,
+# and still linguist-generated -- it really is generated, and nobody reviews it.
+upstream/**   -text linguist-generated

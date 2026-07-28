@@ -1,55 +1,74 @@
-name: Mirror amandata.dev
+name: Check upstream drift
 
-# Re-fetches the live site, sanitizes it, and commits if anything changed.
+# Re-fetches the live Carrd site, sanitizes it, and reports whether it has
+# drifted from upstream/index.html -- the last upstream state we looked at. It
+# does NOT commit.
+#
+# This used to auto-commit the fetched site over main. It can't anymore: main is
+# now the working copy, index.html is hand-edited, and an automated re-pull would
+# silently flatten those edits. Drift is a notification, not an action -- when a
+# run reports a difference, go look and decide what (if anything) to port.
+#
+# It compares against the baseline rather than against index.html on purpose. Our
+# own edits are not drift, and a job that fired every day regardless would be
+# noise nobody reads.
+#
 # tools/mirror.sh aborts non-zero on a bad fetch (non-200, undersized body, or
 # missing site markers), so a Cloudflare challenge page fails the run loudly
-# instead of being committed over a good mirror.
+# instead of being reported as an upstream rewrite.
+#
+# To deliberately reset back to upstream, run `tools/mirror.sh` locally (without
+# --check) and commit the result yourself, with eyes on the diff.
 
 on:
   schedule:
     # 07:00 UTC daily. GitHub cron is UTC and can run late under load; that is
-    # fine for a mirror.
+    # fine for a drift check.
     - cron: '0 7 * * *'
-  workflow_dispatch:        # lets you trigger a sync by hand from the Actions tab
+  workflow_dispatch:        # lets you run a check by hand from the Actions tab
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: mirror
   cancel-in-progress: false
 
 jobs:
-  mirror:
+  check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Run mirror
-        run: bash tools/mirror.sh
-
-      - name: Commit if changed
+      - name: Check for upstream drift
+        id: check
         run: |
-          if [ -z "$(git status --porcelain)" ]; then
-            echo "No changes -- live site matches the mirror."
-            exit 0
+          # pipefail matters: without it, tee would swallow a mirror.sh failure
+          # and a broken fetch would read as "no drift".
+          set -o pipefail
+          bash tools/mirror.sh --check 2>&1 | tee check.log
+          if grep -q 'UPSTREAM DRIFT' check.log; then
+            echo "drift=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "drift=false" >> "$GITHUB_OUTPUT"
           fi
-          git config user.name  "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A
-          git commit -m "Sync mirror with live amandata.dev ($(date -u +%Y-%m-%d))"
-          git push
-          echo "Mirror updated."
 
       - name: Summary
         if: always()
         run: |
           {
-            echo "### Mirror run"
+            echo "### Upstream drift check"
             echo ""
-            if [ -n "$(git log --oneline -1 --grep='Sync mirror' --since='5 minutes ago')" ]; then
-              echo "Committed an update from the live site."
+            if [ "${{ steps.check.outputs.drift }}" = "true" ]; then
+              echo "The live site has **drifted** from this repo."
+              echo ""
+              echo "Amanda changed something in Carrd since we last looked."
+              echo "Decide whether to port it, then run"
+              echo "\`tools/mirror.sh --baseline\` and commit to acknowledge it."
+            elif [ "${{ steps.check.outputs.drift }}" = "false" ]; then
+              echo "No drift -- the live site still matches the baseline."
             else
-              echo "No change, or the run failed before committing."
+              echo "The check did not complete. The fetch most likely failed"
+              echo "validation; see the job log."
             fi
           } >> "$GITHUB_STEP_SUMMARY"
