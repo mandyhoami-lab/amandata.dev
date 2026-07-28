@@ -1,0 +1,10 @@
+# Shell scripts and workflows must keep LF endings — CRLF breaks them on the
+# Linux Actions runner. This repo is edited on Windows, where core.autocrlf
+# would otherwise decide, so pin it here instead of relying on local config.
+*.sh    text eol=lf
+*.yml   text eol=lf
+*.yaml  text eol=lf
+
+# Generated mirror output: keep byte-exact, and don't let it skew language stats.
+index.html    -text linguist-generated
+assets/**     binary
