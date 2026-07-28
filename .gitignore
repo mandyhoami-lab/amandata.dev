@@ -1,0 +1,13 @@
+# Editor / OS
+.vscode/
+.idea/
+*.code-workspace
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+
+# Scratch
+*.log
+*.tmp
+*.bak
