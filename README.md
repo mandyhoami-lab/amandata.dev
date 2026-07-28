@@ -29,9 +29,13 @@ mirror.
 - The `/cdn-cgi/` email-decode script is dropped; it 404s off Cloudflare.
 - `?v=<hash>` cache-busting is stripped from asset refs, so a republish with no
   content change produces an empty diff.
+- The one builder string in the output, an IndexedDB store name, is renamed. The
+  output contains no builder references at all.
 
-The inline runtime is left intact — excising it from minified generated JS isn't
-reliably scriptable, and a rewrite wouldn't be a mirror.
+Most of the generated code is deliberately left as-is. There was never a badge
+or attribution notice to remove, and the ~39KB inline runtime and the
+`instance-N` / `text-component` class scheme stay: excising them from minified
+generated JS isn't reliably scriptable, and a rewrite wouldn't be a mirror.
 
 ### Known limitation
 

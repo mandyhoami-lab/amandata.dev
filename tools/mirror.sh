@@ -56,10 +56,13 @@ http_code="$(curl -sSL \
 size="$(wc -c < "$WORK/raw.html" | tr -d '[:space:]')"
 [ "$size" -ge 50000 ] || die "response is only ${size}B (<50KB) -- likely a challenge or error page"
 
-# Markers that identify this as the real site. The Carrd signature also guards
-# the self-mirror case: if the domain is ever repointed at this repo, a fetch
-# that lacks it means the source changed and a blind overwrite would be wrong.
-for marker in 'Amanda Ta' '#biography' "indexedDB.open('carrd')"; do
+# Markers that identify this as the real site. Deliberately only stable ones --
+# section anchors like #biography are renameable from the site editor, and using
+# one here would hard-fail the mirror the day it changed. The builder signature
+# also guards the self-mirror case: if the domain is ever repointed at this
+# repo, a fetch lacking it means the source changed and a blind overwrite would
+# be wrong. It is checked against the raw fetch, before sanitation removes it.
+for marker in 'Amanda Ta' "indexedDB.open('carrd')"; do
   grep -qF "$marker" "$WORK/raw.html" \
     || die "expected marker not found: $marker -- refusing to overwrite the mirror"
 done
@@ -97,6 +100,12 @@ perl -0777 -pe '
   #    Google Fonts query string is untouched -- that is a real API parameter.
   s{(["'"'"'(])((?:\./)?assets/[^"'"'"')?]+)\?v=[0-9a-f]+}{$1$2}g;
   s{(https?://amandata\.dev/assets/[^"'"'"')?]+)\?v=[0-9a-f]+}{$1}g;
+
+  # 4. The only literal builder string in the output: an IndexedDB store name.
+  #    Renaming is safe (the store is created and read by this same inline
+  #    script, nothing external references it) and idempotent, since after the
+  #    rename the pattern no longer matches.
+  s{indexedDB\.open\('"'"'carrd'"'"'\)}{indexedDB.open('"'"'site'"'"')}g;
 ' "$WORK/raw.html" > "$WORK/index.html"
 
 # Fail loudly rather than shipping a half-sanitized page.
