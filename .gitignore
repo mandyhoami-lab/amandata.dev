@@ -11,3 +11,6 @@ Desktop.ini
 *.log
 *.tmp
 *.bak
+
+# Tooling artifacts
+.playwright-mcp/
