@@ -900,6 +900,17 @@ section[id$='-section'] > h1.style-1:not(#text03)::after {
   function boot() {
     var tagline = document.getElementById('text08');
     if (tagline) eeg = makeEeg(tagline);
+
+    // Prepare every section now rather than lazily on first view. Carrd makes a
+    // section visible a couple of frames before sync() reaches it, so a section
+    // still waiting for its .lx-reveal painted at full opacity, snapped to
+    // hidden the instant prepare() ran, and only then faded in. That read as the
+    // heading flashing, and only ever on a section's first visit -- afterwards
+    // the class is already there and it starts hidden as intended.
+    //
+    // Runs after makeEeg so the trace it injects into the home section is picked
+    // up as one of its children and reveals with the rest.
+    each(sections, prepare);
     sync();
   }
 
