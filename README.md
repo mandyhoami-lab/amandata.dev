@@ -51,10 +51,14 @@ reads like normal code, and can be lifted out in one piece. **New presentation
 work should go here** in preference to editing the generated soup above it.
 
 Everything in it is keyed to the page's own content — an EEG trace under the hero,
-a highlighter sweep across the biography's green key terms (the page coding its
-own themes, the way she codes interview data), staggered section reveals, a
-typewriter on the tagline, retro press states, a reading-progress bar, and a CRT
-vignette.
+a highlighter sweep across the biography's key terms (the page coding its own
+themes, the way she codes interview data), staggered section reveals, a typewriter
+on the tagline, retro press states, a reading-progress bar, and a CRT vignette.
+The visual system now layers in a restrained Miku-inspired “clinical cyber-pop”
+theme: turquoise and magenta data accents, abstract twin light ribbons behind the
+hero, a technical grid, instrument-style portrait framing, and quieter translucent
+research cards. The character reference stays abstract so the academic work remains
+the focus.
 
 Three rules it holds to, worth keeping if you extend it:
 
