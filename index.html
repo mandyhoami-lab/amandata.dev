@@ -74,8 +74,14 @@
    natural width -- script narrows the inner one, so a failure shows the whole
    tagline instead of nothing. */
 .lx-tw, .lx-tw-i { display: inline-block; white-space: nowrap; }
-.lx-tw { overflow: hidden; text-align: left; vertical-align: bottom; }
+.lx-tw { overflow: hidden; text-align: left; vertical-align: bottom; max-width: 100%; }
 .lx-tw-i { overflow: hidden; vertical-align: bottom; }
+/* Once script has released its inline width the span is plain text again, and a
+   tagline that no longer fits on one line must be allowed to wrap rather than
+   run off the side. The left alignment only exists so the animation reveals
+   left-to-right; a wrapped line has to centre like every other heading. */
+.lx-tw.lx-tw-done, .lx-tw.lx-tw-done .lx-tw-i { overflow: visible; white-space: normal; }
+.lx-tw.lx-tw-done { text-align: center; }
 .lx-caret {
   display: inline-block; width: .55ch; height: .9em; vertical-align: baseline;
   background: var(--lx-accent); opacity: .8; margin-left: .12ch;
@@ -444,6 +450,19 @@ section[id$='-section'] > h1.style-1:not(#text03)::after {
   section[id$='-section'] > h2.style-2::before { font-size: .19em; line-height: 1.45; }
 }
 
+/* The stock narrow-screen rule puts 4.75rem of padding on each side of these
+   headings, which is fine at phone widths but becomes 152px of gutter against
+   169px of usable width by 320px -- "research portfolio" ends up within a few
+   pixels of overflowing before anything else has gone wrong. Scale the gutter to
+   the viewport, but only in the range where it is actually load-bearing, so
+   ordinary phone layouts keep their original proportions. */
+@media (max-width: 360px) {
+  .text-component.style-1 {
+    padding-left: clamp(1rem, 8vw, 4.75rem);
+    padding-right: clamp(1rem, 8vw, 4.75rem);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .mk-ribbons { transform: none !important; transition: none !important; }
   .mk-ribbon, .mk-signal::before { animation: none !important; }
@@ -640,22 +659,56 @@ section[id$='-section'] > h1.style-1:not(#text03)::after {
     el.textContent = '';
     el.appendChild(outer);
 
-    // Measured after insertion, so it reflects the real font and size. Zero
-    // means we were called while hidden -- leave the tagline plainly visible and
-    // let a later activation try again.
+    // Whenever we are not actively animating, the span must behave like plain
+    // text: wrappable and unclipped. Anything else leaves the tagline at the
+    // mercy of a measurement taken once and never revisited.
+    function plain() { outer.classList.add('lx-tw-done'); }
+
+    // Measured after insertion and while still nowrap, so it reflects the real
+    // font and size on one line. Zero means we were called while hidden -- leave
+    // the tagline plainly visible and let a later activation try again.
     var full = Math.ceil(ilx.getBoundingClientRect().width);
-    if (full < 2) return;
+    if (full < 2) { plain(); return; }
     el.dataset.lxTw = '1';
-    if (reduce) return;   // text is already fully in place
+    if (reduce) { plain(); return; }   // text is already fully in place
+
+    // Only animate when the finished line genuinely fits where it is going to
+    // live. Reserving a width the box cannot give us would lock in a single
+    // line the text has already outgrown, and the tail would never come back.
+    var cs = getComputedStyle(el);
+    var room = el.clientWidth - parseFloat(cs.paddingLeft || 0) - parseFloat(cs.paddingRight || 0);
+    if (room > 0 && full + 12 > room) { plain(); return; }
 
     // Reserve the finished width on the outer span so the centred line box
     // never shifts, then grow the inner one. A width transition rather than
     // @keyframes: if it is not honoured the text simply appears at full width.
+    var duration = text.length * 55;
     outer.style.width = (full + 12) + 'px';
     ilx.style.width = '0px';
     void ilx.offsetWidth;
-    ilx.style.transition = 'width ' + (text.length * 55) + 'ms steps(' + text.length + ', end) 250ms';
+    ilx.style.transition = 'width ' + duration + 'ms steps(' + text.length + ', end) 250ms';
     ilx.style.width = full + 'px';
+
+    // Hand the line back to normal layout the moment it has finished drawing.
+    // `full` is a one-off measurement, but the text it describes is not fixed:
+    // the webfont swaps in late, the 736px breakpoint changes font-size, and
+    // zoom rescales everything. Any of those makes the real text wider than the
+    // reserved box, and .lx-tw's overflow:hidden would clip the tail for good --
+    // nothing ever re-measures. Clearing the inline widths leaves plain,
+    // responsive text that re-wraps like any other heading.
+    var released = false;
+    function release() {
+      if (released) return;
+      released = true;
+      outer.style.width = '';
+      ilx.style.transition = '';
+      ilx.style.width = '';
+      plain();
+    }
+    ilx.addEventListener('transitionend', release);
+    // transitionend does not fire if the transition is interrupted or never
+    // starts (background tab, reduced-motion override); release anyway.
+    setTimeout(release, duration + 900);
   }
 
   /* ---- reading progress ---------------------------------------------- */
