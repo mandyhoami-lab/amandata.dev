@@ -40,6 +40,19 @@
               transform .55s var(--lx-ease) var(--lx-d, 0ms);
 }
 
+/* --- section departure ---------------------------------------------------
+   The counterpart to the staggered arrival above. Carrd cuts a section out in
+   a single frame, taking the container height with it; script holds the
+   outgoing section here for 240ms first so it recedes instead of vanishing,
+   and the reflow lands while there is nothing on screen to see it. The section
+   leaves as one piece on purpose -- staggering the exit as well reads as slow,
+   and the point is only to soften the cut. Applied by script only. */
+section.lx-exit {
+  opacity: 0; transform: translateY(-8px) scale(.99);
+  transition: opacity .24s var(--lx-ease), transform .24s var(--lx-ease);
+  pointer-events: none;
+}
+
 /* --- key-term highlight sweep -------------------------------------------
    The biography already marks its key concepts in green inline spans. This
    sweeps a highlighter across them on section entry: she codes qualitative data
@@ -510,6 +523,7 @@ section[id$='-section'] > h1.style-1:not(#text03)::after {
 
   function play(section) {
     prepare(section);
+    section.classList.remove('lx-exit');   // in case it is being re-entered
     // Flush style and layout so the from-state is the browser's current truth.
     // Without this, adding .lx-reveal and .lx-in in one tick means no transition
     // ever starts -- the two states are never separately painted.
@@ -531,6 +545,10 @@ section[id$='-section'] > h1.style-1:not(#text03)::after {
   }
 
   function rewind(section) {
+    // Always clear the exit state, even for a section that was never prepared:
+    // it is set on the way out and the section is display:none by the time we
+    // get here, so this is the natural place to drop it.
+    section.classList.remove('lx-exit');
     if (!section.dataset.lxPrepared) return;
     each(section.children, function (child) { child.classList.remove('lx-in'); });
     each(section.querySelectorAll('.lx-in'), function (el) { el.classList.remove('lx-in'); });
@@ -807,6 +825,62 @@ section[id$='-section'] > h1.style-1:not(#text03)::after {
   document.addEventListener('visibilitychange', function () {
     if (document.hidden) { if (eeg) eeg.stop(); } else { schedule(); }
   });
+
+  /* ---- section transitions -------------------------------------------- */
+
+  // Carrd swaps sections by flipping display:none in a single frame, so the
+  // outgoing content simply blinks out of existence and the container height
+  // snaps with it -- home to biography jumps 773px to 1271px between two
+  // adjacent frames. The arrival is already staggered by play(); this gives the
+  // departure the same courtesy. Take the click, fade the current section out,
+  // then hand the switch back to Carrd by setting the hash. The height change
+  // then lands while there is nothing on screen to see it happen.
+  var NAV_OUT = 240;   // keep in step with .lx-exit's transition duration
+  var leaving = false;
+
+  // Only hashes naming a real section are ours; mailto: and outbound links fall
+  // through untouched to Carrd and the browser. A bare '#' is not a placeholder
+  // here -- Carrd reads it as home, and the back buttons on biography and cv are
+  // written that way, so it has to route like any other section link or those
+  // two are the only buttons on the site without a transition.
+  function sectionFor(href) {
+    if (!href || href.charAt(0) !== '#') return null;
+    if (href === '#') return document.getElementById('home-section');
+    return document.getElementById(href.slice(1) + '-section');
+  }
+
+  document.addEventListener('click', function (e) {
+    if (e.defaultPrevented || e.button !== 0) return;
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var a = e.target && e.target.closest && e.target.closest('a[href]');
+    if (!a) return;
+
+    var href = a.getAttribute('href');
+    var target = sectionFor(href);
+    if (!target || !current || target === current) return;
+    if (reduce) return;   // no motion wanted: let Carrd switch instantly
+    // Setting a hash to the value it already holds fires no hashchange, so
+    // Carrd would never switch. Not reachable while our `current` tracks what
+    // Carrd is showing, but if it ever happens, correctness beats the fade.
+    if (location.hash === href) return;
+
+    // Ours now: Carrd's own handler must not switch out from under the fade.
+    e.preventDefault();
+    e.stopPropagation();
+    if (leaving) return;   // a departure is already in flight
+
+    leaving = true;
+    var from = current;
+    from.classList.add('lx-exit');
+    setTimeout(function () {
+      leaving = false;
+      location.hash = href;
+      // .lx-exit is deliberately left on: clearing it here would hand the
+      // section a frame back at full opacity if Carrd has not hidden it yet.
+      // play() and rewind() both clear it, so it comes off once the element is
+      // display:none -- or on the way back in, whichever happens first.
+    }, NAV_OUT);
+  }, true);
 
   var rt = 0;
   window.addEventListener('resize', function () {
