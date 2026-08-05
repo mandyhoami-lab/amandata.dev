@@ -664,26 +664,38 @@ section[id$='-section'] > h1.style-1:not(#text03)::after {
     // mercy of a measurement taken once and never revisited.
     function plain() { outer.classList.add('lx-tw-done'); }
 
-    // Measured after insertion and while still nowrap, so it reflects the real
-    // font and size on one line. Zero means we were called while hidden -- leave
-    // the tagline plainly visible and let a later activation try again.
-    var full = Math.ceil(ilx.getBoundingClientRect().width);
+    // Measured after insertion and while still nowrap, so both reflect the real
+    // font and size on one line. `full` is the text alone -- what the inner span
+    // grows to. `natural` is the whole line, text plus caret, which is exactly
+    // the width the outer span will shrink back to once released.
+    //
+    // Reserving `natural` rather than a padded approximation is what keeps the
+    // tagline still. The outer span is a centred inline-block, so any slack
+    // between the reserved width and the real content width re-centres the
+    // moment the inline width comes off, sliding the words sideways by half of
+    // it. Reserve precisely what the line ends up needing and there is no slack
+    // to redistribute -- the release changes nothing you can see.
+    //
+    // Zero width means we were called while hidden -- leave the tagline plainly
+    // visible and let a later activation try again.
+    var full = ilx.getBoundingClientRect().width;
     if (full < 2) { plain(); return; }
     el.dataset.lxTw = '1';
     if (reduce) { plain(); return; }   // text is already fully in place
+    var natural = outer.getBoundingClientRect().width;
 
     // Only animate when the finished line genuinely fits where it is going to
     // live. Reserving a width the box cannot give us would lock in a single
     // line the text has already outgrown, and the tail would never come back.
     var cs = getComputedStyle(el);
     var room = el.clientWidth - parseFloat(cs.paddingLeft || 0) - parseFloat(cs.paddingRight || 0);
-    if (room > 0 && full + 12 > room) { plain(); return; }
+    if (room > 0 && natural > room) { plain(); return; }
 
-    // Reserve the finished width on the outer span so the centred line box
-    // never shifts, then grow the inner one. A width transition rather than
-    // @keyframes: if it is not honoured the text simply appears at full width.
+    // Hold that width on the outer span so the centred line box never shifts,
+    // then grow the inner one. A width transition rather than @keyframes: if it
+    // is not honoured the text simply appears at full width.
     var duration = text.length * 55;
-    outer.style.width = (full + 12) + 'px';
+    outer.style.width = natural + 'px';
     ilx.style.width = '0px';
     void ilx.offsetWidth;
     ilx.style.transition = 'width ' + duration + 'ms steps(' + text.length + ', end) 250ms';
