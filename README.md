@@ -1,31 +1,32 @@
 # amandata.dev
+# in the process of moving domains
+# scroll for credits
 
-research stuff
 
-## What this repo is
+## Description
 
 This started as a read-only mirror of the live site (built and hosted on Carrd),
 produced by [`tools/mirror.sh`](tools/mirror.sh). That's how `index.html` and
 `assets/` got here, and it's still where the current markup came from.
 
-**It is no longer just a mirror.** It's the working copy now. The direction is:
+**It’s no longer just a mirror.** It's now a working copy. direction:
 
 1. Edit here, in the repo.
 2. Preview those edits locally and raise them as suggestions against the live
    design.
 3. Port the agreed ones upstream while Carrd is still the host.
-4. Eventually stop doing step 3 — drop Carrd and serve the site straight from
+4. Eventually stop doing step 3. Drop Carrd and serve the site straight from
    this repo.
 
-So the mirror is a starting point, not the source of truth. Divergence from the
-live site is expected and intentional.
+The mirror was a starting point, which soon became the
+live site.
 
 ## Editing
 
-`index.html` and `assets/` are **fair game to edit.** They are hand-maintained
+`index.html` and `assets/` were **fair game to edit.** Hand-maintained
 from here on.
 
-The one thing to keep in mind: `index.html` is 90KB of minified,
+ `index.html` is 90KB of minified,
 builder-generated markup. It is not pretty, and reformatting the whole file would
 bury every real change in a 90KB diff, so it stays minified for now. Prefer
 small, surgical edits. If a real build step (source files + a minifier) becomes
@@ -50,7 +51,7 @@ It is appended rather than woven into the minified markup, so it diffs cleanly,
 reads like normal code, and can be lifted out in one piece. **New presentation
 work should go here** in preference to editing the generated soup above it.
 
-Everything in it is keyed to the page's own content — an EEG trace under the hero,
+Everything in it is keyed to the page's own content. EEG trace under the hero,
 a highlighter sweep across the biography's key terms (the page coding its own
 themes, the way she codes interview data), staggered section reveals, a typewriter
 on the tagline, retro press states, a reading-progress bar, and a CRT vignette.
@@ -173,5 +174,7 @@ Known blockers for step 4. Listed to be tracked, not being worked on yet:
 
 ## Credits
 
-Coauthored and maintained by my husband,
-[KoriKosmos](https://github.com/KoriKosmos).
+Original Carrd live site was entirely built by me. 
+
+Coauthored and maintained by
+[KoriKosmos](https://github.com/KoriKosmos) 
