@@ -174,7 +174,7 @@ Known blockers for step 4. Listed to be tracked, not being worked on yet:
 
 ## Credits
 
-Original Carrd live site was entirely built by me. 
+Original live site was entirely built by me. 
 
 Coauthored and maintained by
 [KoriKosmos](https://github.com/KoriKosmos) 
