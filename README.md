@@ -174,7 +174,6 @@ Known blockers for step 4. Listed to be tracked, not being worked on yet:
 
 ## Credits
 
-Original live site was entirely built by me. 
-
-Coauthored and maintained by
-[KoriKosmos](https://github.com/KoriKosmos) 
+The original live site was entirely built by me 
+This is also coauthored and maintained by
+[KoriKosmos](https://github.com/KoriKosmos) !!
