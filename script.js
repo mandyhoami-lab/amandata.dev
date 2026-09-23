@@ -1,5 +1,5 @@
 /* =========================================================
-   amandata.org — vanilla JS behavior, no build step.
+   amandata.dev — vanilla JS behavior, no build step.
 
    Three rules (carried over from the old amandata.dev):
    1. Everything fails open. The hidden pre-reveal state only

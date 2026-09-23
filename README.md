@@ -1,8 +1,10 @@
-# amandata.org
+# amandata.dev
 
-My research portfolio site. Plain HTML, CSS, and JS — no build step.
+My personal website. Plain HTML, CSS, and JS — no build step.
 
-> Domain change: this project moved from **amandata.dev** to **amandata.org**.
+Live at **https://amandata.dev** (GitHub Pages, custom domain).
+
+> **amandata.org** is kept as a separate professional portfolio. This repo is the personal site.
 
 ## Edit me
 
@@ -22,7 +24,12 @@ Then open http://localhost:8000
 
 ## Deploy
 
-Push to any static host (GitHub Pages, Netlify, Cloudflare Pages).
+GitHub Pages serves the `main` branch (`/ (root)`) at amandata.dev.
+DNS: apex A records pointing at GitHub Pages (see repo settings).
+
+## History
+
+See [CHANGELOG.md](CHANGELOG.md) for a catalog of notable commits.
 
 ## Credits
 
@@ -34,4 +41,4 @@ Contributor: Muse.
 ## To do
 
 - [ ] Fill in the "My Work" section
-- [ ] Point the domain at the host
+
