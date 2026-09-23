@@ -28,7 +28,8 @@ Push to any static host (GitHub Pages, Netlify, Cloudflare Pages).
 
 The original live site was entirely built by me.
 This is also coauthored and maintained by [KoriKosmos](https://github.com/KoriKosmos) !!
-Rebuilt with Claude, and 2.0.
+Rebuilt with Claude and 2.0 (personal bot created with Muse by Meta).
+Contributor: Muse.
 
 ## To do
 
