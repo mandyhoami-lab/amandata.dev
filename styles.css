@@ -1,0 +1,378 @@
+/* =========================================================
+   amandata.org — token system
+   "clinical cyber-pop": black lab-bench background, turquoise
+   and magenta data accents, retro-terminal type.
+   Black    : #060606   (page)
+   Ink      : #F2F2F2   (text)
+   Turquoise: #39C5BB   (EEG trace, key terms, primary accent)
+   Magenta  : #F471B5   (secondary data accent)
+   Grid     : #123B38   (technical grid lines)
+   Display  : 'Press Start 2P' (hero / headings — retro terminal)
+   Alt disp : 'Micro 5'        (section tags, kickers)
+   Body     : 'Overpass Mono'  (everything else)
+   ========================================================= */
+
+:root{
+  --bg:      #060606;
+  --panel:   #0B0F0E;
+  --ink:     #F2F2F2;
+  --dim:     rgba(242,242,242,0.62);
+  --faint:   rgba(242,242,242,0.38);
+  --turq:    #39C5BB;
+  --magenta: #F471B5;
+  --grid:    rgba(57,197,187,0.07);
+  --line:    rgba(242,242,242,0.14);
+
+  --display: 'Press Start 2P', monospace;
+  --micro:   'Micro 5', monospace;
+  --body:    'Overpass Mono', monospace;
+
+  --max: 760px;
+  --edge: clamp(1.25rem, 5vw, 3rem);
+}
+
+*{ box-sizing: border-box; }
+html{ scroll-behavior: smooth; }
+
+body{
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  /* technical grid */
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+a{ color: var(--turq); }
+::selection{ background: var(--turq); color: #060606; }
+
+/* CRT vignette — pure overlay, never blocks clicks */
+.vignette{
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.55) 100%);
+}
+
+/* reading progress bar */
+.progress{
+  position: fixed; top: 0; left: 0;
+  height: 3px; width: 0%;
+  background: linear-gradient(90deg, var(--turq), var(--magenta));
+  z-index: 70;
+}
+
+/* ================= NAV ================= */
+.nav{
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.9rem var(--edge);
+  background: rgba(6,6,6,0.82);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.nav__mark{
+  font-family: var(--display);
+  font-size: 0.85rem;
+  color: var(--ink);
+  text-decoration: none;
+}
+.nav__mark:hover{ color: var(--turq); }
+.nav__links{ display: flex; gap: 1.6rem; }
+.nav__link{
+  font-family: var(--micro);
+  font-size: 1.05rem;
+  letter-spacing: 0.06em;
+  color: var(--dim);
+  text-decoration: none;
+  padding: 0.2rem 0;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.nav__link:hover{ color: var(--ink); }
+.nav__link.is-active{ color: var(--turq); border-color: var(--turq); }
+
+/* ================= HERO ================= */
+.hero{
+  position: relative;
+  min-height: 94svh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 5rem var(--edge) 2.5rem;
+  overflow: hidden;
+}
+
+/* twin light ribbons behind the hero */
+.ribbons{
+  position: absolute; inset: -20%;
+  pointer-events: none;
+  background:
+    linear-gradient(115deg, transparent 42%, rgba(57,197,187,0.16) 47%, transparent 53%),
+    linear-gradient(115deg, transparent 55%, rgba(244,113,181,0.12) 60%, transparent 66%);
+  filter: blur(30px);
+}
+
+.hero__kicker{
+  font-family: var(--micro);
+  font-size: 1.3rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin: 0 0 1.4rem;
+}
+.hero__title{
+  font-family: var(--display);
+  font-size: clamp(1.9rem, 7vw, 4.2rem);
+  line-height: 1.25;
+  margin: 0 0 1.6rem;
+  text-shadow: 0 0 24px rgba(57,197,187,0.35);
+}
+.hero__tagline{
+  font-family: var(--micro);
+  font-size: 1.6rem;
+  letter-spacing: 0.1em;
+  color: var(--turq);
+  margin: 0 0 2.2rem;
+  min-height: 2.2em;
+}
+.caret{
+  display: inline-block;
+  width: 0.55em; height: 1em;
+  background: var(--turq);
+  vertical-align: -0.12em;
+  margin-left: 2px;
+  animation: blink 1s steps(1) infinite; /* ~1Hz, well under the 3Hz limit */
+}
+@keyframes blink{ 50%{ opacity: 0; } }
+
+/* EEG trace */
+.eeg{
+  width: min(640px, 92vw);
+  height: 120px;
+  margin: 0 0 2rem;
+  opacity: 0.9;
+}
+.hero__scroll{
+  font-family: var(--micro);
+  font-size: 1.1rem;
+  letter-spacing: 0.14em;
+  color: var(--faint);
+  margin: 0;
+}
+
+/* ================= SECTIONS ================= */
+.section{
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 5.5rem var(--edge) 1.5rem;
+  position: relative;
+}
+.section__head{
+  display: flex; align-items: baseline; gap: 1rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 0.9rem;
+}
+.section__title{
+  font-family: var(--display);
+  font-size: clamp(1rem, 3.4vw, 1.4rem);
+  margin: 0;
+  color: var(--ink);
+}
+.section__tag{
+  font-family: var(--micro);
+  font-size: 1.15rem;
+  letter-spacing: 0.12em;
+  color: var(--magenta);
+}
+.section__body p{ margin: 0 0 1.2rem; color: rgba(242,242,242,0.88); }
+.section__body a{ text-decoration-color: rgba(57,197,187,0.5); }
+
+/* key terms — the page coding its own themes */
+mark.key{
+  background: transparent;
+  color: var(--turq);
+  /* highlighter sweep: background grows in when .in is added by script */
+  background-image: linear-gradient(rgba(57,197,187,0.22), rgba(57,197,187,0.22));
+  background-repeat: no-repeat;
+  background-size: 0% 100%;
+  background-position: 0 0;
+  padding: 0 1px;
+  transition: background-size 0.5s ease;
+  transition-delay: var(--d, 0ms);
+}
+.js-on mark.key.in{ background-size: 100% 100%; }
+
+/* ---- staggered reveal ----
+   Fails open: the hidden state only exists when JS has run
+   (html gets .js-on), so no-JS / JS-error still shows everything. */
+.js-on .reveal{ opacity: 0; transform: translateY(14px); }
+.js-on .reveal.in{
+  opacity: 1; transform: none;
+  transition: opacity 0.55s ease, transform 0.55s ease;
+  transition-delay: var(--d, 0ms);
+}
+
+/* ---------- stats ---------- */
+.stats{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+.stat{
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--turq);
+  border-radius: 4px;
+  padding: 1.1rem 1rem;
+  display: flex; flex-direction: column; gap: 0.35rem;
+}
+.stat__num{
+  font-family: var(--micro);
+  font-size: 2.6rem;
+  line-height: 1;
+  color: var(--turq);
+}
+.stat__label{ font-size: 0.8rem; color: var(--dim); line-height: 1.4; }
+
+/* ---------- cv ---------- */
+.cv-block{ margin-bottom: 2.75rem; }
+.cv-block__title{
+  font-family: var(--micro);
+  font-size: 1.4rem;
+  letter-spacing: 0.1em;
+  color: var(--magenta);
+  margin: 0 0 1rem;
+}
+.cv-list{ padding-left: 1.1rem; margin: 0; }
+.cv-list li{ margin-bottom: 0.95rem; font-size: 0.94rem; color: rgba(242,242,242,0.88); }
+.cv-list strong{ color: var(--ink); }
+
+.cv-entry{
+  margin-bottom: 2rem;
+  padding: 1.1rem 1.1rem 1.1rem 1.2rem;
+  background: rgba(11,15,14,0.6);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--magenta);
+  border-radius: 4px;
+}
+.cv-entry__meta{
+  display: flex; justify-content: space-between; gap: 0.5rem;
+  font-family: var(--micro);
+  font-size: 1.05rem;
+  letter-spacing: 0.06em;
+  color: var(--dim);
+  margin-bottom: 0.5rem;
+}
+.cv-entry__role{ font-weight: 600; margin: 0 0 0.25rem; }
+.cv-entry__lab{ font-style: italic; font-size: 0.92rem; color: var(--dim); margin: 0 0 0.2rem; }
+.cv-entry__mentor{ font-size: 0.85rem; color: var(--faint); margin: 0 0 0.7rem; }
+.cv-entry p:last-child{ margin-bottom: 0; }
+.cv-entry strong{ color: var(--turq); }
+
+.skills-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+.skills-col h4{
+  font-family: var(--micro);
+  font-size: 1.15rem;
+  letter-spacing: 0.1em;
+  color: var(--turq);
+  margin: 0 0 0.4rem;
+  text-transform: uppercase;
+}
+.skills-col p{ margin: 0; font-size: 0.9rem; color: rgba(242,242,242,0.85); }
+.skills-col strong{ color: var(--ink); }
+
+/* ---------- work ---------- */
+.work__note{
+  font-family: var(--micro);
+  font-size: 1.35rem;
+  letter-spacing: 0.04em;
+  color: var(--dim);
+  border: 1px dashed var(--line);
+  border-radius: 4px;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+/* ---------- contact ---------- */
+.contact__intro{
+  font-family: var(--micro);
+  font-size: 1.4rem;
+  letter-spacing: 0.04em;
+  color: var(--dim);
+}
+.contact__list{
+  list-style: none; padding: 0; margin: 2rem 0 0;
+  display: flex; flex-direction: column; gap: 1rem;
+}
+.contact__link{
+  display: inline-flex; align-items: center; gap: 0.8rem;
+  font-family: var(--micro);
+  font-size: 1.35rem;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+  text-decoration: none;
+  width: fit-content;
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+/* retro press state: the blinking square "lights up" on hover */
+.blink{
+  width: 10px; height: 10px; flex: none;
+  background: var(--faint);
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+.contact__link:hover{ color: var(--turq); border-color: var(--turq); }
+.contact__link:hover .blink{
+  background: var(--turq);
+  box-shadow: 0 0 10px var(--turq);
+}
+
+.footer{
+  text-align: center;
+  padding: 3rem var(--edge) 4rem;
+  font-family: var(--micro);
+  font-size: 1.05rem;
+  letter-spacing: 0.08em;
+  color: var(--faint);
+}
+
+/* ================= responsive ================= */
+@media (max-width: 640px){
+  .nav__links{ gap: 1rem; }
+  .stats{ grid-template-columns: 1fr; }
+  .skills-grid{ grid-template-columns: 1fr; }
+  .cv-entry__meta{ flex-direction: column; gap: 0.1rem; }
+}
+
+/* ================= accessibility ================= */
+a:focus-visible, button:focus-visible{
+  outline: 2px solid var(--turq);
+  outline-offset: 3px;
+}
+
+/* Reduced motion: every effect lands in its final state instantly.
+   The script also checks this and skips animation loops. */
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior: auto; }
+  *, *::before, *::after{
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .js-on .reveal{ opacity: 1; transform: none; }
+  .js-on mark.key.in{ background-size: 100% 100%; }
+}
