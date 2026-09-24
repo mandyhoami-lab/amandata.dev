@@ -4,7 +4,7 @@ My personal website. Plain HTML, CSS, and JS — no build step.
 
 Live at **https://amandata.dev** (GitHub Pages, custom domain).
 
-> **amandata.org** is kept as a separate professional portfolio. This repo is the personal site.
+> **amandata.org** is kept as a separate professional portfolio. This repo is the personal site. In active development.
 
 ## Edit me
 
