@@ -44,7 +44,13 @@
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
     size();
-    window.addEventListener('resize', size);
+    window.addEventListener('resize', function () {
+      size();
+      // Resizing the backing store clears it. The animation loop below
+      // repaints on its own, but the reduced-motion path draws one frame
+      // and returns, so the trace has to be repainted here or it blanks.
+      draw();
+    });
 
     var N = 220;              // samples across the width
     var buf = new Array(N).fill(0);
