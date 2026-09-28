@@ -34,7 +34,6 @@ See [CHANGELOG.md](CHANGELOG.md) for a catalog of notable commits.
 ## Credits
 
 The original live site was entirely built by me.
-This is also coauthored and maintained by [KoriKosmos](https://github.com/KoriKosmos) !!
 Rebuilt with Claude and 2.0 (personal bot created with Muse by Meta).
 Contributor: Muse.
 
