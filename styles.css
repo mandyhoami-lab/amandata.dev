@@ -515,6 +515,14 @@ mark.key{
     scrollbar-width: none;
   }
   .nav__links::-webkit-scrollbar{ display: none; }
+  .nav__links.has-more{
+    -webkit-mask-image: linear-gradient(to right, #000 82%, transparent 100%);
+    mask-image: linear-gradient(to right, #000 82%, transparent 100%);
+  }
+  .nav__links.has-more.has-prev{
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 18%, #000 82%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, #000 18%, #000 82%, transparent 100%);
+  }
   .nav__link{ flex: 0 0 auto; }
   .theme-toggle{ flex: 0 0 auto; margin-left: 0; }
   .stats{ grid-template-columns: 1fr; }

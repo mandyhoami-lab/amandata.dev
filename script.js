@@ -156,6 +156,22 @@
     nums.forEach(function (el) { io.observe(el); });
   })();
 
+  /* ---------------- nav scroll hint: fade edges when links overflow ---------------- */
+  (function navFade() {
+    var links = document.querySelector('.nav__links');
+    if (!links) return;
+    function update() {
+      var can = links.scrollWidth > links.clientWidth + 2;
+      var more = can && links.scrollLeft + links.clientWidth < links.scrollWidth - 2;
+      var prev = can && links.scrollLeft > 2;
+      links.classList.toggle('has-more', more);
+      links.classList.toggle('has-prev', prev);
+    }
+    links.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  })();
+
   /* ---------------- email: assembled from parts, not scraped ---------------- */
   (function email() {
     var a = document.getElementById('email-link');
