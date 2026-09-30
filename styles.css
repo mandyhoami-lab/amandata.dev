@@ -20,6 +20,7 @@
   --green:   #1DA05B;
   --sand:    #D9BE7A;
   --line:    rgba(242,236,220,0.14);
+  --heading: var(--ink);   /* headings: cream in dark, leaf green in light */
 
   /* semantic tokens that flip with the theme */
   --tag:            #D9BE7A;
@@ -50,13 +51,20 @@
   --faint:   rgba(24,28,22,0.42);
   --line:    rgba(24,28,22,0.14);
 
+  /* light is its own palette: leaf green replaces the neon green,
+     headings go leaf instead of near-black, gold deepens for cream */
+  --leaf:     #2E7B3E;
+  --green:    #2E7B3E;
+  --heading:  #2E7B3E;
+  --sand:     #C2A14E;
+
   --tag:            #9A7B2D;
   --body-text:      rgba(24,28,22,0.88);
   --card-bg:        rgba(255,255,255,0.78);
   --card-shadow:    0 1px 3px rgba(24,28,22,0.06);
   --nav-bg:         rgba(247,243,233,0.85);
   --vignette:       radial-gradient(ellipse at center, transparent 60%, rgba(120,100,60,0.10) 100%);
-  --hero-glow:      0 0 26px rgba(29,160,91,0.22);
+  --hero-glow:      0 0 26px rgba(46,123,62,0.28);
   --selection-ink:  #FFFFFF;
   --work-note-bg:   rgba(255,255,255,0.5);
   --game-opacity:   0.26;
@@ -120,7 +128,7 @@ main, .footer{ position: relative; z-index: 1; }
 .nav__mark{
   font-family: var(--display);
   font-size: 0.85rem;
-  color: var(--ink);
+  color: var(--heading);
   text-decoration: none;
 }
 .nav__mark:hover{ color: var(--green); }
@@ -174,6 +182,11 @@ main, .footer{ position: relative; z-index: 1; }
     linear-gradient(115deg, transparent 55%, rgba(217,190,122,0.12) 60%, transparent 66%);
   filter: blur(30px);
 }
+[data-theme="light"] .ribbons{
+  background:
+    linear-gradient(115deg, transparent 42%, rgba(46,123,62,0.12) 47%, transparent 53%),
+    linear-gradient(115deg, transparent 55%, rgba(154,123,45,0.14) 60%, transparent 66%);
+}
 
 .hero__kicker{
   font-family: var(--micro);
@@ -188,7 +201,7 @@ main, .footer{ position: relative; z-index: 1; }
   font-size: clamp(1.6rem, 6.5vw, 3.8rem);
   line-height: 1.25;
   margin: 0 0 1.6rem;
-  color: var(--ink);
+  color: var(--heading);
   text-shadow: var(--hero-glow);
   /* slanted like a lean-forward italic; the nudge recenters the visual weight */
   transform: skewX(8deg) translateX(-0.12em);
@@ -243,7 +256,7 @@ main, .footer{ position: relative; z-index: 1; }
   font-family: var(--display);
   font-size: clamp(1rem, 3.4vw, 1.4rem);
   margin: 0;
-  color: var(--ink);
+  color: var(--heading);
 }
 .section__tag{
   font-family: var(--micro);
@@ -252,14 +265,14 @@ main, .footer{ position: relative; z-index: 1; }
   color: var(--tag);
 }
 .section__body p{ margin: 0 0 1.2rem; color: var(--body-text); }
-.section__body a{ text-decoration-color: rgba(29,160,91,0.5); }
+.section__body a{ text-decoration-color: color-mix(in srgb, var(--green) 55%, transparent); }
 
 /* key terms — the page coding its own themes */
 mark.key{
   background: transparent;
   color: var(--green);
   /* highlighter sweep: background grows in when .in is added by script */
-  background-image: linear-gradient(rgba(29,160,91,0.22), rgba(29,160,91,0.22));
+  background-image: linear-gradient(color-mix(in srgb, var(--green) 24%, transparent), color-mix(in srgb, var(--green) 24%, transparent));
   background-repeat: no-repeat;
   background-size: 0% 100%;
   background-position: 0 0;

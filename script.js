@@ -85,16 +85,17 @@
         var y = mid - buf[i] * amp;
         if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
       }
-      ctx.strokeStyle = '#1DA05B';
+      var light = document.documentElement.dataset.theme === 'light';
+      ctx.strokeStyle = light ? '#2E7B3E' : '#39C5BB';
       ctx.lineWidth = 1.6;
-      ctx.shadowColor = 'rgba(29,160,91,0.7)';
+      ctx.shadowColor = light ? 'rgba(46,123,62,0.45)' : 'rgba(57,197,187,0.7)';
       ctx.shadowBlur = 8;
       ctx.stroke();
       ctx.shadowBlur = 0;
       // faint baseline
       ctx.beginPath();
       ctx.moveTo(0, mid); ctx.lineTo(W, mid);
-      ctx.strokeStyle = 'rgba(242,236,220,0.12)';
+      ctx.strokeStyle = light ? 'rgba(24,28,22,0.14)' : 'rgba(242,242,242,0.12)';
       ctx.lineWidth = 1;
       ctx.stroke();
     }
