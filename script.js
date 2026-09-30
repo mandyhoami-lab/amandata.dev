@@ -37,7 +37,7 @@
   /* ---------------- staggered section reveals ---------------- */
   (function reveals() {
     var sections = Array.prototype.slice.call(
-      document.querySelectorAll('main .section')
+      document.querySelectorAll('main .section:not(.section--static)')
     );
     if (!sections.length) return;
 
