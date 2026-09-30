@@ -273,10 +273,12 @@ main, .footer{ position: relative; z-index: 1; }
 }
 .hero__tagline{
   font-family: var(--micro);
-  font-size: 1.6rem;
-  letter-spacing: 0.1em;
+  font-size: 1.12rem;
+  letter-spacing: 0.06em;
+  line-height: 1.8;
   color: var(--green);
-  margin: 0 0 2.2rem;
+  margin: 0 auto 2.2rem;
+  max-width: 52ch;
   min-height: 2.6em;
 }
 .caret{

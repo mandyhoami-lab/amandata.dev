@@ -209,10 +209,10 @@
   var W = 0, H = 0, DPR = 1, boards = [];
 
   function layoutSpec() {
-    if (W < 720) return [{ cx: 0.50, cy: 0.68, s: 0.55, alpha: 0.55, delay: 300 }];
+    if (W < 720) return [{ cx: 0.50, cy: 0.74, s: 0.44, alpha: 0.50, delay: 300 }];
     return [
-      { cx: 0.15, cy: 0.70, s: 0.50, alpha: 0.34, delay: 300 },
-      { cx: 0.85, cy: 0.36, s: 0.58, alpha: 0.42, delay: 1400 }
+      { cx: 0.10, cy: 0.80, s: 0.34, alpha: 0.30, delay: 300 },
+      { cx: 0.90, cy: 0.28, s: 0.40, alpha: 0.36, delay: 1400 }
     ];
   }
 
