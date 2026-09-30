@@ -7,8 +7,7 @@
       error or disabled JS leaves the page fully readable.
    2. prefers-reduced-motion lands every effect in its final
       state instantly instead of animating.
-   3. Nothing flashes faster than 3Hz. The caret blinks at ~1Hz
-      and the EEG trace is continuous motion, no flicker.
+   3. Nothing flashes faster than 3Hz. The caret blinks at ~1Hz.
    ========================================================= */
 (function () {
   'use strict';
@@ -20,119 +19,6 @@
 
   /* Mark JS as working — this is what arms the hidden states in CSS. */
   document.documentElement.classList.add('js-on');
-
-  /* ---------------- EEG trace ----------------
-     A scrolling trace: sum of a few incommensurate sines plus
-     low-amplitude noise, with an occasional smooth biphasic
-     deflection. Shaped to read as a trace — it is not derived
-     from real data and is not labelled as though it were. */
-  var EEG_THEMES = {
-    dark:  { trace: '#39C5BB', glow: 'rgba(57,197,187,0.7)',  base: 'rgba(242,242,242,0.12)' },
-    light: { trace: '#2E7B3E', glow: 'rgba(46,123,62,0.45)',   base: 'rgba(24,28,22,0.14)' },
-    pink:  { trace: '#C2255C', glow: 'rgba(194,37,92,0.45)',   base: 'rgba(59,36,48,0.14)' },
-    blue:  { trace: '#6BB8F0', glow: 'rgba(107,184,240,0.6)',  base: 'rgba(233,239,247,0.12)' }
-  };
-  var eegTheme = null, eegTrace = '#39C5BB', eegGlow = 'rgba(57,197,187,0.7)',
-      eegBase = 'rgba(242,242,242,0.12)';
-  (function eeg() {
-    var canvas = document.getElementById('eeg');
-    if (!canvas) return;
-    var ctx = canvas.getContext && canvas.getContext('2d');
-    if (!ctx) return;
-
-    var dpr = Math.min(window.devicePixelRatio || 1, 2);
-    var W = 0, H = 0;
-
-    function size() {
-      var r = canvas.getBoundingClientRect();
-      W = Math.max(1, Math.floor(r.width));
-      H = Math.max(1, Math.floor(r.height));
-      canvas.width = W * dpr;
-      canvas.height = H * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    }
-    size();
-    window.addEventListener('resize', function () {
-      size();
-      // Resizing the backing store clears it. The animation loop below
-      // repaints on its own, but the reduced-motion path draws one frame
-      // and returns, so the trace has to be repainted here or it blanks.
-      draw();
-    });
-
-    var N = 220;              // samples across the width
-    var buf = new Array(N).fill(0);
-    var t = 0;
-    var countdown = 140;      // frames until next deflection
-    var deflect = -1;         // progress through deflection, -1 = none
-
-    function sample(x) {
-      var v = Math.sin(x * 0.055) * 0.42
-            + Math.sin(x * 0.131 + 1.7) * 0.24
-            + Math.sin(x * 0.311 + 0.6) * 0.12
-            + (Math.random() - 0.5) * 0.10;
-      if (deflect >= 0) {
-        // smooth biphasic bump: up then down, sine-windowed
-        var p = deflect / 26;
-        v += Math.sin(p * Math.PI * 2) * Math.sin(p * Math.PI) * 0.9;
-        deflect++;
-        if (deflect > 26) deflect = -1;
-      } else if (--countdown <= 0) {
-        deflect = 0;
-        countdown = 120 + Math.floor(Math.random() * 160);
-      }
-      return v;
-    }
-
-    function draw() {
-      ctx.clearRect(0, 0, W, H);
-      var mid = H / 2, amp = H * 0.38;
-      ctx.beginPath();
-      for (var i = 0; i < N; i++) {
-        var x = (i / (N - 1)) * W;
-        var y = mid - buf[i] * amp;
-        if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
-      }
-      var theme = document.documentElement.dataset.theme || 'dark';
-      if (theme !== eegTheme) {
-        eegTheme = theme;
-        var pal = EEG_THEMES[theme] || EEG_THEMES.dark;
-        eegTrace = pal.trace; eegGlow = pal.glow; eegBase = pal.base;
-      }
-      ctx.strokeStyle = eegTrace;
-      ctx.lineWidth = 1.6;
-      ctx.shadowColor = eegGlow;
-      ctx.shadowBlur = 8;
-      ctx.stroke();
-      ctx.shadowBlur = 0;
-      // faint baseline
-      ctx.beginPath();
-      ctx.moveTo(0, mid); ctx.lineTo(W, mid);
-      ctx.strokeStyle = eegBase;
-      ctx.lineWidth = 1;
-      ctx.stroke();
-    }
-
-    if (reduceMotion) {
-      // one static frame, fully drawn — no animation loop
-      for (var i = 0; i < N; i++) { buf[i] = sample(t++); }
-      draw();
-      return;
-    }
-
-    var last = 0;
-    function frame(now) {
-      if (now - last > 33) {          // ~30fps is plenty for a trace
-        last = now;
-        buf.push(sample(t++));
-        buf.shift();
-        draw();
-      }
-      requestAnimationFrame(frame);
-    }
-    for (var j = 0; j < N; j++) { buf[j] = sample(t++); }
-    requestAnimationFrame(frame);
-  })();
 
   /* ---------------- typewriter tagline ---------------- */
   (function typewriter() {

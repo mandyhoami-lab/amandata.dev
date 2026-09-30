@@ -53,8 +53,8 @@
 
   /* one strong board, roughly behind the hero; fades as you scroll */
   function layoutSpec() {
-    if (W < 720) return [{ cx: 0.50, cy: 0.34, s: 0.66, alpha: 0.60, delay: 300 }];
-    return [{ cx: 0.70, cy: 0.46, s: 0.60, alpha: 0.95, delay: 300 }];
+    if (W < 720) return [{ cx: 0.50, cy: 0.32, s: 0.52, alpha: 0.60, delay: 300 }];
+    return [{ cx: 0.50, cy: 0.42, s: 0.42, alpha: 0.90, delay: 300 }];
   }
 
   function resize() {
@@ -344,7 +344,7 @@
               drawn = true;
             } else if (m.type === "flip" && m.t >= 0) {
               var fp = Math.min(m.t / 0.30, 1);
-              var sx = Math.max(Math.abs(Math.cos(fp * Math.PI)), 0.06);
+              var sx = Math.max(Math.abs(Math.cos(fp * Math.PI)), 0.18);
               ctx.save();
               ctx.translate(xy[0], xy[1]);
               ctx.scale(sx, 1);

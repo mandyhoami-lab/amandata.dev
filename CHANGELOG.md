@@ -33,6 +33,9 @@ Full history: `git log` on the repo, or the Commits page on GitHub.
 - **Mobile nav scrolls** — nav links scroll horizontally on small screens
   instead of overflowing.
 - **Light hero: no glow** — hero title is plain leaf green now.
+- **EEG trace removed** — the hero waveform is gone.
+- **Othello board centered & smaller** — sits behind the hero at a
+  calmer size; flip animation softened.
 - **Physical othello backdrop** — the overlay is now a proper wooden board
   with green felt and 3D black/white discs, bigger and clearer, with
   animated strategy notes (candidate moves, arrows, tips, live score).
