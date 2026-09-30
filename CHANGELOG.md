@@ -33,6 +33,11 @@ Full history: `git log` on the repo, or the Commits page on GitHub.
 - **Mobile nav scrolls** — nav links scroll horizontally on small screens
   instead of overflowing.
 - **Light hero: no glow** — hero title is plain leaf green now.
+- **Abstract othello backdrop** — the physical board is gone; the game
+  now renders as a flat graphic (thin grid, solid/ring discs) spread to
+  the edges so content stays the focus.
+- **Heavier type** — body text at weight 500; display and micro faces
+  get a slight stroke so the words read thicker.
 - **EEG trace removed** — the hero waveform is gone.
 - **Othello board centered & smaller** — sits behind the hero at a
   calmer size; flip animation softened.

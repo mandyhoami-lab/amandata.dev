@@ -12,7 +12,7 @@
 /* theme init before first paint: saved choice, else system preference, else dark */
 (function(){try{var t=localStorage.getItem('amandata-theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='dark';}})();
 </script>
-<link rel="stylesheet" href="styles.css?v=11">
+<link rel="stylesheet" href="styles.css?v=12">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/images/icon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="assets/images/icon-192.png">
@@ -190,6 +190,7 @@
         <li><strong>2026-09-30</strong> — nav bar darkened per theme (white links); nav links scroll sideways on mobile.</li>
         <li><strong>2026-09-30</strong> — othello backdrop is now a physical board with strategy notes.</li>
         <li><strong>2026-09-30</strong> — removed the EEG trace; othello board centered and smaller.</li>
+        <li><strong>2026-09-30</strong> — othello backdrop went abstract: flat graphic discs, spread to the edges; type set heavier.</li>
         <li><strong>2026-09-30</strong> — pink (sakura) and blue (midnight) themes; the toggle now cycles dark &rarr; light &rarr; pink &rarr; blue.</li>
         <li><strong>2026-09-30</strong> — light mode reworked: leaf-green palette instead of an inverted dark, no more neon.</li>
         <li><strong>2026-09-30</strong> — new "about me" bio with links for all three labs and named people.</li>
@@ -206,7 +207,7 @@
   <p>© 2026 Amanda Ta · amandata.dev</p>
 </footer>
 
-<script src="othello-bg.js?v=12"></script>
+<script src="othello-bg.js?v=13"></script>
 <script src="theme.js?v=8"></script>
 <script src="script.js?v=9"></script>
 </body>

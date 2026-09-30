@@ -81,6 +81,7 @@ body{
   background: var(--bg);
   color: var(--ink);
   font-family: var(--body);
+  font-weight: 500;
   font-size: 16px;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
@@ -97,7 +98,7 @@ a{ color: var(--green); }
   z-index: 0;
   pointer-events: none;
   opacity: var(--game-opacity);
-  filter: blur(0.4px);
+  filter: none;
 }
 
 /* content floats above the game */
@@ -130,6 +131,8 @@ main, .footer{ position: relative; z-index: 1; }
 }
 .nav__mark{
   font-family: var(--display);
+  -webkit-text-stroke: 0.6px currentColor;
+  paint-order: stroke fill;
   font-size: 0.85rem;
   color: var(--nav-ink);
   text-decoration: none;
@@ -138,6 +141,8 @@ main, .footer{ position: relative; z-index: 1; }
 .nav__links{ display: flex; gap: 1.6rem; }
 .nav__link{
   font-family: var(--micro);
+  -webkit-text-stroke: 0.4px currentColor;
+  paint-order: stroke fill;
   font-size: 1.05rem;
   letter-spacing: 0.06em;
   color: var(--nav-dim);
@@ -152,6 +157,8 @@ main, .footer{ position: relative; z-index: 1; }
 /* dark/light toggle */
 .theme-toggle{
   font-family: var(--micro);
+  -webkit-text-stroke: 0.4px currentColor;
+  paint-order: stroke fill;
   font-size: 1.05rem;
   letter-spacing: 0.06em;
   color: var(--nav-dim);
@@ -258,6 +265,8 @@ main, .footer{ position: relative; z-index: 1; }
 }
 .hero__title{
   font-family: var(--display);
+  -webkit-text-stroke: 1px var(--heading);
+  paint-order: stroke fill;
   font-size: clamp(1.6rem, 6.5vw, 3.8rem);
   line-height: 1.25;
   margin: 0 0 1.6rem;
@@ -307,6 +316,8 @@ main, .footer{ position: relative; z-index: 1; }
 }
 .section__title{
   font-family: var(--display);
+  -webkit-text-stroke: 0.7px var(--heading);
+  paint-order: stroke fill;
   font-size: clamp(1rem, 3.4vw, 1.4rem);
   margin: 0;
   color: var(--heading);
