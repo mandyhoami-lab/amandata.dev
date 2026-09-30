@@ -33,6 +33,9 @@ Full history: `git log` on the repo, or the Commits page on GitHub.
 - **Mobile nav scrolls** — nav links scroll horizontally on small screens
   instead of overflowing.
 - **Light hero: no glow** — hero title is plain leaf green now.
+- **Physical othello backdrop** — the overlay is now a proper wooden board
+  with green felt and 3D black/white discs, bigger and clearer, with
+  animated strategy notes (candidate moves, arrows, tips, live score).
 - **"my work" &rarr; "projects"** — nav and section renamed.
 - **Changelog section** — new `#changelog` section on the homepage
   summarizing site updates.

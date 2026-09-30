@@ -4,8 +4,9 @@
    pink sakura, blue midnight — toggled via [data-theme]
    on <html> (default: dark).
    Green felt + gold accents, retro-terminal type.
-   An ambient game of othello plays itself at the edges
-   (see othello-bg.js) — low, slow, never in the way.
+   A physical othello board plays itself behind the page
+   (see othello-bg.js) — wood frame, felt, 3D discs,
+   with strategy notes animating over it.
    Display  : 'Press Start 2P' (hero / headings — retro terminal)
    Alt disp : 'Micro 5'        (section tags, kickers)
    Body     : 'Overpass Mono'  (everything else)
@@ -35,7 +36,7 @@
   --hero-glow:      0 0 24px rgba(29,160,91,0.35);
   --selection-ink:  #0A0C0A;
   --work-note-bg:   transparent;
-  --game-opacity:   0.30;
+  --game-opacity:   0.55;
 
   --display: 'Press Start 2P', monospace;
   --micro:   'Micro 5', monospace;
@@ -69,7 +70,7 @@
   --hero-glow:      none;
   --selection-ink:  #FFFFFF;
   --work-note-bg:   rgba(255,255,255,0.5);
-  --game-opacity:   0.26;
+  --game-opacity:   0.50;
 }
 
 *{ box-sizing: border-box; }
@@ -96,7 +97,7 @@ a{ color: var(--green); }
   z-index: 0;
   pointer-events: none;
   opacity: var(--game-opacity);
-  filter: blur(2px);
+  filter: blur(0.4px);
 }
 
 /* content floats above the game */
@@ -210,7 +211,7 @@ main, .footer{ position: relative; z-index: 1; }
   --hero-glow:      0 0 26px rgba(194,37,92,0.25);
   --selection-ink:  #FFFFFF;
   --work-note-bg:   rgba(255,255,255,0.5);
-  --game-opacity:   0.26;
+  --game-opacity:   0.50;
 }
 [data-theme="pink"] .ribbons{
   background:
@@ -239,7 +240,7 @@ main, .footer{ position: relative; z-index: 1; }
   --hero-glow:      0 0 24px rgba(90,169,230,0.35);
   --selection-ink:  #0A1220;
   --work-note-bg:   transparent;
-  --game-opacity:   0.30;
+  --game-opacity:   0.55;
 }
 [data-theme="blue"] .ribbons{
   background:
