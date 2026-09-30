@@ -7,9 +7,9 @@
    A physical othello board plays itself behind the page
    (see othello-bg.js) — wood frame, felt, 3D discs,
    with strategy notes animating over it.
-   Display  : 'Press Start 2P' (hero / headings — retro terminal)
-   Alt disp : 'Micro 5'        (section tags, kickers)
-   Body     : 'Overpass Mono'  (everything else)
+   Primary  : 'Pixelify Sans' (display — hero / headings, cutesy videogamey)
+   Secondary: 'Silkscreen'    (labels, nav, buttons, kickers)
+   Tertiary : 'Nunito'        (body — soft rounded sans)
    ========================================================= */
 
 /* ---------- dark (default) ---------- */
@@ -38,9 +38,9 @@
   --work-note-bg:   transparent;
   --game-opacity:   0.55;
 
-  --display: 'Press Start 2P', monospace;
-  --micro:   'Micro 5', monospace;
-  --body:    'Overpass Mono', monospace;
+  --display: 'Pixelify Sans', 'Press Start 2P', monospace;
+  --micro:   'Silkscreen', 'Micro 5', monospace;
+  --body:    'Nunito', sans-serif;
 
   --max: 760px;
   --edge: clamp(1.25rem, 5vw, 3rem);
@@ -82,7 +82,7 @@ body{
   color: var(--ink);
   font-family: var(--body);
   font-weight: 500;
-  font-size: 16px;
+  font-size: 17px;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   transition: background 0.3s ease, color 0.3s ease;
@@ -131,9 +131,8 @@ main, .footer{ position: relative; z-index: 1; }
 }
 .nav__mark{
   font-family: var(--display);
-  -webkit-text-stroke: 0.6px currentColor;
-  paint-order: stroke fill;
-  font-size: 0.85rem;
+  font-weight: 700;
+  font-size: 1rem;
   color: var(--nav-ink);
   text-decoration: none;
 }
@@ -141,9 +140,8 @@ main, .footer{ position: relative; z-index: 1; }
 .nav__links{ display: flex; gap: 1.6rem; }
 .nav__link{
   font-family: var(--micro);
-  -webkit-text-stroke: 0.4px currentColor;
-  paint-order: stroke fill;
-  font-size: 1.05rem;
+  font-weight: 700;
+  font-size: 1rem;
   letter-spacing: 0.06em;
   color: var(--nav-dim);
   text-decoration: none;
@@ -157,9 +155,8 @@ main, .footer{ position: relative; z-index: 1; }
 /* dark/light toggle */
 .theme-toggle{
   font-family: var(--micro);
-  -webkit-text-stroke: 0.4px currentColor;
-  paint-order: stroke fill;
-  font-size: 1.05rem;
+  font-weight: 700;
+  font-size: 1rem;
   letter-spacing: 0.06em;
   color: var(--nav-dim);
   background: transparent;
@@ -265,9 +262,8 @@ main, .footer{ position: relative; z-index: 1; }
 }
 .hero__title{
   font-family: var(--display);
-  -webkit-text-stroke: 1px var(--heading);
-  paint-order: stroke fill;
-  font-size: clamp(1.6rem, 6.5vw, 3.8rem);
+  font-weight: 700;
+  font-size: clamp(2.4rem, 8vw, 5rem);
   line-height: 1.25;
   margin: 0 0 1.6rem;
   color: var(--heading);
@@ -316,9 +312,8 @@ main, .footer{ position: relative; z-index: 1; }
 }
 .section__title{
   font-family: var(--display);
-  -webkit-text-stroke: 0.7px var(--heading);
-  paint-order: stroke fill;
-  font-size: clamp(1rem, 3.4vw, 1.4rem);
+  font-weight: 700;
+  font-size: clamp(1.3rem, 4vw, 1.8rem);
   margin: 0;
   color: var(--heading);
 }
