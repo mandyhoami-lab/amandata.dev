@@ -196,32 +196,32 @@ main, .footer{ position: relative; z-index: 1; }
 
 /* ---------- pink (sakura) ---------- */
 [data-theme="pink"]{
-  --bg:      #FAE9EE;
-  --panel:   #FFF7F9;
-  --ink:     #471E3C;
-  --dim:     rgba(71,30,60,0.66);
-  --faint:   rgba(71,30,60,0.42);
-  --line:    rgba(71,30,60,0.14);
+  --bg:      #FAF3EA;
+  --panel:   #FFF9F4;
+  --ink:     #4E2440;
+  --dim:     rgba(78,36,64,0.64);
+  --faint:   rgba(78,36,64,0.40);
+  --line:    rgba(78,36,64,0.13);
 
-  --green:    #C2255C;   /* rose replaces green */
-  --heading:  #A61E4D;
-  --sand:     #D9A441;
+  --green:    #C96F8E;   /* soft rose replaces green */
+  --heading:  #A94E70;
+  --sand:     #DDB56A;   /* creamy champagne */
 
-  --tag:            #96506B;
-  --body-text:      rgba(71,30,60,0.88);
-  --card-bg:        rgba(255,255,255,0.78);
-  --card-shadow:    0 1px 3px rgba(71,30,60,0.06);
-  --nav-bg:         #8A1C46;
-  --vignette:       radial-gradient(ellipse at center, transparent 60%, rgba(150,80,107,0.10) 100%);
-  --hero-glow:      0 0 26px rgba(194,37,92,0.25);
+  --tag:            #9A5F78;
+  --body-text:      rgba(78,36,64,0.88);
+  --card-bg:        rgba(255,251,245,0.80);
+  --card-shadow:    0 1px 3px rgba(78,36,64,0.06);
+  --nav-bg:         #934A66;
+  --vignette:       radial-gradient(ellipse at center, transparent 60%, rgba(154,95,120,0.10) 100%);
+  --hero-glow:      0 0 26px rgba(201,111,142,0.22);
   --selection-ink:  #FFFFFF;
-  --work-note-bg:   rgba(255,255,255,0.5);
+  --work-note-bg:   rgba(255,251,245,0.55);
   --game-opacity:   0.50;
 }
 [data-theme="pink"] .ribbons{
   background:
-    linear-gradient(115deg, transparent 42%, rgba(194,37,92,0.12) 47%, transparent 53%),
-    linear-gradient(115deg, transparent 55%, rgba(217,164,65,0.14) 60%, transparent 66%);
+    linear-gradient(115deg, transparent 42%, rgba(201,111,142,0.10) 47%, transparent 53%),
+    linear-gradient(115deg, transparent 55%, rgba(221,181,106,0.12) 60%, transparent 66%);
 }
 
 /* ---------- blue (midnight) ---------- */
@@ -277,8 +277,8 @@ main, .footer{ position: relative; z-index: 1; }
   --cat-pink: #D98A9B; --cat-eye: #241C12;
 }
 [data-theme="pink"]{
-  --cat-fur: #F6EDEA; --cat-shade: #D9BFB9; --cat-light: #FFFFFF;
-  --cat-pink: #E88AA0; --cat-eye: #4A2C14;
+  --cat-fur: #F8F1E6; --cat-shade: #D9C2B2; --cat-light: #FFFEFB;
+  --cat-pink: #E89AA8; --cat-eye: #4A2C14;
 }
 [data-theme="blue"]{
   --cat-fur: #E9EEF4; --cat-shade: #B9C4D1; --cat-light: #FFFFFF;
