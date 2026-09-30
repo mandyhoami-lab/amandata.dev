@@ -267,12 +267,13 @@ main, .footer{ position: relative; z-index: 1; }
 
 /* pixel cat asleep on the title, above ".dev" */
 .hero__title{ position: relative; }
+.hero__dev{ position: relative; }
 .hero__cat{
   position: absolute;
   bottom: 72%;
-  left: 0;
+  left: 55%;
   width: 104px;
-  transform: translateX(30%);
+  transform: translateX(-50%);
   animation: cat-crawl 1.6s ease-out backwards;
   pointer-events: none;
 }
@@ -285,8 +286,8 @@ main, .footer{ position: relative; z-index: 1; }
 }
 @keyframes cat-crawl{
   0%{ transform: translateX(190%); }
-  55%{ transform: translateX(90%) translateY(4px); }
-  100%{ transform: translateX(30%) translateY(0); }
+  55%{ transform: translateX(60%) translateY(4px); }
+  100%{ transform: translateX(-50%) translateY(0); }
 }
 @keyframes cat-breathe{
   0%, 100%{ transform: scaleY(1); }
@@ -314,7 +315,7 @@ main, .footer{ position: relative; z-index: 1; }
 }
 @media (prefers-reduced-motion: reduce){
   .hero__cat, .hero__cat-svg, .cat-z{ animation: none !important; }
-  .hero__cat{ transform: translateX(30%); }
+  .hero__cat{ transform: translateX(-50%); }
   .cat-z{ display: none; }
 }
 
