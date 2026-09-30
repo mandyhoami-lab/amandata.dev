@@ -5,14 +5,8 @@ Full history: `git log` on the repo, or the Commits page on GitHub.
 
 ## 2026-09-30
 
-- **Correct capitalization** — nav, tagline, bio, and admin/blog
-  labels properly capitalized; the `amandata.dev` title stays
-  lowercase; theme toggle labels capitalized.
-- **Heavier words, truer colors** — display type at 2px stroke,
-  labels at 0.5px, body at weight 600; light/pink dark text tinted
-  to deep leaf / deep rose instead of near-black.
-- **VT323** replaces Silkscreen (whose file had no lowercase) so
-  the nav renders in correct lowercase.
+### Earlier on Sep 30 (exact times not recorded)
+
 - **Pink and blue themes** — sakura pink and midnight blue join dark
   and light as full standalone themes; the toggle cycles
   dark &rarr; light &rarr; pink &rarr; blue. EEG trace, othello pieces,
@@ -38,36 +32,59 @@ Full history: `git log` on the repo, or the Commits page on GitHub.
   (black in dark, deep leaf in light, darker magenta in pink, darker navy
   in blue) with white links and gold active states. Reverted the earlier
   section-title recolor (it was based on a misspeak).
-- **Mobile nav scrolls** — nav links scroll horizontally on small screens
-  instead of overflowing.
 - **Light hero: no glow** — hero title is plain leaf green now.
-- **Abstract othello backdrop** — the physical board is gone; the game
-  now renders as a flat graphic (thin grid, solid/ring discs) spread to
-  the edges so content stays the focus.
-- **Correct capitalization** — everything properly capitalized
-  (the amandata.dev title stays lowercase); theme toggle labels
-  capitalized.
-- **Heavier words, truer colors** — display type at 2px stroke,
-  labels at 0.5px, body at weight 600; light/pink dark text tinted
-  to deep leaf / deep rose instead of near-black.
-- **VT323** replaces Silkscreen (whose file had no lowercase) so
-  the nav renders in correct lowercase.
-- **Type system** — primary: Pixelify Sans (display), secondary:
-  Silkscreen (labels), tertiary: Nunito (body). Cutesy videogamey,
-  your call honored.
-- **Heavier type** — body text at weight 500; display and micro faces
-  get a slight stroke so the words read thicker.
 - **EEG trace removed** — the hero waveform is gone.
-- **Othello board centered & smaller** — sits behind the hero at a
-  calmer size; flip animation softened.
 - **Physical othello backdrop** — the overlay is now a proper wooden board
   with green felt and 3D black/white discs, bigger and clearer, with
   animated strategy notes (candidate moves, arrows, tips, live score).
-- **"my work" &rarr; "projects"** — nav and section renamed.
-- **Changelog section** — new `#changelog` section on the homepage
-  summarizing site updates.
 - **Cache-busted assets** — CSS/JS referenced with `?v=` so theme
   updates reach visitors without stale caches.
+
+- **1:44 AM** — **Othello frame: black instead of brown** — the board
+  frame recolored from brown to black.
+- **1:48 AM** — **Abstract othello backdrop** — the physical board is
+  gone; the game now renders as a flat graphic (thin grid, solid/ring
+  discs) spread to the edges so content stays the focus.
+- **1:52 AM** — **Type system** — primary: Pixelify Sans (display),
+  secondary: Silkscreen (labels), tertiary: Nunito (body).
+- **1:55 AM** — **Smaller edge boards, compact tagline** — othello boards
+  centered and smaller behind the hero; tagline tightened.
+- **1:58 AM** — **VT323 replaces Silkscreen** — secondary font swapped to
+  VT323 (whose file has true lowercase) so the nav renders in correct
+  lowercase; chunkier title.
+- **2:01 AM** — **Heavier words, truer colors** — display type at 2px
+  stroke, labels at 0.5px, body at weight 600; dark text tinted to each
+  theme's palette (deep leaf / deep rose) instead of near-black.
+- **10:50 AM** — **Correct capitalization** — nav, tagline, bio, and
+  admin/blog labels properly capitalized; the `amandata.dev` title stays
+  lowercase; theme toggle labels capitalized.
+- **10:51 AM** — **Changelog section** — new `#changelog` section on the
+  homepage summarizing site updates.
+- **11:54 AM** — **"my work" &rarr; "projects"** — nav and section
+  renamed; section tag reads "cool stuff".
+- **11:59 AM** — **Mobile nav scrolls** — nav links scroll horizontally
+  on small screens with edge fades instead of overflowing.
+- **12:02–12:08 PM** — **Toolkit wording** — JavaScript added to the
+  toolkit list; briefly swapped to Java, then back to JavaScript.
+- **12:30–12:39 PM** — **Sleeping pixel cat** — a pixel cat that crawls
+  in and naps over the hero title; repositioned above `.dev`, coat
+  recolored per theme.
+- **12:44 PM** — **Reading progress bar** — progress now rides along the
+  sticky header's bottom edge.
+- **12:48 PM** — **Z's lose the title glow** — the sleeping cat's z's no
+  longer inherit the hero title's outline and glow.
+- **1:14 PM** — **Pink mode: softer, creamier** — pink background shifted
+  to warm cream; rose accents muted; champagne gold.
+- **1:16 PM** — **Pink theme: grey cat** — the cat's fur is grey in pink
+  mode (pink ears and nose kept).
+- **1:20 PM** — **Share preview: amandata.dev, welcome** — link-preview
+  metadata updated so shared links read "amandata.dev" / "welcome".
+- **1:25–1:35 PM** — **Cat favicon** — sleeping-cat icons for the tab and
+  share sheet, plus a text-safe SVG; the first PNG upload landed as broken
+  base64 and was re-uploaded as real binaries.
+- **1:39 PM** — **PSY 410 vocab flashcards** — interactive 118-card study
+  deck at `/psy410-flashcards/`, with README.
+
 
 ## 2026-09-23
 
