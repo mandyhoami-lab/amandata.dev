@@ -233,9 +233,9 @@
 
     /* wood frame */
     var wood = ctx.createLinearGradient(ox, oy, ox + S, oy + S);
-    wood.addColorStop(0, "#a06b3a");
-    wood.addColorStop(0.45, "#7d5027");
-    wood.addColorStop(1, "#59371b");
+    wood.addColorStop(0, "#2b2b2b");
+    wood.addColorStop(0.45, "#161616");
+    wood.addColorStop(1, "#060606");
     roundRectPath(ox, oy, S, S, 14);
     ctx.fillStyle = wood;
     ctx.fill();
