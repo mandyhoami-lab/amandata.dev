@@ -321,6 +321,8 @@ main, .footer{ position: relative; z-index: 1; }
   font-family: var(--micro);
   font-size: 1.2rem;
   color: var(--sand);
+  -webkit-text-stroke: 0;
+  text-shadow: none;
   opacity: 0;
   animation: z-float 3.6s ease-in 2s infinite;
 }
