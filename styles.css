@@ -1,27 +1,30 @@
 /* =========================================================
    amandata.dev — token system
-   "othello": black board-room background, cream pieces,
-   green felt accents, retro-terminal type.
-   Black    : #0A0C0A   (page)
-   Cream    : #F2ECDC   (text)
-   Green    : #1DA05B   (EEG trace, key terms, primary accent)
-   Sand     : #D9BE7A   (secondary accent)
-   Grid     : #0E1F14   (technical grid lines)
+   "othello, inverted": warm white page, dark ink text,
+   board-green and gold accents, retro-terminal type.
+   An ambient game of othello plays itself behind everything
+   (see othello-bg.js) — low, slow, never in the way.
+   Paper    : #F7F3E9   (page)
+   Panel    : #FFFFFF   (cards)
+   Ink      : #181C16   (text)
+   Green    : #1DA05B   (othello felt, EEG trace, primary accent)
+   Gold     : #D9BE7A   (secondary accent)
+   Gold ink : #9A7B2D   (gold text on light backgrounds)
    Display  : 'Press Start 2P' (hero / headings — retro terminal)
    Alt disp : 'Micro 5'        (section tags, kickers)
    Body     : 'Overpass Mono'  (everything else)
    ========================================================= */
 
 :root{
-  --bg:      #0A0C0A;
-  --panel:   #0E130F;
-  --ink:     #F2ECDC;
-  --dim:     rgba(242,236,220,0.62);
-  --faint:   rgba(242,236,220,0.38);
+  --bg:      #F7F3E9;
+  --panel:   #FFFFFF;
+  --ink:     #181C16;
+  --dim:     rgba(24,28,22,0.66);
+  --faint:   rgba(24,28,22,0.42);
   --green:   #1DA05B;
   --sand:    #D9BE7A;
-  --grid:    rgba(29,160,91,0.07);
-  --line:    rgba(242,236,220,0.14);
+  --sand-ink:#9A7B2D;
+  --line:    rgba(24,28,22,0.14);
 
   --display: 'Press Start 2P', monospace;
   --micro:   'Micro 5', monospace;
@@ -42,22 +45,30 @@ body{
   font-size: 16px;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
-  /* technical grid */
-  background-image:
-    linear-gradient(var(--grid) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-  background-size: 48px 48px;
 }
 
 a{ color: var(--green); }
-::selection{ background: var(--green); color: #0A0C0A; }
+::selection{ background: var(--green); color: #FFFFFF; }
 
-/* CRT vignette — pure overlay, never blocks clicks */
+/* ambient othello game — fixed backdrop, never interactive, never in the way */
+.othello-bg{
+  position: fixed; inset: 0;
+  width: 100vw; height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.34;
+  filter: blur(1.5px);
+}
+
+/* content floats above the game */
+main, .footer{ position: relative; z-index: 1; }
+
+/* soft warm vignette — pure overlay, never blocks clicks */
 .vignette{
   position: fixed; inset: 0;
   pointer-events: none;
   z-index: 60;
-  background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.55) 100%);
+  background: radial-gradient(ellipse at center, transparent 60%, rgba(120,100,60,0.10) 100%);
 }
 
 /* reading progress bar */
@@ -73,7 +84,7 @@ a{ color: var(--green); }
   position: sticky; top: 0; z-index: 50;
   display: flex; align-items: center; justify-content: space-between;
   padding: 0.9rem var(--edge);
-  background: rgba(10,12,10,0.82);
+  background: rgba(247,243,233,0.85);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--line);
 }
@@ -114,8 +125,8 @@ a{ color: var(--green); }
   position: absolute; inset: -20%;
   pointer-events: none;
   background:
-    linear-gradient(115deg, transparent 42%, rgba(29,160,91,0.16) 47%, transparent 53%),
-    linear-gradient(115deg, transparent 55%, rgba(217,190,122,0.10) 60%, transparent 66%);
+    linear-gradient(115deg, transparent 42%, rgba(29,160,91,0.14) 47%, transparent 53%),
+    linear-gradient(115deg, transparent 55%, rgba(217,190,122,0.14) 60%, transparent 66%);
   filter: blur(30px);
 }
 
@@ -132,7 +143,8 @@ a{ color: var(--green); }
   font-size: clamp(1.9rem, 7vw, 4.2rem);
   line-height: 1.25;
   margin: 0 0 1.6rem;
-  text-shadow: 0 0 24px rgba(29,160,91,0.35);
+  color: var(--ink);
+  text-shadow: 0 0 26px rgba(29,160,91,0.22);
 }
 .hero__tagline{
   font-family: var(--micro);
@@ -190,9 +202,9 @@ a{ color: var(--green); }
   font-family: var(--micro);
   font-size: 1.15rem;
   letter-spacing: 0.12em;
-  color: var(--sand);
+  color: var(--sand-ink);
 }
-.section__body p{ margin: 0 0 1.2rem; color: rgba(242,236,220,0.88); }
+.section__body p{ margin: 0 0 1.2rem; color: rgba(24,28,22,0.88); }
 .section__body a{ text-decoration-color: rgba(29,160,91,0.5); }
 
 /* key terms — the page coding its own themes */
@@ -200,7 +212,7 @@ mark.key{
   background: transparent;
   color: var(--green);
   /* highlighter sweep: background grows in when .in is added by script */
-  background-image: linear-gradient(rgba(29,160,91,0.22), rgba(29,160,91,0.22));
+  background-image: linear-gradient(rgba(29,160,91,0.20), rgba(29,160,91,0.20));
   background-repeat: no-repeat;
   background-size: 0% 100%;
   background-position: 0 0;
@@ -232,6 +244,7 @@ mark.key{
   border: 1px solid var(--line);
   border-left: 3px solid var(--green);
   border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(24,28,22,0.06);
   padding: 1.1rem 1rem;
   display: flex; flex-direction: column; gap: 0.35rem;
 }
@@ -249,20 +262,21 @@ mark.key{
   font-family: var(--micro);
   font-size: 1.4rem;
   letter-spacing: 0.1em;
-  color: var(--sand);
+  color: var(--sand-ink);
   margin: 0 0 1rem;
 }
 .cv-list{ padding-left: 1.1rem; margin: 0; }
-.cv-list li{ margin-bottom: 0.95rem; font-size: 0.94rem; color: rgba(242,236,220,0.88); }
+.cv-list li{ margin-bottom: 0.95rem; font-size: 0.94rem; color: rgba(24,28,22,0.88); }
 .cv-list strong{ color: var(--ink); }
 
 .cv-entry{
   margin-bottom: 2rem;
   padding: 1.1rem 1.1rem 1.1rem 1.2rem;
-  background: rgba(14,19,15,0.6);
+  background: rgba(255,255,255,0.78);
   border: 1px solid var(--line);
   border-left: 3px solid var(--sand);
   border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(24,28,22,0.06);
 }
 .cv-entry__meta{
   display: flex; justify-content: space-between; gap: 0.5rem;
@@ -291,7 +305,7 @@ mark.key{
   margin: 0 0 0.4rem;
   text-transform: uppercase;
 }
-.skills-col p{ margin: 0; font-size: 0.9rem; color: rgba(242,236,220,0.85); }
+.skills-col p{ margin: 0; font-size: 0.9rem; color: rgba(24,28,22,0.85); }
 .skills-col strong{ color: var(--ink); }
 
 /* ---------- work ---------- */
@@ -304,6 +318,7 @@ mark.key{
   border-radius: 4px;
   padding: 1.5rem;
   text-align: center;
+  background: rgba(255,255,255,0.5);
 }
 
 /* ---------- contact ---------- */
@@ -365,7 +380,7 @@ a:focus-visible, button:focus-visible{
 }
 
 /* Reduced motion: every effect lands in its final state instantly.
-   The script also checks this and skips animation loops. */
+   The scripts also check this and skip animation loops. */
 @media (prefers-reduced-motion: reduce){
   html{ scroll-behavior: auto; }
   *, *::before, *::after{

@@ -23,11 +23,14 @@
   .form button.ghost:hover{color:var(--ink);border-color:var(--dim)}
   .form .check{display:flex;align-items:center;gap:0.6rem;cursor:pointer}
   .form .check input{width:1.1rem;height:1.1rem;accent-color:var(--green)}
-  .form-error{color:var(--sand);font-family:var(--micro);font-size:1.15rem;letter-spacing:0.04em}
+  .form-error{color:var(--sand-ink);font-family:var(--micro);font-size:1.15rem;letter-spacing:0.04em}
   .form-ok{color:var(--green);font-family:var(--micro);font-size:1.15rem;letter-spacing:0.04em}
 </style>
 </head>
 <body>
+
+<!-- ambient othello game backdrop -->
+<canvas class="othello-bg" id="othello-bg" aria-hidden="true"></canvas>
 
 <div class="vignette" aria-hidden="true"></div>
 
@@ -77,6 +80,7 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="othello-bg.js"></script>
 <script src="supabase-config.js"></script>
 <script src="admin.js"></script>
 </body>
