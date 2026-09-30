@@ -13,7 +13,8 @@
 
   function label(btn) {
     /* names the theme a click will switch to */
-    btn.textContent = THEMES[(THEMES.indexOf(current()) + 1) % THEMES.length];
+    var next = THEMES[(THEMES.indexOf(current()) + 1) % THEMES.length];
+    btn.textContent = next.charAt(0).toUpperCase() + next.slice(1);
   }
 
   var btn = document.getElementById("theme-toggle");

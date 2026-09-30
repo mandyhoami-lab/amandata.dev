@@ -12,7 +12,7 @@
 /* theme init before first paint: saved choice, else system preference, else dark */
 (function(){try{var t=localStorage.getItem('amandata-theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='dark';}})();
 </script>
-<link rel="stylesheet" href="styles.css?v=16">
+<link rel="stylesheet" href="styles.css?v=17">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <style>
   .post-card{display:block;text-decoration:none;margin-bottom:1.5rem;padding:1.1rem 1.1rem 1.1rem 1.2rem;background:var(--card-bg);border:1px solid var(--line);border-left:3px solid var(--green);border-radius:4px;box-shadow:var(--card-shadow);transition:border-color 0.2s ease}
@@ -40,13 +40,13 @@
 <nav class="nav">
   <a class="nav__mark" href="/">AT</a>
   <div class="nav__links">
-    <a class="nav__link" href="/#about">about</a>
-    <a class="nav__link" href="/#cv">cv</a>
-    <a class="nav__link" href="/#work">projects</a>
-    <a class="nav__link is-active" href="/blog.html">blog</a>
-    <a class="nav__link" href="/#contact">contact</a>
+    <a class="nav__link" href="/#about">About</a>
+    <a class="nav__link" href="/#cv">CV</a>
+    <a class="nav__link" href="/#work">Projects</a>
+    <a class="nav__link is-active" href="/blog.html">Blog</a>
+    <a class="nav__link" href="/#contact">Contact</a>
   </div>
-  <button class="theme-toggle" id="theme-toggle" aria-label="cycle color theme">light</button>
+  <button class="theme-toggle" id="theme-toggle" aria-label="cycle color theme">Light</button>
 </nav>
 
 <main>
@@ -55,9 +55,9 @@
   <section class="section" id="view-list">
     <div class="section__head">
       <h2 class="section__title">Blog</h2>
-      <span class="section__tag">notes &amp; essays</span>
+      <span class="section__tag">Notes &amp; essays</span>
     </div>
-    <div id="post-list" class="section__body"><p>loading…</p></div>
+    <div id="post-list" class="section__body"><p>Loading…</p></div>
   </section>
 
   <!-- ================= SINGLE POST ================= -->
@@ -80,7 +80,7 @@
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
 <script src="othello-bg.js?v=14"></script>
-<script src="theme.js?v=8"></script>
+<script src="theme.js?v=9"></script>
 <script src="supabase-config.js?v=8"></script>
 <script src="blog.js?v=8"></script>
 </body>

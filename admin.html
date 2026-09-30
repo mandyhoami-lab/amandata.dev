@@ -12,7 +12,7 @@
 /* theme init before first paint: saved choice, else system preference, else dark */
 (function(){try{var t=localStorage.getItem('amandata-theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='dark';}})();
 </script>
-<link rel="stylesheet" href="styles.css?v=16">
+<link rel="stylesheet" href="styles.css?v=17">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <style>
   .form{max-width:640px}
@@ -42,11 +42,11 @@
 <nav class="nav">
   <a class="nav__mark" href="/">AT</a>
   <div class="nav__links">
-    <a class="nav__link" href="/#about">about</a>
-    <a class="nav__link" href="/blog.html">blog</a>
-    <a class="nav__link" href="/#contact">contact</a>
+    <a class="nav__link" href="/#about">About</a>
+    <a class="nav__link" href="/blog.html">Blog</a>
+    <a class="nav__link" href="/#contact">Contact</a>
   </div>
-  <button class="theme-toggle" id="theme-toggle" aria-label="cycle color theme">light</button>
+  <button class="theme-toggle" id="theme-toggle" aria-label="cycle color theme">Light</button>
 </nav>
 
 <main>
@@ -61,7 +61,7 @@
       <p class="contact__intro">enter your email — we'll send you a sign-in link. no password needed.</p>
       <form id="login-form" class="form">
         <label>email<input type="email" id="login-email" required autocomplete="email"></label>
-        <button type="submit">email me a link</button>
+        <button type="submit">Email me a link</button>
       </form>
       <p id="login-msg"></p>
     </div>
@@ -69,13 +69,13 @@
     <!-- editor -->
     <div id="editor-view" class="section__body" hidden>
       <form id="post-form" class="form">
-        <label>title<input type="text" id="post-title" required maxlength="120" placeholder="a tiny essay on…"></label>
-        <label>body <span class="hint">(markdown — # headings, **bold**, *italic*, [links](url))</span><textarea id="post-body" rows="14" required placeholder="write it here…"></textarea></label>
-        <label class="check"><input type="checkbox" id="post-published" checked> published</label>
-        <button type="submit">publish post</button>
+        <label>title<input type="text" id="post-title" required maxlength="120" placeholder="A tiny essay on…"></label>
+        <label>body <span class="hint">(markdown — # headings, **bold**, *italic*, [links](url))</span><textarea id="post-body" rows="14" required placeholder="Write it here…"></textarea></label>
+        <label class="check"><input type="checkbox" id="post-published" checked> Published</label>
+        <button type="submit">Publish post</button>
       </form>
       <p id="post-status"></p>
-      <p><button id="logout-btn" class="ghost form">sign out</button></p>
+      <p><button id="logout-btn" class="ghost form">Sign out</button></p>
     </div>
   </section>
 </main>
@@ -86,7 +86,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="othello-bg.js?v=14"></script>
-<script src="theme.js?v=8"></script>
+<script src="theme.js?v=9"></script>
 <script src="supabase-config.js?v=8"></script>
 <script src="admin.js?v=8"></script>
 </body>

@@ -12,7 +12,7 @@
 /* theme init before first paint: saved choice, else system preference, else dark */
 (function(){try{var t=localStorage.getItem('amandata-theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='dark';}})();
 </script>
-<link rel="stylesheet" href="styles.css?v=16">
+<link rel="stylesheet" href="styles.css?v=17">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/images/icon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="assets/images/icon-192.png">
@@ -33,14 +33,14 @@
 <nav class="nav">
   <a class="nav__mark" href="#top">AT</a>
   <div class="nav__links">
-    <a class="nav__link" href="#about">about</a>
-    <a class="nav__link" href="#cv">cv</a>
-    <a class="nav__link" href="#work">projects</a>
-    <a class="nav__link" href="/blog.html">blog</a>
-    <a class="nav__link" href="#contact">contact</a>
-    <a class="nav__link" href="#changelog">changelog</a>
+    <a class="nav__link" href="#about">About</a>
+    <a class="nav__link" href="#cv">CV</a>
+    <a class="nav__link" href="#work">Projects</a>
+    <a class="nav__link" href="/blog.html">Blog</a>
+    <a class="nav__link" href="#contact">Contact</a>
+    <a class="nav__link" href="#changelog">Changelog</a>
   </div>
-  <button class="theme-toggle" id="theme-toggle" aria-label="cycle color theme">light</button>
+  <button class="theme-toggle" id="theme-toggle" aria-label="cycle color theme">Light</button>
 </nav>
 
 <!-- ================= HERO ================= -->
@@ -48,9 +48,9 @@
   <div class="ribbons" aria-hidden="true"></div>
   <h1 class="hero__title">amandata.dev</h1>
   <p class="hero__tagline">
-    <span id="typewriter">social scientist, researcher, web stuff. welcome to my space.</span><span class="caret" aria-hidden="true"></span>
+    <span id="typewriter">Social scientist, researcher, web stuff. Welcome to my space.</span><span class="caret" aria-hidden="true"></span>
   </p>
-  <p class="hero__scroll">scroll ↓</p>
+  <p class="hero__scroll">Scroll ↓</p>
 </header>
 
 <main>
@@ -58,22 +58,22 @@
   <!-- ================= ABOUT ================= -->
   <section class="section" id="about">
     <div class="section__head">
-      <h2 class="section__title">about me</h2>
+      <h2 class="section__title">About me</h2>
       <span class="section__tag">Background</span>
     </div>
 
     <div class="section__body">
-      <p>hi, it&rsquo;s amanda. you can call me mandy.</p>
+      <p>Hi, it&rsquo;s Amanda. You can call me Mandy.</p>
 
-      <p>big fan of the internet, othello, and humans. i also skate.</p>
+      <p>Big fan of the internet, Othello, and humans. I also skate.</p>
 
-      <p>currently i&rsquo;m a psychology undergrad at sdsu. i&rsquo;m a research volunteer across a few labs&mdash; <a href="https://business.sdsu.edu/centers-institutes/ai" target="_blank" rel="noopener">JSBCAI</a>, the <a href="https://emilykappenman.org" target="_blank" rel="noopener">Kappenman lab</a>, and the <a href="https://cte.sdsu.edu/" target="_blank" rel="noopener">Center for Tobacco and the Environment</a>; looking at how public health, artificial intelligence, and neuroimaging play a role in clinical psychology and mental health.</p>
+      <p>Currently I&rsquo;m a psychology undergrad at SDSU. i&rsquo;m a research volunteer across a few labs&mdash; <a href="https://business.sdsu.edu/centers-institutes/ai" target="_blank" rel="noopener">JSBCAI</a>, the <a href="https://emilykappenman.org" target="_blank" rel="noopener">Kappenman lab</a>, and the <a href="https://cte.sdsu.edu/" target="_blank" rel="noopener">Center for Tobacco and the Environment</a>; looking at how public health, artificial intelligence, and neuroimaging play a role in clinical psychology and mental health.</p>
 
-      <p>i also enjoy social science history and theory, abstract strategy board games (Othello/Reversi), LLMs, statistics, personality models, psychometrics, neuroimaging, and humans in general. My influences include my mentors; <a href="https://psychology.sdsu.edu/people/georg-matt/" target="_blank" rel="noopener">Dr. Georg Matt</a>, <a href="https://policycte.sdsu.edu/lydia-greiner-drph-aprn/" target="_blank" rel="noopener">Dr. Lydia Greiner</a>, and <a href="https://emilykappenman.org" target="_blank" rel="noopener">Dr. Emily Kappenman</a>, along with other various cyber/internet science folk; <a href="https://www.penguinrandomhouse.com/authors/226907/mary-aiken" target="_blank" rel="noopener">Mary Aiken</a>, <a href="https://en.wikipedia.org/wiki/Hank_Green" target="_blank" rel="noopener">Hank Green</a>, and <a href="https://en.wikipedia.org/wiki/Alok_Kanojia" target="_blank" rel="noopener">Alok Kanojia</a> (or, HealthyGamerGG).</p>
+      <p>I also enjoy social science history and theory, abstract strategy board games (Othello/Reversi), LLMs, statistics, personality models, psychometrics, neuroimaging, and humans in general. My influences include my mentors; <a href="https://psychology.sdsu.edu/people/georg-matt/" target="_blank" rel="noopener">Dr. Georg Matt</a>, <a href="https://policycte.sdsu.edu/lydia-greiner-drph-aprn/" target="_blank" rel="noopener">Dr. Lydia Greiner</a>, and <a href="https://emilykappenman.org" target="_blank" rel="noopener">Dr. Emily Kappenman</a>, along with other various cyber/internet science folk; <a href="https://www.penguinrandomhouse.com/authors/226907/mary-aiken" target="_blank" rel="noopener">Mary Aiken</a>, <a href="https://en.wikipedia.org/wiki/Hank_Green" target="_blank" rel="noopener">Hank Green</a>, and <a href="https://en.wikipedia.org/wiki/Alok_Kanojia" target="_blank" rel="noopener">Alok Kanojia</a> (or, HealthyGamerGG).</p>
 
       <p>You can also call me Mandy. Education is for everyone.</p>
 
-      <p><strong>toolkit:</strong> R &middot; html &middot; SPSS</p>
+      <p><strong>Toolkit:</strong> R &middot; HTML &middot; SPSS</p>
     </div>
   </section>
 
@@ -160,7 +160,7 @@
   <section class="section" id="work">
     <div class="section__head">
       <h2 class="section__title">Projects</h2>
-      <span class="section__tag">projects</span>
+      <span class="section__tag">Projects</span>
     </div>
     <p class="work__note">Under construction — check back soon. In the meantime, see my <a href="https://www.linkedin.com/in/amandahoamita" target="_blank" rel="noopener">LinkedIn</a>.</p>
   </section>
@@ -183,21 +183,21 @@
   <section class="section" id="changelog">
     <div class="section__head">
       <h2 class="section__title">Changelog</h2>
-      <span class="section__tag">site updates</span>
+      <span class="section__tag">Site updates</span>
     </div>
     <div class="section__body">
       <ul class="cv-list">
-        <li><strong>2026-09-30</strong> — nav bar darkened per theme (white links); nav links scroll sideways on mobile.</li>
-        <li><strong>2026-09-30</strong> — othello backdrop is now a physical board with strategy notes.</li>
-        <li><strong>2026-09-30</strong> — removed the EEG trace; othello board centered and smaller.</li>
-        <li><strong>2026-09-30</strong> — othello backdrop went abstract: flat graphic discs, spread to the edges; type set heavier.</li>
-        <li><strong>2026-09-30</strong> — new type system: Pixelify Sans display, Silkscreen labels, Nunito body.</li>
-        <li><strong>2026-09-30</strong> — heavier type strokes; dark text tinted to each theme's palette; VT323 fixes lowercase.</li>
-        <li><strong>2026-09-30</strong> — pink (sakura) and blue (midnight) themes; the toggle now cycles dark &rarr; light &rarr; pink &rarr; blue.</li>
-        <li><strong>2026-09-30</strong> — light mode reworked: leaf-green palette instead of an inverted dark, no more neon.</li>
-        <li><strong>2026-09-30</strong> — new "about me" bio with links for all three labs and named people.</li>
-        <li><strong>2026-09-30</strong> — blog is live, with passwordless publishing.</li>
-        <li><strong>2026-09-30</strong> — "my work" renamed to "projects".</li>
+        <li><strong>2026-09-30</strong> — Nav bar darkened per theme (white links); nav links scroll sideways on mobile.</li>
+        <li><strong>2026-09-30</strong> — Othello backdrop is now a physical board with strategy notes.</li>
+        <li><strong>2026-09-30</strong> — Removed the EEG trace; Othello board centered and smaller.</li>
+        <li><strong>2026-09-30</strong> — Othello backdrop went abstract: flat graphic discs, spread to the edges; type set heavier.</li>
+        <li><strong>2026-09-30</strong> — New type system: Pixelify Sans display, Silkscreen labels, Nunito body.</li>
+        <li><strong>2026-09-30</strong> — Heavier type strokes; dark text tinted to each theme's palette; VT323 fixes lowercase.</li>
+        <li><strong>2026-09-30</strong> — Pink (sakura) and blue (midnight) themes; the toggle now cycles dark &rarr; light &rarr; pink &rarr; blue.</li>
+        <li><strong>2026-09-30</strong> — Light mode reworked: leaf-green palette instead of an inverted dark, no more neon.</li>
+        <li><strong>2026-09-30</strong> — New "About me" bio with links for all three labs and named people.</li>
+        <li><strong>2026-09-30</strong> — Blog is live, with passwordless publishing.</li>
+        <li><strong>2026-09-30</strong> — "My work" renamed to "Projects".</li>
       </ul>
       <p>Full history in the repo's <a href="https://github.com/mandyhoami-lab/amandata.dev/blob/main/CHANGELOG.md" target="_blank" rel="noopener">CHANGELOG.md</a>.</p>
     </div>
@@ -210,7 +210,7 @@
 </footer>
 
 <script src="othello-bg.js?v=14"></script>
-<script src="theme.js?v=8"></script>
+<script src="theme.js?v=9"></script>
 <script src="script.js?v=9"></script>
 </body>
 </html>
