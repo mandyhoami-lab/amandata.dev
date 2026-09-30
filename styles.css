@@ -183,9 +183,7 @@ main, .footer{ position: relative; z-index: 1; }
   filter: blur(30px);
 }
 [data-theme="light"] .ribbons{
-  background:
-    linear-gradient(115deg, transparent 42%, rgba(46,123,62,0.12) 47%, transparent 53%),
-    linear-gradient(115deg, transparent 55%, rgba(154,123,45,0.14) 60%, transparent 66%);
+  display: none;
 }
 
 .hero__kicker{
