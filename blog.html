@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blog — Amanda Ta</title>
+<meta name="description" content="Notes and essays by Amanda Ta, SDSU psychology researcher.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Micro+5&family=Overpass+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<style>
+  .post-card{display:block;text-decoration:none;margin-bottom:1.5rem;padding:1.1rem 1.1rem 1.1rem 1.2rem;background:rgba(14,19,15,0.6);border:1px solid var(--line);border-left:3px solid var(--green);border-radius:4px;transition:border-color 0.2s ease}
+  .post-card:hover{border-left-color:var(--sand)}
+  .post-card__title{font-family:var(--micro);font-size:1.5rem;letter-spacing:0.04em;color:var(--ink);margin:0 0 0.3rem}
+  .post-card__date{font-family:var(--micro);font-size:1rem;letter-spacing:0.08em;color:var(--dim)}
+  .post-card__excerpt{color:rgba(242,236,220,0.85);font-size:0.95rem;margin:0.6rem 0 0}
+  .back-link{display:inline-block;margin-bottom:1.5rem;font-family:var(--micro);font-size:1.2rem;letter-spacing:0.06em;color:var(--green);text-decoration:none}
+  .back-link:hover{color:var(--sand)}
+  #post-body h1,#post-body h2,#post-body h3{font-family:var(--micro);letter-spacing:0.04em;color:var(--ink);line-height:1.4}
+  #post-body pre{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1rem;overflow-x:auto}
+  #post-body code{font-size:0.9em}
+  #post-body blockquote{border-left:3px solid var(--green);margin:1.2rem 0;padding:0.2rem 0 0.2rem 1rem;color:var(--dim)}
+  #post-body img{max-width:100%;border-radius:4px}
+</style>
+</head>
+<body>
+
+<div class="vignette" aria-hidden="true"></div>
+
+<!-- ================= NAV ================= -->
+<nav class="nav">
+  <a class="nav__mark" href="/">AT</a>
+  <div class="nav__links">
+    <a class="nav__link" href="/#about">about</a>
+    <a class="nav__link" href="/#cv">cv</a>
+    <a class="nav__link" href="/#work">my work</a>
+    <a class="nav__link is-active" href="/blog.html">blog</a>
+    <a class="nav__link" href="/#contact">contact</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ================= POST LIST ================= -->
+  <section class="section" id="view-list">
+    <div class="section__head">
+      <h2 class="section__title">Blog</h2>
+      <span class="section__tag">notes &amp; essays</span>
+    </div>
+    <div id="post-list" class="section__body"><p>loading…</p></div>
+  </section>
+
+  <!-- ================= SINGLE POST ================= -->
+  <section class="section" id="view-post" hidden>
+    <a class="back-link" href="/blog.html">&larr; all posts</a>
+    <div class="section__head">
+      <h2 class="section__title" id="post-title"></h2>
+    </div>
+    <p class="contact__intro" id="post-date"></p>
+    <div id="post-body" class="section__body"></div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p>amandata.dev — built with plain HTML, CSS &amp; JS</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
+<script src="supabase-config.js"></script>
+<script src="blog.js"></script>
+</body>
+</html>

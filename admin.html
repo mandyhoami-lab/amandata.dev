@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin — Amanda Ta</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Micro+5&family=Overpass+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<style>
+  .form{max-width:640px}
+  .form label{display:block;font-family:var(--micro);font-size:1.2rem;letter-spacing:0.06em;color:var(--dim);margin-bottom:1.2rem}
+  .form .hint{color:var(--faint);font-size:1rem}
+  .form input[type="email"],.form input[type="password"],.form input[type="text"],.form textarea{display:block;width:100%;margin-top:0.4rem;background:var(--panel);border:1px solid var(--line);border-radius:4px;color:var(--ink);font-family:var(--body);font-size:1rem;line-height:1.6;padding:0.7rem 0.9rem}
+  .form textarea{resize:vertical}
+  .form input:focus,.form textarea:focus{outline:2px solid var(--green);outline-offset:2px;border-color:var(--green)}
+  .form button{background:var(--green);color:#0A0C0A;border:none;border-radius:4px;font-family:var(--micro);font-size:1.2rem;letter-spacing:0.06em;padding:0.7rem 1.6rem;cursor:pointer}
+  .form button:hover{background:var(--sand)}
+  .form button.ghost{background:transparent;color:var(--dim);border:1px solid var(--line);padding:0.5rem 1.1rem;font-size:1.05rem}
+  .form button.ghost:hover{color:var(--ink);border-color:var(--dim)}
+  .form .check{display:flex;align-items:center;gap:0.6rem;cursor:pointer}
+  .form .check input{width:1.1rem;height:1.1rem;accent-color:var(--green)}
+  .form-error{color:var(--sand);font-family:var(--micro);font-size:1.15rem;letter-spacing:0.04em}
+  .form-ok{color:var(--green);font-family:var(--micro);font-size:1.15rem;letter-spacing:0.04em}
+</style>
+</head>
+<body>
+
+<div class="vignette" aria-hidden="true"></div>
+
+<!-- ================= NAV ================= -->
+<nav class="nav">
+  <a class="nav__mark" href="/">AT</a>
+  <div class="nav__links">
+    <a class="nav__link" href="/#about">about</a>
+    <a class="nav__link" href="/blog.html">blog</a>
+    <a class="nav__link" href="/#contact">contact</a>
+  </div>
+</nav>
+
+<main>
+  <section class="section">
+    <div class="section__head">
+      <h2 class="section__title">Admin</h2>
+      <span class="section__tag">write</span>
+    </div>
+
+    <!-- login -->
+    <div id="login-view" class="section__body">
+      <p class="contact__intro">sign in to write.</p>
+      <form id="login-form" class="form">
+        <label>email<input type="email" id="login-email" required autocomplete="username"></label>
+        <label>password<input type="password" id="login-pass" required autocomplete="current-password"></label>
+        <button type="submit">sign in</button>
+      </form>
+      <p id="login-error" class="form-error"></p>
+    </div>
+
+    <!-- editor -->
+    <div id="editor-view" class="section__body" hidden>
+      <form id="post-form" class="form">
+        <label>title<input type="text" id="post-title" required maxlength="120" placeholder="a tiny essay on…"></label>
+        <label>body <span class="hint">(markdown — # headings, **bold**, *italic*, [links](url))</span><textarea id="post-body" rows="14" required placeholder="write it here…"></textarea></label>
+        <label class="check"><input type="checkbox" id="post-published" checked> published</label>
+        <button type="submit">publish post</button>
+      </form>
+      <p id="post-status"></p>
+      <p><button id="logout-btn" class="ghost form">sign out</button></p>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <p>amandata.dev — built with plain HTML, CSS &amp; JS</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>
