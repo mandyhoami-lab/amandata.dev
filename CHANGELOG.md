@@ -32,6 +32,7 @@ Full history: `git log` on the repo, or the Commits page on GitHub.
   section-title recolor (it was based on a misspeak).
 - **Mobile nav scrolls** — nav links scroll horizontally on small screens
   instead of overflowing.
+- **Light hero: no glow** — hero title is plain leaf green now.
 - **"my work" &rarr; "projects"** — nav and section renamed.
 - **Changelog section** — new `#changelog` section on the homepage
   summarizing site updates.

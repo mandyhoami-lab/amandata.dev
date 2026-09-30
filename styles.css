@@ -66,7 +66,7 @@
   --card-shadow:    0 1px 3px rgba(24,28,22,0.06);
   --nav-bg:         #235C30;
   --vignette:       radial-gradient(ellipse at center, transparent 60%, rgba(120,100,60,0.10) 100%);
-  --hero-glow:      0 0 26px rgba(46,123,62,0.28);
+  --hero-glow:      none;
   --selection-ink:  #FFFFFF;
   --work-note-bg:   rgba(255,255,255,0.5);
   --game-opacity:   0.26;
