@@ -21,7 +21,8 @@
   --green:   #1DA05B;
   --sand:    #D9BE7A;
   --line:    rgba(242,236,220,0.14);
-  --heading: var(--ink);   /* headings: cream in dark, leaf green in light */
+  --heading: var(--ink);   /* hero/nav headings: cream in dark, leaf in light */
+  --section-heading: #1DA05B; /* section titles: deeper theme color per theme */
 
   /* semantic tokens that flip with the theme */
   --tag:            #D9BE7A;
@@ -56,6 +57,7 @@
      headings go leaf instead of near-black, gold deepens for cream */
   --green:    #2E7B3E;   /* leaf green replaces the neon green */
   --heading:  #2E7B3E;   /* headings go leaf instead of near-black */
+  --section-heading: #235C30;
   --sand:     #C2A14E;   /* deeper gold so accents read on cream */
 
   --tag:            #9A7B2D;
@@ -197,6 +199,7 @@ main, .footer{ position: relative; z-index: 1; }
 
   --green:    #C2255C;   /* rose replaces green */
   --heading:  #A61E4D;
+  --section-heading: #8A1C46;   /* darker magenta */
   --sand:     #D9A441;
 
   --tag:            #96506B;
@@ -226,6 +229,7 @@ main, .footer{ position: relative; z-index: 1; }
   --line:    rgba(233,239,247,0.14);
 
   --green:    #5AA9E6;   /* sky accent replaces felt green */
+  --section-heading: #4E8FCB;
   --sand:     #D9BE7A;
 
   --tag:            #D9BE7A;
@@ -313,7 +317,7 @@ main, .footer{ position: relative; z-index: 1; }
   font-family: var(--display);
   font-size: clamp(1rem, 3.4vw, 1.4rem);
   margin: 0;
-  color: var(--heading);
+  color: var(--section-heading);
 }
 .section__tag{
   font-family: var(--micro);
