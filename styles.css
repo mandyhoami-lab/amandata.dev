@@ -268,6 +268,28 @@ main, .footer{ position: relative; z-index: 1; }
 /* pixel cat asleep on the title, above ".dev" */
 .hero__title{ position: relative; }
 .hero__dev{ position: relative; }
+/* cat coat per theme */
+:root{
+  --cat-fur: #F4F1E8; --cat-shade: #CFC9BA; --cat-light: #FFFFFF;
+  --cat-pink: #F0A6B8; --cat-eye: #4A2C14;
+}
+[data-theme="light"]{
+  --cat-fur: #7D7668; --cat-shade: #57534A; --cat-light: #A8A294;
+  --cat-pink: #D98A9B; --cat-eye: #241C12;
+}
+[data-theme="pink"]{
+  --cat-fur: #F6EDEA; --cat-shade: #D9BFB9; --cat-light: #FFFFFF;
+  --cat-pink: #E88AA0; --cat-eye: #4A2C14;
+}
+[data-theme="blue"]{
+  --cat-fur: #E9EEF4; --cat-shade: #B9C4D1; --cat-light: #FFFFFF;
+  --cat-pink: #E8A0B8; --cat-eye: #2A2F38;
+}
+.hero__cat-svg .pxf{ fill: var(--cat-fur); }
+.hero__cat-svg .pxd{ fill: var(--cat-shade); }
+.hero__cat-svg .pxl{ fill: var(--cat-light); }
+.hero__cat-svg .pxp{ fill: var(--cat-pink); }
+.hero__cat-svg .pxe{ fill: var(--cat-eye); }
 .hero__cat{
   position: absolute;
   bottom: 72%;
