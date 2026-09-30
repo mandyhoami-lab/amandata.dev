@@ -5,6 +5,14 @@ Full history: `git log` on the repo, or the Commits page on GitHub.
 
 ## 2026-09-30
 
+- **Correct capitalization** — nav, tagline, bio, and admin/blog
+  labels properly capitalized; the `amandata.dev` title stays
+  lowercase; theme toggle labels capitalized.
+- **Heavier words, truer colors** — display type at 2px stroke,
+  labels at 0.5px, body at weight 600; light/pink dark text tinted
+  to deep leaf / deep rose instead of near-black.
+- **VT323** replaces Silkscreen (whose file had no lowercase) so
+  the nav renders in correct lowercase.
 - **Pink and blue themes** — sakura pink and midnight blue join dark
   and light as full standalone themes; the toggle cycles
   dark &rarr; light &rarr; pink &rarr; blue. EEG trace, othello pieces,
