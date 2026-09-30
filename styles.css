@@ -8,7 +8,7 @@
    (see othello-bg.js) — wood frame, felt, 3D discs,
    with strategy notes animating over it.
    Primary  : 'Pixelify Sans' (display — hero / headings, cutesy videogamey)
-   Secondary: 'Silkscreen'    (labels, nav, buttons, kickers)
+   Secondary: 'VT323'        (labels, nav, buttons, kickers)
    Tertiary : 'Nunito'        (body — soft rounded sans)
    ========================================================= */
 
@@ -39,7 +39,7 @@
   --game-opacity:   0.55;
 
   --display: 'Pixelify Sans', 'Press Start 2P', monospace;
-  --micro:   'Silkscreen', 'Micro 5', monospace;
+  --micro:   'VT323', 'Silkscreen', monospace;
   --body:    'Nunito', sans-serif;
 
   --max: 760px;
@@ -140,8 +140,7 @@ main, .footer{ position: relative; z-index: 1; }
 .nav__links{ display: flex; gap: 1.6rem; }
 .nav__link{
   font-family: var(--micro);
-  font-weight: 700;
-  font-size: 1rem;
+  font-size: 1.15rem;
   letter-spacing: 0.06em;
   color: var(--nav-dim);
   text-decoration: none;
@@ -155,8 +154,7 @@ main, .footer{ position: relative; z-index: 1; }
 /* dark/light toggle */
 .theme-toggle{
   font-family: var(--micro);
-  font-weight: 700;
-  font-size: 1rem;
+  font-size: 1.15rem;
   letter-spacing: 0.06em;
   color: var(--nav-dim);
   background: transparent;
@@ -263,7 +261,9 @@ main, .footer{ position: relative; z-index: 1; }
 .hero__title{
   font-family: var(--display);
   font-weight: 700;
-  font-size: clamp(2.4rem, 8vw, 5rem);
+  -webkit-text-stroke: 1px var(--heading);
+  paint-order: stroke fill;
+  font-size: clamp(2.6rem, 9vw, 5.5rem);
   line-height: 1.25;
   margin: 0 0 1.6rem;
   color: var(--heading);
