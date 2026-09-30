@@ -641,6 +641,7 @@ a:focus-visible, button:focus-visible{
 .guide .g-table th, .guide .g-table td{ border: 1px solid var(--line); padding: 0.55em 0.75em; text-align: left; vertical-align: top; line-height: 1.5; }
 .guide .g-table th{ background: var(--card-bg); color: var(--ink); font-family: var(--micro); font-size: 0.95rem; }
 .guide .g-table td:first-child{ font-weight: 700; color: var(--ink); }
+.guide .g-table td:nth-child(2){ font-size: 0.8rem; opacity: 0.85; }
 .guide-flashlink{ font-size: 1rem; margin-bottom: 1.4em; }
 .guide-flashlink a{ color: var(--sand); font-weight: 700; }
 /* PSY 410 guide: skip rendering off-screen chapters until scrolled to — faster initial load */
