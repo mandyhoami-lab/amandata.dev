@@ -1,4 +1,4 @@
-/* admin — sign in + publish posts to Supabase */
+/* admin — magic-link sign in + publish posts to Supabase */
 (function () {
   "use strict";
 
@@ -6,12 +6,13 @@
   var loginView = document.getElementById("login-view");
   var editorView = document.getElementById("editor-view");
   var loginForm = document.getElementById("login-form");
-  var loginError = document.getElementById("login-error");
+  var loginMsg = document.getElementById("login-msg");
   var postForm = document.getElementById("post-form");
   var postStatus = document.getElementById("post-status");
 
   if (!cfg.SUPABASE_URL || cfg.SUPABASE_URL.indexOf("YOUR_") === 0) {
-    loginError.textContent = "blog backend isn't connected yet.";
+    loginMsg.className = "form-error";
+    loginMsg.textContent = "blog backend isn't connected yet.";
     loginForm.querySelector("button").disabled = true;
     return;
   }
@@ -23,22 +24,30 @@
     editorView.hidden = false;
   }
 
+  // supabase-js picks up the session from the magic-link redirect automatically
   client.auth.getSession().then(function (res) {
     if (res.data && res.data.session) showEditor();
+  });
+  client.auth.onAuthStateChange(function (event) {
+    if (event === "SIGNED_IN") showEditor();
   });
 
   loginForm.addEventListener("submit", function (e) {
     e.preventDefault();
-    loginError.textContent = "";
+    loginMsg.className = "";
+    loginMsg.textContent = "sending…";
     var email = document.getElementById("login-email").value.trim();
-    var password = document.getElementById("login-pass").value;
-    client.auth.signInWithPassword({ email: email, password: password }).then(function (res) {
+    client.auth.signInWithOtp({
+      email: email,
+      options: { emailRedirectTo: "https://amandata.dev/admin.html" }
+    }).then(function (res) {
       if (res.error) {
-        loginError.textContent = "couldn't sign in — check your email and password.";
+        loginMsg.className = "form-error";
+        loginMsg.textContent = "couldn't send the link — is this the right email?";
         return;
       }
-      document.getElementById("login-pass").value = "";
-      showEditor();
+      loginMsg.className = "form-ok";
+      loginMsg.textContent = "check your inbox for the sign-in link.";
     });
   });
 

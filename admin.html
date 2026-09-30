@@ -50,13 +50,12 @@
 
     <!-- login -->
     <div id="login-view" class="section__body">
-      <p class="contact__intro">sign in to write.</p>
+      <p class="contact__intro">enter your email — we'll send you a sign-in link. no password needed.</p>
       <form id="login-form" class="form">
-        <label>email<input type="email" id="login-email" required autocomplete="username"></label>
-        <label>password<input type="password" id="login-pass" required autocomplete="current-password"></label>
-        <button type="submit">sign in</button>
+        <label>email<input type="email" id="login-email" required autocomplete="email"></label>
+        <button type="submit">email me a link</button>
       </form>
-      <p id="login-error" class="form-error"></p>
+      <p id="login-msg"></p>
     </div>
 
     <!-- editor -->
