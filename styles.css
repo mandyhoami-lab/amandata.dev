@@ -477,13 +477,16 @@ mark.key{
 }
 
 .footer{
+  background: var(--nav-bg);
+  border-top: 1px solid rgba(255,255,255,0.12);
   text-align: center;
-  padding: 3rem var(--edge) 4rem;
+  padding: 1.1rem var(--edge);
   font-family: var(--micro);
   font-size: 1.05rem;
   letter-spacing: 0.08em;
-  color: var(--faint);
+  color: var(--nav-ink);
 }
+.footer p{ margin: 0; }
 
 /* ================= responsive ================= */
 @media (max-width: 640px){
