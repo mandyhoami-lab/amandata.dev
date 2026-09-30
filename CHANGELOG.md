@@ -3,6 +3,35 @@
 A catalog of the notable commits on this repo's `main` branch.
 Full history: `git log` on the repo, or the Commits page on GitHub.
 
+## 2026-09-30
+
+- **Pink and blue themes** — sakura pink and midnight blue join dark
+  and light as full standalone themes; the toggle cycles
+  dark &rarr; light &rarr; pink &rarr; blue. EEG trace, othello pieces,
+  and hero ribbons follow the active theme.
+- **Light theme rework** — light is its own palette, not an inverted
+  dark: leaf-green (`#2E7B3E`) text and accents, leaf-green headings,
+  deeper gold; the glossy hero ribbons are hidden in light mode.
+- **"about me" bio** — "Biography" renamed to "about me" with a new
+  casual bio and links for all three labs (JSBCAI, Kappenman lab,
+  Center for Tobacco and the Environment) and named people.
+- **Hero refresh** — lowercase `amandata.dev` title with forward
+  slant, recentered and resized; new tagline.
+- **Supabase-backed blog** — `blog.html` (public reader, Markdown via
+  Marked + DOMPurify) and `admin.html` (passwordless email magic-link
+  publishing), backed by the `amandata-blog` Supabase project
+  (`posts` table; RLS: public reads published posts, authenticated
+  users manage them).
+- **Dark/light theme toggle + ambient othello backdrop** — saved
+  `localStorage` preference (`amandata-theme`) with system-preference
+  fallback; small blurred self-playing othello boards at the page
+  edges (single board on narrow screens).
+- **"my work" &rarr; "projects"** — nav and section renamed.
+- **Changelog section** — new `#changelog` section on the homepage
+  summarizing site updates.
+- **Cache-busted assets** — CSS/JS referenced with `?v=` so theme
+  updates reach visitors without stale caches.
+
 ## 2026-09-23
 
 - **Rebrand to amandata.dev (personal website)** — site and README
