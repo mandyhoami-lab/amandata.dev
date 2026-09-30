@@ -185,12 +185,13 @@ main, .footer{ position: relative; z-index: 1; }
 }
 .hero__title{
   font-family: var(--display);
-  font-size: clamp(1.4rem, 5.5vw, 3.2rem);
+  font-size: clamp(1.6rem, 6.5vw, 3.8rem);
   line-height: 1.25;
   margin: 0 0 1.6rem;
   color: var(--ink);
   text-shadow: var(--hero-glow);
-  transform: skewX(8deg); /* slanted, like a lean-forward italic */
+  /* slanted like a lean-forward italic; the nudge recenters the visual weight */
+  transform: skewX(8deg) translateX(-0.12em);
 }
 .hero__tagline{
   font-family: var(--micro);
