@@ -1,27 +1,27 @@
 /* =========================================================
    amandata.dev — token system
-   "clinical cyber-pop": black lab-bench background, turquoise
-   and magenta data accents, retro-terminal type.
-   Black    : #060606   (page)
-   Ink      : #F2F2F2   (text)
-   Turquoise: #39C5BB   (EEG trace, key terms, primary accent)
-   Magenta  : #F471B5   (secondary data accent)
-   Grid     : #123B38   (technical grid lines)
+   "othello": black board-room background, cream pieces,
+   green felt accents, retro-terminal type.
+   Black    : #0A0C0A   (page)
+   Cream    : #F2ECDC   (text)
+   Green    : #45C787   (EEG trace, key terms, primary accent)
+   Sand     : #D9BE7A   (secondary accent)
+   Grid     : #0E1F14   (technical grid lines)
    Display  : 'Press Start 2P' (hero / headings — retro terminal)
    Alt disp : 'Micro 5'        (section tags, kickers)
    Body     : 'Overpass Mono'  (everything else)
    ========================================================= */
 
 :root{
-  --bg:      #060606;
-  --panel:   #0B0F0E;
-  --ink:     #F2F2F2;
-  --dim:     rgba(242,242,242,0.62);
-  --faint:   rgba(242,242,242,0.38);
-  --turq:    #39C5BB;
-  --magenta: #F471B5;
-  --grid:    rgba(57,197,187,0.07);
-  --line:    rgba(242,242,242,0.14);
+  --bg:      #0A0C0A;
+  --panel:   #0E130F;
+  --ink:     #F2ECDC;
+  --dim:     rgba(242,236,220,0.62);
+  --faint:   rgba(242,236,220,0.38);
+  --green:   #45C787;
+  --sand:    #D9BE7A;
+  --grid:    rgba(69,199,135,0.07);
+  --line:    rgba(242,236,220,0.14);
 
   --display: 'Press Start 2P', monospace;
   --micro:   'Micro 5', monospace;
@@ -49,8 +49,8 @@ body{
   background-size: 48px 48px;
 }
 
-a{ color: var(--turq); }
-::selection{ background: var(--turq); color: #060606; }
+a{ color: var(--green); }
+::selection{ background: var(--green); color: #0A0C0A; }
 
 /* CRT vignette — pure overlay, never blocks clicks */
 .vignette{
@@ -64,7 +64,7 @@ a{ color: var(--turq); }
 .progress{
   position: fixed; top: 0; left: 0;
   height: 3px; width: 0%;
-  background: linear-gradient(90deg, var(--turq), var(--magenta));
+  background: linear-gradient(90deg, var(--green), var(--sand));
   z-index: 70;
 }
 
@@ -73,7 +73,7 @@ a{ color: var(--turq); }
   position: sticky; top: 0; z-index: 50;
   display: flex; align-items: center; justify-content: space-between;
   padding: 0.9rem var(--edge);
-  background: rgba(6,6,6,0.82);
+  background: rgba(10,12,10,0.82);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--line);
 }
@@ -83,7 +83,7 @@ a{ color: var(--turq); }
   color: var(--ink);
   text-decoration: none;
 }
-.nav__mark:hover{ color: var(--turq); }
+.nav__mark:hover{ color: var(--green); }
 .nav__links{ display: flex; gap: 1.6rem; }
 .nav__link{
   font-family: var(--micro);
@@ -96,7 +96,7 @@ a{ color: var(--turq); }
   transition: color 0.2s ease, border-color 0.2s ease;
 }
 .nav__link:hover{ color: var(--ink); }
-.nav__link.is-active{ color: var(--turq); border-color: var(--turq); }
+.nav__link.is-active{ color: var(--green); border-color: var(--green); }
 
 /* ================= HERO ================= */
 .hero{
@@ -114,8 +114,8 @@ a{ color: var(--turq); }
   position: absolute; inset: -20%;
   pointer-events: none;
   background:
-    linear-gradient(115deg, transparent 42%, rgba(57,197,187,0.16) 47%, transparent 53%),
-    linear-gradient(115deg, transparent 55%, rgba(244,113,181,0.12) 60%, transparent 66%);
+    linear-gradient(115deg, transparent 42%, rgba(69,199,135,0.16) 47%, transparent 53%),
+    linear-gradient(115deg, transparent 55%, rgba(217,190,122,0.10) 60%, transparent 66%);
   filter: blur(30px);
 }
 
@@ -132,20 +132,20 @@ a{ color: var(--turq); }
   font-size: clamp(1.9rem, 7vw, 4.2rem);
   line-height: 1.25;
   margin: 0 0 1.6rem;
-  text-shadow: 0 0 24px rgba(57,197,187,0.35);
+  text-shadow: 0 0 24px rgba(69,199,135,0.35);
 }
 .hero__tagline{
   font-family: var(--micro);
   font-size: 1.6rem;
   letter-spacing: 0.1em;
-  color: var(--turq);
+  color: var(--green);
   margin: 0 0 2.2rem;
   min-height: 2.2em;
 }
 .caret{
   display: inline-block;
   width: 0.55em; height: 1em;
-  background: var(--turq);
+  background: var(--green);
   vertical-align: -0.12em;
   margin-left: 2px;
   animation: blink 1s steps(1) infinite; /* ~1Hz, well under the 3Hz limit */
@@ -190,17 +190,17 @@ a{ color: var(--turq); }
   font-family: var(--micro);
   font-size: 1.15rem;
   letter-spacing: 0.12em;
-  color: var(--magenta);
+  color: var(--sand);
 }
-.section__body p{ margin: 0 0 1.2rem; color: rgba(242,242,242,0.88); }
-.section__body a{ text-decoration-color: rgba(57,197,187,0.5); }
+.section__body p{ margin: 0 0 1.2rem; color: rgba(242,236,220,0.88); }
+.section__body a{ text-decoration-color: rgba(69,199,135,0.5); }
 
 /* key terms — the page coding its own themes */
 mark.key{
   background: transparent;
-  color: var(--turq);
+  color: var(--green);
   /* highlighter sweep: background grows in when .in is added by script */
-  background-image: linear-gradient(rgba(57,197,187,0.22), rgba(57,197,187,0.22));
+  background-image: linear-gradient(rgba(69,199,135,0.22), rgba(69,199,135,0.22));
   background-repeat: no-repeat;
   background-size: 0% 100%;
   background-position: 0 0;
@@ -230,7 +230,7 @@ mark.key{
 .stat{
   background: var(--panel);
   border: 1px solid var(--line);
-  border-left: 3px solid var(--turq);
+  border-left: 3px solid var(--green);
   border-radius: 4px;
   padding: 1.1rem 1rem;
   display: flex; flex-direction: column; gap: 0.35rem;
@@ -239,7 +239,7 @@ mark.key{
   font-family: var(--micro);
   font-size: 2.6rem;
   line-height: 1;
-  color: var(--turq);
+  color: var(--green);
 }
 .stat__label{ font-size: 0.8rem; color: var(--dim); line-height: 1.4; }
 
@@ -249,19 +249,19 @@ mark.key{
   font-family: var(--micro);
   font-size: 1.4rem;
   letter-spacing: 0.1em;
-  color: var(--magenta);
+  color: var(--sand);
   margin: 0 0 1rem;
 }
 .cv-list{ padding-left: 1.1rem; margin: 0; }
-.cv-list li{ margin-bottom: 0.95rem; font-size: 0.94rem; color: rgba(242,242,242,0.88); }
+.cv-list li{ margin-bottom: 0.95rem; font-size: 0.94rem; color: rgba(242,236,220,0.88); }
 .cv-list strong{ color: var(--ink); }
 
 .cv-entry{
   margin-bottom: 2rem;
   padding: 1.1rem 1.1rem 1.1rem 1.2rem;
-  background: rgba(11,15,14,0.6);
+  background: rgba(14,19,15,0.6);
   border: 1px solid var(--line);
-  border-left: 3px solid var(--magenta);
+  border-left: 3px solid var(--sand);
   border-radius: 4px;
 }
 .cv-entry__meta{
@@ -276,7 +276,7 @@ mark.key{
 .cv-entry__lab{ font-style: italic; font-size: 0.92rem; color: var(--dim); margin: 0 0 0.2rem; }
 .cv-entry__mentor{ font-size: 0.85rem; color: var(--faint); margin: 0 0 0.7rem; }
 .cv-entry p:last-child{ margin-bottom: 0; }
-.cv-entry strong{ color: var(--turq); }
+.cv-entry strong{ color: var(--green); }
 
 .skills-grid{
   display: grid;
@@ -287,11 +287,11 @@ mark.key{
   font-family: var(--micro);
   font-size: 1.15rem;
   letter-spacing: 0.1em;
-  color: var(--turq);
+  color: var(--green);
   margin: 0 0 0.4rem;
   text-transform: uppercase;
 }
-.skills-col p{ margin: 0; font-size: 0.9rem; color: rgba(242,242,242,0.85); }
+.skills-col p{ margin: 0; font-size: 0.9rem; color: rgba(242,236,220,0.85); }
 .skills-col strong{ color: var(--ink); }
 
 /* ---------- work ---------- */
@@ -335,10 +335,10 @@ mark.key{
   background: var(--faint);
   transition: background 0.2s ease, box-shadow 0.2s ease;
 }
-.contact__link:hover{ color: var(--turq); border-color: var(--turq); }
+.contact__link:hover{ color: var(--green); border-color: var(--green); }
 .contact__link:hover .blink{
-  background: var(--turq);
-  box-shadow: 0 0 10px var(--turq);
+  background: var(--green);
+  box-shadow: 0 0 10px var(--green);
 }
 
 .footer{
@@ -360,7 +360,7 @@ mark.key{
 
 /* ================= accessibility ================= */
 a:focus-visible, button:focus-visible{
-  outline: 2px solid var(--turq);
+  outline: 2px solid var(--green);
   outline-offset: 3px;
 }
 

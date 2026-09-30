@@ -85,16 +85,16 @@
         var y = mid - buf[i] * amp;
         if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
       }
-      ctx.strokeStyle = '#39C5BB';
+      ctx.strokeStyle = '#45C787';
       ctx.lineWidth = 1.6;
-      ctx.shadowColor = 'rgba(57,197,187,0.7)';
+      ctx.shadowColor = 'rgba(69,199,135,0.7)';
       ctx.shadowBlur = 8;
       ctx.stroke();
       ctx.shadowBlur = 0;
       // faint baseline
       ctx.beginPath();
       ctx.moveTo(0, mid); ctx.lineTo(W, mid);
-      ctx.strokeStyle = 'rgba(242,242,242,0.12)';
+      ctx.strokeStyle = 'rgba(242,236,220,0.12)';
       ctx.lineWidth = 1;
       ctx.stroke();
     }
