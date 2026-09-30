@@ -26,9 +26,12 @@ Full history: `git log` on the repo, or the Commits page on GitHub.
   `localStorage` preference (`amandata-theme`) with system-preference
   fallback; small blurred self-playing othello boards at the page
   edges (single board on narrow screens).
-- **Section headings deepened** — "about", "cv", etc. now use a deeper
-  theme color per theme: green in dark, deeper leaf in light, darker
-  magenta in pink, deeper sky in blue.
+- **Nav bar darkened per theme** — the nav now sits on a darker box
+  (black in dark, deep leaf in light, darker magenta in pink, darker navy
+  in blue) with white links and gold active states. Reverted the earlier
+  section-title recolor (it was based on a misspeak).
+- **Mobile nav scrolls** — nav links scroll horizontally on small screens
+  instead of overflowing.
 - **"my work" &rarr; "projects"** — nav and section renamed.
 - **Changelog section** — new `#changelog` section on the homepage
   summarizing site updates.
