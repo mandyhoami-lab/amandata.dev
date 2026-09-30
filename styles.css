@@ -264,6 +264,60 @@ main, .footer{ position: relative; z-index: 1; }
   color: var(--dim);
   margin: 0 0 1.4rem;
 }
+
+/* pixel cat asleep on the title, above ".dev" */
+.hero__title{ position: relative; }
+.hero__cat{
+  position: absolute;
+  bottom: 72%;
+  left: 0;
+  width: 104px;
+  transform: translateX(30%);
+  animation: cat-crawl 1.6s ease-out backwards;
+  pointer-events: none;
+}
+.hero__cat-svg{
+  display: block;
+  width: 100%;
+  height: auto;
+  transform-origin: 50% 100%;
+  animation: cat-breathe 3.2s ease-in-out 1.8s infinite;
+}
+@keyframes cat-crawl{
+  0%{ transform: translateX(190%); }
+  55%{ transform: translateX(90%) translateY(4px); }
+  100%{ transform: translateX(30%) translateY(0); }
+}
+@keyframes cat-breathe{
+  0%, 100%{ transform: scaleY(1); }
+  50%{ transform: scaleY(1.05); }
+}
+.cat-z{
+  position: absolute;
+  left: 26%;
+  bottom: 92%;
+  font-family: var(--micro);
+  font-size: 1.2rem;
+  color: var(--sand);
+  opacity: 0;
+  animation: z-float 3.6s ease-in 2s infinite;
+}
+.cat-z:nth-of-type(2){ animation-delay: 3.2s; left: 34%; }
+.cat-z:nth-of-type(3){ animation-delay: 4.4s; left: 22%; }
+@keyframes z-float{
+  0%{ transform: translateY(6px) scale(0.7); opacity: 0; }
+  25%{ opacity: 1; }
+  100%{ transform: translateY(-42px) scale(1.3); opacity: 0; }
+}
+@media (max-width: 640px){
+  .hero__cat{ width: 76px; }
+}
+@media (prefers-reduced-motion: reduce){
+  .hero__cat, .hero__cat-svg, .cat-z{ animation: none !important; }
+  .hero__cat{ transform: translateX(30%); }
+  .cat-z{ display: none; }
+}
+
 .hero__title{
   font-family: var(--display);
   font-weight: 700;
