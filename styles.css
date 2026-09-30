@@ -4,7 +4,7 @@
    green felt accents, retro-terminal type.
    Black    : #0A0C0A   (page)
    Cream    : #F2ECDC   (text)
-   Green    : #45C787   (EEG trace, key terms, primary accent)
+   Green    : #1DA05B   (EEG trace, key terms, primary accent)
    Sand     : #D9BE7A   (secondary accent)
    Grid     : #0E1F14   (technical grid lines)
    Display  : 'Press Start 2P' (hero / headings — retro terminal)
@@ -18,9 +18,9 @@
   --ink:     #F2ECDC;
   --dim:     rgba(242,236,220,0.62);
   --faint:   rgba(242,236,220,0.38);
-  --green:   #45C787;
+  --green:   #1DA05B;
   --sand:    #D9BE7A;
-  --grid:    rgba(69,199,135,0.07);
+  --grid:    rgba(29,160,91,0.07);
   --line:    rgba(242,236,220,0.14);
 
   --display: 'Press Start 2P', monospace;
@@ -114,7 +114,7 @@ a{ color: var(--green); }
   position: absolute; inset: -20%;
   pointer-events: none;
   background:
-    linear-gradient(115deg, transparent 42%, rgba(69,199,135,0.16) 47%, transparent 53%),
+    linear-gradient(115deg, transparent 42%, rgba(29,160,91,0.16) 47%, transparent 53%),
     linear-gradient(115deg, transparent 55%, rgba(217,190,122,0.10) 60%, transparent 66%);
   filter: blur(30px);
 }
@@ -132,7 +132,7 @@ a{ color: var(--green); }
   font-size: clamp(1.9rem, 7vw, 4.2rem);
   line-height: 1.25;
   margin: 0 0 1.6rem;
-  text-shadow: 0 0 24px rgba(69,199,135,0.35);
+  text-shadow: 0 0 24px rgba(29,160,91,0.35);
 }
 .hero__tagline{
   font-family: var(--micro);
@@ -193,14 +193,14 @@ a{ color: var(--green); }
   color: var(--sand);
 }
 .section__body p{ margin: 0 0 1.2rem; color: rgba(242,236,220,0.88); }
-.section__body a{ text-decoration-color: rgba(69,199,135,0.5); }
+.section__body a{ text-decoration-color: rgba(29,160,91,0.5); }
 
 /* key terms — the page coding its own themes */
 mark.key{
   background: transparent;
   color: var(--green);
   /* highlighter sweep: background grows in when .in is added by script */
-  background-image: linear-gradient(rgba(69,199,135,0.22), rgba(69,199,135,0.22));
+  background-image: linear-gradient(rgba(29,160,91,0.22), rgba(29,160,91,0.22));
   background-repeat: no-repeat;
   background-size: 0% 100%;
   background-position: 0 0;

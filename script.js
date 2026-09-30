@@ -85,9 +85,9 @@
         var y = mid - buf[i] * amp;
         if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
       }
-      ctx.strokeStyle = '#45C787';
+      ctx.strokeStyle = '#1DA05B';
       ctx.lineWidth = 1.6;
-      ctx.shadowColor = 'rgba(69,199,135,0.7)';
+      ctx.shadowColor = 'rgba(29,160,91,0.7)';
       ctx.shadowBlur = 8;
       ctx.stroke();
       ctx.shadowBlur = 0;
