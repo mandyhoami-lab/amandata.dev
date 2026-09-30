@@ -277,8 +277,8 @@ main, .footer{ position: relative; z-index: 1; }
   --cat-pink: #D98A9B; --cat-eye: #241C12;
 }
 [data-theme="pink"]{
-  --cat-fur: #F8F1E6; --cat-shade: #D9C2B2; --cat-light: #FFFEFB;
-  --cat-pink: #E89AA8; --cat-eye: #4A2C14;
+  --cat-fur: #B9B3AC; --cat-shade: #8E8880; --cat-light: #D8D3CA;
+  --cat-pink: #E89AA8; --cat-eye: #3A322C;
 }
 [data-theme="blue"]{
   --cat-fur: #E9EEF4; --cat-shade: #B9C4D1; --cat-light: #FFFFFF;
