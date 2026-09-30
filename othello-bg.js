@@ -9,8 +9,14 @@
   var ctx = canvas.getContext("2d");
 
   var N = 8;
-  var GREEN = "#1DA05B";
-  var GOLD = "#D9BE7A";
+  /* piece colors follow the active theme */
+  function pieceColors() {
+    var t = document.documentElement.dataset.theme || "dark";
+    if (t === "pink")  return { a: "#C2255C", b: "#D9A441", ring: "194,37,92" };
+    if (t === "blue")  return { a: "#5AA9E6", b: "#D9BE7A", ring: "90,169,230" };
+    if (t === "light") return { a: "#2E7B3E", b: "#C2A14E", ring: "46,123,62" };
+    return { a: "#1DA05B", b: "#D9BE7A", ring: "29,160,91" };
+  }
   var DIRS = [[-1,-1],[-1,0],[-1,1],[0,-1],[0,1],[1,-1],[1,0],[1,1]];
 
   var W = 0, H = 0;
@@ -161,6 +167,7 @@
   }
 
   function drawBoard(b, lineColor) {
+    var pc = pieceColors(), GREEN = pc.a, GOLD = pc.b;
     var cell = b.S / N, i, r, c;
     ctx.strokeStyle = lineColor;
     ctx.lineWidth = 1;
@@ -225,7 +232,7 @@
       var rp = cellXY(b, rg.r, rg.c);
       ctx.beginPath();
       ctx.arc(rp[0], rp[1], cell * (0.42 + 0.38 * rt), 0, Math.PI * 2);
-      ctx.strokeStyle = "rgba(29,160,91," + (0.45 * (1 - rt)).toFixed(3) + ")";
+      ctx.strokeStyle = "rgba(" + pc.ring + "," + (0.45 * (1 - rt)).toFixed(3) + ")";
       ctx.lineWidth = 2;
       ctx.stroke();
     }
@@ -234,7 +241,8 @@
   function frame(ts) {
     var dt = Math.min((ts - last) / 1000, 0.1);
     last = ts;
-    var dark = document.documentElement.dataset.theme !== "light";
+    var _t = document.documentElement.dataset.theme || "dark";
+    var dark = _t === "dark" || _t === "blue";
     var lineColor = dark ? "rgba(242,236,220,0.09)" : "rgba(24,28,22,0.10)";
 
     ctx.clearRect(0, 0, W, H);

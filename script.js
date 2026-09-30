@@ -26,6 +26,14 @@
      low-amplitude noise, with an occasional smooth biphasic
      deflection. Shaped to read as a trace — it is not derived
      from real data and is not labelled as though it were. */
+  var EEG_THEMES = {
+    dark:  { trace: '#39C5BB', glow: 'rgba(57,197,187,0.7)',  base: 'rgba(242,242,242,0.12)' },
+    light: { trace: '#2E7B3E', glow: 'rgba(46,123,62,0.45)',   base: 'rgba(24,28,22,0.14)' },
+    pink:  { trace: '#C2255C', glow: 'rgba(194,37,92,0.45)',   base: 'rgba(59,36,48,0.14)' },
+    blue:  { trace: '#6BB8F0', glow: 'rgba(107,184,240,0.6)',  base: 'rgba(233,239,247,0.12)' }
+  };
+  var eegTheme = null, eegTrace = '#39C5BB', eegGlow = 'rgba(57,197,187,0.7)',
+      eegBase = 'rgba(242,242,242,0.12)';
   (function eeg() {
     var canvas = document.getElementById('eeg');
     if (!canvas) return;
@@ -85,17 +93,22 @@
         var y = mid - buf[i] * amp;
         if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
       }
-      var light = document.documentElement.dataset.theme === 'light';
-      ctx.strokeStyle = light ? '#2E7B3E' : '#39C5BB';
+      var theme = document.documentElement.dataset.theme || 'dark';
+      if (theme !== eegTheme) {
+        eegTheme = theme;
+        var pal = EEG_THEMES[theme] || EEG_THEMES.dark;
+        eegTrace = pal.trace; eegGlow = pal.glow; eegBase = pal.base;
+      }
+      ctx.strokeStyle = eegTrace;
       ctx.lineWidth = 1.6;
-      ctx.shadowColor = light ? 'rgba(46,123,62,0.45)' : 'rgba(57,197,187,0.7)';
+      ctx.shadowColor = eegGlow;
       ctx.shadowBlur = 8;
       ctx.stroke();
       ctx.shadowBlur = 0;
       // faint baseline
       ctx.beginPath();
       ctx.moveTo(0, mid); ctx.lineTo(W, mid);
-      ctx.strokeStyle = light ? 'rgba(24,28,22,0.14)' : 'rgba(242,242,242,0.12)';
+      ctx.strokeStyle = eegBase;
       ctx.lineWidth = 1;
       ctx.stroke();
     }

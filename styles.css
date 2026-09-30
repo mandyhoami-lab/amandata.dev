@@ -1,7 +1,8 @@
 /* =========================================================
    amandata.dev — token system
-   "othello": dark board-room AND inverted light themes,
-   toggled via [data-theme] on <html> (default: dark).
+   "othello": four themes — dark board-room, light paper,
+   pink sakura, blue midnight — toggled via [data-theme]
+   on <html> (default: dark).
    Green felt + gold accents, retro-terminal type.
    An ambient game of othello plays itself at the edges
    (see othello-bg.js) — low, slow, never in the way.
@@ -53,10 +54,9 @@
 
   /* light is its own palette: leaf green replaces the neon green,
      headings go leaf instead of near-black, gold deepens for cream */
-  --leaf:     #2E7B3E;
-  --green:    #2E7B3E;
-  --heading:  #2E7B3E;
-  --sand:     #C2A14E;
+  --green:    #2E7B3E;   /* leaf green replaces the neon green */
+  --heading:  #2E7B3E;   /* headings go leaf instead of near-black */
+  --sand:     #C2A14E;   /* deeper gold so accents read on cream */
 
   --tag:            #9A7B2D;
   --body-text:      rgba(24,28,22,0.88);
@@ -184,6 +184,65 @@ main, .footer{ position: relative; z-index: 1; }
 }
 [data-theme="light"] .ribbons{
   display: none;
+}
+
+/* ---------- pink (sakura) ---------- */
+[data-theme="pink"]{
+  --bg:      #FAE9EE;
+  --panel:   #FFF7F9;
+  --ink:     #3B2430;
+  --dim:     rgba(59,36,48,0.66);
+  --faint:   rgba(59,36,48,0.42);
+  --line:    rgba(59,36,48,0.14);
+
+  --green:    #C2255C;   /* rose replaces green */
+  --heading:  #A61E4D;
+  --sand:     #D9A441;
+
+  --tag:            #96506B;
+  --body-text:      rgba(59,36,48,0.88);
+  --card-bg:        rgba(255,255,255,0.78);
+  --card-shadow:    0 1px 3px rgba(59,36,48,0.06);
+  --nav-bg:         rgba(250,233,238,0.85);
+  --vignette:       radial-gradient(ellipse at center, transparent 60%, rgba(150,80,107,0.10) 100%);
+  --hero-glow:      0 0 26px rgba(194,37,92,0.25);
+  --selection-ink:  #FFFFFF;
+  --work-note-bg:   rgba(255,255,255,0.5);
+  --game-opacity:   0.26;
+}
+[data-theme="pink"] .ribbons{
+  background:
+    linear-gradient(115deg, transparent 42%, rgba(194,37,92,0.12) 47%, transparent 53%),
+    linear-gradient(115deg, transparent 55%, rgba(217,164,65,0.14) 60%, transparent 66%);
+}
+
+/* ---------- blue (midnight) ---------- */
+[data-theme="blue"]{
+  --bg:      #0A1220;
+  --panel:   #0E1828;
+  --ink:     #E9EFF7;
+  --dim:     rgba(233,239,247,0.62);
+  --faint:   rgba(233,239,247,0.38);
+  --line:    rgba(233,239,247,0.14);
+
+  --green:    #5AA9E6;   /* sky accent replaces felt green */
+  --sand:     #D9BE7A;
+
+  --tag:            #D9BE7A;
+  --body-text:      rgba(233,239,247,0.88);
+  --card-bg:        rgba(14,24,40,0.6);
+  --card-shadow:    none;
+  --nav-bg:         rgba(10,18,32,0.82);
+  --vignette:       radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.55) 100%);
+  --hero-glow:      0 0 24px rgba(90,169,230,0.35);
+  --selection-ink:  #0A1220;
+  --work-note-bg:   transparent;
+  --game-opacity:   0.30;
+}
+[data-theme="blue"] .ribbons{
+  background:
+    linear-gradient(115deg, transparent 42%, rgba(90,169,230,0.14) 47%, transparent 53%),
+    linear-gradient(115deg, transparent 55%, rgba(217,190,122,0.12) 60%, transparent 66%);
 }
 
 .hero__kicker{
