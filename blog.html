@@ -8,14 +8,18 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Micro+5&family=Overpass+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script>
+/* theme init before first paint: saved choice, else system preference, else dark */
+(function(){try{var t=localStorage.getItem('amandata-theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='dark';}})();
+</script>
 <link rel="stylesheet" href="styles.css">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <style>
-  .post-card{display:block;text-decoration:none;margin-bottom:1.5rem;padding:1.1rem 1.1rem 1.1rem 1.2rem;background:rgba(255,255,255,0.78);border:1px solid var(--line);border-left:3px solid var(--green);border-radius:4px;box-shadow:0 1px 3px rgba(24,28,22,0.06);transition:border-color 0.2s ease}
+  .post-card{display:block;text-decoration:none;margin-bottom:1.5rem;padding:1.1rem 1.1rem 1.1rem 1.2rem;background:var(--card-bg);border:1px solid var(--line);border-left:3px solid var(--green);border-radius:4px;box-shadow:var(--card-shadow);transition:border-color 0.2s ease}
   .post-card:hover{border-left-color:var(--sand)}
   .post-card__title{font-family:var(--micro);font-size:1.5rem;letter-spacing:0.04em;color:var(--ink);margin:0 0 0.3rem}
   .post-card__date{font-family:var(--micro);font-size:1rem;letter-spacing:0.08em;color:var(--dim)}
-  .post-card__excerpt{color:rgba(24,28,22,0.78);font-size:0.95rem;margin:0.6rem 0 0}
+  .post-card__excerpt{color:var(--body-text);font-size:0.95rem;margin:0.6rem 0 0}
   .back-link{display:inline-block;margin-bottom:1.5rem;font-family:var(--micro);font-size:1.2rem;letter-spacing:0.06em;color:var(--green);text-decoration:none}
   .back-link:hover{color:var(--sand)}
   #post-body h1,#post-body h2,#post-body h3{font-family:var(--micro);letter-spacing:0.04em;color:var(--ink);line-height:1.4}
@@ -42,6 +46,7 @@
     <a class="nav__link is-active" href="/blog.html">blog</a>
     <a class="nav__link" href="/#contact">contact</a>
   </div>
+  <button class="theme-toggle" id="theme-toggle" aria-label="toggle dark and light theme">light</button>
 </nav>
 
 <main>
@@ -75,6 +80,7 @@
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
 <script src="othello-bg.js"></script>
+<script src="theme.js"></script>
 <script src="supabase-config.js"></script>
 <script src="blog.js"></script>
 </body>

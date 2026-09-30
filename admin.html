@@ -8,6 +8,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Micro+5&family=Overpass+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script>
+/* theme init before first paint: saved choice, else system preference, else dark */
+(function(){try{var t=localStorage.getItem('amandata-theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='dark';}})();
+</script>
 <link rel="stylesheet" href="styles.css">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <style>
@@ -23,7 +27,7 @@
   .form button.ghost:hover{color:var(--ink);border-color:var(--dim)}
   .form .check{display:flex;align-items:center;gap:0.6rem;cursor:pointer}
   .form .check input{width:1.1rem;height:1.1rem;accent-color:var(--green)}
-  .form-error{color:var(--sand-ink);font-family:var(--micro);font-size:1.15rem;letter-spacing:0.04em}
+  .form-error{color:var(--tag);font-family:var(--micro);font-size:1.15rem;letter-spacing:0.04em}
   .form-ok{color:var(--green);font-family:var(--micro);font-size:1.15rem;letter-spacing:0.04em}
 </style>
 </head>
@@ -42,6 +46,7 @@
     <a class="nav__link" href="/blog.html">blog</a>
     <a class="nav__link" href="/#contact">contact</a>
   </div>
+  <button class="theme-toggle" id="theme-toggle" aria-label="toggle dark and light theme">light</button>
 </nav>
 
 <main>
@@ -81,6 +86,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="othello-bg.js"></script>
+<script src="theme.js"></script>
 <script src="supabase-config.js"></script>
 <script src="admin.js"></script>
 </body>

@@ -1,30 +1,37 @@
 /* =========================================================
    amandata.dev — token system
-   "othello, inverted": warm white page, dark ink text,
-   board-green and gold accents, retro-terminal type.
-   An ambient game of othello plays itself behind everything
+   "othello": dark board-room AND inverted light themes,
+   toggled via [data-theme] on <html> (default: dark).
+   Green felt + gold accents, retro-terminal type.
+   An ambient game of othello plays itself at the edges
    (see othello-bg.js) — low, slow, never in the way.
-   Paper    : #F7F3E9   (page)
-   Panel    : #FFFFFF   (cards)
-   Ink      : #181C16   (text)
-   Green    : #1DA05B   (othello felt, EEG trace, primary accent)
-   Gold     : #D9BE7A   (secondary accent)
-   Gold ink : #9A7B2D   (gold text on light backgrounds)
    Display  : 'Press Start 2P' (hero / headings — retro terminal)
    Alt disp : 'Micro 5'        (section tags, kickers)
    Body     : 'Overpass Mono'  (everything else)
    ========================================================= */
 
+/* ---------- dark (default) ---------- */
 :root{
-  --bg:      #F7F3E9;
-  --panel:   #FFFFFF;
-  --ink:     #181C16;
-  --dim:     rgba(24,28,22,0.66);
-  --faint:   rgba(24,28,22,0.42);
+  --bg:      #0A0C0A;
+  --panel:   #0E130F;
+  --ink:     #F2ECDC;
+  --dim:     rgba(242,236,220,0.62);
+  --faint:   rgba(242,236,220,0.38);
   --green:   #1DA05B;
   --sand:    #D9BE7A;
-  --sand-ink:#9A7B2D;
-  --line:    rgba(24,28,22,0.14);
+  --line:    rgba(242,236,220,0.14);
+
+  /* semantic tokens that flip with the theme */
+  --tag:            #D9BE7A;
+  --body-text:      rgba(242,236,220,0.88);
+  --card-bg:        rgba(14,19,15,0.6);
+  --card-shadow:    none;
+  --nav-bg:         rgba(10,12,10,0.82);
+  --vignette:       radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.55) 100%);
+  --hero-glow:      0 0 24px rgba(29,160,91,0.35);
+  --selection-ink:  #0A0C0A;
+  --work-note-bg:   transparent;
+  --game-opacity:   0.30;
 
   --display: 'Press Start 2P', monospace;
   --micro:   'Micro 5', monospace;
@@ -32,6 +39,27 @@
 
   --max: 760px;
   --edge: clamp(1.25rem, 5vw, 3rem);
+}
+
+/* ---------- light ---------- */
+[data-theme="light"]{
+  --bg:      #F7F3E9;
+  --panel:   #FFFFFF;
+  --ink:     #181C16;
+  --dim:     rgba(24,28,22,0.66);
+  --faint:   rgba(24,28,22,0.42);
+  --line:    rgba(24,28,22,0.14);
+
+  --tag:            #9A7B2D;
+  --body-text:      rgba(24,28,22,0.88);
+  --card-bg:        rgba(255,255,255,0.78);
+  --card-shadow:    0 1px 3px rgba(24,28,22,0.06);
+  --nav-bg:         rgba(247,243,233,0.85);
+  --vignette:       radial-gradient(ellipse at center, transparent 60%, rgba(120,100,60,0.10) 100%);
+  --hero-glow:      0 0 26px rgba(29,160,91,0.22);
+  --selection-ink:  #FFFFFF;
+  --work-note-bg:   rgba(255,255,255,0.5);
+  --game-opacity:   0.26;
 }
 
 *{ box-sizing: border-box; }
@@ -45,10 +73,11 @@ body{
   font-size: 16px;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 a{ color: var(--green); }
-::selection{ background: var(--green); color: #FFFFFF; }
+::selection{ background: var(--green); color: var(--selection-ink); }
 
 /* ambient othello game — fixed backdrop, never interactive, never in the way */
 .othello-bg{
@@ -56,19 +85,19 @@ a{ color: var(--green); }
   width: 100vw; height: 100vh;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.34;
-  filter: blur(1.5px);
+  opacity: var(--game-opacity);
+  filter: blur(2px);
 }
 
 /* content floats above the game */
 main, .footer{ position: relative; z-index: 1; }
 
-/* soft warm vignette — pure overlay, never blocks clicks */
+/* vignette — pure overlay, never blocks clicks */
 .vignette{
   position: fixed; inset: 0;
   pointer-events: none;
   z-index: 60;
-  background: radial-gradient(ellipse at center, transparent 60%, rgba(120,100,60,0.10) 100%);
+  background: var(--vignette);
 }
 
 /* reading progress bar */
@@ -84,7 +113,7 @@ main, .footer{ position: relative; z-index: 1; }
   position: sticky; top: 0; z-index: 50;
   display: flex; align-items: center; justify-content: space-between;
   padding: 0.9rem var(--edge);
-  background: rgba(247,243,233,0.85);
+  background: var(--nav-bg);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--line);
 }
@@ -109,6 +138,22 @@ main, .footer{ position: relative; z-index: 1; }
 .nav__link:hover{ color: var(--ink); }
 .nav__link.is-active{ color: var(--green); border-color: var(--green); }
 
+/* dark/light toggle */
+.theme-toggle{
+  font-family: var(--micro);
+  font-size: 1.05rem;
+  letter-spacing: 0.06em;
+  color: var(--dim);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 0.25rem 0.7rem;
+  margin-left: 1rem;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.theme-toggle:hover{ color: var(--green); border-color: var(--green); }
+
 /* ================= HERO ================= */
 .hero{
   position: relative;
@@ -126,7 +171,7 @@ main, .footer{ position: relative; z-index: 1; }
   pointer-events: none;
   background:
     linear-gradient(115deg, transparent 42%, rgba(29,160,91,0.14) 47%, transparent 53%),
-    linear-gradient(115deg, transparent 55%, rgba(217,190,122,0.14) 60%, transparent 66%);
+    linear-gradient(115deg, transparent 55%, rgba(217,190,122,0.12) 60%, transparent 66%);
   filter: blur(30px);
 }
 
@@ -144,7 +189,7 @@ main, .footer{ position: relative; z-index: 1; }
   line-height: 1.25;
   margin: 0 0 1.6rem;
   color: var(--ink);
-  text-shadow: 0 0 26px rgba(29,160,91,0.22);
+  text-shadow: var(--hero-glow);
 }
 .hero__tagline{
   font-family: var(--micro);
@@ -202,9 +247,9 @@ main, .footer{ position: relative; z-index: 1; }
   font-family: var(--micro);
   font-size: 1.15rem;
   letter-spacing: 0.12em;
-  color: var(--sand-ink);
+  color: var(--tag);
 }
-.section__body p{ margin: 0 0 1.2rem; color: rgba(24,28,22,0.88); }
+.section__body p{ margin: 0 0 1.2rem; color: var(--body-text); }
 .section__body a{ text-decoration-color: rgba(29,160,91,0.5); }
 
 /* key terms — the page coding its own themes */
@@ -212,7 +257,7 @@ mark.key{
   background: transparent;
   color: var(--green);
   /* highlighter sweep: background grows in when .in is added by script */
-  background-image: linear-gradient(rgba(29,160,91,0.20), rgba(29,160,91,0.20));
+  background-image: linear-gradient(rgba(29,160,91,0.22), rgba(29,160,91,0.22));
   background-repeat: no-repeat;
   background-size: 0% 100%;
   background-position: 0 0;
@@ -240,11 +285,11 @@ mark.key{
   margin-bottom: 3rem;
 }
 .stat{
-  background: var(--panel);
+  background: var(--card-bg);
   border: 1px solid var(--line);
   border-left: 3px solid var(--green);
   border-radius: 4px;
-  box-shadow: 0 1px 3px rgba(24,28,22,0.06);
+  box-shadow: var(--card-shadow);
   padding: 1.1rem 1rem;
   display: flex; flex-direction: column; gap: 0.35rem;
 }
@@ -262,21 +307,21 @@ mark.key{
   font-family: var(--micro);
   font-size: 1.4rem;
   letter-spacing: 0.1em;
-  color: var(--sand-ink);
+  color: var(--tag);
   margin: 0 0 1rem;
 }
 .cv-list{ padding-left: 1.1rem; margin: 0; }
-.cv-list li{ margin-bottom: 0.95rem; font-size: 0.94rem; color: rgba(24,28,22,0.88); }
+.cv-list li{ margin-bottom: 0.95rem; font-size: 0.94rem; color: var(--body-text); }
 .cv-list strong{ color: var(--ink); }
 
 .cv-entry{
   margin-bottom: 2rem;
   padding: 1.1rem 1.1rem 1.1rem 1.2rem;
-  background: rgba(255,255,255,0.78);
+  background: var(--card-bg);
   border: 1px solid var(--line);
   border-left: 3px solid var(--sand);
   border-radius: 4px;
-  box-shadow: 0 1px 3px rgba(24,28,22,0.06);
+  box-shadow: var(--card-shadow);
 }
 .cv-entry__meta{
   display: flex; justify-content: space-between; gap: 0.5rem;
@@ -305,7 +350,7 @@ mark.key{
   margin: 0 0 0.4rem;
   text-transform: uppercase;
 }
-.skills-col p{ margin: 0; font-size: 0.9rem; color: rgba(24,28,22,0.85); }
+.skills-col p{ margin: 0; font-size: 0.9rem; color: var(--body-text); }
 .skills-col strong{ color: var(--ink); }
 
 /* ---------- work ---------- */
@@ -318,7 +363,7 @@ mark.key{
   border-radius: 4px;
   padding: 1.5rem;
   text-align: center;
-  background: rgba(255,255,255,0.5);
+  background: var(--work-note-bg);
 }
 
 /* ---------- contact ---------- */
