@@ -50,10 +50,10 @@
 [data-theme="light"]{
   --bg:      #F7F3E9;
   --panel:   #FFFFFF;
-  --ink:     #181C16;
-  --dim:     rgba(24,28,22,0.66);
-  --faint:   rgba(24,28,22,0.42);
-  --line:    rgba(24,28,22,0.14);
+  --ink:     #1B2F21;
+  --dim:     rgba(27,47,33,0.66);
+  --faint:   rgba(27,47,33,0.42);
+  --line:    rgba(27,47,33,0.14);
 
   /* light is its own palette: leaf green replaces the neon green,
      headings go leaf instead of near-black, gold deepens for cream */
@@ -62,9 +62,9 @@
   --sand:     #C2A14E;   /* deeper gold so accents read on cream */
 
   --tag:            #9A7B2D;
-  --body-text:      rgba(24,28,22,0.88);
+  --body-text:      rgba(27,47,33,0.88);
   --card-bg:        rgba(255,255,255,0.78);
-  --card-shadow:    0 1px 3px rgba(24,28,22,0.06);
+  --card-shadow:    0 1px 3px rgba(27,47,33,0.06);
   --nav-bg:         #235C30;
   --vignette:       radial-gradient(ellipse at center, transparent 60%, rgba(120,100,60,0.10) 100%);
   --hero-glow:      none;
@@ -81,7 +81,7 @@ body{
   background: var(--bg);
   color: var(--ink);
   font-family: var(--body);
-  font-weight: 500;
+  font-weight: 600;
   font-size: 17px;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
@@ -140,6 +140,8 @@ main, .footer{ position: relative; z-index: 1; }
 .nav__links{ display: flex; gap: 1.6rem; }
 .nav__link{
   font-family: var(--micro);
+  -webkit-text-stroke: 0.5px currentColor;
+  paint-order: stroke fill;
   font-size: 1.15rem;
   letter-spacing: 0.06em;
   color: var(--nav-dim);
@@ -154,6 +156,8 @@ main, .footer{ position: relative; z-index: 1; }
 /* dark/light toggle */
 .theme-toggle{
   font-family: var(--micro);
+  -webkit-text-stroke: 0.5px currentColor;
+  paint-order: stroke fill;
   font-size: 1.15rem;
   letter-spacing: 0.06em;
   color: var(--nav-dim);
@@ -195,19 +199,19 @@ main, .footer{ position: relative; z-index: 1; }
 [data-theme="pink"]{
   --bg:      #FAE9EE;
   --panel:   #FFF7F9;
-  --ink:     #3B2430;
-  --dim:     rgba(59,36,48,0.66);
-  --faint:   rgba(59,36,48,0.42);
-  --line:    rgba(59,36,48,0.14);
+  --ink:     #471E3C;
+  --dim:     rgba(71,30,60,0.66);
+  --faint:   rgba(71,30,60,0.42);
+  --line:    rgba(71,30,60,0.14);
 
   --green:    #C2255C;   /* rose replaces green */
   --heading:  #A61E4D;
   --sand:     #D9A441;
 
   --tag:            #96506B;
-  --body-text:      rgba(59,36,48,0.88);
+  --body-text:      rgba(71,30,60,0.88);
   --card-bg:        rgba(255,255,255,0.78);
-  --card-shadow:    0 1px 3px rgba(59,36,48,0.06);
+  --card-shadow:    0 1px 3px rgba(71,30,60,0.06);
   --nav-bg:         #8A1C46;
   --vignette:       radial-gradient(ellipse at center, transparent 60%, rgba(150,80,107,0.10) 100%);
   --hero-glow:      0 0 26px rgba(194,37,92,0.25);
@@ -252,6 +256,8 @@ main, .footer{ position: relative; z-index: 1; }
 
 .hero__kicker{
   font-family: var(--micro);
+  -webkit-text-stroke: 0.5px currentColor;
+  paint-order: stroke fill;
   font-size: 1.3rem;
   letter-spacing: 0.28em;
   text-transform: uppercase;
@@ -261,7 +267,7 @@ main, .footer{ position: relative; z-index: 1; }
 .hero__title{
   font-family: var(--display);
   font-weight: 700;
-  -webkit-text-stroke: 1px var(--heading);
+  -webkit-text-stroke: 2px var(--heading);
   paint-order: stroke fill;
   font-size: clamp(2.6rem, 9vw, 5.5rem);
   line-height: 1.25;
@@ -273,6 +279,8 @@ main, .footer{ position: relative; z-index: 1; }
 }
 .hero__tagline{
   font-family: var(--micro);
+  -webkit-text-stroke: 0.5px currentColor;
+  paint-order: stroke fill;
   font-size: 1.12rem;
   letter-spacing: 0.06em;
   line-height: 1.8;
@@ -315,6 +323,8 @@ main, .footer{ position: relative; z-index: 1; }
 .section__title{
   font-family: var(--display);
   font-weight: 700;
+  -webkit-text-stroke: 1px var(--heading);
+  paint-order: stroke fill;
   font-size: clamp(1.3rem, 4vw, 1.8rem);
   margin: 0;
   color: var(--heading);
@@ -483,6 +493,8 @@ mark.key{
   text-align: center;
   padding: 1.1rem var(--edge);
   font-family: var(--micro);
+  -webkit-text-stroke: 0.5px currentColor;
+  paint-order: stroke fill;
   font-size: 1.05rem;
   letter-spacing: 0.08em;
   color: var(--nav-ink);

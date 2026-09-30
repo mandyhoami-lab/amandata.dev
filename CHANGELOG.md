@@ -36,6 +36,11 @@ Full history: `git log` on the repo, or the Commits page on GitHub.
 - **Abstract othello backdrop** — the physical board is gone; the game
   now renders as a flat graphic (thin grid, solid/ring discs) spread to
   the edges so content stays the focus.
+- **Heavier words, truer colors** — display type at 2px stroke,
+  labels at 0.5px, body at weight 600; light/pink dark text tinted
+  to deep leaf / deep rose instead of near-black.
+- **VT323** replaces Silkscreen (whose file had no lowercase) so
+  the nav renders in correct lowercase.
 - **Type system** — primary: Pixelify Sans (display), secondary:
   Silkscreen (labels), tertiary: Nunito (body). Cutesy videogamey,
   your call honored.
