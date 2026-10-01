@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Othello Advanced — Amanda Ta</title>
+<meta name="description" content="Advanced Othello study mode. The engine grades every move the moment you play it.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://amandata.dev/othello-advanced.html">
+<meta property="og:title" content="Othello Advanced — amandata.dev">
+<meta property="og:description" content="Othello study mode: engine grades every move.">
+<meta property="og:site_name" content="amandata.dev">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&family=VT323&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script>
+/* theme init before first paint: saved choice, else system preference, else dark */
+(function(){try{var t=localStorage.getItem('amandata-theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='dark';}})();
+</script>
+<link rel="stylesheet" href="styles.css?v=30">
+<link rel="stylesheet" href="othello.css?v=6">
+<link rel="icon" href="/favicon.ico" sizes="any">
+</head>
+<body>
+
+<!-- ambient othello game backdrop -->
+<canvas class="othello-bg" id="othello-bg" aria-hidden="true"></canvas>
+
+<div class="vignette" aria-hidden="true"></div>
+
+<!-- ================= NAV ================= -->
+<nav class="nav">
+  <a class="nav__mark" href="/">AT</a>
+  <div class="nav__links">
+    <a class="nav__link" href="/#about">About</a>
+    <a class="nav__link" href="/#cv">CV</a>
+    <a class="nav__link" href="/#work">Projects</a>
+    <a class="nav__link" href="/#contact">Contact</a>
+    <a class="nav__link" href="/#changelog">Changelog</a>
+    <a class="nav__link" href="/blog.html">Blog</a>
+    <a class="nav__link" href="/psy410.html">PSY 410 Resources</a>
+    <a class="nav__link is-active" href="/learn.html">Learn</a>
+  </div>
+  <button class="theme-toggle" id="theme-toggle" aria-label="cycle color theme">Light</button>
+</nav>
+
+<main>
+
+  <!-- ================= OTHELLO ADVANCED ================= -->
+  <section class="section" id="othello-advanced">
+    <div class="section__head">
+      <h2 class="section__title">Othello</h2>
+      <span class="section__tag">advanced · study mode</span>
+    </div>
+    <div class="section__body">
+
+      <p class="games-note"><a href="/learn.html">&larr; back to Learn</a> · <a href="/othello.html">beginner mode</a></p>
+
+      <div class="game-card">
+        <h3 class="game-card__title">Advanced</h3>
+        <p class="game-card__desc">For players with a few games under their belt. The engine grades every move the moment you play it — good, shaky, or blunder — and the eval graph shows exactly where the game swung.</p>
+
+        <div class="othello-controls">
+          <div class="othello-seg" role="group" aria-label="Play as">
+            <span class="othello-seg__label">Play as</span>
+            <button class="othello-seg__btn" id="adv-color-b" type="button" aria-pressed="true">Black</button>
+            <button class="othello-seg__btn" id="adv-color-w" type="button" aria-pressed="false">White</button>
+          </div>
+        </div>
+
+        <div class="adv-board-wrap">
+          <div class="adv-coords adv-coords--top" aria-hidden="true"><span></span><span>a</span><span>b</span><span>c</span><span>d</span><span>e</span><span>f</span><span>g</span><span>h</span></div>
+          <div class="adv-board-row">
+            <div class="adv-coords adv-coords--side" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span></div>
+            <div class="othello-board adv-board" id="adv-board" role="grid" aria-label="Othello board"></div>
+          </div>
+        </div>
+
+        <div class="othello-hud">
+          <span class="adv-move-no" id="adv-moveno">No. 1</span>
+          <div class="othello-score" aria-live="polite">
+            <span>you</span>
+            <span id="adv-you">2</span>
+            <span class="othello-sep">&ndash;</span>
+            <span id="adv-ai">2</span>
+            <span>robot</span>
+          </div>
+        </div>
+
+        <p class="adv-coach" id="adv-coach" aria-live="polite">Your move.</p>
+
+        <div class="othello-actions">
+          <button class="othello-btn" id="adv-new" type="button">New game</button>
+          <button class="othello-btn" id="adv-undo" type="button">Undo</button>
+          <button class="othello-btn" id="adv-redo" type="button">Redo</button>
+          <button class="othello-btn" id="adv-graph-btn" type="button" aria-expanded="false">Eval graph</button>
+        </div>
+
+        <div class="othello-panel" id="adv-graph-panel" hidden>
+          <h4 class="othello-panel__title">Evaluation</h4>
+          <canvas class="adv-graph" id="adv-graph" width="640" height="220" aria-label="Evaluation graph"></canvas>
+          <p class="score-note">Engine eval from your perspective after each move. Up = you're ahead, down = the robot is.</p>
+        </div>
+
+        <div class="othello-panel">
+          <h4 class="othello-panel__title">Moves</h4>
+          <ol class="adv-moves" id="adv-moves" aria-live="polite"></ol>
+        </div>
+
+        <p class="adv-credit">Study interface inspired by <strong>Hiyoko Reversi</strong> (ひよこリバーシ) — its post-game analysis and eval graph taught me what a teaching UI should do.</p>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p>© 2026 Amanda Ta · amandata.dev</p>
+</footer>
+
+<script src="othello-bg.js?v=14"></script>
+<script src="theme.js?v=9"></script>
+<script src="othello.js?v=9"></script>
+<script src="othello-advanced.js?v=4"></script>
+</body>
+</html>

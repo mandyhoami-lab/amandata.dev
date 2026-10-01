@@ -1,0 +1,63 @@
+/* creations hub — pixel-art buttons, one per creation */
+
+.creation-grid{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin: 1.25rem 0;
+}
+
+.creation-btn{
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .55rem;
+  padding: 1.1rem 1.4rem 1rem;
+  text-decoration: none;
+  color: var(--ink);
+  background: var(--card-bg);
+  border: 3px solid var(--ink);
+  border-radius: 0;
+  box-shadow: 6px 6px 0 color-mix(in srgb, var(--ink) 25%, transparent);
+}
+.creation-btn:hover{
+  filter: brightness(1.06);
+}
+.creation-btn:hover .creation-btn__label{
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 4px;
+}
+
+.creation-btn__board{
+  display: grid;
+  grid-template-columns: repeat(4, 18px);
+  grid-template-rows: repeat(4, 18px);
+  gap: 2px;
+  padding: 6px;
+  background: color-mix(in srgb, var(--green) 48%, var(--panel));
+  border: 3px solid var(--ink);
+}
+.creation-btn__cell{
+  width: 18px;
+  height: 18px;
+  background: rgba(255,255,255,.14);
+}
+.creation-btn__cell--b{ background: #141414; box-shadow: inset -3px -3px 0 #000, inset 3px 3px 0 #3a3a3a; }
+.creation-btn__cell--w{ background: #f4f1ea; box-shadow: inset -3px -3px 0 #b9b2a1, inset 3px 3px 0 #ffffff; }
+
+.creation-btn__label{
+  font-family: "Pixelify Sans", "VT323", monospace;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+  line-height: 1;
+}
+.creation-btn__sub{
+  font-size: .85rem;
+  opacity: .75;
+}
+
+.creations-intro{
+  max-width: 60ch;
+}
