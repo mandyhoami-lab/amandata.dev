@@ -70,8 +70,7 @@
 
   var E = (typeof window !== 'undefined') ? window.OthelloEngine : null;
   var boardEl = (typeof document !== 'undefined') ? document.getElementById('ex-board') : null;
-  var exBtn = (typeof document !== 'undefined') ? document.getElementById('othello-ex-btn') : null;
-  if (!E || !boardEl || !exBtn) return;
+  if (!E || !boardEl) return;
 
   var promptEl = document.getElementById('ex-prompt');
   var feedbackEl = document.getElementById('ex-feedback');
@@ -283,5 +282,5 @@
     renderEx();
   }
 
-  exBtn.addEventListener('click', init);
+  window.othelloExInit = init;
 })();
