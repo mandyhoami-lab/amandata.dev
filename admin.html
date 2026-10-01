@@ -101,6 +101,10 @@
       </form>
       <p id="post-status"></p>
       <p><button id="logout-btn" class="ghost form">Sign out</button></p>
+      <hr>
+      <p class="hint">maintenance</p>
+      <p><button id="maint-btn" class="ghost" type="button">Remove leftover subtitle lines</button></p>
+      <p id="maint-status"></p>
     </div>
   </section>
 </main>
@@ -115,5 +119,87 @@
 <script src="nav.js?v=1"></script>
 <script src="supabase-config.js?v=8"></script>
 <script src="admin.js?v=8"></script>
+<script>
+/* one-time maintenance: remove leftover blog subtitle lines. remove after use. */
+(function () {
+  var btn = document.getElementById("maint-btn");
+  var status = document.getElementById("maint-status");
+  if (!btn) return;
+  btn.addEventListener("click", function () {
+    btn.disabled = true;
+    status.className = "";
+    status.textContent = "working…";
+    var out = [];
+    var targets = {
+      "making-amandata-dev": [
+        "How a rented Carrd page became a hand-built site: the mirror, the rebuild, and the design system that grew out of it."
+      ],
+      "building-the-reversi-coach-turning-the-othello-bot-into-a-learning-system": [
+        "From a teachable robot to a study mode that grades every move: how a childhood favorite became the site\u2019s learning system.",
+        "From a teachable robot to a study mode that grades every move: how a childhood favorite became the site's learning system.",
+        "From a teachable robot to a study mode that grades every move."
+      ]
+    };
+    var slugs = Object.keys(targets);
+    function rm(body, line) {
+      var i = body.indexOf(line);
+      if (i < 0) return { b: body, f: false };
+      var e = i + line.length;
+      var mAfter = body.slice(e).match(/^\r?\n[ \t]*\r?\n/);
+      if (mAfter) { e += mAfter[0].length; }
+      else {
+        var mBefore = body.slice(0, i).match(/(\r?\n)[ \t]*\r?\n$/);
+        if (mBefore) i -= mBefore[0].length;
+      }
+      return { b: (body.slice(0, i) + body.slice(e)).replace(/(?:\r?\n){3,}/g, "\n\n"), f: true };
+    }
+    try {
+      var cfg = window.SUPABASE_CONFIG || {};
+      var client = supabase.createClient(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY);
+      client.auth.getSession().then(function (res) {
+        if (!res.data || !res.data.session) {
+          status.className = "form-error";
+          status.textContent = "not signed in — sign in first, then tap the button.";
+          btn.disabled = false;
+          return;
+        }
+        client.from("posts").select("id,slug,body").in("slug", slugs).then(function (r) {
+          if (r.error) {
+            status.className = "form-error";
+            status.textContent = "fetch failed: " + r.error.message;
+            btn.disabled = false;
+            return;
+          }
+          var chain = Promise.resolve();
+          r.data.forEach(function (p) {
+            chain = chain.then(function () {
+              var found = { b: p.body, f: false }, v = -1;
+              for (var j = 0; j < targets[p.slug].length; j++) {
+                found = rm(p.body, targets[p.slug][j]);
+                if (found.f) { v = j; break; }
+              }
+              out.push(p.slug + ": found=" + found.f + " (variant " + v + ")");
+              if (!found.f) return null;
+              return client.from("posts").update({ body: found.b }).eq("id", p.id).select("id").then(function (up) {
+                var ok = !up.error && up.data && up.data.length === 1;
+                out.push(p.slug + ": update=" + (up.error ? "ERR " + up.error.message : (ok ? "ok" : "UNEXPECTED")));
+              });
+            });
+          });
+          chain.then(function () {
+            status.className = "form-ok";
+            status.textContent = out.join(" · ");
+            btn.disabled = false;
+          });
+        });
+      });
+    } catch (err) {
+      status.className = "form-error";
+      status.textContent = "error: " + ((err && err.message) || String(err));
+      btn.disabled = false;
+    }
+  });
+})();
+</script>
 </body>
 </html>
