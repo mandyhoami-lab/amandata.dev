@@ -10,7 +10,7 @@ Live at **https://amandata.dev** (GitHub Pages, custom domain).
 
 - `index.html` — all the words on the site
 - `styles.css` — colors and fonts (tokens at the top)
-- `script.js` — animations (EEG trace, typewriter, scroll reveals)
+- `script.js` — animations (othello background gameplay, typewriter, scroll reveals)
 
 ## Preview
 
