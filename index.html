@@ -21,60 +21,22 @@
 /* theme init before first paint: saved choice, else system preference, else dark */
 (function(){try{var t=localStorage.getItem('amandata-theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='dark';}})();
 </script>
-<link rel="stylesheet" href="styles.css?v=35">
+<link rel="stylesheet" href="styles.css?v=36">
 <link rel="icon" type="image/svg+xml" href="/cat-icon.svg">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/images/icon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="assets/images/icon-192.png">
 <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
 </head>
-<body>
+<body data-nav="home">
+<noscript><p class="noscript-nav">amandata.dev &mdash; <a href="/#about">About</a> &middot; <a href="/learn.html">Learn</a> &middot; <a href="/blog.html">Blog</a> &middot; <a href="/othello.html">Play Othello</a> &middot; <a href="/psy410.html">PSY 410 Resources</a></p></noscript>
 
-<!-- ambient othello game backdrop -->
-<canvas class="othello-bg" id="othello-bg" aria-hidden="true"></canvas>
 
 
 <!-- CRT vignette overlay -->
 <div class="vignette" aria-hidden="true"></div>
 
 <!-- ================= NAV ================= -->
-<nav class="nav">
-  <a class="nav__mark" href="#top">AT</a>
-  <div class="nav__links">
-<div class="nav__item nav__dropdown">
-      <button class="nav__toggle" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="nav-menu-me" id="nav-toggle-me">Me <span class="nav__caret" aria-hidden="true">▾</span></button>
-      <div class="nav__menu" id="nav-menu-me" role="menu" aria-labelledby="nav-toggle-me">
-        <a class="nav__menu-link" role="menuitem" href="/#about">About</a>
-        <a class="nav__menu-link" role="menuitem" href="/#cv">CV</a>
-        <a class="nav__menu-link" role="menuitem" href="/#contact">Contact</a>
-        <a class="nav__menu-link" role="menuitem" href="/commissions.html">Commissions</a>
-      </div>
-    </div>
-<div class="nav__item nav__dropdown">
-      <button class="nav__toggle" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="nav-menu-site" id="nav-toggle-site">This Site <span class="nav__caret" aria-hidden="true">▾</span></button>
-      <div class="nav__menu" id="nav-menu-site" role="menu" aria-labelledby="nav-toggle-site">
-        <a class="nav__menu-link" role="menuitem" href="/blog.html?p=making-amandata-dev">Making amandata.dev</a>
-        <a class="nav__menu-link" role="menuitem" href="/blog.html?p=building-the-reversi-coach-turning-the-othello-bot-into-a-learning-system">Building the Reversi Coach</a>
-        <a class="nav__menu-link" role="menuitem" href="/repository.html">Repository</a>
-        <a class="nav__menu-link" role="menuitem" href="/#changelog">Changelog</a>
-      </div>
-    </div>
-<div class="nav__item nav__dropdown">
-      <button class="nav__toggle" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="nav-menu-learn" id="nav-toggle-learn">Learn <span class="nav__caret" aria-hidden="true">▾</span></button>
-      <div class="nav__menu" id="nav-menu-learn" role="menu" aria-labelledby="nav-toggle-learn">
-        <a class="nav__menu-link" role="menuitem" href="/learn.html">Games</a>
-        <a class="nav__menu-link" role="menuitem" href="/othello.html">Othello</a>
-        <a class="nav__menu-link" role="menuitem" href="/psy410-flashcards/">Myers flashcards</a>
-      </div>
-    </div>
-<div class="nav__item"><a class="nav__link" href="/blog.html">Blog</a></div>
-<div class="nav__item"><a class="nav__link" href="/othello.html">Play Othello</a></div>
-<div class="nav__item"><a class="nav__link" href="/psy410.html">PSY 410 Resources</a></div>
-
-  </div>
-  <button class="theme-toggle" id="theme-toggle" aria-label="cycle color theme">Light</button>
-  <div class="progress" id="progress" aria-hidden="true"></div>
-</nav>
 
 <!-- ================= HERO ================= -->
 <header class="hero" id="top">
@@ -154,75 +116,9 @@
     </div>
 
     <!-- stat row -->
-    <div class="stats" role="list">
-      <div class="stat" role="listitem">
-        <span class="stat__num" data-count="100">100</span>
-        <span class="stat__label">remediation &amp; cleaning businesses catalogued</span>
-      </div>
-      <div class="stat" role="listitem">
-        <span class="stat__num" data-count="281">281</span>
-        <span class="stat__label">state-subsidized housing developments studied</span>
-      </div>
-      <div class="stat" role="listitem">
-        <span class="stat__num" data-count="57">57</span>
-        <span class="stat__label">CA affordable housing properties surveyed</span>
-      </div>
-    </div>
+    <div class="stats" role="list" id="cv-stats"></div>
 
-    <div class="cv-block">
-      <h3 class="cv-block__title">Academic Presentations</h3>
-      <ul class="cv-list">
-        <li><strong>Ta, A.</strong>, Matt, G. E., Wooldridge, G., &amp; Greiner, L. (2026). <em>Smoking and vaping policies in newly constructed, state-funded multiunit housing in California</em> [Poster presentation]. Third Annual Research Symposium on Tobacco and the Environment, Southeast Live Well Center, San Diego, CA.</li>
-        <li><strong>Ta, A.</strong>, Matt, G. E., Wooldridge, G., &amp; Greiner, L. (2026). <em>Smoking and vaping policies in newly constructed, state-funded multiunit housing in California</em> [Poster presentation]. SDSU Student Symposium (S3), San Diego State University, San Diego, CA.</li>
-      </ul>
-    </div>
-
-    <div class="cv-block">
-      <h3 class="cv-block__title">Research</h3>
-
-      <div class="cv-entry">
-        <div class="cv-entry__meta"><span>02/2026 — present</span><span>San Diego</span></div>
-        <p class="cv-entry__role">Neural Correlates of Cognitive Control in Healthy Adults <em>(Ongoing)</em></p>
-        <p class="cv-entry__lab">Cognitive Affective Psychopathology &amp; Psychophysiology Lab, Kappenman Laboratory, San Diego State University</p>
-        <p class="cv-entry__mentor">Mentor: Dr. Emily Kappenman, PhD</p>
-        <p>I prepared and documented raw EEG datasets for preprocessing and analysis, collected and managed EEG datasets from healthy adult participants during a cognitive control task, and monitored task performance while ensuring high-quality EEG signal acquisition during experimental sessions.</p>
-      </div>
-
-      <div class="cv-entry">
-        <div class="cv-entry__meta"><span>09/2025 — 05/2026</span><span>Kearny Mesa</span></div>
-        <p class="cv-entry__role">Tobacco Smoke Remediation Practices in San Diego County <em>(Ongoing)</em></p>
-        <p class="cv-entry__lab">Policy Research Center for Tobacco and the Environment, San Diego State University</p>
-        <p class="cv-entry__mentor">Mentors: Dr. Georg Matt, PhD, Dr. Lydia Greiner, DrPH — with Savannah Yurcek, Amelia Allison, and Samuel Padilla</p>
-        <p>I developed a database of <strong>100</strong> remediation and cleaning businesses and certified professionals using IICRC records, business directories, and public databases, and prepared the background and methods sections of a mixed-methods study investigating residential tobacco smoke remediation practices and thirdhand smoke contamination. I also contributed to recruitment protocol design and implemented purposive and snowball sampling strategies to recruit professionals with tobacco smoke remediation experience.</p>
-      </div>
-
-      <div class="cv-entry">
-        <div class="cv-entry__meta"><span>09/2025 — 05/2026</span><span>Kearny Mesa</span></div>
-        <p class="cv-entry__role">Smoking and Vaping Policies in Newly Constructed, State-Funded Multiunit Housing in California</p>
-        <p class="cv-entry__lab">Policy Research Center for Tobacco and the Environment, San Diego State University</p>
-        <p class="cv-entry__mentor">Mentors: Dr. Georg Matt, PhD, Dr. Lydia Greiner, DrPH — with Gunnar Wooldridge</p>
-        <p>I integrated administrative and survey data from <strong>281</strong> newly constructed state-subsidized housing developments to evaluate the implementation of smoking and vaping policies, conducted structured qualitative coding of interview and survey data to classify lease policies and enforcement procedures into thematic categories, and synthesized survey responses from <strong>57</strong> California affordable housing properties to identify patterns in lease policy inclusion and enforcement.</p>
-        <p>Awarded <strong>Top Poster Presentation</strong> in the College of Sciences at the 2026 SDSU Student Symposium (S3), and also presented at the Third Annual Research Symposium on Tobacco and the Environment.</p>
-      </div>
-    </div>
-
-    <div class="cv-block">
-      <h3 class="cv-block__title">Honors</h3>
-      <ul class="cv-list">
-        <li><strong>Certificate of Recognition</strong> — Third Annual Research Symposium on Tobacco and the Environment (2026).</li>
-        <li><strong>Dean&rsquo;s Award for Top Poster Presentation</strong> — SDSU College of Sciences (2026). One of the top two poster presentations at the 2026 SDSU Student Symposium (S3).</li>
-        <li><strong>SDSU Merit Scholarship</strong> — San Diego State University (2024). Four-year full-tuition scholarship for outstanding local incoming students.</li>
-      </ul>
-    </div>
-
-    <div class="cv-block">
-      <h3 class="cv-block__title">Skills</h3>
-      <div class="skills-grid">
-        <div class="skills-col"><h4>Software</h4><p><strong>R</strong>, SPSS, JavaScript, PyCorder, Overleaf, Excel</p></div>
-        <div class="skills-col"><h4>Statistics</h4><p>Descriptive statistics, t-tests, ANOVA, correlation, linear regression</p></div>
-        <div class="skills-col"><h4>Methodology</h4><p>EEG data acquisition, qualitative coding (thematic analysis), survey &amp; interview design, database development</p></div>
-      </div>
-    </div>
+    <div id="cv-blocks"></div>
   </section>
 
   <!-- ================= CONTACT ================= -->
@@ -246,27 +142,7 @@
       <span class="section__tag">Site updates</span>
     </div>
     <div class="section__body">
-      <ul class="cv-list">
-        <li><strong>Oct 1, 10:08 AM</strong> — Flashcards joined Learn: the PSY 410 deck got a polished pixel-art rewrite on a shared engine (same 118 terms), and a new Research Methods deck covers 77 advanced terms — causal inference, regression diagnostics, psychometrics, Bayesian methods, and open science. Both live under Learn.</li>
-        <li><strong>Oct 1, 12:55 PM</strong> — Othello is now a learning system under Learn: a Beginner mode (the preserved easy game) and a new Advanced study mode where the engine grades every move instantly, with coordinates, a move list, undo/redo, and an eval graph.</li>
-        <li><strong>Oct 1, 12:55 PM</strong> — Creations renamed to Learn.</li>
-        <li><strong>Oct 1, earlier</strong> — New Creations section: the games page is now a hub with its own pixel-art button per creation, and Othello moved to its own page.</li>
-        <li><strong>Oct 1, earlier</strong> — Games page reworked: no levels — a teachable robot that's easy to beat, play as black or white, a how-to-play panel, an all-time scoreboard with usernames, and a pixel-art look with awake cat-head discs and a stepped disc-flip animation.</li>
-        <li><strong>Sep 30, 1:39 PM</strong> — PSY 410 vocab flashcards are live at <a href="/psy410-flashcards/">/psy410-flashcards/</a>.</li>
-        <li><strong>Sep 30, 1:25 PM</strong> — Sleeping-cat favicon for tabs and share sheets.</li>
-        <li><strong>Sep 30, 1:20 PM</strong> — Share previews now read "amandata.dev / welcome".</li>
-        <li><strong>Sep 30, 1:14 PM</strong> — Pink mode softened with creamier accents; the cat goes grey in pink mode.</li>
-        <li><strong>Sep 30, 12:30 PM</strong> — A pixel cat naps on the hero title, its coat adapting per theme.</li>
-        <li><strong>Sep 30, 12:44 PM</strong> — Reading progress bar rides under the nav.</li>
-        <li><strong>Sep 30, 11:59 AM</strong> — Nav links scroll sideways with edge fades on mobile.</li>
-        <li><strong>Sep 30, 11:54 AM</strong> — "My work" renamed to "Projects".</li>
-        <li><strong>Sep 30, 10:51 AM</strong> — This changelog section was added.</li>
-        <li><strong>Sep 30, 10:50 AM</strong> — Correct capitalization site-wide (amandata.dev title stays lowercase).</li>
-        <li><strong>Sep 30, 2:01 AM</strong> — Heavier type; dark text tinted to each theme's palette.</li>
-        <li><strong>Sep 30, 1:58 AM</strong> — VT323 replaces Silkscreen so the nav renders true lowercase.</li>
-        <li><strong>Sep 30, earlier</strong> — Pink (sakura) and blue (midnight) themes join the toggle.</li>
-        <li><strong>Sep 30, earlier</strong> — New "About me" bio; blog is live with passwordless publishing.</li>
-      </ul>
+      <ul class="cv-list" id="changelog-list"></ul>
       <p>Full history in the repo's <a href="https://github.com/mandyhoami-lab/amandata.dev/blob/main/CHANGELOG.md" target="_blank" rel="noopener">CHANGELOG.md</a>.</p>
     </div>
   </section>
@@ -274,13 +150,13 @@
 
 </main>
 
-<footer class="footer">
-  <p>© 2026 Amanda Ta · amandata.dev</p>
-</footer>
 
+<script src="layout.js?v=1"></script>
 <script src="othello-bg.js?v=16"></script>
 <script src="theme.js?v=9"></script>
 <script src="nav.js?v=9"></script>
+<script src="content-data.js?v=1"></script>
+<script src="content.js?v=1"></script>
 <script src="script.js?v=11"></script>
 </body>
 </html>
