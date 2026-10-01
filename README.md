@@ -56,7 +56,7 @@ live site is expected and intentional.
 - **[Amanda Ta](https://github.com/mandyhoami-lab)** — the original live site was entirely built by me.
 - **[KoriKosmos](https://github.com/KoriKosmos)** — coauthored by, KoriKosmos. Wrote the original full README and led the Carrd-mirror-to-working-copy transition.
 - **Muse** — contributor.
-- Rebuilt with Claude and 2.0 (personal bot created with Muse by Meta).
+- Assisted rebuilt commits with Claude and 2.0 (Muse by Meta). 
 
 ## To do
 
