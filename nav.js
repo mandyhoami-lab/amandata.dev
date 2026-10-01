@@ -23,6 +23,7 @@
     dropdowns.forEach(function (dd) {
       if (dd.classList.contains('open')) anyOpen = true;
       dd.classList.remove('open');
+      dd.classList.remove('nav__dropdown--right');
       var t = dd.querySelector('.nav__toggle');
       if (t) t.setAttribute('aria-expanded', 'false');
     });
@@ -45,6 +46,11 @@
       toggle.setAttribute('aria-expanded', 'true');
       var nav = navEl();
       if (nav) nav.classList.add('nav--menu-open');
+      /* keep the floating panel inside the viewport on narrow screens:
+         right-align when it would otherwise spill past the right edge */
+      var r = toggle.getBoundingClientRect();
+      var w = menu.offsetWidth || 240;
+      if (r.left + w > window.innerWidth - 8) dd.classList.add('nav__dropdown--right');
     }
 
     function close(refocus) {
@@ -108,6 +114,9 @@
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') closeAll();
   });
+
+  /* a resize can move the toggle; don't leave a panel stranded mid-air */
+  window.addEventListener('resize', function () { closeAll(); });
 
   /* a menu link navigating away should not leave the panel stuck open */
   document.addEventListener('focusin', function (e) {
