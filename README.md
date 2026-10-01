@@ -12,8 +12,6 @@ Live at **https://amandata.dev** (GitHub Pages, custom domain).
 - `styles.css` — colors and fonts (tokens at the top)
 - `script.js` — animations (EEG trace, typewriter, scroll reveals)
 
-The old Carrd-based site is kept on the `archive` branch.
-
 ## Preview
 
 ```bash
@@ -31,13 +29,35 @@ DNS: apex A records pointing at GitHub Pages (see repo settings).
 
 See [CHANGELOG.md](CHANGELOG.md) for a catalog of notable commits.
 
-## Credits
+The old Carrd-based site is kept on the `archive` branch.
 
-The original live site was entirely built by me.
-Rebuilt with Claude and 2.0 (personal bot created with Muse by Meta).
-Contributor: Muse.
+### How the Carrd mirror became the site
+
+*Written by KoriKosmos — restored from the original README:*
+
+This started as a read-only mirror of the live site (built and hosted on Carrd),
+produced by `tools/mirror.sh`. That's how `index.html` and `assets/` got here,
+and it's still where the current markup came from.
+
+**It is no longer just a mirror.** It's the working copy now. The direction is:
+
+1. Edit here, in the repo.
+2. Preview those edits locally and raise them as suggestions against the live
+   design.
+3. Port the agreed ones upstream while Carrd is still the host.
+4. Eventually stop doing step 3 — drop Carrd and serve the site straight from
+   this repo.
+
+So the mirror is a starting point, not the source of truth. Divergence from the
+live site is expected and intentional.
+
+## Contributors
+
+- **Amanda Ta** — the original live site was entirely built by me.
+- **[KoriKosmos](https://github.com/KoriKosmos)** — coauthored and maintained by my husband, KoriKosmos. Wrote the original full README and led the Carrd-mirror-to-working-copy transition.
+- **Muse** — contributor.
+- Rebuilt with Claude and 2.0 (personal bot created with Muse by Meta).
 
 ## To do
 
 - [ ] Fill in the "My Work" section
-
