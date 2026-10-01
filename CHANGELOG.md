@@ -5,6 +5,16 @@ Full history: `git log` on the repo, or the Commits page on GitHub.
 
 ## 2026-10-01
 
+- **Flashcards under Learn (same day)** — the PSY 410 deck got a
+  polished rewrite on a new shared flashcard engine
+  (`/flashcards.css` + `/flashcards.js`): full site chrome, theme
+  toggle, pixel-art cards with a stepped flip, topic filter, shuffle,
+  missed-only drill, progress bar, and keyboard shortcuts. Same 118
+  terms, same URL (`/psy410-flashcards/`). New companion deck at
+  `/research-methods-flashcards/`: 77 advanced research-methods terms
+  across causal inference, regression diagnostics, multilevel & latent
+  models, Bayesian methods, psychometrics, threats & biases, power &
+  sampling, and open science. Both linked from `/learn.html`.
 - **Learn (same day)** — the Creations hub is now **Learn**:
   `/creations.html` and `/games.html` both redirect to `/learn.html`,
   and the nav says Learn on every page.

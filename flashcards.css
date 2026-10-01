@@ -1,0 +1,79 @@
+/* Shared flashcard deck styling — theme-aware, pixel-art look.
+   Used by /psy410-flashcards/ and /research-methods-flashcards/.
+   Relies on the site token system in styles.css
+   (--bg, --ink, --dim, --line, --card-bg, --tag, --green,
+    --display, --micro, --body). */
+
+.fc-wrap{ width:100%; max-width:560px; margin:0 auto; padding:0 0 2.5rem; }
+
+.fc-back{ display:inline-block; font-family:var(--micro); font-size:1.05rem;
+  color:var(--ink); text-decoration:none; border-bottom:2px solid var(--tag);
+  margin:1.2rem 0 .6rem; }
+.fc-back:hover{ color:var(--tag); }
+
+.fc-head{ text-align:center; margin-bottom:.9rem; }
+.fc-title{ font-family:var(--display); font-size:1.7rem; margin:.4rem 0 .2rem;
+  color:var(--ink); }
+.fc-sub{ font-family:var(--micro); font-size:1.05rem; color:var(--dim); }
+
+.fc-controls{ display:flex; gap:.6rem; justify-content:center; flex-wrap:wrap;
+  margin-bottom:.9rem; }
+.fc-controls select, .fc-controls button{
+  font-family:var(--micro); font-size:1.05rem; padding:.45rem .8rem;
+  border-radius:0; border:3px solid var(--ink);
+  background:var(--card-bg); color:var(--ink); cursor:pointer; }
+.fc-controls button:active{ transform:translateY(2px); }
+#fc-shuffle{ border-color:var(--tag); color:var(--tag); }
+
+.fc-progress{ margin-bottom:.9rem; }
+.fc-bar{ height:10px; background:var(--card-bg); border:2px solid var(--ink); overflow:hidden; }
+.fc-bar > div{ height:100%; width:0%; background:var(--tag); transition:width .25s steps(6); }
+.fc-ptext{ font-family:var(--micro); font-size:1rem; color:var(--dim);
+  margin-top:.35rem; text-align:center; }
+
+.fc-deck{ perspective:1200px; }
+.fc-card{ position:relative; width:100%; min-height:320px; cursor:pointer;
+  outline-offset:4px; }
+.fc-inner{ position:absolute; inset:0; transform-style:preserve-3d;
+  transition:transform .38s steps(9); }
+.fc-card.flipped .fc-inner{ transform:rotateY(180deg); }
+.fc-face{ position:absolute; inset:0; backface-visibility:hidden;
+  -webkit-backface-visibility:hidden; background:var(--card-bg);
+  border:3px solid var(--ink); border-radius:0;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  padding:1.75rem 1.5rem; text-align:center; }
+.fc-face.back{ transform:rotateY(180deg); border-color:var(--tag); }
+.fc-tag{ font-family:var(--micro); font-size:1rem; text-transform:uppercase;
+  letter-spacing:.14em; color:var(--tag); margin-bottom:.9rem; font-weight:700; }
+.fc-term{ font-family:var(--display); font-size:1.65rem; font-weight:600;
+  line-height:1.25; color:var(--ink); }
+.fc-def{ font-family:var(--body); font-size:1.08rem; font-weight:600;
+  line-height:1.5; color:var(--ink); }
+.fc-hint{ margin-top:1rem; font-family:var(--micro); font-size:.95rem; color:var(--dim); }
+
+.fc-grade{ display:flex; gap:.7rem; margin-top:1rem; }
+.fc-grade button{ flex:1; padding:.85rem .5rem; font-family:var(--micro);
+  font-size:1.15rem; border-radius:0; border:3px solid var(--ink);
+  cursor:pointer; color:#fff; }
+.fc-grade button:active{ transform:translateY(2px); }
+#fc-miss{ background:#b34a5e; border-color:#b34a5e; }
+#fc-got{ background:#1d8a4e; border-color:#1d8a4e; }
+
+.fc-keys{ margin-top:.7rem; text-align:center; font-family:var(--micro);
+  font-size:.95rem; color:var(--dim); }
+.fc-keys kbd{ font-family:var(--micro); border:2px solid var(--line);
+  padding:0 .35rem; border-radius:0; }
+
+.fc-done{ text-align:center; padding:2.5rem 1.25rem; }
+.fc-done .big{ font-size:2.6rem; margin-bottom:.5rem; }
+
+@media (max-width:480px){
+  .fc-card{ min-height:280px; }
+  .fc-term{ font-size:1.4rem; }
+  .fc-title{ font-size:1.45rem; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .fc-inner{ transition:none; }
+  .fc-bar > div{ transition:none; }
+}

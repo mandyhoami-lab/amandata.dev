@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Research Methods Flashcards — Amanda Ta</title>
+<meta name="description" content="Advanced research methods terminology flashcards: causal inference, regression diagnostics, psychometrics, Bayesian methods, and open science.">
+<meta property="og:title" content="Research Methods Flashcards — amandata.dev">
+<meta property="og:description" content="Advanced research methods terminology, as flashcards.">
+<script>
+/* theme init before first paint: saved choice, else system preference, else dark */
+(function(){try{var t=localStorage.getItem('amandata-theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='dark';}})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&family=VT323&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=30">
+<link rel="stylesheet" href="../flashcards.css?v=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav__mark" href="/">AT</a>
+  <div class="nav__links">
+    <a class="nav__link" href="/#about">About</a>
+    <a class="nav__link" href="/#cv">CV</a>
+    <a class="nav__link" href="/#work">Projects</a>
+    <a class="nav__link" href="/#contact">Contact</a>
+    <a class="nav__link" href="/#changelog">Changelog</a>
+    <a class="nav__link" href="/blog.html">Blog</a>
+    <a class="nav__link" href="/psy410.html">PSY 410 Resources</a>
+    <a class="nav__link is-active" href="/learn.html">Learn</a>
+  </div>
+  <button class="theme-toggle" id="theme-toggle" aria-label="cycle color theme">Light</button>
+</nav>
+
+<main>
+  <section class="section">
+    <div class="section__body">
+      <div class="fc-wrap">
+        <a class="fc-back" href="/learn.html">&#8592; back to Learn</a>
+        <div class="fc-head">
+          <h1 class="fc-title" id="fc-title">Research Methods Flashcards</h1>
+          <div class="fc-sub" id="fc-sub"></div>
+        </div>
+        <div class="fc-controls">
+          <select id="fc-filter" aria-label="filter by topic"><option value="all">All topics</option></select>
+          <button id="fc-shuffle" type="button">&#8635; Shuffle</button>
+          <button id="fc-missonly" type="button">Missed only: off</button>
+        </div>
+        <div class="fc-progress">
+          <div class="fc-bar"><div id="fc-barfill"></div></div>
+          <div class="fc-ptext" id="fc-ptext"></div>
+        </div>
+        <div class="fc-deck" id="fc-deck"></div>
+        <div class="fc-grade">
+          <button id="fc-miss" type="button">&#10007; Still learning</button>
+          <button id="fc-got" type="button">&#10003; Got it</button>
+        </div>
+        <div class="fc-keys"><kbd>space</kbd> flip &middot; <kbd>&larr;</kbd> still learning &middot; <kbd>&rarr;</kbd> got it</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <p>&copy; 2026 Amanda Ta &middot; amandata.dev</p>
+</footer>
+
+<script>
+window.FLASHCARD_DECK = {
+  title: 'Research Methods Flashcards',
+  sub: '77 terms · tap a card to flip',
+  cards: [{"tag": "Causal inference", "term": "Endogeneity", "def": "when a predictor is correlated with the error term — OLS estimates come out biased."}, {"tag": "Causal inference", "term": "Omitted variable bias", "def": "leaving out a variable that affects both X and Y distorts the estimated effect of X."}, {"tag": "Causal inference", "term": "Instrumental variable", "def": "a variable that shifts X but affects Y only through X — used to isolate causal effects."}, {"tag": "Causal inference", "term": "Exclusion restriction", "def": "the assumption that an instrument influences the outcome only via the treatment, never directly."}, {"tag": "Causal inference", "term": "DAG (directed acyclic graph)", "def": "a diagram of your assumed causal links — shows what to control for and, crucially, what not to."}, {"tag": "Causal inference", "term": "Collider", "def": "a variable caused by both X and Y — controlling for it manufactures a spurious association."}, {"tag": "Causal inference", "term": "Mediator", "def": "a variable sitting on the causal path from X to Y — it explains how the effect works."}, {"tag": "Causal inference", "term": "Moderator", "def": "a variable that changes the size or direction of X's effect on Y."}, {"tag": "Causal inference", "term": "Propensity score matching", "def": "pairing treated and control units with similar predicted treatment odds, to mimic randomization."}, {"tag": "Causal inference", "term": "Difference-in-differences", "def": "comparing the over-time change in a treated group against a control group — assumes parallel trends."}, {"tag": "Causal inference", "term": "Parallel trends", "def": "the assumption that treated and control groups would have moved together without the treatment."}, {"tag": "Causal inference", "term": "Regression discontinuity", "def": "comparing units just above vs. below a cutoff that assigns treatment — near the cutoff it's as-if random."}, {"tag": "Causal inference", "term": "Simpson's paradox", "def": "a trend visible inside subgroups reverses when the groups are pooled together."}, {"tag": "Causal inference", "term": "Selection bias", "def": "when who ends up in your sample is related to the outcome — estimates get distorted."}, {"tag": "Regression diagnostics", "term": "Heteroscedasticity", "def": "error variance that changes across levels of X — standard errors become unreliable."}, {"tag": "Regression diagnostics", "term": "Multicollinearity", "def": "predictors highly correlated with each other — inflates standard errors of the coefficients."}, {"tag": "Regression diagnostics", "term": "VIF (variance inflation factor)", "def": "how much multicollinearity inflates a coefficient's variance — roughly 5–10+ is worrying."}, {"tag": "Regression diagnostics", "term": "Residual", "def": "the gap between an observed value and what the model predicted."}, {"tag": "Regression diagnostics", "term": "Leverage", "def": "how extreme a point's X values are — high-leverage points tug the regression line toward themselves."}, {"tag": "Regression diagnostics", "term": "Influential point", "def": "an observation that substantially changes the results when dropped — high leverage plus a large residual."}, {"tag": "Regression diagnostics", "term": "Overfitting", "def": "a model that memorizes noise in the training data and flops on new data."}, {"tag": "Regression diagnostics", "term": "Cross-validation", "def": "testing the model on held-out folds of data to estimate real-world performance."}, {"tag": "Regression diagnostics", "term": "Regularization", "def": "penalizing large coefficients to keep a model from overfitting."}, {"tag": "Regression diagnostics", "term": "Ridge regression", "def": "regularization that shrinks every coefficient toward zero but keeps all predictors in the model."}, {"tag": "Regression diagnostics", "term": "Lasso regression", "def": "regularization that can shrink some coefficients to exactly zero — performs variable selection."}, {"tag": "Regression diagnostics", "term": "Specification error", "def": "wrong functional form or wrong variables in the model — estimates come out biased."}, {"tag": "Multilevel & latent models", "term": "Hierarchical linear modeling", "def": "regression for nested data (students in schools) — models effects at each level simultaneously."}, {"tag": "Multilevel & latent models", "term": "Random intercept", "def": "letting each group have its own baseline in a multilevel model."}, {"tag": "Multilevel & latent models", "term": "Random slope", "def": "letting each group have its own effect of X in a multilevel model."}, {"tag": "Multilevel & latent models", "term": "ICC (intraclass correlation)", "def": "the share of total variance sitting between groups rather than within them."}, {"tag": "Multilevel & latent models", "term": "Latent variable", "def": "an unobserved construct inferred from multiple observed indicators."}, {"tag": "Multilevel & latent models", "term": "EFA (exploratory factor analysis)", "def": "discovering how many latent factors underlie a set of items, with no structure assumed up front."}, {"tag": "Multilevel & latent models", "term": "CFA (confirmatory factor analysis)", "def": "testing whether items actually load onto your hypothesized factors."}, {"tag": "Multilevel & latent models", "term": "Factor loading", "def": "how strongly an item reflects its underlying latent factor."}, {"tag": "Multilevel & latent models", "term": "SEM (structural equation modeling)", "def": "combines a measurement model (CFA) with a path model of relations among latent variables."}, {"tag": "Multilevel & latent models", "term": "Measurement invariance", "def": "evidence that a scale measures the same construct the same way across groups — required before comparing them."}, {"tag": "Bayesian methods", "term": "Prior", "def": "what you believe about a parameter before seeing the data."}, {"tag": "Bayesian methods", "term": "Likelihood", "def": "how probable the observed data is under each possible parameter value."}, {"tag": "Bayesian methods", "term": "Posterior", "def": "your updated belief: prior times likelihood, normalized."}, {"tag": "Bayesian methods", "term": "MCMC", "def": "algorithms that sample from the posterior when it can't be computed in closed form."}, {"tag": "Bayesian methods", "term": "Credible interval", "def": "the range holding the parameter with, say, 95% posterior probability — not a confidence interval."}, {"tag": "Bayesian methods", "term": "Bayes factor", "def": "how much more likely the data are under one hypothesis than another — graded evidence, no cutoff."}, {"tag": "Psychometrics", "term": "Reliability", "def": "consistency of measurement across time, items, or raters."}, {"tag": "Psychometrics", "term": "Cronbach's alpha", "def": "internal consistency — how well the items on a scale hang together."}, {"tag": "Psychometrics", "term": "Test-retest reliability", "def": "score consistency when the same people are measured twice."}, {"tag": "Psychometrics", "term": "Interrater reliability", "def": "agreement between independent raters or coders."}, {"tag": "Psychometrics", "term": "Cohen's kappa", "def": "interrater agreement corrected for chance."}, {"tag": "Psychometrics", "term": "Construct validity", "def": "whether a measure truly captures the theoretical construct it claims to."}, {"tag": "Psychometrics", "term": "Convergent validity", "def": "a measure correlates with other measures of the same construct."}, {"tag": "Psychometrics", "term": "Discriminant validity", "def": "a measure does not correlate with measures of unrelated constructs."}, {"tag": "Psychometrics", "term": "Content validity", "def": "the items cover the full domain of the construct."}, {"tag": "Psychometrics", "term": "Face validity", "def": "the measure looks plausible on its face — the weakest form of validity."}, {"tag": "Psychometrics", "term": "Criterion validity", "def": "scores predict an external benchmark."}, {"tag": "Psychometrics", "term": "Predictive validity", "def": "scores forecast a future outcome."}, {"tag": "Psychometrics", "term": "Attenuation", "def": "measurement error shrinks observed correlations below their true size."}, {"tag": "Psychometrics", "term": "Restriction of range", "def": "narrowed sample variance that deflates correlations."}, {"tag": "Psychometrics", "term": "Ceiling effect", "def": "scores pile at the top of the scale — high-end differences become invisible."}, {"tag": "Psychometrics", "term": "Floor effect", "def": "scores pile at the bottom — low-end differences become invisible."}, {"tag": "Threats & biases", "term": "Regression to the mean", "def": "extreme scores drift back toward average on retest, with no intervention at all."}, {"tag": "Threats & biases", "term": "Hawthorne effect", "def": "people change their behavior because they know they're being studied."}, {"tag": "Threats & biases", "term": "Survivorship bias", "def": "conclusions drawn only from whoever survived some selection process."}, {"tag": "Threats & biases", "term": "History threat", "def": "an outside event coinciding with treatment offers a rival explanation."}, {"tag": "Threats & biases", "term": "Maturation threat", "def": "participants change naturally over time — growing, tiring, learning — confounding the effect."}, {"tag": "Power & sampling", "term": "Power analysis", "def": "computing the sample size needed to detect an effect of a given size."}, {"tag": "Power & sampling", "term": "Cohen's d", "def": "standardized mean difference — about 0.2 is small, 0.5 medium, 0.8 large."}, {"tag": "Power & sampling", "term": "Sampling frame", "def": "the actual list or population your sample is drawn from."}, {"tag": "Power & sampling", "term": "Stratified sampling", "def": "splitting the population into subgroups and sampling within each."}, {"tag": "Power & sampling", "term": "Cluster sampling", "def": "randomly selecting whole groups, then sampling inside them."}, {"tag": "Power & sampling", "term": "WEIRD samples", "def": "Western, Educated, Industrialized, Rich, Democratic — limits how far results generalize."}, {"tag": "Open science", "term": "Preregistration", "def": "publicly logging hypotheses and analysis plans before data collection."}, {"tag": "Open science", "term": "p-hacking", "def": "running analyses until p drops below .05 — inflates false positives."}, {"tag": "Open science", "term": "HARKing", "def": "hypothesizing after results are known — dressing post-hoc findings up as predictions."}, {"tag": "Open science", "term": "File drawer problem", "def": "null results go unpublished, so the literature skews positive."}, {"tag": "Open science", "term": "Publication bias", "def": "significant findings are more likely to get published than null ones."}, {"tag": "Open science", "term": "Meta-analysis", "def": "statistically pooling results across studies to estimate one overall effect."}, {"tag": "Open science", "term": "Funnel plot", "def": "study effects plotted against precision — asymmetry hints at publication bias."}, {"tag": "Open science", "term": "Replication crisis", "def": "the finding that many published results don't replicate — drove open-science reforms."}]
+};
+</script>
+<script src="../flashcards.js?v=1"></script>
+<script src="../theme.js?v=9"></script>
+</body>
+</html>
