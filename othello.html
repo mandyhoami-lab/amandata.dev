@@ -18,7 +18,7 @@
 (function(){try{var t=localStorage.getItem('amandata-theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='dark';}})();
 </script>
 <link rel="stylesheet" href="styles.css?v=30">
-<link rel="stylesheet" href="othello.css?v=4">
+<link rel="stylesheet" href="othello.css?v=6">
 <link rel="icon" href="/favicon.ico" sizes="any">
 </head>
 <body>
@@ -39,7 +39,7 @@
     <a class="nav__link" href="/#changelog">Changelog</a>
     <a class="nav__link" href="/blog.html">Blog</a>
     <a class="nav__link" href="/psy410.html">PSY 410 Resources</a>
-    <a class="nav__link is-active" href="/creations.html">Creations</a>
+    <a class="nav__link is-active" href="/learn.html">Learn</a>
   </div>
   <button class="theme-toggle" id="theme-toggle" aria-label="cycle color theme">Light</button>
 </nav>
@@ -54,9 +54,24 @@
     </div>
     <div class="section__body">
 
-      <p class="games-note"><a href="/creations.html">&larr; all creations</a></p>
+      <p class="games-note"><a href="/learn.html">&larr; back to Learn</a></p>
 
-      <div class="game-card">
+      <div class="game-card mode-pick" id="mode-pick">
+        <h3 class="game-card__title">Othello</h3>
+        <p class="game-card__desc">How seasoned are you?</p>
+        <div class="mode-pick__btns">
+          <button class="mode-btn" id="mode-beginner" type="button">
+            <span class="mode-btn__title">Beginner</span>
+            <span class="mode-btn__sub">never played — learn vs a chill robot</span>
+          </button>
+          <a class="mode-btn" href="/othello-advanced.html">
+            <span class="mode-btn__title">Advanced</span>
+            <span class="mode-btn__sub">seasoned a little — engine grades every move</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="game-card" id="beginner-game" hidden>
         <h3 class="game-card__title">Othello</h3>
         <p class="game-card__desc">Pick a color, then outflank the robot. Black moves first. Add a username to keep an all-time scoreboard on this device.</p>
 
@@ -96,7 +111,9 @@
             <input class="score-input" id="othello-name" type="text" maxlength="16" placeholder="username" aria-label="Username">
             <button class="othello-btn" id="othello-add" type="button">Add</button>
           </div>
+          <div class="score-tabs" id="othello-score-tabs" role="tablist" aria-label="Scoreboard view"></div>
           <div id="othello-score-list"></div>
+          <p class="score-note" id="othello-score-note"></p>
         </div>
 
         <div class="othello-panel" id="othello-help-panel" hidden>
@@ -123,6 +140,6 @@
 
 <script src="othello-bg.js?v=14"></script>
 <script src="theme.js?v=9"></script>
-<script src="othello.js?v=7"></script>
+<script src="othello.js?v=9"></script>
 </body>
 </html>

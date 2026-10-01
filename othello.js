@@ -100,130 +100,66 @@
     return scored[0].mv;
   }
 
-  /* expose engine for node testing */
-  if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { newGrid: newGrid, legalMoves: legalMoves, applyMove: applyMove,
-      countDiscs: countDiscs, evaluate: evaluate, aiChooseMove: aiChooseMove, other: other };
-    return;
+  /* Deeper search (negamax + alpha-beta) used by the advanced
+     teaching mode: grading human moves and powering the robot. */
+  function cloneGrid(g) {
+    return g.map(function (row) { return row.slice(); });
   }
-
-  /* ---------------- UI ---------------- */
-  var boardEl = document.getElementById('othello-board');
-  if (!boardEl) return;
-
-  var statusEl = document.getElementById('othello-status');
-  var youEl = document.getElementById('othello-you');
-  var aiEl = document.getElementById('othello-ai');
-  var youDiscEl = document.getElementById('othello-you-disc');
-  var aiDiscEl = document.getElementById('othello-ai-disc');
-  var newBtn = document.getElementById('othello-new');
-  var scoresBtn = document.getElementById('othello-scores-btn');
-  var helpBtn = document.getElementById('othello-help-btn');
-  var scoresPanel = document.getElementById('othello-scores-panel');
-  var helpPanel = document.getElementById('othello-help-panel');
-  var colorB = document.getElementById('othello-color-b');
-  var colorW = document.getElementById('othello-color-w');
-  var nameInput = document.getElementById('othello-name');
-  var addBtn = document.getElementById('othello-add');
-  var scoreList = document.getElementById('othello-score-list');
-
-  var COLOR_KEY = 'amandata-othello-color';
-  var SCORE_KEY = 'amandata-othello-scores-v1';
-
-  var grid, turn, aiThinking = false, lastMove = null, gameLive = true, aiBlunder = 0.75;
-  var human = 'b', ai = 'w';
-
-  function loadColor() {
-    try {
-      var c = localStorage.getItem(COLOR_KEY);
-      if (c === 'w' || c === 'b') return c;
-    } catch (e) {}
-    return 'b';
-  }
-  function saveColor(c) {
-    try { localStorage.setItem(COLOR_KEY, c); } catch (e) {}
-  }
-
-  /* -------- scoreboard -------- */
-  function loadScores() {
-    try {
-      var s = JSON.parse(localStorage.getItem(SCORE_KEY));
-      if (s && s.players) return s;
-    } catch (e) {}
-    return { players: {}, active: null };
-  }
-  function saveScores(s) {
-    try { localStorage.setItem(SCORE_KEY, JSON.stringify(s)); } catch (e) {}
-  }
-  var scores = loadScores();
-
-  function renderScores() {
-    scoreList.innerHTML = '';
-    var names = Object.keys(scores.players).sort();
-    if (!names.length) {
-      var p = document.createElement('p');
-      p.className = 'score-empty';
-      p.textContent = 'No players yet — add a username above and your results get tracked.';
-      scoreList.appendChild(p);
-      return;
+  function negamax(g, color, depth, alpha, beta) {
+    var ms = legalMoves(g, color);
+    if (ms.length === 0) {
+      if (legalMoves(g, other(color)).length === 0) {
+        var c = countDiscs(g);
+        var diff = color === 'b' ? c.b - c.w : c.w - c.b;
+        return diff * 10000;
+      }
+      return -negamax(g, other(color), depth, -beta, -alpha);
     }
-    var table = document.createElement('table');
-    table.className = 'score-table';
-    var head = document.createElement('tr');
-    ['player', 'vs robot'].forEach(function (h) {
-      var th = document.createElement('th');
-      th.textContent = h;
-      head.appendChild(th);
-    });
-    table.appendChild(head);
-    names.forEach(function (name) {
-      var st = scores.players[name];
-      var tr = document.createElement('tr');
-      if (name === scores.active) tr.className = 'score-row--active';
-      tr.title = 'Click to track as ' + name;
-      var tdN = document.createElement('td');
-      tdN.textContent = name + (name === scores.active ? ' ●' : '');
-      tr.appendChild(tdN);
-      var tdS = document.createElement('td');
-      tdS.textContent = st.w + ' \u2013 ' + st.l + ' \u2013 ' + st.d;
-      tr.appendChild(tdS);
-      tr.addEventListener('click', function () {
-        scores.active = name;
-        saveScores(scores);
-        renderScores();
-        setStatus('Tracking scores as ' + name + '.');
-      });
-      table.appendChild(tr);
-    });
-    scoreList.appendChild(table);
+    if (depth === 0) return evaluate(g, color);
+    var best = -Infinity;
+    for (var i = 0; i < ms.length; i++) {
+      var ng = cloneGrid(g);
+      applyMove(ng, ms[i], color);
+      var s = -negamax(ng, other(color), depth - 1, -beta, -alpha);
+      if (s > best) best = s;
+      if (best > alpha) alpha = best;
+      if (alpha >= beta) break;
+    }
+    return best;
+  }
+  function searchMove(g, color, depth) {
+    var ms = legalMoves(g, color);
+    if (!ms.length) return { mv: null, score: 0 };
+    var best = ms[0], bestS = -Infinity;
+    for (var i = 0; i < ms.length; i++) {
+      var ng = cloneGrid(g);
+      applyMove(ng, ms[i], color);
+      var s = -negamax(ng, other(color), depth - 1, -Infinity, Infinity);
+      if (s > bestS) { bestS = s; best = ms[i]; }
+    }
+    return { mv: best, score: bestS };
+  }
+  /* How good was the human's move? Compares it against the engine's
+     best move at the same depth. diff is in eval points, from the
+     mover's perspective (0 = played the best move). */
+  function gradeMove(g, mv, color, depth) {
+    var best = searchMove(g, color, depth);
+    if (!best.mv) return null;
+    var playedBest = best.mv.r === mv.r && best.mv.c === mv.c;
+    var afterHuman = cloneGrid(g);
+    applyMove(afterHuman, mv, color);
+    var humanScore = -negamax(afterHuman, other(color), depth - 1, -Infinity, Infinity);
+    return { best: best.mv, diff: playedBest ? 0 : best.score - humanScore, playedBest: playedBest };
+  }
+  function moveName(mv) {
+    return 'abcdefgh'.charAt(mv.c) + (mv.r + 1);
   }
 
-  function addPlayer() {
-    var name = (nameInput.value || '').trim().slice(0, 16);
-    if (!name) return;
-    if (!scores.players[name]) scores.players[name] = { w: 0, l: 0, d: 0 };
-    scores.active = name;
-    saveScores(scores);
-    nameInput.value = '';
-    renderScores();
-    setStatus('Tracking scores as ' + name + '.');
-  }
-
-  function recordResult(result) {
-    if (!scores.active || !scores.players[scores.active]) return;
-    var st = scores.players[scores.active];
-    if (result === 'win') st.w++;
-    else if (result === 'loss') st.l++;
-    else st.d++;
-    saveScores(scores);
-    renderScores();
-  }
-
+  /* expose engine for node testing and for the advanced page */
   /* -------- pixel-art disc sprites (generated at runtime) --------
      Awake cat heads, 16x16, in the site cat's palette: cream cat for
      white, black cat with amber eyes for black. The head breaks out
      of the old disc circle — ears and all — with a 1px outline. */
-  var sprites = {};
   var CAT_FACE_ROWS = [
     "................",
     "..ff........ff..",
@@ -242,7 +178,10 @@
     "...ffffffffff...",
     ".....ffffff....."
   ];
-  function makeDiscSprite(color) {
+  var _spriteCache = {};
+  function discSprite(color) {
+    if (_spriteCache[color]) return _spriteCache[color];
+    if (typeof document === 'undefined') return '';
     var S = 16;
     var cv = document.createElement('canvas');
     cv.width = S; cv.height = S;
@@ -278,8 +217,167 @@
       ctx.fillStyle = accent[x + ',' + y] ? pal.v : (pal[ch] || pal.f);
       ctx.fillRect(x, y, 1, 1);
     }
-    return cv.toDataURL();
+    var out = cv.toDataURL();
+    _spriteCache[color] = out;
+    return out;
   }
+  var ENGINE_API = {
+    newGrid: newGrid, legalMoves: legalMoves, applyMove: applyMove,
+    countDiscs: countDiscs, evaluate: evaluate, aiChooseMove: aiChooseMove,
+    other: other, searchMove: searchMove, gradeMove: gradeMove,
+    moveName: moveName, discSprite: discSprite
+  };
+  if (typeof window !== 'undefined') window.OthelloEngine = ENGINE_API;
+  if (typeof module !== 'undefined' && module.exports) {
+    module.exports = ENGINE_API;
+    return;
+  }
+
+  /* ---------------- UI ---------------- */
+  var boardEl = document.getElementById('othello-board');
+  if (!boardEl) return;
+
+  var statusEl = document.getElementById('othello-status');
+  var youEl = document.getElementById('othello-you');
+  var aiEl = document.getElementById('othello-ai');
+  var youDiscEl = document.getElementById('othello-you-disc');
+  var aiDiscEl = document.getElementById('othello-ai-disc');
+  var newBtn = document.getElementById('othello-new');
+  var scoresBtn = document.getElementById('othello-scores-btn');
+  var helpBtn = document.getElementById('othello-help-btn');
+  var scoresPanel = document.getElementById('othello-scores-panel');
+  var helpPanel = document.getElementById('othello-help-panel');
+  var colorB = document.getElementById('othello-color-b');
+  var colorW = document.getElementById('othello-color-w');
+  var nameInput = document.getElementById('othello-name');
+  var addBtn = document.getElementById('othello-add');
+  var scoreList = document.getElementById('othello-score-list');
+  var scoreTabs = document.getElementById('othello-score-tabs');
+  var scoreNote = document.getElementById('othello-score-note');
+  var modePick = document.getElementById('mode-pick');
+  var beginnerGame = document.getElementById('beginner-game');
+  var modeBeginnerBtn = document.getElementById('mode-beginner');
+
+  var COLOR_KEY = 'amandata-othello-color';
+  var SCORE_KEY = 'amandata-othello-scores-v1';
+
+  var grid, turn, aiThinking = false, lastMove = null, gameLive = true, aiBlunder = 0.75;
+  var human = 'b', ai = 'w';
+
+  function loadColor() {
+    try {
+      var c = localStorage.getItem(COLOR_KEY);
+      if (c === 'w' || c === 'b') return c;
+    } catch (e) {}
+    return 'b';
+  }
+  function saveColor(c) {
+    try { localStorage.setItem(COLOR_KEY, c); } catch (e) {}
+  }
+
+  /* -------- scoreboard -------- */
+  function loadScores() {
+    try {
+      var s = JSON.parse(localStorage.getItem(SCORE_KEY));
+      if (s && s.players) return s;
+    } catch (e) {}
+    return { players: {}, active: null };
+  }
+  function saveScores(s) {
+    try { localStorage.setItem(SCORE_KEY, JSON.stringify(s)); } catch (e) {}
+  }
+  var scores = loadScores();
+  if (!scores.view) scores.view = '__all__';
+
+  function renderScores() {
+    scoreList.innerHTML = '';
+    scoreTabs.innerHTML = '';
+    var names = Object.keys(scores.players).sort();
+    if (scores.view !== '__all__' && !scores.players[scores.view]) scores.view = '__all__';
+
+    function addTab(label, view, title) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'score-tab' + (scores.view === view ? ' is-active' : '');
+      b.setAttribute('role', 'tab');
+      b.setAttribute('aria-selected', scores.view === view ? 'true' : 'false');
+      b.textContent = label;
+      if (title) b.title = title;
+      b.addEventListener('click', function () {
+        scores.view = view;
+        if (view !== '__all__') scores.active = view;
+        saveScores(scores);
+        renderScores();
+        setStatus(view === '__all__'
+          ? 'Showing everyone, all time.'
+          : 'Showing ' + view + ' vs the robot — tracking as ' + view + '.');
+      });
+      scoreTabs.appendChild(b);
+    }
+    addTab('Everyone', '__all__', 'Every player combined, all time');
+    names.forEach(function (name) {
+      addTab(name, name, name + ' vs the robot');
+    });
+
+    var rec;
+    if (scores.view === '__all__') {
+      rec = { w: 0, l: 0, d: 0 };
+      names.forEach(function (n) {
+        var s = scores.players[n];
+        rec.w += s.w; rec.l += s.l; rec.d += s.d;
+      });
+    } else {
+      rec = scores.players[scores.view];
+    }
+    var total = rec.w + rec.l + rec.d;
+    if (!names.length) {
+      var p = document.createElement('p');
+      p.className = 'score-empty';
+      p.textContent = 'No players yet — add a username above and your results get tracked.';
+      scoreList.appendChild(p);
+    } else {
+      var big = document.createElement('div');
+      big.className = 'score-big';
+      big.innerHTML = '<span class="score-big__w">' + rec.w + '</span>' +
+        '<span class="score-big__sep">–</span>' +
+        '<span class="score-big__l">' + rec.l + '</span>' +
+        '<span class="score-big__sep">–</span>' +
+        '<span class="score-big__d">' + rec.d + '</span>';
+      scoreList.appendChild(big);
+      var lab = document.createElement('p');
+      lab.className = 'score-big__label';
+      lab.textContent = 'wins – losses – draws · ' + total + ' game' + (total === 1 ? '' : 's') +
+        (scores.view === '__all__' ? ' · everyone, all time' : ' · ' + scores.view + ' vs robot');
+      scoreList.appendChild(lab);
+    }
+    scoreNote.textContent = scores.active && scores.players[scores.active]
+      ? 'Tracking your games as ' + scores.active + '.'
+      : 'Pick your player tab above and your games get tracked under it.';
+  }
+
+  function addPlayer() {
+    var name = (nameInput.value || '').trim().slice(0, 16);
+    if (!name) return;
+    if (!scores.players[name]) scores.players[name] = { w: 0, l: 0, d: 0 };
+    scores.active = name;
+    scores.view = name;
+    saveScores(scores);
+    nameInput.value = '';
+    renderScores();
+    setStatus('Tracking scores as ' + name + '.');
+  }
+
+  function recordResult(result) {
+    if (!scores.active || !scores.players[scores.active]) return;
+    var st = scores.players[scores.active];
+    if (result === 'win') st.w++;
+    else if (result === 'loss') st.l++;
+    else st.d++;
+    saveScores(scores);
+    renderScores();
+  }
+
+  var sprites = {};
   function spriteFor(color) {
     return sprites[color] ? 'url(' + sprites[color] + ')' : '';
   }
@@ -474,11 +572,19 @@
     if (e.key === 'Enter') addPlayer();
   });
 
-  human = loadColor();
-  ai = other(human);
-  sprites.b = makeDiscSprite('b');
-  sprites.w = makeDiscSprite('w');
-  buildBoard();
-  renderScores();
-  newGame();
+  var beginnerStarted = false;
+  function startBeginner() {
+    if (beginnerStarted) return;
+    beginnerStarted = true;
+    modePick.setAttribute('hidden', '');
+    beginnerGame.removeAttribute('hidden');
+    human = loadColor();
+    ai = other(human);
+    sprites.b = discSprite('b');
+    sprites.w = discSprite('w');
+    buildBoard();
+    renderScores();
+    newGame();
+  }
+  modeBeginnerBtn.addEventListener('click', startBeginner);
 })();
