@@ -18,7 +18,7 @@
 (function(){try{var t=localStorage.getItem('amandata-theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='dark';}})();
 </script>
 <link rel="stylesheet" href="styles.css?v=30">
-<link rel="stylesheet" href="othello.css?v=1">
+<link rel="stylesheet" href="othello.css?v=2">
 <link rel="icon" href="/favicon.ico" sizes="any">
 </head>
 <body>
@@ -56,17 +56,26 @@
 
       <div class="game-card">
         <h3 class="game-card__title">Othello</h3>
-        <p class="game-card__desc">You play black and move first. Beat the AI and it levels up — sleepy &rarr; curious &rarr; focused &rarr; sharp &rarr; tryhard. It tops out at level 5 and stays beatable. Your level is saved on this device.</p>
+        <p class="game-card__desc">Pick a color, then outflank the AI. Black moves first. Add a username to keep an all-time scoreboard on this device.</p>
+
+        <div class="othello-controls">
+          <div class="othello-seg" role="group" aria-label="Play as">
+            <span class="othello-seg__label">Play as</span>
+            <button class="othello-seg__btn" id="othello-color-b" type="button" aria-pressed="true">Black</button>
+            <button class="othello-seg__btn" id="othello-color-w" type="button" aria-pressed="false">White</button>
+          </div>
+        </div>
 
         <div class="othello-hud">
           <div class="othello-score" aria-live="polite">
-            <span class="mini-disc mini-disc--b" aria-hidden="true"></span>
+            <span class="mini-disc mini-disc--b" id="othello-you-disc" aria-hidden="true"></span>
+            <span>you</span>
             <span id="othello-you">2</span>
             <span class="othello-sep">&ndash;</span>
             <span id="othello-ai">2</span>
-            <span class="mini-disc mini-disc--w" aria-hidden="true"></span>
+            <span>ai</span>
+            <span class="mini-disc mini-disc--w" id="othello-ai-disc" aria-hidden="true"></span>
           </div>
-          <div class="othello-level" id="othello-level">ai: sleepy &middot; lv 1/5</div>
         </div>
 
         <div class="othello-board" id="othello-board" role="grid" aria-label="Othello board"></div>
@@ -75,6 +84,28 @@
 
         <div class="othello-actions">
           <button class="othello-btn" id="othello-new" type="button">New game</button>
+          <button class="othello-btn" id="othello-scores-btn" type="button">Scores</button>
+          <button class="othello-btn" id="othello-help-btn" type="button">How to play</button>
+        </div>
+
+        <div class="othello-panel" id="othello-scores-panel" hidden>
+          <h4 class="othello-panel__title">All-time scoreboard</h4>
+          <div class="score-add">
+            <input class="score-input" id="othello-name" type="text" maxlength="16" placeholder="username" aria-label="Username">
+            <button class="othello-btn" id="othello-add" type="button">Add</button>
+          </div>
+          <div id="othello-score-list"></div>
+        </div>
+
+        <div class="othello-panel" id="othello-help-panel" hidden>
+          <h4 class="othello-panel__title">How to play</h4>
+          <ul class="othello-rules">
+            <li>Black moves first. Tap a highlighted square to place your disc.</li>
+            <li>Your move must trap at least one opponent disc between your new disc and one of yours — horizontally, vertically, or diagonally.</li>
+            <li>Every trapped disc flips to your color.</li>
+            <li>No legal move? You pass automatically.</li>
+            <li>The game ends when neither side can move. Most discs wins.</li>
+          </ul>
         </div>
       </div>
 
@@ -91,6 +122,6 @@
 
 <script src="othello-bg.js?v=14"></script>
 <script src="theme.js?v=9"></script>
-<script src="othello.js?v=1"></script>
+<script src="othello.js?v=2"></script>
 </body>
 </html>

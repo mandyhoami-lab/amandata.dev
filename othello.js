@@ -1,9 +1,9 @@
 /* =========================================================
-   amandata.dev — playable Othello vs. a leveling AI.
-   You play black and move first. Win and the AI levels up
-   (saved in localStorage), maxing out at level 5 — which is
-   sharp but still very beatable. No animations by request:
-   everything updates instantly.
+   amandata.dev — playable Othello vs. the AI.
+   No levels, no limits: one honest AI, you choose black or
+   white. Optional all-time scoreboard with usernames
+   (localStorage), plus a how-to-play panel.
+   No animations: everything updates instantly.
    ========================================================= */
 (function () {
   'use strict';
@@ -52,16 +52,9 @@
   }
 
   /* ---------------- AI ----------------
-     Level 1 "sleepy"   — random legal move
-     Level 2 "curious"  — greedy: most flips
-     Level 3 "focused"  — 1-ply with positional weights
-     Level 4 "sharp"    — 2-ply minimax, weights + mobility
-     Level 5 "tryhard"  — 3-ply minimax, weights + mobility
-     Deliberately no opening book or endgame solver: even at
-     max level a thoughtful human wins regularly.           */
-  var MAX_LEVEL = 5;
-  var LEVEL_NAMES = { 1: 'sleepy', 2: 'curious', 3: 'focused', 4: 'sharp', 5: 'tryhard' };
-
+     One fixed strength: 1-ply search with positional weights
+     and a mobility term, plus a little random wobble so it
+     doesn't play like a machine. Sensible, beatable. */
   var WEIGHTS = [
     120, -20,  20,   5,   5,  20, -20, 120,
     -20, -40,  -5,  -5,  -5,  -5, -40, -20,
@@ -79,9 +72,7 @@
       if (g[r][c] === p) score += WEIGHTS[r * N + c];
       else if (g[r][c] === o) score -= WEIGHTS[r * N + c];
     }
-    /* mobility: having moves is worth something */
-    var pm = legalMoves(g, p).length, om = legalMoves(g, o).length;
-    score += (pm - om) * 6;
+    score += (legalMoves(g, p).length - legalMoves(g, o).length) * 6;
     return score;
   }
 
@@ -89,57 +80,13 @@
     return g.map(function (row) { return row.slice(); });
   }
 
-  function minimax(g, turn, depth, ai, alpha, beta) {
-    var moves = legalMoves(g, turn);
-    if (!moves.length) {
-      var om = legalMoves(g, other(turn));
-      if (!om.length || depth === 0) return evaluate(g, ai);
-      return minimax(g, other(turn), depth, ai, alpha, beta); /* pass, no depth cost */
-    }
-    if (depth === 0) return evaluate(g, ai);
-    if (turn === ai) {
-      var best = -Infinity;
-      for (var i = 0; i < moves.length; i++) {
-        var ng = cloneGrid(g);
-        applyMove(ng, moves[i], turn);
-        var v = minimax(ng, other(turn), depth - 1, ai, alpha, beta);
-        if (v > best) best = v;
-        if (best > alpha) alpha = best;
-        if (beta <= alpha) break;
-      }
-      return best;
-    }
-    var worst = Infinity;
-    for (var j = 0; j < moves.length; j++) {
-      var ng2 = cloneGrid(g);
-      applyMove(ng2, moves[j], turn);
-      var v2 = minimax(ng2, other(turn), depth - 1, ai, alpha, beta);
-      if (v2 < worst) worst = v2;
-      if (worst < beta) beta = worst;
-      if (beta <= alpha) break;
-    }
-    return worst;
-  }
-
-  function aiChoose(g, moves, level, ai, rnd) {
+  function aiChooseMove(g, moves, ai, rnd) {
     rnd = rnd || Math.random;
-    if (level <= 1 || !moves.length) {
-      return moves[Math.floor(rnd() * moves.length)] || null;
-    }
+    if (!moves.length) return null;
     var scored = moves.map(function (mv) {
-      var s;
-      if (level === 2) {
-        s = mv.flips.length + rnd() * 3;
-      } else {
-        var ng = cloneGrid(g);
-        applyMove(ng, mv, ai);
-        var depth = level === 3 ? 0 : level === 4 ? 1 : 2;
-        /* level 3 is 1-ply: evaluate right after our move */
-        s = depth === 0 ? evaluate(ng, ai)
-                        : minimax(ng, other(ai), depth, ai, -Infinity, Infinity);
-        s += rnd() * (level === 5 ? 4 : 8); /* a little human wobble */
-      }
-      return { mv: mv, s: s };
+      var ng = cloneGrid(g);
+      applyMove(ng, mv, ai);
+      return { mv: mv, s: evaluate(ng, ai) + rnd() * 8 };
     });
     scored.sort(function (a, b) { return b.s - a.s; });
     return scored[0].mv;
@@ -148,8 +95,7 @@
   /* expose engine for node testing */
   if (typeof module !== 'undefined' && module.exports) {
     module.exports = { newGrid: newGrid, legalMoves: legalMoves, applyMove: applyMove,
-      countDiscs: countDiscs, evaluate: evaluate, aiChoose: aiChoose, other: other,
-      MAX_LEVEL: MAX_LEVEL, LEVEL_NAMES: LEVEL_NAMES };
+      countDiscs: countDiscs, evaluate: evaluate, aiChooseMove: aiChooseMove, other: other };
     return;
   }
 
@@ -160,30 +106,114 @@
   var statusEl = document.getElementById('othello-status');
   var youEl = document.getElementById('othello-you');
   var aiEl = document.getElementById('othello-ai');
-  var levelEl = document.getElementById('othello-level');
+  var youDiscEl = document.getElementById('othello-you-disc');
+  var aiDiscEl = document.getElementById('othello-ai-disc');
   var newBtn = document.getElementById('othello-new');
+  var scoresBtn = document.getElementById('othello-scores-btn');
+  var helpBtn = document.getElementById('othello-help-btn');
+  var scoresPanel = document.getElementById('othello-scores-panel');
+  var helpPanel = document.getElementById('othello-help-panel');
+  var colorB = document.getElementById('othello-color-b');
+  var colorW = document.getElementById('othello-color-w');
+  var nameInput = document.getElementById('othello-name');
+  var addBtn = document.getElementById('othello-add');
+  var scoreList = document.getElementById('othello-score-list');
 
-  var HUMAN = 'b', AI = 'w';
-  var LEVEL_KEY = 'amandata-othello-level';
+  var COLOR_KEY = 'amandata-othello-color';
+  var SCORE_KEY = 'amandata-othello-scores-v1';
 
   var grid, turn, aiThinking = false, lastMove = null, gameLive = true;
+  var human = 'b', ai = 'w';
 
-  function getLevel() {
+  function loadColor() {
     try {
-      var l = parseInt(localStorage.getItem(LEVEL_KEY), 10);
-      if (l >= 1 && l <= MAX_LEVEL) return l;
+      var c = localStorage.getItem(COLOR_KEY);
+      if (c === 'w' || c === 'b') return c;
     } catch (e) {}
-    return 1;
+    return 'b';
   }
-  function setLevel(l) {
-    try { localStorage.setItem(LEVEL_KEY, String(l)); } catch (e) {}
-  }
-  var level = getLevel();
-
-  function levelLabel() {
-    return 'ai: ' + LEVEL_NAMES[level] + ' · lv ' + level + '/' + MAX_LEVEL;
+  function saveColor(c) {
+    try { localStorage.setItem(COLOR_KEY, c); } catch (e) {}
   }
 
+  /* -------- scoreboard -------- */
+  function loadScores() {
+    try {
+      var s = JSON.parse(localStorage.getItem(SCORE_KEY));
+      if (s && s.players) return s;
+    } catch (e) {}
+    return { players: {}, active: null };
+  }
+  function saveScores(s) {
+    try { localStorage.setItem(SCORE_KEY, JSON.stringify(s)); } catch (e) {}
+  }
+  var scores = loadScores();
+
+  function renderScores() {
+    scoreList.innerHTML = '';
+    var names = Object.keys(scores.players).sort();
+    if (!names.length) {
+      var p = document.createElement('p');
+      p.className = 'score-empty';
+      p.textContent = 'No players yet — add a username above and your results get tracked.';
+      scoreList.appendChild(p);
+      return;
+    }
+    var table = document.createElement('table');
+    table.className = 'score-table';
+    var head = document.createElement('tr');
+    ['player', 'w', 'l', 'd'].forEach(function (h) {
+      var th = document.createElement('th');
+      th.textContent = h;
+      head.appendChild(th);
+    });
+    table.appendChild(head);
+    names.forEach(function (name) {
+      var st = scores.players[name];
+      var tr = document.createElement('tr');
+      if (name === scores.active) tr.className = 'score-row--active';
+      tr.title = 'Click to track as ' + name;
+      var tdN = document.createElement('td');
+      tdN.textContent = name + (name === scores.active ? ' ●' : '');
+      tr.appendChild(tdN);
+      [st.w, st.l, st.d].forEach(function (v) {
+        var td = document.createElement('td');
+        td.textContent = v;
+        tr.appendChild(td);
+      });
+      tr.addEventListener('click', function () {
+        scores.active = name;
+        saveScores(scores);
+        renderScores();
+        setStatus('Tracking scores as ' + name + '.');
+      });
+      table.appendChild(tr);
+    });
+    scoreList.appendChild(table);
+  }
+
+  function addPlayer() {
+    var name = (nameInput.value || '').trim().slice(0, 16);
+    if (!name) return;
+    if (!scores.players[name]) scores.players[name] = { w: 0, l: 0, d: 0 };
+    scores.active = name;
+    saveScores(scores);
+    nameInput.value = '';
+    renderScores();
+    setStatus('Tracking scores as ' + name + '.');
+  }
+
+  function recordResult(result) {
+    if (!scores.active || !scores.players[scores.active]) return;
+    var st = scores.players[scores.active];
+    if (result === 'win') st.w++;
+    else if (result === 'loss') st.l++;
+    else st.d++;
+    saveScores(scores);
+    renderScores();
+  }
+
+  /* -------- board -------- */
   function buildBoard() {
     boardEl.innerHTML = '';
     for (var r = 0; r < N; r++) for (var c = 0; c < N; c++) {
@@ -193,7 +223,6 @@
         cell.className = 'othello-cell';
         cell.setAttribute('aria-label', 'row ' + (rr + 1) + ' column ' + (cc + 1));
         cell.addEventListener('click', function () { onCell(rr, cc); });
-        cell.dataset.r = rr; cell.dataset.c = cc;
         boardEl.appendChild(cell);
       })(r, c);
     }
@@ -218,32 +247,58 @@
         (lastMove && lastMove[0] === r && lastMove[1] === c ? ' othello-disc--last' : '');
     }
     var n = countDiscs(grid);
-    youEl.textContent = n.b;
-    aiEl.textContent = n.w;
-    levelEl.textContent = levelLabel();
+    youEl.textContent = human === 'b' ? n.b : n.w;
+    aiEl.textContent = ai === 'b' ? n.b : n.w;
+    youDiscEl.className = 'mini-disc mini-disc--' + human;
+    aiDiscEl.className = 'mini-disc mini-disc--' + ai;
   }
 
   function setStatus(t) { statusEl.textContent = t; }
 
+  function colorName(c) { return c === 'b' ? 'black' : 'white'; }
+
+  function markColorButtons() {
+    colorB.classList.toggle('othello-seg--active', human === 'b');
+    colorW.classList.toggle('othello-seg--active', human === 'w');
+    colorB.setAttribute('aria-pressed', human === 'b' ? 'true' : 'false');
+    colorW.setAttribute('aria-pressed', human === 'w' ? 'true' : 'false');
+  }
+
   function newGame() {
     grid = newGrid();
-    turn = HUMAN;
+    turn = 'b';
     aiThinking = false;
     lastMove = null;
     gameLive = true;
-    render(legalMoves(grid, HUMAN));
-    setStatus('Your move — you play black.');
+    markColorButtons();
+    if (turn === human) {
+      render(legalMoves(grid, human));
+      setStatus('Your move — you play ' + colorName(human) + '.');
+    } else {
+      render(null);
+      aiThinking = true;
+      setStatus('AI opens as ' + colorName(ai) + '…');
+      setTimeout(aiMove, 500);
+    }
+  }
+
+  function setHumanColor(c) {
+    if (human === c && gameLive) { newGame(); return; }
+    human = c;
+    ai = other(c);
+    saveColor(c);
+    newGame();
   }
 
   function onCell(r, c) {
-    if (!gameLive || aiThinking || turn !== HUMAN) return;
-    var moves = legalMoves(grid, HUMAN);
+    if (!gameLive || aiThinking || turn !== human) return;
+    var moves = legalMoves(grid, human);
     var mv = null;
     for (var i = 0; i < moves.length; i++) {
       if (moves[i].r === r && moves[i].c === c) { mv = moves[i]; break; }
     }
     if (!mv) return;
-    applyMove(grid, mv, HUMAN);
+    applyMove(grid, mv, human);
     lastMove = [r, c];
     advance();
   }
@@ -254,33 +309,27 @@
     if (nextMoves.length) {
       turn = next;
     } else {
-      var curMoves = legalMoves(grid, turn);
-      if (!curMoves.length) { gameOver(); return; }
-      setStatus((next === AI ? 'AI' : 'You') + ' has no moves — pass.');
-      /* turn stays with current player */
+      if (!legalMoves(grid, turn).length) { gameOver(); return; }
+      setStatus((next === ai ? 'AI' : 'You') + ' has no moves — pass.');
     }
-    if (turn === AI) {
+    if (turn === ai) {
       aiThinking = true;
       render(null);
-      setStatus('AI (' + LEVEL_NAMES[level] + ') is thinking…');
+      setStatus('AI is thinking…');
       setTimeout(aiMove, 450);
     } else {
       aiThinking = false;
-      var hm = legalMoves(grid, HUMAN);
+      var hm = legalMoves(grid, human);
       render(hm);
-      if (gameLive) {
-        var s = statusEl.textContent;
-        if (s.indexOf('pass') === -1) setStatus('Your move.');
-      }
+      if (gameLive && statusEl.textContent.indexOf('pass') === -1) setStatus('Your move.');
     }
   }
 
   function aiMove() {
     if (!gameLive) return;
-    var moves = legalMoves(grid, AI);
-    if (moves.length) {
-      var mv = aiChoose(grid, moves, level, AI, Math.random);
-      applyMove(grid, mv, AI);
+    var mv = aiChooseMove(grid, legalMoves(grid, ai), ai, Math.random);
+    if (mv) {
+      applyMove(grid, mv, ai);
       lastMove = [mv.r, mv.c];
     }
     aiThinking = false;
@@ -292,25 +341,43 @@
     aiThinking = false;
     render(null);
     var n = countDiscs(grid);
-    if (n.b > n.w) {
-      if (level < MAX_LEVEL) {
-        level++;
-        setLevel(level);
-        setStatus('You win ' + n.b + '–' + n.w + '! The AI leveled up: now ' +
-          LEVEL_NAMES[level] + ' (lv ' + level + ').');
-      } else {
-        setStatus('You win ' + n.b + '–' + n.w + '! The AI is maxed out — it fears you.');
-      }
-    } else if (n.w > n.b) {
-      setStatus('AI wins ' + n.w + '–' + n.b + '. It stays ' + LEVEL_NAMES[level] + ' — run it back.');
+    var hn = human === 'b' ? n.b : n.w;
+    var an = ai === 'b' ? n.b : n.w;
+    var who = scores.active ? ' (' + scores.active + ')' : '';
+    if (hn > an) {
+      recordResult('win');
+      setStatus('You win ' + hn + '–' + an + who + '! New game?');
+    } else if (an > hn) {
+      recordResult('loss');
+      setStatus('AI wins ' + an + '–' + hn + who + '. Run it back.');
     } else {
-      setStatus('Draw, ' + n.b + '–' + n.w + '. Nobody levels up.');
+      recordResult('draw');
+      setStatus('Draw, ' + hn + '–' + an + who + '.');
     }
-    render(null);
   }
 
+  /* -------- wiring -------- */
   newBtn.addEventListener('click', newGame);
+  colorB.addEventListener('click', function () { setHumanColor('b'); });
+  colorW.addEventListener('click', function () { setHumanColor('w'); });
+  scoresBtn.addEventListener('click', function () {
+    var open = scoresPanel.hasAttribute('hidden');
+    scoresPanel.toggleAttribute('hidden');
+    if (open) helpPanel.setAttribute('hidden', '');
+  });
+  helpBtn.addEventListener('click', function () {
+    var open = helpPanel.hasAttribute('hidden');
+    helpPanel.toggleAttribute('hidden');
+    if (open) scoresPanel.setAttribute('hidden', '');
+  });
+  addBtn.addEventListener('click', addPlayer);
+  nameInput.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') addPlayer();
+  });
 
+  human = loadColor();
+  ai = other(human);
   buildBoard();
+  renderScores();
   newGame();
 })();

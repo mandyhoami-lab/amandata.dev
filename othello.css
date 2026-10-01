@@ -29,11 +29,11 @@
   max-width: 34rem;
 }
 
-/* score + level readout */
+/* score readout */
 .othello-hud{
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 1rem;
   flex-wrap: wrap;
   margin-bottom: 1rem;
@@ -44,7 +44,39 @@
 }
 .othello-score{ display: flex; align-items: center; gap: 0.5rem; }
 .othello-sep{ color: var(--dim); }
-.othello-level{ color: var(--dim); font-size: 1.15rem; }
+
+/* play-as color selector */
+.othello-controls{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+.othello-seg{
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--micro);
+  font-size: 1.15rem;
+  letter-spacing: 0.05em;
+}
+.othello-seg__label{ color: var(--dim); margin-right: 0.3rem; }
+.othello-seg__btn{
+  font-family: var(--micro);
+  font-size: 1.15rem;
+  letter-spacing: 0.06em;
+  color: var(--dim);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 0.25rem 0.9rem;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.othello-seg__btn:hover{ color: var(--sand); border-color: var(--sand); }
+.othello-seg--active{
+  color: var(--ink);
+  border-color: var(--green);
+}
 
 /* mini discs used in the score line */
 .mini-disc{
@@ -135,7 +167,7 @@
   font-family: var(--micro);
   font-size: 1.2rem;
   letter-spacing: 0.06em;
-  color: var(--nav-dim);
+  color: var(--dim);
   background: transparent;
   border: 1px solid var(--line);
   border-radius: 4px;
@@ -150,3 +182,78 @@
   font-size: 0.9rem;
   margin-top: 1.5rem;
 }
+
+/* toggle panels: scoreboard + how-to-play */
+.othello-panel{
+  margin-top: 1.2rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--panel) 70%, transparent);
+}
+.othello-panel__title{
+  font-family: var(--micro);
+  font-size: 1.4rem;
+  letter-spacing: 0.05em;
+  color: var(--ink);
+  margin: 0 0 0.8rem;
+}
+.othello-rules{
+  margin: 0;
+  padding-left: 1.3rem;
+  color: var(--body-text);
+  font-size: 0.95rem;
+}
+.othello-rules li{ margin-bottom: 0.4rem; }
+
+/* scoreboard */
+.score-add{
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 0.9rem;
+}
+.score-input{
+  flex: 1;
+  min-width: 0;
+  font-family: var(--micro);
+  font-size: 1.2rem;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 0.3rem 0.7rem;
+}
+.score-input::placeholder{ color: var(--faint); }
+.score-input:focus{
+  outline: none;
+  border-color: var(--green);
+}
+.score-empty{
+  color: var(--dim);
+  font-size: 0.92rem;
+  margin: 0;
+}
+.score-table{
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--micro);
+  font-size: 1.2rem;
+  letter-spacing: 0.04em;
+}
+.score-table th,
+.score-table td{
+  text-align: left;
+  padding: 0.3rem 0.6rem;
+  border-bottom: 1px solid var(--line);
+  color: var(--body-text);
+}
+.score-table th{
+  color: var(--dim);
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+.score-table tr:last-child td{ border-bottom: 0; }
+.score-table tbody tr, .score-table tr:not(:first-child){ cursor: pointer; }
+.score-row--active td{ color: var(--sand); }
