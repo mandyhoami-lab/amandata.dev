@@ -89,8 +89,8 @@
   image-rendering: pixelated;
   image-rendering: crisp-edges;
 }
-.mini-disc--b{ background-color: #161616; }
-.mini-disc--w{ background-color: #f4f1ea; }
+.mini-disc--b{ background-color: transparent; }
+.mini-disc--w{ background-color: transparent; }
 
 /* the board: felt tinted by the theme accent, chunky pixel frame */
 .othello-board{
@@ -145,8 +145,8 @@
   image-rendering: crisp-edges;
   pointer-events: none;
 }
-.othello-disc--b{ background-color: #161616; }
-.othello-disc--w{ background-color: #f4f1ea; }
+.othello-disc--b{ background-color: transparent; }
+.othello-disc--w{ background-color: transparent; }
 .othello-disc--last{
   outline: 2px solid var(--sand);
   outline-offset: 2px;
