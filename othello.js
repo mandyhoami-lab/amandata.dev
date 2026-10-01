@@ -220,26 +220,27 @@
   }
 
   /* -------- pixel-art disc sprites (generated at runtime) --------
-     Awake cat-face discs, 16x16, in the site cat's palette:
-     cream cat for white, black cat with amber eyes for black. */
+     Awake cat heads, 16x16, in the site cat's palette: cream cat for
+     white, black cat with amber eyes for black. The head breaks out
+     of the old disc circle — ears and all — with a 1px outline. */
   var sprites = {};
   var CAT_FACE_ROWS = [
     "................",
-    ".....f....f.....",
-    "....fff..fff....",
-    "....fpf..fpf....",
-    "...ffffddffff...",
+    "..ff........ff..",
+    "..fff......fff..",
+    "..fppf....fppf..",
     "..ffffffffffff..",
-    "..fffeeffffeef..",
-    "..fffeeffffeef..",
+    ".ffffffddffffff.",
+    ".ffffffffffffff.",
+    ".fffveffffvefff.",
+    ".fffeeffffeefff.",
+    ".ffffffffffffff.",
+    ".ffffffnnffffff.",
+    ".fffffdfffdffff.",
+    ".ffffffffffffff.",
     "..ffffffffffff..",
-    "..ffffffnnffff..",
-    "..ffffdfffdfff..",
     "...ffffffffff...",
-    "....ffffffff....",
-    "......ffff......",
-    "................",
-    "................"
+    ".....ffffff....."
   ];
   function makeDiscSprite(color) {
     var S = 16;
@@ -253,18 +254,28 @@
       : { f: '#f4efe1', d: '#8f8874', p: '#E8A0B8', n: '#E8A0B8', e: '#4A2C14', v: '#ffffff' };
     /* eye accents: glints for the cream cat, pupils for the black cat */
     var accent = color === 'b'
-      ? { '6,7': 1, '10,7': 1 }
-      : { '5,6': 1, '9,6': 1 };
-    for (var y = 0; y < S; y++) for (var x = 0; x < S; x++) {
-      var dx = x - 7.5, dy = y - 7.5;
-      var d = Math.sqrt(dx * dx + dy * dy);
-      if (d > 7) continue;
-      var col = d > 5.8 ? edge : pal.f;
-      var ch = CAT_FACE_ROWS[y].charAt(x);
-      if (ch !== '.') {
-        col = (accent[x + ',' + y] ? pal.v : pal[ch]) || col;
+      ? { '5,8': 1, '11,8': 1 }
+      : { '4,7': 1, '10,7': 1 };
+    function isFace(x, y) {
+      return x >= 0 && y >= 0 && x < S && y < S && CAT_FACE_ROWS[y].charAt(x) !== '.';
+    }
+    var x, y, ox, oy;
+    /* pass 1: 1px outline hugging the head */
+    for (y = 0; y < S; y++) for (x = 0; x < S; x++) {
+      if (!isFace(x, y)) continue;
+      for (oy = -1; oy <= 1; oy++) for (ox = -1; ox <= 1; ox++) {
+        if (ox === 0 && oy === 0) continue;
+        var nx = x + ox, ny = y + oy;
+        if (nx < 0 || ny < 0 || nx >= S || ny >= S || isFace(nx, ny)) continue;
+        ctx.fillStyle = edge;
+        ctx.fillRect(nx, ny, 1, 1);
       }
-      ctx.fillStyle = col;
+    }
+    /* pass 2: the face itself */
+    for (y = 0; y < S; y++) for (x = 0; x < S; x++) {
+      var ch = CAT_FACE_ROWS[y].charAt(x);
+      if (ch === '.') continue;
+      ctx.fillStyle = accent[x + ',' + y] ? pal.v : (pal[ch] || pal.f);
       ctx.fillRect(x, y, 1, 1);
     }
     return cv.toDataURL();

@@ -20,8 +20,9 @@ Full history: `git log` on the repo, or the Commits page on GitHub.
   localStorage.
 - **Games, pixel pass (same day)** — pixel-art disc sprites generated at
   runtime (16px, scaled up with `image-rendering: pixelated`): awake
-  cat faces, cream cat for white and black cat with amber eyes for
-  black. Square cells/hints/buttons, a chunky stepped board frame,
+  cat heads that break out of the disc circle — cream cat for white,
+  black cat with amber eyes for black, 1px outline. Square
+  cells/hints/buttons, a chunky stepped board frame,
   and a stepped flip animation when discs change color (disabled under
   `prefers-reduced-motion`).
 
