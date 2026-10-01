@@ -10,7 +10,12 @@
 
   var canvas = document.getElementById('othello-bg');
   if (!canvas) return;
-  var ctx = canvas.getContext('2d');
+  var dctx = canvas.getContext('2d');
+  /* pixel look: paint the study onto a tiny offscreen buffer, then upscale
+     with smoothing off. Same art, same opacity — chunky pixels instead. */
+  var PIXEL = 5;
+  var buf = document.createElement('canvas');
+  var ctx = buf.getContext('2d');
 
   var reduceMotion = false;
   try {
@@ -221,7 +226,12 @@
     W = window.innerWidth; H = window.innerHeight;
     canvas.width = Math.round(W * DPR);
     canvas.height = Math.round(H * DPR);
-    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    dctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    dctx.imageSmoothingEnabled = false;
+    /* low-res buffer; drawing code keeps using CSS-pixel coordinates */
+    buf.width = Math.max(1, Math.round(W / PIXEL));
+    buf.height = Math.max(1, Math.round(H / PIXEL));
+    ctx.setTransform(1 / PIXEL, 0, 0, 1 / PIXEL, 0, 0);
     var specs = layoutSpec();
     boards = specs.map(function (sp, i) {
       var b = makeBoard(sp, 1234 + i * 777);
@@ -265,6 +275,10 @@
       drawAbstractBoard(b, pal, now);
       b.alpha = a0;
     }
+    /* pixelated upscale */
+    dctx.imageSmoothingEnabled = false;
+    dctx.clearRect(0, 0, W, H);
+    dctx.drawImage(buf, 0, 0, W, H);
     if (!reduceMotion) requestAnimationFrame(frame);
   }
 
@@ -275,6 +289,9 @@
     var p0 = palette();
     ctx.clearRect(0, 0, W, H);
     boards.forEach(function (b) { drawAbstractBoard(b, p0, 0); });
+    dctx.imageSmoothingEnabled = false;
+    dctx.clearRect(0, 0, W, H);
+    dctx.drawImage(buf, 0, 0, W, H);
   } else {
     requestAnimationFrame(frame);
   }
