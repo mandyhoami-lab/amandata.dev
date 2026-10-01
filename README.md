@@ -56,8 +56,11 @@ live site is expected and intentional.
 - **[Mandy](https://github.com/mandyhoami-lab)** — the original live site was entirely built by me.
 - **[KoriKosmos](https://github.com/KoriKosmos)** — coauthored by, KoriKosmos. Wrote the original full README and led the Carrd-mirror-to-working-copy transition.
 - **Muse** — contributor.
-- Assisted rebuilt commits with **Claude**; **[KoriKosmos](https://github.com/KoriKosmos)and **2.0** (prompt emgineered agent; Muse by Meta); **[Mandy](https://github.com/mandyhoami-lab), 
+- Assisted rebuilt commits with **Claude** ; **[KoriKosmos](https://github.com/KoriKosmos)** and **2.0** (prompt emgineered agent; Muse by Meta); **[Mandy](https://github.com/mandyhoami-lab)** 
 
 ## To do
 
 - [ ] Fill in the "My Work" section
+- [ ] Write first blog
+- [ ] Update changelogs and tweak navbar
+- [ ] Search function in nav
