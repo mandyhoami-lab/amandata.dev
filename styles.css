@@ -233,8 +233,10 @@ html.js-on .nav__menu-link:focus-visible{
 .nav__dropdown.open .nav__menu{ display: block; }
 .nav__dropdown--right .nav__menu{ left: auto; right: 0; }
 /* while a menu is open the mobile scroll strip must not clip it,
-   and the edge-fade mask must not hide the panel below the strip */
-.nav--menu-open .nav__links{
+   and the edge-fade mask must not hide the panel below the strip.
+   (Extra specificity: the .has-more mask rules below tie at 0,2,0,
+   so this must outrank them regardless of source order.) */
+.nav.nav--menu-open .nav__links{
   overflow: visible;
   -webkit-mask-image: none;
   mask-image: none;
