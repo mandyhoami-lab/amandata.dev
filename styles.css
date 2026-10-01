@@ -152,6 +152,11 @@ main, .footer{ position: relative; z-index: 1; }
 .nav__link:hover{ color: var(--nav-ink); }
 .nav__link.is-active{ color: var(--sand); border-color: var(--sand); }
 
+/* desktop: tilt the nav links left instead of centering them */
+@media (min-width: 641px){
+  .nav__links{ margin-right: auto; margin-left: 2.5rem; }
+}
+
 /* dark/light toggle */
 .theme-toggle{
   font-family: var(--micro);
