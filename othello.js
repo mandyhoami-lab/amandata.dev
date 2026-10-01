@@ -219,24 +219,51 @@
     renderScores();
   }
 
-  /* -------- pixel-art disc sprites (generated at runtime) -------- */
+  /* -------- pixel-art disc sprites (generated at runtime) --------
+     Awake cat-face discs, 16x16, in the site cat's palette:
+     cream cat for white, black cat with amber eyes for black. */
   var sprites = {};
+  var CAT_FACE_ROWS = [
+    "................",
+    ".....f....f.....",
+    "....fff..fff....",
+    "....fpf..fpf....",
+    "...ffffddffff...",
+    "..ffffffffffff..",
+    "..fffeeffffeef..",
+    "..fffeeffffeef..",
+    "..ffffffffffff..",
+    "..ffffffnnffff..",
+    "..ffffdfffdfff..",
+    "...ffffffffff...",
+    "....ffffffff....",
+    "......ffff......",
+    "................",
+    "................"
+  ];
   function makeDiscSprite(color) {
     var S = 16;
     var cv = document.createElement('canvas');
     cv.width = S; cv.height = S;
     var ctx = cv.getContext('2d');
     if (!ctx) return '';
-    var main  = color === 'b' ? '#1a1611' : '#f4efe1';
-    var edge  = color === 'b' ? '#000000'  : '#8f8874';
-    var shine = color === 'b' ? '#57503f'  : '#ffffff';
+    var edge = color === 'b' ? '#000000' : '#8f8874';
+    var pal = color === 'b'
+      ? { f: '#1a1611', d: '#57503f', p: '#D98A9B', n: '#E89AA8', e: '#E8A33D', v: '#5c3a10' }
+      : { f: '#f4efe1', d: '#8f8874', p: '#E8A0B8', n: '#E8A0B8', e: '#4A2C14', v: '#ffffff' };
+    /* eye accents: glints for the cream cat, pupils for the black cat */
+    var accent = color === 'b'
+      ? { '6,7': 1, '10,7': 1 }
+      : { '5,6': 1, '9,6': 1 };
     for (var y = 0; y < S; y++) for (var x = 0; x < S; x++) {
       var dx = x - 7.5, dy = y - 7.5;
       var d = Math.sqrt(dx * dx + dy * dy);
       if (d > 7) continue;
-      var col = main;
-      if (d > 5.8) col = edge;
-      else if (dx < -1.5 && dy < -1.5 && d < 5) col = shine;
+      var col = d > 5.8 ? edge : pal.f;
+      var ch = CAT_FACE_ROWS[y].charAt(x);
+      if (ch !== '.') {
+        col = (accent[x + ',' + y] ? pal.v : pal[ch]) || col;
+      }
       ctx.fillStyle = col;
       ctx.fillRect(x, y, 1, 1);
     }
