@@ -27,6 +27,10 @@
   #post-body code{font-size:0.9em}
   #post-body blockquote{border-left:3px solid var(--green);margin:1.2rem 0;padding:0.2rem 0 0.2rem 1rem;color:var(--dim)}
   #post-body img{max-width:100%;border-radius:4px}
+  .post-search{display:block;width:100%;max-width:26rem;margin:0 0 1.25rem;padding:0.55rem 0.9rem;background:var(--card-bg);border:1px solid var(--line);border-radius:4px;color:var(--ink);font-family:var(--micro);font-size:1.15rem;letter-spacing:0.05em}
+  .post-search::placeholder{color:var(--dim)}
+  .post-search:focus{outline:none;border-color:var(--green)}
+  .post-search[hidden]{display:none}
 </style>
 </head>
 <body>
@@ -60,7 +64,10 @@
       <h2 class="section__title">Blog</h2>
       <span class="section__tag">Notes &amp; essays</span>
     </div>
-    <div id="post-list" class="section__body"><p>Loading…</p></div>
+    <div class="section__body">
+      <input type="search" id="post-search" class="post-search" placeholder="Search posts…" aria-label="Search posts" autocomplete="off" hidden>
+      <div id="post-list"><p>Loading…</p></div>
+    </div>
   </section>
 
   <!-- ================= SINGLE POST ================= -->
@@ -85,6 +92,6 @@
 <script src="othello-bg.js?v=14"></script>
 <script src="theme.js?v=9"></script>
 <script src="supabase-config.js?v=8"></script>
-<script src="blog.js?v=8"></script>
+<script src="blog.js?v=9"></script>
 </body>
 </html>

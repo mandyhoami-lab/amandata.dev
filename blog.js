@@ -4,8 +4,10 @@
 
   var cfg = window.SUPABASE_CONFIG || {};
   var listEl = document.getElementById("post-list");
+  var searchEl = document.getElementById("post-search");
   var listView = document.getElementById("view-list");
   var postView = document.getElementById("view-post");
+  var allPosts = [];
 
   function fmtDate(iso) {
     return new Date(iso).toLocaleDateString(undefined, {
@@ -26,6 +28,26 @@
     return text.length > 160 ? text.slice(0, 160) + "…" : text;
   }
 
+  function cardHtml(p) {
+    return '<a class="post-card" href="/blog.html?p=' + encodeURIComponent(p.slug) + '">' +
+      '<h3 class="post-card__title">' + escapeHtml(p.title) + "</h3>" +
+      '<span class="post-card__date">' + fmtDate(p.created_at) + "</span>" +
+      '<p class="post-card__excerpt">' + escapeHtml(excerpt(p.body)) + "</p></a>";
+  }
+
+  function renderList() {
+    var q = searchEl ? (searchEl.value || "").trim().toLowerCase() : "";
+    var matches = !q ? allPosts : allPosts.filter(function (p) {
+      return (p.title + " " + p.body).toLowerCase().indexOf(q) !== -1;
+    });
+    if (!matches.length) {
+      listEl.innerHTML = q ? "<p>no posts match — try another search.</p>"
+                           : "<p>no posts yet — check back soon.</p>";
+      return;
+    }
+    listEl.innerHTML = matches.map(cardHtml).join("");
+  }
+
   function showList(client) {
     client.from("posts")
       .select("title,slug,body,created_at")
@@ -34,16 +56,15 @@
       .then(function (res) {
         if (res.error || !res.data || !res.data.length) {
           listEl.innerHTML = "<p>no posts yet — check back soon.</p>";
+          if (searchEl) searchEl.hidden = true;
           return;
         }
-        listEl.innerHTML = res.data.map(function (p) {
-          return '<a class="post-card" href="/blog.html?p=' + encodeURIComponent(p.slug) + '">' +
-            '<h3 class="post-card__title">' + escapeHtml(p.title) + "</h3>" +
-            '<span class="post-card__date">' + fmtDate(p.created_at) + "</span>" +
-            '<p class="post-card__excerpt">' + escapeHtml(excerpt(p.body)) + "</p></a>";
-        }).join("");
+        allPosts = res.data;
+        if (searchEl) searchEl.hidden = false;
+        renderList();
       }, function () {
         listEl.innerHTML = "<p>couldn't load posts — try refreshing.</p>";
+        if (searchEl) searchEl.hidden = true;
       });
   }
 
@@ -78,6 +99,9 @@
 
   var client = supabase.createClient(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY);
   var slug = new URLSearchParams(location.search).get("p");
+  if (searchEl) {
+    searchEl.addEventListener("input", renderList);
+  }
   if (slug) showPost(client, slug);
   else showList(client);
 })();
