@@ -1,11 +1,20 @@
-/* admin — magic-link sign in + publish posts to Supabase */
+/* admin — email+password sign in (owner only) + publish/edit posts in Supabase */
 (function () {
   "use strict";
+
+  var OWNER_EMAIL = "mandyhoami@gmail.com";
+  var MAX_ATTEMPTS = 5;
+  var LOCKOUT_MS = 60000;
+  var THROTTLE_KEY = "admin-login-throttle";
 
   var cfg = window.SUPABASE_CONFIG || {};
   var loginView = document.getElementById("login-view");
   var editorView = document.getElementById("editor-view");
   var loginForm = document.getElementById("login-form");
+  var loginBtn = document.getElementById("login-btn");
+  var forgotBtn = document.getElementById("forgot-btn");
+  var forgotForm = document.getElementById("forgot-form");
+  var newpassForm = document.getElementById("newpass-form");
   var loginMsg = document.getElementById("login-msg");
   var postForm = document.getElementById("post-form");
   var postStatus = document.getElementById("post-status");
@@ -24,12 +33,36 @@
 
   var client = supabase.createClient(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY);
 
+  /* ---- login brute-force throttle (per device) ---- */
+  function throttleState() {
+    try { return JSON.parse(localStorage.getItem(THROTTLE_KEY) || "{}"); }
+    catch (e) { return {}; }
+  }
+  function saveThrottle(s) {
+    try { localStorage.setItem(THROTTLE_KEY, JSON.stringify(s)); } catch (e) {}
+  }
+  function isLockedOut() {
+    var s = throttleState();
+    return !!(s.lockedUntil && Date.now() < s.lockedUntil);
+  }
+  function lockoutMsg() {
+    var s = throttleState();
+    var secs = Math.max(1, Math.ceil(((s.lockedUntil || 0) - Date.now()) / 1000));
+    return "too many tries — wait " + secs + "s, then try again.";
+  }
+  function recordFailure() {
+    var s = throttleState();
+    s.count = (s.count || 0) + 1;
+    if (s.count >= MAX_ATTEMPTS) { s.lockedUntil = Date.now() + LOCKOUT_MS; s.count = 0; }
+    saveThrottle(s);
+  }
+  function clearThrottle() { saveThrottle({}); }
+
   function showEditor() {
     loginView.hidden = true;
     editorView.hidden = false;
     loadPosts();
   }
-
   function loadPosts() {
     if (!postsList) return;
     postsList.innerHTML = "<li><span>loading…</span></li>";
@@ -104,22 +137,105 @@
     if (event === "SIGNED_IN") showEditor();
   });
 
+  /* ---- session + recovery ---- */
+  client.auth.getSession().then(function (res) {
+    if (res.data && res.data.session) showEditor();
+  });
+  client.auth.onAuthStateChange(function (event) {
+    if (event === "SIGNED_IN") { showEditor(); return; }
+    if (event === "PASSWORD_RECOVERY") {
+      loginForm.hidden = true;
+      forgotForm.hidden = true;
+      if (forgotBtn) forgotBtn.hidden = true;
+      newpassForm.hidden = false;
+      loginMsg.className = "";
+      loginMsg.textContent = "choose a new password.";
+    }
+  });
+
+  /* ---- password sign in (owner email only) ---- */
   loginForm.addEventListener("submit", function (e) {
     e.preventDefault();
+    if (isLockedOut()) {
+      loginMsg.className = "form-error";
+      loginMsg.textContent = lockoutMsg();
+      return;
+    }
+    var email = document.getElementById("login-email").value.trim().toLowerCase();
+    var password = document.getElementById("login-password").value;
+    if (email !== OWNER_EMAIL) {
+      recordFailure();
+      loginMsg.className = "form-error";
+      loginMsg.textContent = isLockedOut() ? lockoutMsg() : "wrong email or password.";
+      return;
+    }
+    loginMsg.className = "";
+    loginMsg.textContent = "signing in…";
+    loginBtn.disabled = true;
+    client.auth.signInWithPassword({ email: email, password: password }).then(function (res) {
+      loginBtn.disabled = false;
+      if (res.error) {
+        recordFailure();
+        loginMsg.className = "form-error";
+        loginMsg.textContent = isLockedOut() ? lockoutMsg() : "wrong email or password.";
+        return;
+      }
+      clearThrottle();
+      /* SIGNED_IN event shows the editor */
+    });
+  });
+
+  /* ---- forgot password: email a reset link, then set a new password here ---- */
+  if (forgotBtn) forgotBtn.addEventListener("click", function () {
+    forgotForm.hidden = !forgotForm.hidden;
+    loginMsg.className = "";
+    loginMsg.textContent = "";
+  });
+  forgotForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var email = document.getElementById("forgot-email").value.trim().toLowerCase();
     loginMsg.className = "";
     loginMsg.textContent = "sending…";
-    var email = document.getElementById("login-email").value.trim();
-    client.auth.signInWithOtp({
-      email: email,
-      options: { emailRedirectTo: "https://amandata.dev/admin.html" }
+    if (email !== OWNER_EMAIL) {
+      /* generic reply either way — don't reveal which emails have accounts */
+      loginMsg.className = "form-ok";
+      loginMsg.textContent = "if that email has an account, a reset link is on its way.";
+      return;
+    }
+    client.auth.resetPasswordForEmail(email, {
+      redirectTo: "https://amandata.dev/admin.html"
     }).then(function (res) {
+      loginMsg.className = res.error ? "form-error" : "form-ok";
+      loginMsg.textContent = res.error
+        ? "couldn't send the reset email — try again in a bit."
+        : "check your inbox for the reset link, then set a new password here.";
+    });
+  });
+  newpassForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var p1 = document.getElementById("newpass-1").value;
+    var p2 = document.getElementById("newpass-2").value;
+    if (p1.length < 8) {
+      loginMsg.className = "form-error";
+      loginMsg.textContent = "password needs at least 8 characters.";
+      return;
+    }
+    if (p1 !== p2) {
+      loginMsg.className = "form-error";
+      loginMsg.textContent = "the two passwords don't match.";
+      return;
+    }
+    loginMsg.className = "";
+    loginMsg.textContent = "saving…";
+    client.auth.updateUser({ password: p1 }).then(function (res) {
       if (res.error) {
         loginMsg.className = "form-error";
-        loginMsg.textContent = "couldn't send the link — is this the right email?";
+        loginMsg.textContent = "couldn't save — reopen the reset link and try again.";
         return;
       }
       loginMsg.className = "form-ok";
-      loginMsg.textContent = "check your inbox for the sign-in link.";
+      loginMsg.textContent = "password saved.";
+      showEditor();
     });
   });
 

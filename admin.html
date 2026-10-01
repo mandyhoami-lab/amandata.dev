@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
 <title>Admin — Amanda Ta</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -88,10 +89,22 @@
 
     <!-- login -->
     <div id="login-view" class="section__body">
-      <p class="contact__intro">enter your email — we'll send you a sign-in link. no password needed.</p>
+      <p class="contact__intro">site owner sign-in.</p>
       <form id="login-form" class="form">
-        <label>email<input type="email" id="login-email" required autocomplete="email"></label>
-        <button type="submit">Email me a link</button>
+        <label>email<input type="email" id="login-email" required autocomplete="username"></label>
+        <label>password<input type="password" id="login-password" required autocomplete="current-password"></label>
+        <button type="submit" id="login-btn">Sign in</button>
+      </form>
+      <p><button id="forgot-btn" class="ghost" type="button">Forgot password?</button></p>
+      <form id="forgot-form" class="form" hidden>
+        <label>email<input type="email" id="forgot-email" required autocomplete="email"></label>
+        <button type="submit">Send reset link</button>
+      </form>
+      <form id="newpass-form" class="form" hidden>
+        <p class="hint">set a new password</p>
+        <label>new password<input type="password" id="newpass-1" required minlength="8" autocomplete="new-password"></label>
+        <label>repeat it<input type="password" id="newpass-2" required minlength="8" autocomplete="new-password"></label>
+        <button type="submit">Save password</button>
       </form>
       <p id="login-msg"></p>
     </div>
@@ -124,6 +137,6 @@
 <script src="theme.js?v=9"></script>
 <script src="nav.js?v=1"></script>
 <script src="supabase-config.js?v=8"></script>
-<script src="admin.js?v=9"></script>
+<script src="admin.js?v=10"></script>
 </body>
 </html>
