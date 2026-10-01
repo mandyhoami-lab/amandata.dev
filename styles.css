@@ -864,3 +864,17 @@ a:focus-visible, button:focus-visible{
 .guide-flashlink a{ color: var(--sand); font-weight: 700; }
 /* PSY 410 guide: skip rendering off-screen chapters until scrolled to — faster initial load */
 .guide .g-chapter{ content-visibility: auto; contain-intrinsic-size: auto 900px; }
+
+/* ---- shared layout (injected by layout.js) ---- */
+/* no-JS fallback link row; hidden from JS users because layout.js
+   inserts the real nav and <noscript> never renders with JS on */
+.noscript-nav{
+  position:relative; z-index:5;
+  padding:.7rem 1rem; text-align:center; font-size:.85rem;
+  background:#141414; color:#fff;
+}
+.noscript-nav a{ color:#fff; margin:0 .3rem; }
+
+/* skip rendering off-screen sections until scrolled near;
+   intrinsic-size keeps the scrollbar stable */
+.section{ content-visibility:auto; contain-intrinsic-size:auto 700px; }
