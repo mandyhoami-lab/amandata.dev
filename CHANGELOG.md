@@ -5,6 +5,19 @@ Full history: `git log` on the repo, or the Commits page on GitHub.
 
 ## 2026-10-01
 
+- **Learn (same day)** — the Creations hub is now **Learn**:
+  `/creations.html` and `/games.html` both redirect to `/learn.html`,
+  and the nav says Learn on every page.
+- **Othello: beginner + advanced (same day)** — `/othello.html` now
+  opens with a mode picker. **Beginner** is the preserved easy game
+  (chill robot, per-player and everyone-combined all-time scoreboard,
+  still local to this device). **Advanced** is a new study mode at
+  `/othello-advanced.html`: a full-strength engine (alpha-beta search)
+  grades every move the moment you play it — best, good, okay, risky,
+  or blunder, naming the stronger square — with board coordinates, a
+  last-move highlight, a running move list, undo/redo, and an eval
+  graph that shows where the game swung. Study interface inspired by
+  Hiyoko Reversi (credited on the page).
 - **Creations (same day)** — `/games.html` became `/creations.html`: a
   hub where each creation gets its own pixel-art button. Othello moved to
   its own page at `/othello.html`. `/games.html` now redirects.
