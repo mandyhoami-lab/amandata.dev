@@ -64,3 +64,4 @@ live site is expected and intentional.
 - [ ] Write first blog
 - [ ] Update changelogs and tweak navbar
 - [ ] Search function in nav
+- [ ] cat interactive elements...
