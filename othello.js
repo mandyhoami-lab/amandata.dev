@@ -1,8 +1,8 @@
 /* =========================================================
    amandata.dev — playable Othello vs. the robot.
-   No levels, no limits: one honest robot, you choose black or
-   white. Optional all-time scoreboard with usernames
-   (localStorage), plus a how-to-play panel.
+   No levels, no limits: a teachable robot that's easy to beat
+   (you choose black or white). Optional all-time scoreboard
+   with usernames (localStorage), plus a how-to-play panel.
    No animations: everything updates instantly.
    ========================================================= */
 (function () {
@@ -52,9 +52,13 @@
   }
 
   /* ---------------- robot ----------------
-     One fixed strength: 1-ply search with positional weights
-     and a mobility term, plus a little random wobble so it
-     doesn't play like a machine. Sensible, beatable. */
+     A teachable, beatable robot. Each game it samples a "mood":
+     a blunder rate between 60% and 92%. Most moves it just picks
+     a random legal square (easy to beat, easy to learn against),
+     but when it focuses it plays a real 1-ply positional game with
+     a mobility term — so you still see what good Othello looks like.
+     Some games it goofs off, some games it locks in: expect a mix
+     of wins and losses, no two games alike. */
   var WEIGHTS = [
     120, -20,  20,   5,   5,  20, -20, 120,
     -20, -40,  -5,  -5,  -5,  -5, -40, -20,
@@ -80,9 +84,13 @@
     return g.map(function (row) { return row.slice(); });
   }
 
-  function aiChooseMove(g, moves, ai, rnd) {
+  function aiChooseMove(g, moves, ai, rnd, blunder) {
     rnd = rnd || Math.random;
+    blunder = (typeof blunder === 'number') ? blunder : 0.75;
     if (!moves.length) return null;
+    /* goof-off move: any legal square, great for learning against */
+    if (rnd() < blunder) return moves[(rnd() * moves.length) | 0];
+    /* focused move: 1-ply positional play with a little wobble */
     var scored = moves.map(function (mv) {
       var ng = cloneGrid(g);
       applyMove(ng, mv, ai);
@@ -122,7 +130,7 @@
   var COLOR_KEY = 'amandata-othello-color';
   var SCORE_KEY = 'amandata-othello-scores-v1';
 
-  var grid, turn, aiThinking = false, lastMove = null, gameLive = true;
+  var grid, turn, aiThinking = false, lastMove = null, gameLive = true, aiBlunder = 0.75;
   var human = 'b', ai = 'w';
 
   function loadColor() {
@@ -314,6 +322,8 @@
     aiThinking = false;
     lastMove = null;
     gameLive = true;
+    /* the robot's mood this game: 60-92% goof-off moves */
+    aiBlunder = 0.60 + Math.random() * 0.32;
     markColorButtons();
     if (turn === human) {
       render(legalMoves(grid, human));
@@ -373,7 +383,7 @@
 
   function aiMove() {
     if (!gameLive) return;
-    var mv = aiChooseMove(grid, legalMoves(grid, ai), ai, Math.random);
+    var mv = aiChooseMove(grid, legalMoves(grid, ai), ai, Math.random, aiBlunder);
     if (mv) {
       var oldColor = other(ai);
       applyMove(grid, mv, ai);

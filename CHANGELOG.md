@@ -11,11 +11,13 @@ Full history: `git log` on the repo, or the Commits page on GitHub.
 - **Games page** — new `/games.html` with a playable 8x8 Othello vs. the
   robot. The board re-tints with all four themes via the shared token system.
   "Games" added to the nav on all pages.
-- **Games rework (same day)** — levels removed. One fixed-strength robot
-  (1-ply search with positional weights and a little wobble — sensible,
-  beatable). Play as black or white (black moves first), a how-to-play
-  panel, and an all-time scoreboard: add usernames and W/L/D is tracked
-  per player in localStorage.
+- **Games rework (same day)** — levels removed. A teachable robot:
+  each game it samples a blunder rate (60–92% of its moves are random
+  legal squares), and when it focuses it plays real 1-ply positional
+  Othello — easy to beat, and you learn by watching. Play as black or
+  white (black moves first), a how-to-play panel, and an all-time
+  scoreboard: add usernames and W/L/D is tracked per player in
+  localStorage.
 - **Games, pixel pass (same day)** — pixel-art disc sprites generated at
   runtime (16px, scaled up with `image-rendering: pixelated`), square
   cells/hints/buttons, a chunky stepped board frame, and a stepped
