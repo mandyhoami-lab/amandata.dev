@@ -553,6 +553,38 @@ mark.key{
   background: var(--work-note-bg);
 }
 
+/* ---------- projects grid ---------- */
+.proj-grid{
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+.proj-box{
+  display: block;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--green);
+  border-radius: 0;
+  background: var(--card-bg);
+  text-decoration: none;
+  transition: border-color 0.2s ease;
+}
+.proj-box:hover{ border-color: var(--green); border-left-color: var(--green); }
+.proj-box:focus-visible{ outline: 2px solid var(--green); outline-offset: 2px; }
+.proj-box__title{
+  display: block;
+  font-family: var(--micro);
+  font-size: 1.35rem;
+  letter-spacing: 0.04em;
+  color: var(--sand);
+}
+.proj-box__desc{
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 0.9rem;
+  color: var(--dim);
+}
+
 /* ---------- contact ---------- */
 .contact__intro{
   font-family: var(--micro);
