@@ -13,7 +13,7 @@
   var dctx = canvas.getContext('2d');
   /* pixel look: paint the study onto a tiny offscreen buffer, then upscale
      with smoothing off. Same art, same opacity — chunky pixels instead. */
-  var PIXEL = 5;
+  var PIXEL = 3;
   var buf = document.createElement('canvas');
   var ctx = buf.getContext('2d');
 
