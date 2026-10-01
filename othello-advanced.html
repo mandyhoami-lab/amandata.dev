@@ -17,7 +17,7 @@
 /* theme init before first paint: saved choice, else system preference, else dark */
 (function(){try{var t=localStorage.getItem('amandata-theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='dark';}})();
 </script>
-<link rel="stylesheet" href="styles.css?v=30">
+<link rel="stylesheet" href="styles.css?v=31">
 <link rel="stylesheet" href="othello.css?v=6">
 <link rel="icon" href="/favicon.ico" sizes="any">
 </head>
@@ -32,14 +32,34 @@
 <nav class="nav">
   <a class="nav__mark" href="/">AT</a>
   <div class="nav__links">
-    <a class="nav__link" href="/#about">About</a>
-    <a class="nav__link" href="/#cv">CV</a>
-    <a class="nav__link" href="/#work">Projects</a>
-    <a class="nav__link" href="/#contact">Contact</a>
-    <a class="nav__link" href="/#changelog">Changelog</a>
-    <a class="nav__link" href="/blog.html">Blog</a>
-    <a class="nav__link" href="/psy410.html">PSY 410 Resources</a>
-    <a class="nav__link is-active" href="/learn.html">Learn</a>
+    <div class="nav__item nav__dropdown">
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="nav-menu-me" id="nav-toggle-me">Me <span class="nav__caret" aria-hidden="true">▾</span></button>
+      <div class="nav__menu" id="nav-menu-me" role="menu" aria-labelledby="nav-toggle-me">
+        <a class="nav__menu-link" role="menuitem" href="/#about">About</a>
+        <a class="nav__menu-link" role="menuitem" href="/#cv">CV</a>
+        <a class="nav__menu-link" role="menuitem" href="/#contact">Contact</a>
+        <a class="nav__menu-link" role="menuitem" href="/commissions.html">Commissions</a>
+      </div>
+    </div>
+    <div class="nav__item"><a class="nav__link" href="/blog.html">Blog</a></div>
+    <div class="nav__item"><a class="nav__link" href="/psy410.html">PSY 410 Resources</a></div>
+    <div class="nav__item nav__dropdown">
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="nav-menu-site" id="nav-toggle-site">This Site <span class="nav__caret" aria-hidden="true">▾</span></button>
+      <div class="nav__menu" id="nav-menu-site" role="menu" aria-labelledby="nav-toggle-site">
+        <a class="nav__menu-link" role="menuitem" href="/blog.html?p=making-amandata-dev">Making amandata.dev</a>
+        <a class="nav__menu-link" role="menuitem" href="/blog.html?p=building-the-reversi-coach-turning-the-othello-bot-into-a-learning-system">Building the Reversi Coach</a>
+        <a class="nav__menu-link" role="menuitem" href="/repository.html">Repository</a>
+        <a class="nav__menu-link" role="menuitem" href="/#changelog">Changelog</a>
+      </div>
+    </div>
+    <div class="nav__item nav__dropdown nav__dropdown--right">
+      <button class="nav__toggle is-active" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="nav-menu-learn" id="nav-toggle-learn">Learn <span class="nav__caret" aria-hidden="true">▾</span></button>
+      <div class="nav__menu" id="nav-menu-learn" role="menu" aria-labelledby="nav-toggle-learn">
+        <a class="nav__menu-link" role="menuitem" href="/learn.html">Learn</a>
+        <a class="nav__menu-link" role="menuitem" href="/othello.html">Othello</a>
+        <a class="nav__menu-link" role="menuitem" href="/psy410-flashcards/">Myers flashcards</a>
+      </div>
+    </div>
   </div>
   <button class="theme-toggle" id="theme-toggle" aria-label="cycle color theme">Light</button>
 </nav>
@@ -121,6 +141,7 @@
 
 <script src="othello-bg.js?v=14"></script>
 <script src="theme.js?v=9"></script>
+<script src="nav.js?v=1"></script>
 <script src="othello.js?v=9"></script>
 <script src="othello-advanced.js?v=4"></script>
 </body>

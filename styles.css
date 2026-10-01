@@ -175,6 +175,162 @@ main, .footer{ position: relative; z-index: 1; }
 }
 .theme-toggle:hover{ color: var(--sand); border-color: var(--sand); }
 
+/* ================= NAV DROPDOWNS ================= */
+.nav__item{ position: relative; }
+.nav__toggle{
+  font-family: var(--micro);
+  -webkit-text-stroke: 0.5px currentColor;
+  paint-order: stroke fill;
+  font-size: 1.15rem;
+  letter-spacing: 0.06em;
+  color: var(--nav-dim);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 0.2rem 0;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.nav__toggle:hover{ color: var(--nav-ink); }
+.nav__toggle.is-active{ color: var(--sand); border-color: var(--sand); }
+.nav__caret{ font-size: 0.85em; margin-left: 0.15em; }
+/* No-JS fail-open: menus render as plain stacked links under their toggle. */
+.nav__menu{ padding: 0.25rem 0 0.5rem; }
+.nav__menu-link{
+  display: block;
+  font-family: var(--micro);
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+  color: var(--nav-dim);
+  text-decoration: none;
+  padding: 0.35rem 0;
+}
+.nav__menu-link:hover{ color: var(--sand); }
+/* JS armed: menus become floating dropdown panels, hidden until opened. */
+html.js-on .nav__menu{
+  display: none;
+  position: absolute;
+  top: calc(100% + 0.55rem);
+  left: 0;
+  min-width: 15rem;
+  background: var(--nav-bg);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 6px;
+  padding: 0.4rem;
+  z-index: 60;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.35);
+}
+html.js-on .nav__menu-link{
+  padding: 0.55rem 0.8rem;
+  border-radius: 4px;
+}
+html.js-on .nav__menu-link:hover,
+html.js-on .nav__menu-link:focus-visible{
+  color: var(--sand);
+  background: rgba(255,255,255,0.06);
+  outline: none;
+}
+.nav__dropdown.open .nav__menu{ display: block; }
+.nav__dropdown--right .nav__menu{ left: auto; right: 0; }
+/* while a menu is open the mobile scroll strip must not clip it */
+.nav--menu-open .nav__links{ overflow: visible; }
+
+/* ================= COMMISSIONS FORM ================= */
+.commissions-intro{ max-width: 42rem; }
+.commission-form{
+  max-width: 42rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  margin-top: 1.5rem;
+}
+.commission-field{ display: flex; flex-direction: column; gap: 0.4rem; }
+.commission-label{
+  font-family: var(--micro);
+  font-size: 1.05rem;
+  letter-spacing: 0.06em;
+  color: var(--nav-dim);
+}
+.commission-input{
+  font-family: var(--body, inherit);
+  font-size: 1rem;
+  color: var(--ink);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.22);
+  border-radius: 6px;
+  padding: 0.65rem 0.8rem;
+  width: 100%;
+}
+.commission-input::placeholder{ color: var(--nav-dim); opacity: 0.7; }
+.commission-input:focus{
+  outline: none;
+  border-color: var(--sand);
+  box-shadow: 0 0 0 2px rgba(217,190,122,0.25);
+}
+.commission-textarea{ resize: vertical; min-height: 8rem; }
+.commission-submit{
+  align-self: flex-start;
+  font-family: var(--micro);
+  font-size: 1.1rem;
+  letter-spacing: 0.06em;
+  color: var(--nav-ink);
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.28);
+  border-radius: 4px;
+  padding: 0.5rem 1.2rem;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.commission-submit:hover{ color: var(--sand); border-color: var(--sand); }
+.commission-note{ font-size: 0.95rem; color: var(--nav-dim); min-height: 1.4em; }
+
+/* ================= REPOSITORY BROWSER ================= */
+.repo-intro{ max-width: 46rem; }
+.repo-link{ color: var(--sand); }
+.repo-crumbs{
+  font-family: var(--micro);
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+  margin: 1.4rem 0 0.6rem;
+  max-width: 46rem;
+}
+.repo-crumb{ color: var(--nav-dim); text-decoration: none; }
+.repo-crumb:hover{ color: var(--sand); }
+.repo-sep{ color: var(--nav-dim); opacity: 0.6; }
+.repo-list{
+  max-width: 46rem;
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.repo-row{
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.55rem 0.9rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.repo-row:last-child{ border-bottom: none; }
+.repo-name{
+  font-family: var(--micro);
+  font-size: 1.05rem;
+  letter-spacing: 0.03em;
+  color: var(--nav-ink);
+  text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.repo-name:hover{ color: var(--sand); }
+.repo-icon{ color: var(--sand); }
+.repo-size{
+  flex: 0 0 auto;
+  font-size: 0.85rem;
+  color: var(--nav-dim);
+}
+.repo-status{ padding: 1rem; color: var(--nav-dim); }
+
 /* ================= HERO ================= */
 .hero{
   position: relative;
@@ -657,6 +813,7 @@ mark.key{
     mask-image: linear-gradient(to right, transparent 0%, #000 18%, #000 82%, transparent 100%);
   }
   .nav__link{ flex: 0 0 auto; }
+  .nav__item{ flex: 0 0 auto; }
   .theme-toggle{ flex: 0 0 auto; margin-left: 0; }
   .stats{ grid-template-columns: 1fr; }
   .skills-grid{ grid-template-columns: 1fr; }
