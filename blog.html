@@ -32,6 +32,9 @@
   .post-search::placeholder{color:var(--dim)}
   .post-search:focus{outline:none;border-color:var(--green)}
   .post-search[hidden]{display:none}
+  .post-count{font-family:var(--micro);font-size:1rem;letter-spacing:0.05em;color:var(--dim);margin:-0.7rem 0 1rem}
+  .post-count[hidden]{display:none}
+  .post-card mark{background:var(--sand);color:#1a1a1a;padding:0 0.1em;border-radius:2px}
 </style>
 </head>
 <body>
@@ -89,6 +92,7 @@
     </div>
     <div class="section__body">
       <input type="search" id="post-search" class="post-search" placeholder="Search posts…" aria-label="Search posts" autocomplete="off" hidden>
+      <p id="post-count" class="post-count" hidden></p>
       <div id="post-list"><p>Loading…</p></div>
     </div>
   </section>
@@ -116,6 +120,6 @@
 <script src="theme.js?v=9"></script>
 <script src="nav.js?v=9"></script>
 <script src="supabase-config.js?v=8"></script>
-<script src="blog.js?v=9"></script>
+<script src="blog.js?v=10"></script>
 </body>
 </html>

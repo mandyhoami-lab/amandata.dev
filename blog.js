@@ -28,11 +28,18 @@
     return text.length > 160 ? text.slice(0, 160) + "…" : text;
   }
 
-  function cardHtml(p) {
+  function highlight(text, q) {
+    var esc = escapeHtml(text);
+    if (!q) return esc;
+    var qesc = escapeHtml(q).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return esc.replace(new RegExp("(" + qesc + ")", "gi"), "<mark>$1</mark>");
+  }
+
+  function cardHtml(p, q) {
     return '<a class="post-card" href="/blog.html?p=' + encodeURIComponent(p.slug) + '">' +
-      '<h3 class="post-card__title">' + escapeHtml(p.title) + "</h3>" +
+      '<h3 class="post-card__title">' + highlight(p.title, q) + "</h3>" +
       '<span class="post-card__date">' + fmtDate(p.created_at) + "</span>" +
-      '<p class="post-card__excerpt">' + escapeHtml(excerpt(p.body)) + "</p></a>";
+      '<p class="post-card__excerpt">' + highlight(excerpt(p.body), q) + "</p></a>";
   }
 
   function renderList() {
@@ -40,12 +47,22 @@
     var matches = !q ? allPosts : allPosts.filter(function (p) {
       return (p.title + " " + p.body).toLowerCase().indexOf(q) !== -1;
     });
+    var countEl = document.getElementById("post-count");
+    if (countEl) {
+      if (!q || !matches.length) { countEl.hidden = true; }
+      else {
+        countEl.hidden = false;
+        countEl.textContent = matches.length === 1
+          ? "1 of " + allPosts.length + " posts"
+          : matches.length + " of " + allPosts.length + " posts";
+      }
+    }
     if (!matches.length) {
       listEl.innerHTML = q ? "<p>no posts match — try another search.</p>"
                            : "<p>no posts yet — check back soon.</p>";
       return;
     }
-    listEl.innerHTML = matches.map(cardHtml).join("");
+    listEl.innerHTML = matches.map(function (p) { return cardHtml(p, q); }).join("");
   }
 
   function showList(client) {
