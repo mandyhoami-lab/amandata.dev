@@ -3,8 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Admin — Amanda Ta</title>
-<meta name="robots" content="noindex, nofollow">
+<title>Commissions — Amanda Ta</title>
+<meta name="description" content="Commission a piece from Amanda Ta — artwork, design, or a small build. Send a message describing what you'd like.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://amandata.dev/commissions.html">
+<meta property="og:title" content="Commissions — amandata.dev">
+<meta property="og:description" content="Commission a piece — artwork, design, or a small build.">
+<meta property="og:site_name" content="amandata.dev">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&family=VT323&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -14,22 +19,6 @@
 </script>
 <link rel="stylesheet" href="styles.css?v=31">
 <link rel="icon" href="/favicon.ico" sizes="any">
-<style>
-  .form{max-width:640px}
-  .form label{display:block;font-family:var(--micro);font-size:1.2rem;letter-spacing:0.06em;color:var(--dim);margin-bottom:1.2rem}
-  .form .hint{color:var(--faint);font-size:1rem}
-  .form input[type="email"],.form input[type="password"],.form input[type="text"],.form textarea{display:block;width:100%;margin-top:0.4rem;background:var(--panel);border:1px solid var(--line);border-radius:4px;color:var(--ink);font-family:var(--body);font-size:1rem;line-height:1.6;padding:0.7rem 0.9rem}
-  .form textarea{resize:vertical}
-  .form input:focus,.form textarea:focus{outline:2px solid var(--green);outline-offset:2px;border-color:var(--green)}
-  .form button{background:var(--green);color:#0A0C0A;border:none;border-radius:4px;font-family:var(--micro);font-size:1.2rem;letter-spacing:0.06em;padding:0.7rem 1.6rem;cursor:pointer}
-  .form button:hover{background:var(--sand)}
-  .form button.ghost{background:transparent;color:var(--dim);border:1px solid var(--line);padding:0.5rem 1.1rem;font-size:1.05rem}
-  .form button.ghost:hover{color:var(--ink);border-color:var(--dim)}
-  .form .check{display:flex;align-items:center;gap:0.6rem;cursor:pointer}
-  .form .check input{width:1.1rem;height:1.1rem;accent-color:var(--green)}
-  .form-error{color:var(--tag);font-family:var(--micro);font-size:1.15rem;letter-spacing:0.04em}
-  .form-ok{color:var(--green);font-family:var(--micro);font-size:1.15rem;letter-spacing:0.04em}
-</style>
 </head>
 <body>
 
@@ -43,7 +32,7 @@
   <a class="nav__mark" href="/">AT</a>
   <div class="nav__links">
     <div class="nav__item nav__dropdown">
-      <button class="nav__toggle" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="nav-menu-me" id="nav-toggle-me">Me <span class="nav__caret" aria-hidden="true">▾</span></button>
+      <button class="nav__toggle is-active" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="nav-menu-me" id="nav-toggle-me">Me <span class="nav__caret" aria-hidden="true">▾</span></button>
       <div class="nav__menu" id="nav-menu-me" role="menu" aria-labelledby="nav-toggle-me">
         <a class="nav__menu-link" role="menuitem" href="/#about">About</a>
         <a class="nav__menu-link" role="menuitem" href="/#cv">CV</a>
@@ -75,45 +64,69 @@
 </nav>
 
 <main>
-  <section class="section">
+
+  <!-- ================= COMMISSIONS ================= -->
+  <section class="section" id="commissions">
     <div class="section__head">
-      <h2 class="section__title">Admin</h2>
-      <span class="section__tag">write</span>
+      <h2 class="section__title">Commissions</h2>
+      <span class="section__tag">open</span>
     </div>
+    <div class="section__body">
 
-    <!-- login -->
-    <div id="login-view" class="section__body">
-      <p class="contact__intro">enter your email — we'll send you a sign-in link. no password needed.</p>
-      <form id="login-form" class="form">
-        <label>email<input type="email" id="login-email" required autocomplete="email"></label>
-        <button type="submit">Email me a link</button>
-      </form>
-      <p id="login-msg"></p>
-    </div>
+      <p class="commissions-intro">Want something made? I take on small commissions — artwork, design, tiny web builds. Tell me what you're after and we'll talk details, timeline, and price.</p>
 
-    <!-- editor -->
-    <div id="editor-view" class="section__body" hidden>
-      <form id="post-form" class="form">
-        <label>title<input type="text" id="post-title" required maxlength="120" placeholder="A tiny essay on…"></label>
-        <label>body <span class="hint">(markdown — # headings, **bold**, *italic*, [links](url))</span><textarea id="post-body" rows="14" required placeholder="Write it here…"></textarea></label>
-        <label class="check"><input type="checkbox" id="post-published" checked> Published</label>
-        <button type="submit">Publish post</button>
+      <form class="commission-form" id="commission-form" data-user="ata3958" data-domain="sdsu.edu" novalidate>
+        <label class="commission-field">
+          <span class="commission-label">Your name</span>
+          <input class="commission-input" type="text" name="name" required maxlength="80" autocomplete="name" placeholder="what should i call you">
+        </label>
+        <label class="commission-field">
+          <span class="commission-label">Your email</span>
+          <input class="commission-input" type="email" name="email" required maxlength="120" autocomplete="email" placeholder="where i can reach you">
+        </label>
+        <label class="commission-field">
+          <span class="commission-label">What would you like made?</span>
+          <textarea class="commission-input commission-textarea" name="message" required rows="6" maxlength="2000" placeholder="describe the piece, size, vibe, deadline — whatever you've got"></textarea>
+        </label>
+        <button class="commission-submit" type="submit">Send request</button>
+        <p class="commission-note" id="commission-note" aria-live="polite"></p>
       </form>
-      <p id="post-status"></p>
-      <p><button id="logout-btn" class="ghost form">Sign out</button></p>
+
     </div>
   </section>
+
 </main>
 
 <footer class="footer">
   <p>© 2026 Amanda Ta · amandata.dev</p>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="othello-bg.js?v=14"></script>
 <script src="theme.js?v=9"></script>
 <script src="nav.js?v=1"></script>
-<script src="supabase-config.js?v=8"></script>
-<script src="admin.js?v=8"></script>
+<script>
+/* commissions form: validate, then open a prefilled email (no backend) */
+(function () {
+  'use strict';
+  var form = document.getElementById('commission-form');
+  if (!form) return;
+  var note = document.getElementById('commission-note');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    var u = form.getAttribute('data-user');
+    var d = form.getAttribute('data-domain');
+    var name = form.elements.name.value.trim();
+    var email = form.elements.email.value.trim();
+    var msg = form.elements.message.value.trim();
+    var subject = 'Commission request from ' + name;
+    var body = 'Name: ' + name + '\nEmail: ' + email + '\n\n' + msg;
+    window.location.href = 'mailto:' + u + '@' + d +
+      '?subject=' + encodeURIComponent(subject) +
+      '&body=' + encodeURIComponent(body);
+    if (note) note.textContent = 'Opening your email app with the request ready to send.';
+  });
+})();
+</script>
 </body>
 </html>

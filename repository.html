@@ -3,8 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Admin — Amanda Ta</title>
-<meta name="robots" content="noindex, nofollow">
+<title>Repository — Amanda Ta</title>
+<meta name="description" content="Browse the open-source code and files behind amandata.dev, mirrored from GitHub.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://amandata.dev/repository.html">
+<meta property="og:title" content="Repository — amandata.dev">
+<meta property="og:description" content="The open-source code and files behind this site.">
+<meta property="og:site_name" content="amandata.dev">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&family=VT323&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -14,22 +19,6 @@
 </script>
 <link rel="stylesheet" href="styles.css?v=31">
 <link rel="icon" href="/favicon.ico" sizes="any">
-<style>
-  .form{max-width:640px}
-  .form label{display:block;font-family:var(--micro);font-size:1.2rem;letter-spacing:0.06em;color:var(--dim);margin-bottom:1.2rem}
-  .form .hint{color:var(--faint);font-size:1rem}
-  .form input[type="email"],.form input[type="password"],.form input[type="text"],.form textarea{display:block;width:100%;margin-top:0.4rem;background:var(--panel);border:1px solid var(--line);border-radius:4px;color:var(--ink);font-family:var(--body);font-size:1rem;line-height:1.6;padding:0.7rem 0.9rem}
-  .form textarea{resize:vertical}
-  .form input:focus,.form textarea:focus{outline:2px solid var(--green);outline-offset:2px;border-color:var(--green)}
-  .form button{background:var(--green);color:#0A0C0A;border:none;border-radius:4px;font-family:var(--micro);font-size:1.2rem;letter-spacing:0.06em;padding:0.7rem 1.6rem;cursor:pointer}
-  .form button:hover{background:var(--sand)}
-  .form button.ghost{background:transparent;color:var(--dim);border:1px solid var(--line);padding:0.5rem 1.1rem;font-size:1.05rem}
-  .form button.ghost:hover{color:var(--ink);border-color:var(--dim)}
-  .form .check{display:flex;align-items:center;gap:0.6rem;cursor:pointer}
-  .form .check input{width:1.1rem;height:1.1rem;accent-color:var(--green)}
-  .form-error{color:var(--tag);font-family:var(--micro);font-size:1.15rem;letter-spacing:0.04em}
-  .form-ok{color:var(--green);font-family:var(--micro);font-size:1.15rem;letter-spacing:0.04em}
-</style>
 </head>
 <body>
 
@@ -54,7 +43,7 @@
     <div class="nav__item"><a class="nav__link" href="/blog.html">Blog</a></div>
     <div class="nav__item"><a class="nav__link" href="/psy410.html">PSY 410 Resources</a></div>
     <div class="nav__item nav__dropdown">
-      <button class="nav__toggle" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="nav-menu-site" id="nav-toggle-site">This Site <span class="nav__caret" aria-hidden="true">▾</span></button>
+      <button class="nav__toggle is-active" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="nav-menu-site" id="nav-toggle-site">This Site <span class="nav__caret" aria-hidden="true">▾</span></button>
       <div class="nav__menu" id="nav-menu-site" role="menu" aria-labelledby="nav-toggle-site">
         <a class="nav__menu-link" role="menuitem" href="/blog.html?p=making-amandata-dev">Making amandata.dev</a>
         <a class="nav__menu-link" role="menuitem" href="/blog.html?p=building-the-reversi-coach-turning-the-othello-bot-into-a-learning-system">Building the Reversi Coach</a>
@@ -75,45 +64,34 @@
 </nav>
 
 <main>
-  <section class="section">
+
+  <!-- ================= REPOSITORY ================= -->
+  <section class="section" id="repository">
     <div class="section__head">
-      <h2 class="section__title">Admin</h2>
-      <span class="section__tag">write</span>
+      <h2 class="section__title">Repository</h2>
+      <span class="section__tag">open source</span>
     </div>
+    <div class="section__body">
 
-    <!-- login -->
-    <div id="login-view" class="section__body">
-      <p class="contact__intro">enter your email — we'll send you a sign-in link. no password needed.</p>
-      <form id="login-form" class="form">
-        <label>email<input type="email" id="login-email" required autocomplete="email"></label>
-        <button type="submit">Email me a link</button>
-      </form>
-      <p id="login-msg"></p>
-    </div>
+      <p class="repo-intro">Everything behind this site — every page, the othello engine, the flashcards — lives in the open at <a class="repo-link" href="https://github.com/mandyhoami-lab/amandata.dev" target="_blank" rel="noopener">github.com/mandyhoami-lab/amandata.dev</a>. Browse the files below.</p>
 
-    <!-- editor -->
-    <div id="editor-view" class="section__body" hidden>
-      <form id="post-form" class="form">
-        <label>title<input type="text" id="post-title" required maxlength="120" placeholder="A tiny essay on…"></label>
-        <label>body <span class="hint">(markdown — # headings, **bold**, *italic*, [links](url))</span><textarea id="post-body" rows="14" required placeholder="Write it here…"></textarea></label>
-        <label class="check"><input type="checkbox" id="post-published" checked> Published</label>
-        <button type="submit">Publish post</button>
-      </form>
-      <p id="post-status"></p>
-      <p><button id="logout-btn" class="ghost form">Sign out</button></p>
+      <nav class="repo-crumbs" id="repo-crumbs" aria-label="Repository path"></nav>
+      <div class="repo-list" id="repo-list" aria-live="polite">
+        <p class="repo-status">Loading files&hellip;</p>
+      </div>
+
     </div>
   </section>
+
 </main>
 
 <footer class="footer">
   <p>© 2026 Amanda Ta · amandata.dev</p>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="othello-bg.js?v=14"></script>
 <script src="theme.js?v=9"></script>
 <script src="nav.js?v=1"></script>
-<script src="supabase-config.js?v=8"></script>
-<script src="admin.js?v=8"></script>
+<script src="repository.js?v=1"></script>
 </body>
 </html>
