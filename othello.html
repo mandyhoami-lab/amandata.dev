@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Othello — Amanda Ta</title>
+<meta name="description" content="Play pixel Othello against the robot. Pick black or white, keep an all-time scoreboard.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://amandata.dev/othello.html">
+<meta property="og:title" content="Othello — amandata.dev">
+<meta property="og:description" content="Pixel Othello vs the robot.">
+<meta property="og:site_name" content="amandata.dev">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&family=VT323&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script>
+/* theme init before first paint: saved choice, else system preference, else dark */
+(function(){try{var t=localStorage.getItem('amandata-theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='dark';}})();
+</script>
+<link rel="stylesheet" href="styles.css?v=30">
+<link rel="stylesheet" href="othello.css?v=4">
+<link rel="icon" href="/favicon.ico" sizes="any">
+</head>
+<body>
+
+<!-- ambient othello game backdrop -->
+<canvas class="othello-bg" id="othello-bg" aria-hidden="true"></canvas>
+
+<div class="vignette" aria-hidden="true"></div>
+
+<!-- ================= NAV ================= -->
+<nav class="nav">
+  <a class="nav__mark" href="/">AT</a>
+  <div class="nav__links">
+    <a class="nav__link" href="/#about">About</a>
+    <a class="nav__link" href="/#cv">CV</a>
+    <a class="nav__link" href="/#work">Projects</a>
+    <a class="nav__link" href="/#contact">Contact</a>
+    <a class="nav__link" href="/#changelog">Changelog</a>
+    <a class="nav__link" href="/blog.html">Blog</a>
+    <a class="nav__link" href="/psy410.html">PSY 410 Resources</a>
+    <a class="nav__link is-active" href="/creations.html">Creations</a>
+  </div>
+  <button class="theme-toggle" id="theme-toggle" aria-label="cycle color theme">Light</button>
+</nav>
+
+<main>
+
+  <!-- ================= OTHELLO ================= -->
+  <section class="section" id="othello">
+    <div class="section__head">
+      <h2 class="section__title">Othello</h2>
+      <span class="section__tag">reversi</span>
+    </div>
+    <div class="section__body">
+
+      <p class="games-note"><a href="/creations.html">&larr; all creations</a></p>
+
+      <div class="game-card">
+        <h3 class="game-card__title">Othello</h3>
+        <p class="game-card__desc">Pick a color, then outflank the robot. Black moves first. Add a username to keep an all-time scoreboard on this device.</p>
+
+        <div class="othello-controls">
+          <div class="othello-seg" role="group" aria-label="Play as">
+            <span class="othello-seg__label">Play as</span>
+            <button class="othello-seg__btn" id="othello-color-b" type="button" aria-pressed="true">Black</button>
+            <button class="othello-seg__btn" id="othello-color-w" type="button" aria-pressed="false">White</button>
+          </div>
+        </div>
+
+        <div class="othello-hud">
+          <div class="othello-score" aria-live="polite">
+            <span class="mini-disc mini-disc--b" id="othello-you-disc" aria-hidden="true"></span>
+            <span>you</span>
+            <span id="othello-you">2</span>
+            <span class="othello-sep">&ndash;</span>
+            <span id="othello-ai">2</span>
+            <span>robot</span>
+            <span class="mini-disc mini-disc--w" id="othello-ai-disc" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="othello-board" id="othello-board" role="grid" aria-label="Othello board"></div>
+
+        <p class="othello-status" id="othello-status" aria-live="polite">Your move.</p>
+
+        <div class="othello-actions">
+          <button class="othello-btn" id="othello-new" type="button">New game</button>
+          <button class="othello-btn" id="othello-scores-btn" type="button">Scores</button>
+          <button class="othello-btn" id="othello-help-btn" type="button">How to play</button>
+        </div>
+
+        <div class="othello-panel" id="othello-scores-panel" hidden>
+          <h4 class="othello-panel__title">All-time scoreboard</h4>
+          <div class="score-add">
+            <input class="score-input" id="othello-name" type="text" maxlength="16" placeholder="username" aria-label="Username">
+            <button class="othello-btn" id="othello-add" type="button">Add</button>
+          </div>
+          <div id="othello-score-list"></div>
+        </div>
+
+        <div class="othello-panel" id="othello-help-panel" hidden>
+          <h4 class="othello-panel__title">How to play</h4>
+          <ul class="othello-rules">
+            <li>Black moves first. Tap a highlighted square to place your disc.</li>
+            <li>Your move must trap at least one opponent disc between your new disc and one of yours — horizontally, vertically, or diagonally.</li>
+            <li>Every trapped disc flips to your color.</li>
+            <li>No legal move? You pass automatically.</li>
+            <li>The game ends when neither side can move. Most discs wins.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p>© 2026 Amanda Ta · amandata.dev</p>
+</footer>
+
+<script src="othello-bg.js?v=14"></script>
+<script src="theme.js?v=9"></script>
+<script src="othello.js?v=4"></script>
+</body>
+</html>

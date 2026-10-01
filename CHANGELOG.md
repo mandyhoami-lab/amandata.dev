@@ -5,6 +5,9 @@ Full history: `git log` on the repo, or the Commits page on GitHub.
 
 ## 2026-10-01
 
+- **Creations (same day)** — `/games.html` became `/creations.html`: a
+  hub where each creation gets its own pixel-art button. Othello moved to
+  its own page at `/othello.html`. `/games.html` now redirects.
 - **Games page** — new `/games.html` with a playable 8x8 Othello vs. the
   robot. The board re-tints with all four themes via the shared token system.
   "Games" added to the nav on all pages.
