@@ -1,6 +1,6 @@
 /* =========================================================
-   amandata.dev — playable Othello vs. the AI.
-   No levels, no limits: one honest AI, you choose black or
+   amandata.dev — playable Othello vs. the robot.
+   No levels, no limits: one honest robot, you choose black or
    white. Optional all-time scoreboard with usernames
    (localStorage), plus a how-to-play panel.
    No animations: everything updates instantly.
@@ -51,7 +51,7 @@
     return { b: b, w: w };
   }
 
-  /* ---------------- AI ----------------
+  /* ---------------- robot ----------------
      One fixed strength: 1-ply search with positional weights
      and a mobility term, plus a little random wobble so it
      doesn't play like a machine. Sensible, beatable. */
@@ -162,7 +162,7 @@
     var table = document.createElement('table');
     table.className = 'score-table';
     var head = document.createElement('tr');
-    ['player', 'w', 'l', 'd'].forEach(function (h) {
+    ['player', 'vs robot'].forEach(function (h) {
       var th = document.createElement('th');
       th.textContent = h;
       head.appendChild(th);
@@ -176,11 +176,9 @@
       var tdN = document.createElement('td');
       tdN.textContent = name + (name === scores.active ? ' ●' : '');
       tr.appendChild(tdN);
-      [st.w, st.l, st.d].forEach(function (v) {
-        var td = document.createElement('td');
-        td.textContent = v;
-        tr.appendChild(td);
-      });
+      var tdS = document.createElement('td');
+      tdS.textContent = st.w + ' \u2013 ' + st.l + ' \u2013 ' + st.d;
+      tr.appendChild(tdS);
       tr.addEventListener('click', function () {
         scores.active = name;
         saveScores(scores);
@@ -323,7 +321,7 @@
     } else {
       render(null);
       aiThinking = true;
-      setStatus('AI opens as ' + colorName(ai) + '…');
+      setStatus('Robot opens as ' + colorName(ai) + '…');
       setTimeout(aiMove, 500);
     }
   }
@@ -358,12 +356,12 @@
       turn = next;
     } else {
       if (!legalMoves(grid, turn).length) { gameOver(); return; }
-      setStatus((next === ai ? 'AI' : 'You') + ' has no moves — pass.');
+      setStatus((next === ai ? 'Robot' : 'You') + ' has no moves — pass.');
     }
     if (turn === ai) {
       aiThinking = true;
       render(null);
-      setStatus('AI is thinking…');
+      setStatus('Robot is thinking…');
       setTimeout(aiMove, 450);
     } else {
       aiThinking = false;
@@ -402,7 +400,7 @@
       setStatus('You win ' + hn + '–' + an + who + '! New game?');
     } else if (an > hn) {
       recordResult('loss');
-      setStatus('AI wins ' + an + '–' + hn + who + '. Run it back.');
+      setStatus('Robot wins ' + an + '–' + hn + who + '. Run it back.');
     } else {
       recordResult('draw');
       setStatus('Draw, ' + hn + '–' + an + who + '.');

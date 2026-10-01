@@ -6,9 +6,9 @@ Full history: `git log` on the repo, or the Commits page on GitHub.
 ## 2026-10-01
 
 - **Games page** — new `/games.html` with a playable 8x8 Othello vs. the
-  AI. The board re-tints with all four themes via the shared token system.
+  robot. The board re-tints with all four themes via the shared token system.
   "Games" added to the nav on all pages.
-- **Games rework (same day)** — levels removed. One fixed-strength AI
+- **Games rework (same day)** — levels removed. One fixed-strength robot
   (1-ply search with positional weights and a little wobble — sensible,
   beatable). Play as black or white (black moves first), a how-to-play
   panel, and an all-time scoreboard: add usernames and W/L/D is tracked
