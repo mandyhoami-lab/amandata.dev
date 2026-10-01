@@ -1,0 +1,152 @@
+/* =========================================================
+   amandata.dev — playable othello styles.
+   Everything keys off the theme tokens (--green, --sand,
+   --panel, --ink, --line…), so the board re-tints with the
+   dark / light / pink / blue themes automatically.
+   ========================================================= */
+
+.game-card{
+  display: block;
+  margin-bottom: 1.5rem;
+  padding: 1.4rem 1.2rem;
+  background: var(--card-bg);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--green);
+  border-radius: 4px;
+  box-shadow: var(--card-shadow);
+}
+.game-card__title{
+  font-family: var(--micro);
+  font-size: 1.7rem;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  margin: 0 0 0.4rem;
+}
+.game-card__desc{
+  color: var(--body-text);
+  font-size: 0.95rem;
+  margin: 0 0 1.2rem;
+  max-width: 34rem;
+}
+
+/* score + level readout */
+.othello-hud{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+  font-family: var(--micro);
+  font-size: 1.35rem;
+  letter-spacing: 0.05em;
+  color: var(--ink);
+}
+.othello-score{ display: flex; align-items: center; gap: 0.5rem; }
+.othello-sep{ color: var(--dim); }
+.othello-level{ color: var(--dim); font-size: 1.15rem; }
+
+/* mini discs used in the score line */
+.mini-disc{
+  display: inline-block;
+  width: 1.1em; height: 1.1em;
+  border-radius: 50%;
+  vertical-align: -0.15em;
+}
+.mini-disc--b{ background: #161616; border: 1px solid rgba(255,255,255,0.35); }
+.mini-disc--w{ background: #f4f1ea; border: 1px solid rgba(0,0,0,0.35); }
+
+/* the board: felt tinted by the theme accent, gaps read as grid lines */
+.othello-board{
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 2px;
+  max-width: min(92vw, 440px);
+  margin: 0 auto;
+  padding: 8px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--green) 48%, var(--panel));
+  border: 2px solid color-mix(in srgb, var(--green) 62%, var(--panel));
+}
+.othello-cell{
+  position: relative;
+  aspect-ratio: 1 / 1;
+  padding: 0;
+  border: 0;
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--green) 24%, var(--panel));
+  cursor: default;
+}
+.othello-cell--hint{ cursor: pointer; }
+.othello-cell--hint::after{
+  content: '';
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 26%; height: 26%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--green) 75%, transparent);
+}
+.othello-cell--hint:hover::after{
+  background: color-mix(in srgb, var(--green) 95%, transparent);
+}
+.othello-cell:focus-visible{
+  outline: 2px solid var(--sand);
+  outline-offset: -2px;
+}
+
+/* discs: flat black vs flat white, readable on any felt */
+.othello-disc{
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 86%; height: 86%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.othello-disc--b{
+  background: #161616;
+  border: 1px solid rgba(255,255,255,0.30);
+}
+.othello-disc--w{
+  background: #f4f1ea;
+  border: 1px solid rgba(0,0,0,0.30);
+}
+.othello-disc--last{
+  outline: 2px solid var(--sand);
+  outline-offset: 2px;
+}
+
+.othello-status{
+  text-align: center;
+  font-family: var(--micro);
+  font-size: 1.25rem;
+  letter-spacing: 0.05em;
+  color: var(--dim);
+  min-height: 2rem;
+  margin: 1rem 0 0.6rem;
+}
+.othello-actions{
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+}
+.othello-btn{
+  font-family: var(--micro);
+  font-size: 1.2rem;
+  letter-spacing: 0.06em;
+  color: var(--nav-dim);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 0.35rem 1rem;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.othello-btn:hover{ color: var(--sand); border-color: var(--sand); }
+
+.games-note{
+  color: var(--dim);
+  font-size: 0.9rem;
+  margin-top: 1.5rem;
+}

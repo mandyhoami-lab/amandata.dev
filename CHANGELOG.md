@@ -3,6 +3,16 @@
 A catalog of the notable commits on this repo's `main` branch.
 Full history: `git log` on the repo, or the Commits page on GitHub.
 
+## 2026-10-01
+
+- **Games page** — new `/games.html` with a playable 8x8 Othello vs. a
+  leveling AI. You play black and move first; every win levels the AI up
+  (sleepy &rarr; curious &rarr; focused &rarr; sharp &rarr; tryhard), saved
+  per device in localStorage and capped at level 5, which uses 3-ply
+  minimax with positional weights but no book or endgame solver — strong,
+  still beatable. The board re-tints with all four themes via the shared
+  token system. "Games" added to the nav on all pages.
+
 ## 2026-09-30
 
 ### Earlier on Sep 30 (exact times not recorded)

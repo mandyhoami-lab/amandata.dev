@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Games — Amanda Ta</title>
+<meta name="description" content="Small games by Amanda Ta. Play Othello against an AI that levels up every time you beat it.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://amandata.dev/games.html">
+<meta property="og:title" content="Games — amandata.dev">
+<meta property="og:description" content="Play Othello against a leveling AI.">
+<meta property="og:site_name" content="amandata.dev">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&family=VT323&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script>
+/* theme init before first paint: saved choice, else system preference, else dark */
+(function(){try{var t=localStorage.getItem('amandata-theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='dark';}})();
+</script>
+<link rel="stylesheet" href="styles.css?v=30">
+<link rel="stylesheet" href="othello.css?v=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+</head>
+<body>
+
+<!-- ambient othello game backdrop -->
+<canvas class="othello-bg" id="othello-bg" aria-hidden="true"></canvas>
+
+<div class="vignette" aria-hidden="true"></div>
+
+<!-- ================= NAV ================= -->
+<nav class="nav">
+  <a class="nav__mark" href="/">AT</a>
+  <div class="nav__links">
+    <a class="nav__link" href="/#about">About</a>
+    <a class="nav__link" href="/#cv">CV</a>
+    <a class="nav__link" href="/#work">Projects</a>
+    <a class="nav__link" href="/#contact">Contact</a>
+    <a class="nav__link" href="/#changelog">Changelog</a>
+    <a class="nav__link" href="/blog.html">Blog</a>
+    <a class="nav__link" href="/psy410.html">PSY 410 Resources</a>
+    <a class="nav__link is-active" href="/games.html">Games</a>
+  </div>
+  <button class="theme-toggle" id="theme-toggle" aria-label="cycle color theme">Light</button>
+</nav>
+
+<main>
+
+  <!-- ================= GAMES ================= -->
+  <section class="section" id="games">
+    <div class="section__head">
+      <h2 class="section__title">Games</h2>
+      <span class="section__tag">playground</span>
+    </div>
+    <div class="section__body">
+
+      <div class="game-card">
+        <h3 class="game-card__title">Othello</h3>
+        <p class="game-card__desc">You play black and move first. Beat the AI and it levels up — sleepy &rarr; curious &rarr; focused &rarr; sharp &rarr; tryhard. It tops out at level 5 and stays beatable. Your level is saved on this device.</p>
+
+        <div class="othello-hud">
+          <div class="othello-score" aria-live="polite">
+            <span class="mini-disc mini-disc--b" aria-hidden="true"></span>
+            <span id="othello-you">2</span>
+            <span class="othello-sep">&ndash;</span>
+            <span id="othello-ai">2</span>
+            <span class="mini-disc mini-disc--w" aria-hidden="true"></span>
+          </div>
+          <div class="othello-level" id="othello-level">ai: sleepy &middot; lv 1/5</div>
+        </div>
+
+        <div class="othello-board" id="othello-board" role="grid" aria-label="Othello board"></div>
+
+        <p class="othello-status" id="othello-status" aria-live="polite">Your move.</p>
+
+        <div class="othello-actions">
+          <button class="othello-btn" id="othello-new" type="button">New game</button>
+        </div>
+      </div>
+
+      <p class="games-note">More small games eventually. Requests welcome.</p>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p>© 2026 Amanda Ta · amandata.dev</p>
+</footer>
+
+<script src="othello-bg.js?v=14"></script>
+<script src="theme.js?v=9"></script>
+<script src="othello.js?v=1"></script>
+</body>
+</html>
