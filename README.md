@@ -53,10 +53,10 @@ live site is expected and intentional.
 
 ## Contributors
 
-- **[Amanda Ta](https://github.com/mandyhoami-lab)** — the original live site was entirely built by me.
+- **[Mandy](https://github.com/mandyhoami-lab)** — the original live site was entirely built by me.
 - **[KoriKosmos](https://github.com/KoriKosmos)** — coauthored by, KoriKosmos. Wrote the original full README and led the Carrd-mirror-to-working-copy transition.
 - **Muse** — contributor.
-- Assisted rebuilt commits with Claude and 2.0 (Muse by Meta). 
+- Assisted rebuilt commits with **Claude**; **[KoriKosmos](https://github.com/KoriKosmos)and **2.0** (prompt emgineered agent; Muse by Meta); **[Mandy](https://github.com/mandyhoami-lab), 
 
 ## To do
 
