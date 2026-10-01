@@ -20,7 +20,7 @@
 /* theme init before first paint: saved choice, else system preference, else dark */
 (function(){try{var t=localStorage.getItem('amandata-theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='dark';}})();
 </script>
-<link rel="stylesheet" href="styles.css?v=29">
+<link rel="stylesheet" href="styles.css?v=30">
 <link rel="icon" type="image/svg+xml" href="/cat-icon.svg">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/images/icon-32.png">
@@ -59,7 +59,7 @@
   <p class="hero__tagline">
     <span id="typewriter">Social scientist, researcher, web stuff. Welcome to my space.</span><span class="caret" aria-hidden="true"></span>
   </p>
-  <p class="hero__scroll">Scroll ↓</p>
+  <p class="hero__scroll">Scroll <span class="hero__scroll-arrow" aria-hidden="true">↓</span></p>
 </header>
 
 <main>

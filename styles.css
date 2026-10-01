@@ -388,6 +388,24 @@ main, .footer{ position: relative; z-index: 1; }
   letter-spacing: 0.14em;
   color: var(--faint);
   margin: 0;
+  animation: scroll-burst 0.8s cubic-bezier(0.2, 0.9, 0.3, 1.15) 0.5s both;
+}
+.hero__scroll-arrow{
+  display: inline-block;
+  animation: scroll-arrow-drop 0.8s cubic-bezier(0.2, 0.9, 0.3, 1.15) 0.5s both;
+}
+@keyframes scroll-burst{
+  0%{ opacity: 0; transform: scale(0.55); }
+  60%{ opacity: 1; transform: scale(1.06); }
+  100%{ opacity: 1; transform: scale(1); }
+}
+@keyframes scroll-arrow-drop{
+  0%{ opacity: 0; transform: translateY(-10px); }
+  60%{ opacity: 1; transform: translateY(5px); }
+  100%{ opacity: 1; transform: translateY(3px); }
+}
+@media (prefers-reduced-motion: reduce){
+  .hero__scroll, .hero__scroll-arrow{ animation: none !important; }
 }
 
 /* ================= SECTIONS ================= */
