@@ -214,7 +214,7 @@ html.js-on .nav__menu{
   left: 0;
   min-width: 15rem;
   background: var(--nav-bg);
-  border: 1px solid rgba(255,255,255,0.14);
+  border: 1px solid var(--line);
   border-radius: 6px;
   padding: 0.4rem;
   z-index: 60;
@@ -254,19 +254,19 @@ html.js-on .nav__menu-link:focus-visible{
   font-family: var(--micro);
   font-size: 1.05rem;
   letter-spacing: 0.06em;
-  color: var(--nav-dim);
+  color: var(--dim);
 }
 .commission-input{
   font-family: var(--body, inherit);
   font-size: 1rem;
   color: var(--ink);
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.22);
+  background: var(--card-bg);
+  border: 1px solid var(--line);
   border-radius: 6px;
   padding: 0.65rem 0.8rem;
   width: 100%;
 }
-.commission-input::placeholder{ color: var(--nav-dim); opacity: 0.7; }
+.commission-input::placeholder{ color: var(--faint); opacity: 0.9; }
 .commission-input:focus{
   outline: none;
   border-color: var(--sand);
@@ -278,16 +278,16 @@ html.js-on .nav__menu-link:focus-visible{
   font-family: var(--micro);
   font-size: 1.1rem;
   letter-spacing: 0.06em;
-  color: var(--nav-ink);
+  color: var(--ink);
   background: transparent;
-  border: 1px solid rgba(255,255,255,0.28);
+  border: 1px solid var(--line);
   border-radius: 4px;
   padding: 0.5rem 1.2rem;
   cursor: pointer;
   transition: color 0.2s ease, border-color 0.2s ease;
 }
 .commission-submit:hover{ color: var(--sand); border-color: var(--sand); }
-.commission-note{ font-size: 0.95rem; color: var(--nav-dim); min-height: 1.4em; }
+.commission-note{ font-size: 0.95rem; color: var(--dim); min-height: 1.4em; }
 
 /* ================= REPOSITORY BROWSER ================= */
 .repo-intro{ max-width: 46rem; }
@@ -299,9 +299,9 @@ html.js-on .nav__menu-link:focus-visible{
   margin: 1.4rem 0 0.6rem;
   max-width: 46rem;
 }
-.repo-crumb{ color: var(--nav-dim); text-decoration: none; }
+.repo-crumb{ color: var(--dim); text-decoration: none; }
 .repo-crumb:hover{ color: var(--sand); }
-.repo-sep{ color: var(--nav-dim); opacity: 0.6; }
+.repo-sep{ color: var(--dim); opacity: 0.6; }
 .repo-list{
   max-width: 46rem;
   border: 1px solid rgba(255,255,255,0.14);
@@ -314,14 +314,14 @@ html.js-on .nav__menu-link:focus-visible{
   align-items: baseline;
   gap: 1rem;
   padding: 0.55rem 0.9rem;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid var(--line);
 }
 .repo-row:last-child{ border-bottom: none; }
 .repo-name{
   font-family: var(--micro);
   font-size: 1.05rem;
   letter-spacing: 0.03em;
-  color: var(--nav-ink);
+  color: var(--ink);
   text-decoration: none;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -332,9 +332,9 @@ html.js-on .nav__menu-link:focus-visible{
 .repo-size{
   flex: 0 0 auto;
   font-size: 0.85rem;
-  color: var(--nav-dim);
+  color: var(--dim);
 }
-.repo-status{ padding: 1rem; color: var(--nav-dim); }
+.repo-status{ padding: 1rem; color: var(--dim); }
 
 /* ================= HERO ================= */
 .hero{
