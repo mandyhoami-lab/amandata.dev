@@ -213,7 +213,50 @@
     renderScores();
   }
 
-  /* -------- board -------- */
+  /* -------- pixel-art disc sprites (generated at runtime) -------- */
+  var sprites = {};
+  function makeDiscSprite(color) {
+    var S = 16;
+    var cv = document.createElement('canvas');
+    cv.width = S; cv.height = S;
+    var ctx = cv.getContext('2d');
+    if (!ctx) return '';
+    var main  = color === 'b' ? '#1a1611' : '#f4efe1';
+    var edge  = color === 'b' ? '#000000'  : '#8f8874';
+    var shine = color === 'b' ? '#57503f'  : '#ffffff';
+    for (var y = 0; y < S; y++) for (var x = 0; x < S; x++) {
+      var dx = x - 7.5, dy = y - 7.5;
+      var d = Math.sqrt(dx * dx + dy * dy);
+      if (d > 7) continue;
+      var col = main;
+      if (d > 5.8) col = edge;
+      else if (dx < -1.5 && dy < -1.5 && d < 5) col = shine;
+      ctx.fillStyle = col;
+      ctx.fillRect(x, y, 1, 1);
+    }
+    return cv.toDataURL();
+  }
+  function spriteFor(color) {
+    return sprites[color] ? 'url(' + sprites[color] + ')' : '';
+  }
+  function reducedMotion() {
+    return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
+
+  /* stepped flip: squash to zero, swap sprite halfway, expand */
+  function animateFlips(flips, newColor, oldColor) {
+    if (!flips || !flips.length || reducedMotion()) return;
+    flips.forEach(function (pos) {
+      var cell = boardEl.children[pos[0] * N + pos[1]];
+      var disc = cell && cell.querySelector('.othello-disc');
+      if (!disc) return;
+      disc.style.backgroundImage = spriteFor(oldColor);
+      void disc.offsetWidth;
+      disc.classList.add('othello-disc--flipping');
+      setTimeout(function () { disc.style.backgroundImage = spriteFor(newColor); }, 110);
+      setTimeout(function () { disc.classList.remove('othello-disc--flipping'); }, 240);
+    });
+  }
   function buildBoard() {
     boardEl.innerHTML = '';
     for (var r = 0; r < N; r++) for (var c = 0; c < N; c++) {
@@ -245,12 +288,15 @@
       }
       disc.className = 'othello-disc othello-disc--' + v +
         (lastMove && lastMove[0] === r && lastMove[1] === c ? ' othello-disc--last' : '');
+      disc.style.backgroundImage = spriteFor(v);
     }
     var n = countDiscs(grid);
     youEl.textContent = human === 'b' ? n.b : n.w;
     aiEl.textContent = ai === 'b' ? n.b : n.w;
     youDiscEl.className = 'mini-disc mini-disc--' + human;
     aiDiscEl.className = 'mini-disc mini-disc--' + ai;
+    youDiscEl.style.backgroundImage = spriteFor(human);
+    aiDiscEl.style.backgroundImage = spriteFor(ai);
   }
 
   function setStatus(t) { statusEl.textContent = t; }
@@ -298,9 +344,11 @@
       if (moves[i].r === r && moves[i].c === c) { mv = moves[i]; break; }
     }
     if (!mv) return;
+    var oldColor = other(human);
     applyMove(grid, mv, human);
     lastMove = [r, c];
     advance();
+    animateFlips(mv.flips, human, oldColor);
   }
 
   function advance() {
@@ -329,11 +377,16 @@
     if (!gameLive) return;
     var mv = aiChooseMove(grid, legalMoves(grid, ai), ai, Math.random);
     if (mv) {
+      var oldColor = other(ai);
       applyMove(grid, mv, ai);
       lastMove = [mv.r, mv.c];
+      aiThinking = false;
+      advance();
+      animateFlips(mv.flips, ai, oldColor);
+    } else {
+      aiThinking = false;
+      advance();
     }
-    aiThinking = false;
-    advance();
   }
 
   function gameOver() {
@@ -377,6 +430,8 @@
 
   human = loadColor();
   ai = other(human);
+  sprites.b = makeDiscSprite('b');
+  sprites.w = makeDiscSprite('w');
   buildBoard();
   renderScores();
   newGame();

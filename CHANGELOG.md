@@ -13,6 +13,11 @@ Full history: `git log` on the repo, or the Commits page on GitHub.
   beatable). Play as black or white (black moves first), a how-to-play
   panel, and an all-time scoreboard: add usernames and W/L/D is tracked
   per player in localStorage.
+- **Games, pixel pass (same day)** — pixel-art disc sprites generated at
+  runtime (16px, scaled up with `image-rendering: pixelated`), square
+  cells/hints/buttons, a chunky stepped board frame, and a stepped
+  flip animation when discs change color (disabled under
+  `prefers-reduced-motion`).
 
 ## 2026-09-30
 
