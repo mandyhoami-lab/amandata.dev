@@ -9,6 +9,11 @@
   var loginMsg = document.getElementById("login-msg");
   var postForm = document.getElementById("post-form");
   var postStatus = document.getElementById("post-status");
+  var postsList = document.getElementById("posts-list");
+  var submitBtn = document.getElementById("post-submit-btn");
+  var cancelEditBtn = document.getElementById("cancel-edit-btn");
+  var editingId = null;
+  var editingSlug = null;
 
   if (!cfg.SUPABASE_URL || cfg.SUPABASE_URL.indexOf("YOUR_") === 0) {
     loginMsg.className = "form-error";
@@ -22,7 +27,74 @@
   function showEditor() {
     loginView.hidden = true;
     editorView.hidden = false;
+    loadPosts();
   }
+
+  function loadPosts() {
+    if (!postsList) return;
+    postsList.innerHTML = "<li><span>loading…</span></li>";
+    client.from("posts").select("id,title,slug,published").then(function (res) {
+      if (res.error || !res.data) {
+        postsList.innerHTML = "<li><span>couldn't load posts.</span></li>";
+        return;
+      }
+      if (!res.data.length) {
+        postsList.innerHTML = "<li><span>no posts yet.</span></li>";
+        return;
+      }
+      postsList.innerHTML = "";
+      res.data.forEach(function (p) {
+        var li = document.createElement("li");
+        var label = document.createElement("span");
+        label.textContent = p.title + (p.published ? "" : " (draft)");
+        var edit = document.createElement("button");
+        edit.type = "button";
+        edit.className = "ghost";
+        edit.textContent = "Edit";
+        edit.addEventListener("click", function () { startEdit(p.id); });
+        li.appendChild(label);
+        li.appendChild(edit);
+        postsList.appendChild(li);
+      });
+    });
+  }
+
+  function startEdit(id) {
+    postStatus.className = "";
+    postStatus.textContent = "loading…";
+    client.from("posts").select("id,title,slug,body,published").eq("id", id).single().then(function (res) {
+      if (res.error || !res.data) {
+        postStatus.className = "form-error";
+        postStatus.textContent = "couldn't load that post.";
+        return;
+      }
+      var p = res.data;
+      editingId = p.id;
+      editingSlug = p.slug;
+      document.getElementById("post-title").value = p.title;
+      document.getElementById("post-body").value = p.body;
+      document.getElementById("post-published").checked = !!p.published;
+      submitBtn.textContent = "Save changes";
+      cancelEditBtn.hidden = false;
+      postStatus.className = "";
+      postStatus.textContent = "editing: " + p.title;
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
+  function cancelEdit() {
+    editingId = null;
+    editingSlug = null;
+    document.getElementById("post-title").value = "";
+    document.getElementById("post-body").value = "";
+    document.getElementById("post-published").checked = true;
+    submitBtn.textContent = "Publish post";
+    cancelEditBtn.hidden = true;
+    postStatus.className = "";
+    postStatus.textContent = "";
+  }
+
+  if (cancelEditBtn) cancelEditBtn.addEventListener("click", cancelEdit);
 
   // supabase-js picks up the session from the magic-link redirect automatically
   client.auth.getSession().then(function (res) {
@@ -61,10 +133,29 @@
   postForm.addEventListener("submit", function (e) {
     e.preventDefault();
     postStatus.className = "";
-    postStatus.textContent = "publishing…";
+    postStatus.textContent = "saving…";
     var title = document.getElementById("post-title").value.trim();
     var body = document.getElementById("post-body").value;
     var published = document.getElementById("post-published").checked;
+
+    // edit mode: update the existing post, keep its slug (URL stays the same)
+    if (editingId) {
+      client.from("posts").update({ title: title, body: body, published: published })
+        .eq("id", editingId).select("id").then(function (res) {
+          if (res.error) {
+            postStatus.className = "form-error";
+            postStatus.textContent = "couldn't save: " + (res.error.message || "unknown error");
+            return;
+          }
+          postStatus.className = "form-ok";
+          postStatus.innerHTML = 'saved ✓ <a href="/blog.html?p=' +
+            encodeURIComponent(editingSlug) + '">view it</a>';
+          cancelEdit();
+          loadPosts();
+        });
+      return;
+    }
+
     var base = slugify(title);
 
     function attempt(slug, retried) {
@@ -86,6 +177,7 @@
           encodeURIComponent(slug) + '">view it</a>';
         document.getElementById("post-title").value = "";
         document.getElementById("post-body").value = "";
+        loadPosts();
       });
     }
     attempt(base, false);

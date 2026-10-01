@@ -29,6 +29,11 @@
   .form .check input{width:1.1rem;height:1.1rem;accent-color:var(--green)}
   .form-error{color:var(--tag);font-family:var(--micro);font-size:1.15rem;letter-spacing:0.04em}
   .form-ok{color:var(--green);font-family:var(--micro);font-size:1.15rem;letter-spacing:0.04em}
+  #posts-list{list-style:none;padding:0;margin:0.6rem 0 0}
+  #posts-list li{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:0.6rem 0;border-bottom:1px solid var(--line)}
+  #posts-list li span{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  #posts-list li button{flex:0 0 auto}
+  #cancel-edit-btn{margin-left:0.6rem}
 </style>
 </head>
 <body>
@@ -97,14 +102,15 @@
         <label>title<input type="text" id="post-title" required maxlength="120" placeholder="A tiny essay on…"></label>
         <label>body <span class="hint">(markdown — # headings, **bold**, *italic*, [links](url))</span><textarea id="post-body" rows="14" required placeholder="Write it here…"></textarea></label>
         <label class="check"><input type="checkbox" id="post-published" checked> Published</label>
-        <button type="submit">Publish post</button>
+        <button type="submit" id="post-submit-btn">Publish post</button>
+        <button type="button" id="cancel-edit-btn" class="ghost" hidden>Cancel editing</button>
       </form>
       <p id="post-status"></p>
+      <div id="existing-posts">
+        <p class="hint">existing posts</p>
+        <ul id="posts-list"></ul>
+      </div>
       <p><button id="logout-btn" class="ghost form">Sign out</button></p>
-      <hr>
-      <p class="hint">maintenance</p>
-      <p><button id="maint-btn" class="ghost" type="button">Remove leftover subtitle lines</button></p>
-      <p id="maint-status"></p>
     </div>
   </section>
 </main>
@@ -118,88 +124,6 @@
 <script src="theme.js?v=9"></script>
 <script src="nav.js?v=1"></script>
 <script src="supabase-config.js?v=8"></script>
-<script src="admin.js?v=8"></script>
-<script>
-/* one-time maintenance: remove leftover blog subtitle lines. remove after use. */
-(function () {
-  var btn = document.getElementById("maint-btn");
-  var status = document.getElementById("maint-status");
-  if (!btn) return;
-  btn.addEventListener("click", function () {
-    btn.disabled = true;
-    status.className = "";
-    status.textContent = "working…";
-    var out = [];
-    var targets = {
-      "making-amandata-dev": [
-        "How a rented Carrd page became a hand-built site: the mirror, the rebuild, and the design system that grew out of it."
-      ],
-      "building-the-reversi-coach-turning-the-othello-bot-into-a-learning-system": [
-        "From a teachable robot to a study mode that grades every move: how a childhood favorite became the site\u2019s learning system.",
-        "From a teachable robot to a study mode that grades every move: how a childhood favorite became the site's learning system.",
-        "From a teachable robot to a study mode that grades every move."
-      ]
-    };
-    var slugs = Object.keys(targets);
-    function rm(body, line) {
-      var i = body.indexOf(line);
-      if (i < 0) return { b: body, f: false };
-      var e = i + line.length;
-      var mAfter = body.slice(e).match(/^\r?\n[ \t]*\r?\n/);
-      if (mAfter) { e += mAfter[0].length; }
-      else {
-        var mBefore = body.slice(0, i).match(/(\r?\n)[ \t]*\r?\n$/);
-        if (mBefore) i -= mBefore[0].length;
-      }
-      return { b: (body.slice(0, i) + body.slice(e)).replace(/(?:\r?\n){3,}/g, "\n\n"), f: true };
-    }
-    try {
-      var cfg = window.SUPABASE_CONFIG || {};
-      var client = supabase.createClient(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY);
-      client.auth.getSession().then(function (res) {
-        if (!res.data || !res.data.session) {
-          status.className = "form-error";
-          status.textContent = "not signed in — sign in first, then tap the button.";
-          btn.disabled = false;
-          return;
-        }
-        client.from("posts").select("id,slug,body").in("slug", slugs).then(function (r) {
-          if (r.error) {
-            status.className = "form-error";
-            status.textContent = "fetch failed: " + r.error.message;
-            btn.disabled = false;
-            return;
-          }
-          var chain = Promise.resolve();
-          r.data.forEach(function (p) {
-            chain = chain.then(function () {
-              var found = { b: p.body, f: false }, v = -1;
-              for (var j = 0; j < targets[p.slug].length; j++) {
-                found = rm(p.body, targets[p.slug][j]);
-                if (found.f) { v = j; break; }
-              }
-              out.push(p.slug + ": found=" + found.f + " (variant " + v + ")");
-              if (!found.f) return null;
-              return client.from("posts").update({ body: found.b }).eq("id", p.id).select("id").then(function (up) {
-                var ok = !up.error && up.data && up.data.length === 1;
-                out.push(p.slug + ": update=" + (up.error ? "ERR " + up.error.message : (ok ? "ok" : "UNEXPECTED")));
-              });
-            });
-          });
-          chain.then(function () {
-            status.className = "form-ok";
-            status.textContent = out.join(" · ");
-            btn.disabled = false;
-          });
-        });
-      });
-    } catch (err) {
-      status.className = "form-error";
-      status.textContent = "error: " + ((err && err.message) || String(err));
-      btn.disabled = false;
-    }
-  });
-})();
-</script>
+<script src="admin.js?v=9"></script>
 </body>
 </html>
