@@ -19,7 +19,7 @@
 (function(){try{var t=localStorage.getItem('amandata-theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='dark';}})();
 </script>
 <link rel="stylesheet" href="styles.css?v=37">
-<link rel="stylesheet" href="othello.css?v=7">
+<link rel="stylesheet" href="othello.css?v=8">
 <link rel="icon" href="/favicon.ico" sizes="any">
 </head>
 <body data-nav="learn" class="picking">
@@ -43,6 +43,9 @@
       <p class="games-note"><a href="/learn.html">&larr; Back to Learn</a></p>
 
       <div class="game-card mode-pick" id="mode-pick">
+        <figure class="mode-pick__demo">
+          <img src="/assets/images/othello-demo.gif" alt="Gameplay on the pixel-cat Othello board — black and white trade moves and discs flip." width="700" height="701" loading="eager" fetchpriority="high">
+        </figure>
         <div class="mode-pick__btns">
           <button class="mode-btn" id="mode-beginner" type="button">
             <span class="mode-btn__title">Beginner</span>

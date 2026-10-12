@@ -278,6 +278,17 @@
 body.picking .section__head,
 body.picking .games-note{display:none;}
 body.picking .mode-pick__btns{margin-top:0;}
+.mode-pick__demo{
+  margin: 0 0 1.1rem;
+  text-align: center;
+}
+.mode-pick__demo img{
+  display: inline-block;
+  width: min(400px, 100%);
+  height: auto;
+  border: 1px solid var(--line);
+  image-rendering: pixelated;
+}
 .mode-pick__btns{
   display: grid;
   gap: 0.8rem;
