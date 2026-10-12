@@ -19,10 +19,10 @@
 (function(){try{var t=localStorage.getItem('amandata-theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='dark';}})();
 </script>
 <link rel="stylesheet" href="styles.css?v=36">
-<link rel="stylesheet" href="othello.css?v=6">
+<link rel="stylesheet" href="othello.css?v=7">
 <link rel="icon" href="/favicon.ico" sizes="any">
 </head>
-<body data-nav="learn">
+<body data-nav="learn" class="picking">
 <noscript><p class="noscript-nav">amandata.dev &mdash; <a href="/#about">About</a> &middot; <a href="/learn.html">Learn</a> &middot; <a href="/blog.html">Blog</a> &middot; <a href="/othello.html">Play Othello</a> &middot; <a href="/psy410.html">PSY 410 Resources</a></p></noscript>
 
 
@@ -43,8 +43,6 @@
       <p class="games-note"><a href="/learn.html">&larr; Back to Learn</a></p>
 
       <div class="game-card mode-pick" id="mode-pick">
-        <h3 class="game-card__title">Othello</h3>
-        <p class="game-card__desc">How seasoned are you?</p>
         <div class="mode-pick__btns">
           <button class="mode-btn" id="mode-beginner" type="button">
             <span class="mode-btn__title">Beginner</span>
@@ -159,7 +157,7 @@
 <script src="othello-bg.js?v=16"></script>
 <script src="theme.js?v=9"></script>
 <script src="nav.js?v=9"></script>
-<script src="othello.js?v=10"></script>
+<script src="othello.js?v=11"></script>
 <script src="othello-exercises.js?v=2"></script>
 </body>
 </html>
