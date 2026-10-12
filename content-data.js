@@ -3,6 +3,9 @@
    Edit here instead of digging through index.html. */
 window.SITE_DATA = {
   changelog: [
+    { d: "Oct 12, 10:55 AM", h: "Smoother scrolling: the animated background now only redraws when something changes, and the nav dropped a costly invisible blur." },
+    { d: "Oct 12, 10:55 AM", h: "New layouts for small phones, tablets, large desktops, and landscape mode — plus roomier touch targets." },
+    { d: "Oct 12, 10:30 AM", h: "Othello now opens on just the two mode buttons; the game reveals itself after you pick." },
     { d: "Oct 1, 10:08 AM", h: "Flashcards joined Learn: the PSY 410 deck got a polished pixel-art rewrite on a shared engine (same 118 terms), live under Learn." },
     { d: "Oct 1, 12:55 PM", h: "Othello is now a learning system under Learn: a Beginner mode (the preserved easy game) and a new Advanced study mode where the engine grades every move instantly, with coordinates, a move list, undo/redo, and an eval graph." },
     { d: "Oct 1, 12:55 PM", h: "Creations renamed to Learn." },

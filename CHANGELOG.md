@@ -3,6 +3,25 @@
 A catalog of the notable commits on this repo's `main` branch.
 Full history: `git log` on the repo, or the Commits page on GitHub.
 
+## 2026-10-12
+
+- **Othello mode-picker landing** — `/othello.html` now opens on just the
+  two mode buttons (Beginner / Advanced); the section header, back link,
+  and picker chrome stay hidden until Beginner is picked. Also fixed a
+  long-standing bug where `.game-card{ display: block }` overrode the
+  `hidden` attribute, leaking the beginner game onto the landing.
+- **Scroll smoothness** — removed a dead `backdrop-filter: blur(8px)` from
+  the sticky nav (its background was already fully opaque, so the blur
+  cost scroll frames for zero visual effect); the pixel-art background
+  canvas now only redraws when something visible changes (move animations,
+  scroll fade, theme switch) instead of every frame, and pauses in
+  background tabs; the reading progress bar's scroll handler is
+  rAF-throttled.
+- **Responsive** — new breakpoints: small phones (<380px), tablets
+  (641–1024px, with a scrollable nav + edge fades and 2-column stat/skill
+  grids), large desktops (>1440px), and landscape phones; 44px minimum
+  touch targets on touch devices.
+
 ## 2026-10-01
 
 - **Flashcards under Learn (same day)** — the PSY 410 deck got a
