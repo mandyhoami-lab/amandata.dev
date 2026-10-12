@@ -87,13 +87,20 @@
   (function progress() {
     var bar = document.getElementById('progress');
     if (!bar) return;
+    var queued = false;
     function update() {
+      queued = false;
       var h = document.documentElement;
       var max = h.scrollHeight - h.clientHeight;
       bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
     }
-    window.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('resize', update);
+    function requestUpdate() {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(update);
+    }
+    window.addEventListener('scroll', requestUpdate, { passive: true });
+    window.addEventListener('resize', requestUpdate);
     update();
   })();
 

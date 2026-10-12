@@ -125,7 +125,6 @@ main, .footer{ position: relative; z-index: 1; }
   display: flex; align-items: center; justify-content: space-between;
   padding: 0.9rem var(--edge);
   background: var(--nav-bg);
-  backdrop-filter: blur(8px);
   border-bottom: 1px solid rgba(255,255,255,0.12);
 }
 .nav__mark{
@@ -824,6 +823,61 @@ mark.key{
   .stats{ grid-template-columns: 1fr; }
   .skills-grid{ grid-template-columns: 1fr; }
   .cv-entry__meta{ flex-direction: column; gap: 0.1rem; }
+}
+
+/* ---------- small phones ---------- */
+@media (max-width: 380px){
+  :root{ --edge: 1rem; }
+  .nav{ padding: 0.75rem var(--edge); }
+  .hero__title{ font-size: clamp(2rem, 11vw, 2.8rem); }
+  .section{ padding-top: 4rem; }
+  .section__head{ gap: 0.6rem; }
+}
+
+/* ---------- tablets ---------- */
+@media (min-width: 641px) and (max-width: 1024px){
+  .nav{ gap: 0.6rem; }
+  .nav__links{
+    gap: 0.9rem;
+    flex: 1 1 auto;
+    min-width: 0;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav__links::-webkit-scrollbar{ display: none; }
+  .nav__links.has-more{
+    -webkit-mask-image: linear-gradient(to right, #000 82%, transparent 100%);
+    mask-image: linear-gradient(to right, #000 82%, transparent 100%);
+  }
+  .nav__links.has-more.has-prev{
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 18%, #000 82%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, #000 18%, #000 82%, transparent 100%);
+  }
+  .nav__item{ flex: 0 0 auto; }
+  .nav__link, .nav__toggle{ white-space: nowrap; font-size: 1.05rem; }
+  .theme-toggle{ flex: 0 0 auto; }
+  .stats{ grid-template-columns: repeat(2, 1fr); }
+  .skills-grid{ grid-template-columns: repeat(2, 1fr); }
+  .hero__title{ font-size: clamp(2.6rem, 8vw, 4.5rem); }
+}
+
+/* ---------- large desktops ---------- */
+@media (min-width: 1440px){
+  :root{ --max: 800px; }
+}
+
+/* ---------- landscape phones ---------- */
+@media (max-height: 500px) and (orientation: landscape){
+  .hero{ min-height: auto; padding: 3.5rem var(--edge) 2rem; }
+  .hero__title{ font-size: clamp(2rem, 7vw, 3rem); margin-bottom: 1rem; }
+  .section{ padding-top: 3rem; }
+}
+
+/* ---------- touch targets ---------- */
+@media (pointer: coarse){
+  .nav__link, .theme-toggle, .mode-btn, .othello-btn,
+  .creation-btn, .flashcard-btn{ min-height: 44px; }
 }
 
 /* ================= accessibility ================= */

@@ -253,15 +253,17 @@
     });
   }
 
-  var last = 0, rT = null;
+  var last = 0, rT = null, rafId = null;
+  var lastScrollY = -1, pageHidden = false;
+  try { pageHidden = document.hidden; } catch (e) {}
+
   window.addEventListener('resize', function () {
     clearTimeout(rT);
-    rT = setTimeout(resize, 200);
+    rT = setTimeout(function () { resize(); lastScrollY = -1; }, 200);
   });
 
-  function frame(now) {
-    var dt = Math.min(now - last, 100);
-    last = now;
+  /* draw one frame with the current scroll fade */
+  function drawFrame(now) {
     var pal = palette();
     ctx.clearRect(0, 0, W, H);
     for (var i = 0; i < boards.length; i++) {
@@ -271,7 +273,6 @@
       var fade = 1;
       try { fade = Math.max(0.25, 1 - (window.scrollY || 0) / (H * 0.9)); } catch (e) {}
       var a0 = b.alpha; b.alpha = a0 * fade;
-      if (!reduceMotion) stepBoard(b, dt);
       drawAbstractBoard(b, pal, now);
       b.alpha = a0;
     }
@@ -279,12 +280,57 @@
     dctx.imageSmoothingEnabled = false;
     dctx.clearRect(0, 0, W, H);
     dctx.drawImage(buf, 0, 0, W, H);
-    if (!reduceMotion) requestAnimationFrame(frame);
+    try { lastScrollY = window.scrollY || 0; } catch (e) { lastScrollY = 0; }
   }
 
-  /* theme changes re-tint automatically via palette() each frame */
+  /* The loop stays on rAF for exact game timing, but the expensive canvas
+     work only runs when something visible changed: an animation playing,
+     a state transition, a board becoming active, or a scroll move. */
+  function frame(now) {
+    var dt = Math.min(now - last, 100);
+    last = now;
+    var sy = 0;
+    try { sy = window.scrollY || 0; } catch (e) {}
+    var needDraw = (sy !== lastScrollY);
+    for (var i = 0; i < boards.length; i++) {
+      var b = boards[i];
+      if (now < b.startedAt) continue;
+      if (!b.drawn) { b.drawn = true; needDraw = true; }
+      var before = b.state;
+      stepBoard(b, dt);
+      if (b.state !== before || b.state === 'place' || b.state === 'flip') needDraw = true;
+    }
+    if (needDraw) drawFrame(now);
+    rafId = requestAnimationFrame(frame);
+  }
+
+  function start() {
+    if (rafId || pageHidden || reduceMotion) return;
+    last = performance.now();
+    rafId = requestAnimationFrame(frame);
+  }
+  function stop() {
+    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+  }
+
+  /* re-tint on theme change even between draws */
+  try {
+    var mo = new MutationObserver(function () {
+      if (!reduceMotion && !pageHidden) drawFrame(performance.now());
+    });
+    mo.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  } catch (e) {}
+
+  /* pause entirely in background tabs */
+  try {
+    document.addEventListener('visibilitychange', function () {
+      pageHidden = document.hidden;
+      if (pageHidden) stop();
+      else { lastScrollY = -1; start(); }
+    });
+  } catch (e) {}
+
   resize();
-  last = performance.now();
   if (reduceMotion) {
     var p0 = palette();
     ctx.clearRect(0, 0, W, H);
@@ -293,6 +339,6 @@
     dctx.clearRect(0, 0, W, H);
     dctx.drawImage(buf, 0, 0, W, H);
   } else {
-    requestAnimationFrame(frame);
+    start();
   }
 })();
