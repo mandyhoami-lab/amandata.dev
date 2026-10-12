@@ -15,6 +15,7 @@
   border-radius: 0;
   box-shadow: var(--card-shadow);
 }
+.game-card[hidden]{display:none;}
 .game-card__title{
   font-family: var(--micro);
   font-size: 1.7rem;
@@ -274,6 +275,9 @@
 .score-row--active td{ color: var(--sand); }
 
 /* mode picker */
+body.picking .section__head,
+body.picking .games-note{display:none;}
+body.picking .mode-pick__btns{margin-top:0;}
 .mode-pick__btns{
   display: grid;
   gap: 0.8rem;

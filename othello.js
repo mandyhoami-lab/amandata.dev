@@ -582,6 +582,7 @@
   function startBeginner() {
     if (beginnerStarted) return;
     beginnerStarted = true;
+    document.body.classList.remove('picking');
     modePick.setAttribute('hidden', '');
     beginnerGame.removeAttribute('hidden');
     human = loadColor();
