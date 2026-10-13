@@ -277,6 +277,8 @@
     var newBtn = document.getElementById('othello-new');
     var scoresBtn = document.getElementById('othello-scores-btn');
     var helpBtn = document.getElementById('othello-help-btn');
+    var tipsBtn = document.getElementById('othello-tips-btn');
+    var exBtn = document.getElementById('othello-ex-btn');
     var scoresPanel = document.getElementById('othello-scores-panel');
     var helpPanel = document.getElementById('othello-help-panel');
     var tipsPanel = document.getElementById('othello-tips-panel');
@@ -623,7 +625,7 @@
     colorB.addEventListener('click', function () { setHumanColor('b'); });
     colorW.addEventListener('click', function () { setHumanColor('w'); });
     function closePanels(except) {
-        [scoresPanel, helpPanel].forEach(function (p) {
+        [scoresPanel, helpPanel, tipsPanel, exPanel].forEach(function (p) {
             if (p && p !== except)
                 p.setAttribute('hidden', '');
         });
@@ -638,6 +640,8 @@
     }
     wirePanelToggle(scoresBtn, scoresPanel);
     wirePanelToggle(helpBtn, helpPanel);
+    wirePanelToggle(tipsBtn, tipsPanel);
+    wirePanelToggle(exBtn, exPanel);
     addBtn.addEventListener('click', addPlayer);
     nameInput.addEventListener('keydown', function (e) {
         if (e.key === 'Enter')

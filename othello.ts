@@ -244,6 +244,8 @@
   var newBtn = document.getElementById('othello-new') as HTMLElement;
   var scoresBtn = document.getElementById('othello-scores-btn') as HTMLElement;
   var helpBtn = document.getElementById('othello-help-btn') as HTMLElement;
+  var tipsBtn = document.getElementById('othello-tips-btn') as HTMLElement;
+  var exBtn = document.getElementById('othello-ex-btn') as HTMLElement;
   var scoresPanel = document.getElementById('othello-scores-panel') as HTMLElement | null;
   var helpPanel = document.getElementById('othello-help-panel') as HTMLElement | null;
   var tipsPanel = document.getElementById('othello-tips-panel') as HTMLElement | null;
@@ -560,7 +562,7 @@
   colorB.addEventListener('click', function () { setHumanColor('b'); });
   colorW.addEventListener('click', function () { setHumanColor('w'); });
   function closePanels(except: HTMLElement | null): void {
-    [scoresPanel, helpPanel].forEach(function (p) {
+    [scoresPanel, helpPanel, tipsPanel, exPanel].forEach(function (p) {
       if (p && p !== except) p.setAttribute('hidden', '');
     });
   }
@@ -573,6 +575,8 @@
   }
   wirePanelToggle(scoresBtn, scoresPanel);
   wirePanelToggle(helpBtn, helpPanel);
+  wirePanelToggle(tipsBtn, tipsPanel);
+  wirePanelToggle(exBtn, exPanel);
   addBtn.addEventListener('click', addPlayer);
   nameInput.addEventListener('keydown', function (e) {
     if (e.key === 'Enter') addPlayer();
