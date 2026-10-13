@@ -1,0 +1,124 @@
+/* blog reader — pulls posts from Supabase */
+(function () {
+  "use strict";
+
+  var cfg = window.SUPABASE_CONFIG || {};
+  var listEl = document.getElementById("post-list") as HTMLElement;
+  var searchEl = document.getElementById("post-search") as HTMLInputElement | null;
+  var listView = document.getElementById("view-list") as HTMLElement;
+  var postView = document.getElementById("view-post") as HTMLElement;
+  var allPosts: any[] = [];
+
+  function fmtDate(iso: string): string {
+    return new Date(iso).toLocaleDateString(undefined, {
+      year: "numeric", month: "long", day: "numeric"
+    });
+  }
+
+  function escapeHtml(s: string): string {
+    return String(s)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function excerpt(body: string): string {
+    var text = String(body).replace(/[#>*`_~|-]/g, "").replace(/\n+/g, " ").trim();
+    return text.length > 160 ? text.slice(0, 160) + "…" : text;
+  }
+
+  function highlight(text: string, q: string): string {
+    var esc = escapeHtml(text);
+    if (!q) return esc;
+    var qesc = escapeHtml(q).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return esc.replace(new RegExp("(" + qesc + ")", "gi"), "<mark>$1</mark>");
+  }
+
+  function cardHtml(p: any, q: string): string {
+    return '<a class="post-card" href="/blog.html?p=' + encodeURIComponent(p.slug) + '">' +
+      '<h3 class="post-card__title">' + highlight(p.title, q) + "</h3>" +
+      '<span class="post-card__date">' + fmtDate(p.created_at) + "</span>" +
+      '<p class="post-card__excerpt">' + highlight(excerpt(p.body), q) + "</p></a>";
+  }
+
+  function renderList(): void {
+    var q = searchEl ? (searchEl.value || "").trim().toLowerCase() : "";
+    var matches = !q ? allPosts : allPosts.filter(function (p: any) {
+      return (p.title + " " + p.body).toLowerCase().indexOf(q) !== -1;
+    });
+    var countEl = document.getElementById("post-count");
+    if (countEl) {
+      if (!q || !matches.length) { countEl.hidden = true; }
+      else {
+        countEl.hidden = false;
+        countEl.textContent = matches.length === 1
+          ? "1 of " + allPosts.length + " posts"
+          : matches.length + " of " + allPosts.length + " posts";
+      }
+    }
+    if (!matches.length) {
+      listEl.innerHTML = q ? "<p>no posts match — try another search.</p>"
+                           : "<p>no posts yet — check back soon.</p>";
+      return;
+    }
+    listEl.innerHTML = matches.map(function (p) { return cardHtml(p, q); }).join("");
+  }
+
+  function showList(client: any): void {
+    client.from("posts")
+      .select("title,slug,body,created_at")
+      .eq("published", true)
+      .order("created_at", { ascending: false })
+      .then(function (res: any) {
+        if (res.error || !res.data || !res.data.length) {
+          listEl.innerHTML = "<p>no posts yet — check back soon.</p>";
+          if (searchEl) searchEl.hidden = true;
+          return;
+        }
+        allPosts = res.data;
+        if (searchEl) searchEl.hidden = false;
+        renderList();
+      }, function () {
+        listEl.innerHTML = "<p>couldn't load posts — try refreshing.</p>";
+        if (searchEl) searchEl.hidden = true;
+      });
+  }
+
+  function showPost(client: any, slug: string): void {
+    listView.hidden = true;
+    postView.hidden = false;
+    client.from("posts")
+      .select("title,body,created_at")
+      .eq("slug", slug)
+      .eq("published", true)
+      .single()
+      .then(function (res: any) {
+        if (res.error || !res.data) {
+          (document.getElementById("post-title") as HTMLElement).textContent = "not found";
+          (document.getElementById("post-body") as HTMLElement).innerHTML = "<p>that post doesn't exist.</p>";
+          return;
+        }
+        document.title = res.data.title + " — Amanda Ta";
+        (document.getElementById("post-title") as HTMLElement).textContent = res.data.title;
+        (document.getElementById("post-date") as HTMLElement).textContent = fmtDate(res.data.created_at);
+        var html = marked.parse(res.data.body || "");
+        (document.getElementById("post-body") as HTMLElement).innerHTML = DOMPurify.sanitize(html);
+      }, function () {
+        (document.getElementById("post-body") as HTMLElement).innerHTML = "<p>couldn't load the post — try refreshing.</p>";
+      });
+  }
+
+  if (!cfg.SUPABASE_URL || cfg.SUPABASE_URL.indexOf("YOUR_") === 0) {
+    listEl.innerHTML = "<p>blog is waking up — check back soon.</p>";
+    return;
+  }
+
+  var client = supabase.createClient(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY);
+  var slug = new URLSearchParams(location.search).get("p");
+  if (searchEl) {
+    searchEl.addEventListener("input", renderList);
+  }
+  if (slug) showPost(client, slug);
+  else showList(client);
+})();
