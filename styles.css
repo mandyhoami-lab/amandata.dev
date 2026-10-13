@@ -161,7 +161,7 @@ main, .footer{ position: relative; z-index: 1; }
 }
 
 /* dark/light toggle — solid "Change Theme" accordion button */
-.theme-picker{ position: relative; }
+.theme-picker{ position: relative; flex: 0 0 auto; }
 .theme-toggle{
   font-family: var(--micro);
   -webkit-text-stroke: 0.5px currentColor;
@@ -210,6 +210,19 @@ main, .footer{ position: relative; z-index: 1; }
   color: var(--sand);
   text-decoration: underline;
   text-underline-offset: 3px;
+}
+/* palette preview swatches beside each theme name */
+.theme-swatches{
+  display: inline-flex;
+  gap: 3px;
+  margin-right: 0.6rem;
+  vertical-align: 1px;
+}
+.theme-swatches i{
+  width: 14px;
+  height: 14px;
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 2px;
 }
 
 /* ================= NAV DROPDOWNS ================= */
@@ -858,7 +871,7 @@ mark.key{
   }
   .nav__link{ flex: 0 0 auto; }
   .nav__item{ flex: 0 0 auto; }
-  .theme-toggle{ flex: 0 0 auto; margin-left: 0; }
+  .theme-toggle{ flex: 0 0 auto; margin-left: 0; font-size: 0.92rem; padding: 0.22rem 0.5rem; }
   .stats{ grid-template-columns: 1fr; }
   .skills-grid{ grid-template-columns: 1fr; }
   .cv-entry__meta{ flex-direction: column; gap: 0.1rem; }
@@ -917,6 +930,11 @@ mark.key{
 @media (pointer: coarse){
   .nav__link, .theme-toggle, .mode-btn, .othello-btn,
   .creation-btn, .flashcard-btn{ min-height: 44px; }
+}
+/* the theme toggle is deliberately compact on small screens;
+   its menu options keep full-size tap targets */
+@media (max-width: 640px){
+  .nav .theme-picker .theme-toggle{ min-height: 0; }
 }
 
 /* ================= accessibility ================= */
