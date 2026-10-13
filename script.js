@@ -172,16 +172,33 @@
         const links = document.querySelector('.nav__links');
         if (!links)
             return;
+        /* Overflow only changes on resize/font load — never mid-scroll. Cache it
+           so the scroll handler never forces layout (that was the mobile jank). */
+        var maxScroll = 0;
+        var ticking = false;
         function update() {
-            var can = links.scrollWidth > links.clientWidth + 2;
-            var more = can && links.scrollLeft + links.clientWidth < links.scrollWidth - 2;
-            var prev = can && links.scrollLeft > 2;
-            links.classList.toggle('has-more', more);
-            links.classList.toggle('has-prev', prev);
+            ticking = false;
+            var sl = links.scrollLeft;
+            links.classList.toggle('has-more', maxScroll > 0 && sl < maxScroll);
+            links.classList.toggle('has-prev', maxScroll > 0 && sl > 2);
         }
-        links.addEventListener('scroll', update, { passive: true });
-        window.addEventListener('resize', update);
-        update();
+        function measure() {
+            maxScroll = Math.max(0, links.scrollWidth - links.clientWidth - 2);
+            update();
+        }
+        function onScroll() {
+            if (!ticking) {
+                ticking = true;
+                requestAnimationFrame(update);
+            }
+        }
+        links.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', measure);
+        try {
+            document.fonts.ready.then(function () { measure(); });
+        }
+        catch (e) { /* fail open */ }
+        measure();
     })();
     /* ---------------- email: assembled from parts, not scraped ---------------- */
     (function email() {
