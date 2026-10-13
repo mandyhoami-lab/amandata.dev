@@ -282,9 +282,16 @@ body.picking .mode-pick__btns{margin-top:0;}
   margin: 0 0 1.1rem;
   text-align: center;
 }
+.mode-pick__kicker{
+  font-family: var(--micro);
+  font-size: 1.6rem;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  margin: 0 0 0.6rem;
+}
 .mode-pick__demo img{
   display: inline-block;
-  width: min(400px, 100%);
+  width: 132px;
   height: auto;
   border: 1px solid var(--line);
   image-rendering: pixelated;

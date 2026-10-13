@@ -39,6 +39,35 @@
   var stickyCls = null;
 
   function cloneGrid(g) { return g.map(function (row) { return row.slice(); }); }
+  function reducedMotion() {
+    return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
+  /* cells that changed color between two grids (not the newly placed disc) */
+  function flippedCells(before, after) {
+    var out = [];
+    for (var r = 0; r < 8; r++) for (var c = 0; c < 8; c++) {
+      var a = before[r][c], b = after[r][c];
+      if ((a === 'b' || a === 'w') && (b === 'b' || b === 'w') && a !== b) {
+        out.push({ r: r, c: c, old: a, nw: b });
+      }
+    }
+    return out;
+  }
+  /* stepped flip: set old sprite, squash, swap sprite halfway, expand —
+     same feel as the beginner board */
+  function animateFlips(list) {
+    if (!list || !list.length || reducedMotion()) return;
+    list.forEach(function (fc) {
+      var cell = cells[fc.r * 8 + fc.c];
+      var disc = cell && cell.querySelector('.othello-disc');
+      if (!disc) return;
+      disc.style.backgroundImage = 'url(' + E.discSprite(fc.old) + ')';
+      void disc.offsetWidth;
+      disc.classList.add('othello-disc--flipping');
+      setTimeout(function () { disc.style.backgroundImage = 'url(' + E.discSprite(fc.nw) + ')'; }, 110);
+      setTimeout(function () { disc.classList.remove('othello-disc--flipping'); }, 240);
+    });
+  }
   function loadColor() {
     try {
       var c = localStorage.getItem(COLOR_KEY);
@@ -312,7 +341,9 @@
     updateHud();
     setCoach('Played ' + E.moveName(mv) + ' — checking…');
     gradeHumanMove(gridBefore, mv, id);
+    var flips = flippedCells(gridBefore, grid);
     advance();
+    animateFlips(flips);
   }
   function advance() {
     render(null);
@@ -346,6 +377,7 @@
     setTimeout(function () {
       if (id !== gameId || !gameLive) return;
       pushHist();
+      var gridBefore = cloneGrid(grid);
       var r = E.searchMove(grid, ai, ROBOT_DEPTH);
       if (r.mv) {
         E.applyMove(grid, r.mv, ai);
@@ -355,7 +387,9 @@
       }
       aiThinking = false;
       renderMoves();
+      var flips = flippedCells(gridBefore, grid);
       advance();
+      animateFlips(flips);
     }, 450);
   }
   function gameOver() {
