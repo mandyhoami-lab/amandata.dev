@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "declaration": false,
+    "lib": [
+      "DOM",
+      "ES2019"
+    ],
+    "module": "none",
+    "noUnusedLocals": false,
+    "outDir": ".",
+    "sourceMap": false,
+    "strict": true,
+    "target": "ES2019"
+  },
+  "include": [
+    "*.ts"
+  ],
+  "exclude": []
+}

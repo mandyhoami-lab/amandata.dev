@@ -1,0 +1,598 @@
+/* =========================================================
+   amandata.dev — playable Othello vs. the robot.
+   No levels, no limits: a teachable robot that's easy to beat
+   (you choose black or white). Optional all-time scoreboard
+   with usernames (localStorage), plus a how-to-play panel.
+   No animations: everything updates instantly.
+   ========================================================= */
+(function () {
+  'use strict';
+
+  /* ---------------- engine (pure, testable) ---------------- */
+  var N = 8;
+  var DIRS: number[][] = [[-1, -1], [-1, 0], [-1, 1], [0, -1], [0, 1], [1, -1], [1, 0], [1, 1]];
+
+  function onBoard(r: number, c: number): boolean { return r >= 0 && r < N && c >= 0 && c < N; }
+  function other(p: OthelloPlayer): OthelloPlayer { return p === 'b' ? 'w' : 'b'; }
+
+  function newGrid(): OthelloGrid {
+    var g: OthelloGrid = [];
+    for (var r = 0; r < N; r++) { g.push([]); for (var c = 0; c < N; c++) g[r].push(null); }
+    g[3][3] = 'w'; g[3][4] = 'b';
+    g[4][3] = 'b'; g[4][4] = 'w';
+    return g;
+  }
+
+  function legalMoves(g: OthelloGrid, p: OthelloPlayer): OthelloMove[] {
+    var o = other(p), moves: OthelloMove[] = [];
+    for (var r = 0; r < N; r++) for (var c = 0; c < N; c++) {
+      if (g[r][c]) continue;
+      var flips: number[][] = [];
+      for (var d = 0; d < DIRS.length; d++) {
+        var line: number[][] = [], rr = r + DIRS[d][0], cc = c + DIRS[d][1];
+        while (onBoard(rr, cc) && g[rr][cc] === o) { line.push([rr, cc]); rr += DIRS[d][0]; cc += DIRS[d][1]; }
+        if (line.length && onBoard(rr, cc) && g[rr][cc] === p) flips = flips.concat(line);
+      }
+      if (flips.length) moves.push({ r: r, c: c, flips: flips });
+    }
+    return moves;
+  }
+
+  function applyMove(g: OthelloGrid, mv: OthelloMove, p: OthelloPlayer): void {
+    g[mv.r][mv.c] = p;
+    for (var i = 0; i < mv.flips.length; i++) g[mv.flips[i][0]][mv.flips[i][1]] = p;
+  }
+
+  function countDiscs(g: OthelloGrid): { b: number; w: number } {
+    var b = 0, w = 0;
+    for (var r = 0; r < N; r++) for (var c = 0; c < N; c++) {
+      if (g[r][c] === 'b') b++; else if (g[r][c] === 'w') w++;
+    }
+    return { b: b, w: w };
+  }
+
+  /* ---------------- robot ----------------
+     A teachable, beatable robot. Each game it samples a "mood":
+     a blunder rate between 60% and 92%. Most moves it just picks
+     a random legal square (easy to beat, easy to learn against),
+     but when it focuses it plays a real 1-ply positional game with
+     a mobility term — so you still see what good Othello looks like.
+     Some games it goofs off, some games it locks in: expect a mix
+     of wins and losses, no two games alike. */
+  var WEIGHTS: number[] = [
+    120, -20,  20,   5,   5,  20, -20, 120,
+    -20, -40,  -5,  -5,  -5,  -5, -40, -20,
+     20,  -5,  15,   3,   3,  15,  -5,  20,
+      5,  -5,   3,   3,   3,   3,  -5,   5,
+      5,  -5,   3,   3,   3,   3,  -5,   5,
+     20,  -5,  15,   3,   3,  15,  -5,  20,
+    -20, -40,  -5,  -5,  -5,  -5, -40, -20,
+    120, -20,  20,   5,   5,  20, -20, 120
+  ];
+
+  function evaluate(g: OthelloGrid, p: OthelloPlayer): number {
+    var o = other(p), score = 0;
+    for (var r = 0; r < N; r++) for (var c = 0; c < N; c++) {
+      if (g[r][c] === p) score += WEIGHTS[r * N + c];
+      else if (g[r][c] === o) score -= WEIGHTS[r * N + c];
+    }
+    score += (legalMoves(g, p).length - legalMoves(g, o).length) * 6;
+    return score;
+  }
+
+  function cloneGrid(g: OthelloGrid): OthelloGrid {
+    return g.map(function (row) { return row.slice(); });
+  }
+
+  function aiChooseMove(g: OthelloGrid, moves: OthelloMove[], ai: OthelloPlayer, rnd?: () => number, blunder?: number): OthelloMove | null {
+    rnd = rnd || Math.random;
+    blunder = (typeof blunder === 'number') ? blunder : 0.75;
+    if (!moves.length) return null;
+    /* goof-off move: any legal square, great for learning against */
+    if (rnd() < blunder) return moves[(rnd() * moves.length) | 0];
+    /* focused move: 1-ply positional play with a little wobble */
+    var scored = moves.map(function (mv) {
+      var ng = cloneGrid(g);
+      applyMove(ng, mv, ai);
+      return { mv: mv, s: evaluate(ng, ai) + rnd() * 8 };
+    });
+    scored.sort(function (a, b) { return b.s - a.s; });
+    return scored[0].mv;
+  }
+
+  /* Deeper search (negamax + alpha-beta) used by the advanced
+     teaching mode: grading human moves and powering the robot.
+     (cloneGrid above is shared; the duplicate declaration the file
+     once carried is gone — the two were identical.) */
+  function negamax(g: OthelloGrid, color: OthelloPlayer, depth: number, alpha: number, beta: number): number {
+    var ms = legalMoves(g, color);
+    if (ms.length === 0) {
+      if (legalMoves(g, other(color)).length === 0) {
+        var c = countDiscs(g);
+        var diff = color === 'b' ? c.b - c.w : c.w - c.b;
+        return diff * 10000;
+      }
+      return -negamax(g, other(color), depth, -beta, -alpha);
+    }
+    if (depth === 0) return evaluate(g, color);
+    var best = -Infinity;
+    for (var i = 0; i < ms.length; i++) {
+      var ng = cloneGrid(g);
+      applyMove(ng, ms[i], color);
+      var s = -negamax(ng, other(color), depth - 1, -beta, -alpha);
+      if (s > best) best = s;
+      if (best > alpha) alpha = best;
+      if (alpha >= beta) break;
+    }
+    return best;
+  }
+  function searchMove(g: OthelloGrid, color: OthelloPlayer, depth: number): { mv: OthelloMove | null; score: number } {
+    var ms = legalMoves(g, color);
+    if (!ms.length) return { mv: null, score: 0 };
+    var best = ms[0], bestS = -Infinity;
+    for (var i = 0; i < ms.length; i++) {
+      var ng = cloneGrid(g);
+      applyMove(ng, ms[i], color);
+      var s = -negamax(ng, other(color), depth - 1, -Infinity, Infinity);
+      if (s > bestS) { bestS = s; best = ms[i]; }
+    }
+    return { mv: best, score: bestS };
+  }
+  /* How good was the human's move? Compares it against the engine's
+     best move at the same depth. diff is in eval points, from the
+     mover's perspective (0 = played the best move). */
+  function gradeMove(g: OthelloGrid, mv: OthelloMove, color: OthelloPlayer, depth: number): { best: OthelloMove; diff: number; playedBest: boolean } | null {
+    var best = searchMove(g, color, depth);
+    if (!best.mv) return null;
+    var playedBest = best.mv.r === mv.r && best.mv.c === mv.c;
+    var afterHuman = cloneGrid(g);
+    applyMove(afterHuman, mv, color);
+    var humanScore = -negamax(afterHuman, other(color), depth - 1, -Infinity, Infinity);
+    return { best: best.mv, diff: playedBest ? 0 : best.score - humanScore, playedBest: playedBest };
+  }
+  function moveName(mv: OthelloMove): string {
+    return 'abcdefgh'.charAt(mv.c) + (mv.r + 1);
+  }
+
+  /* expose engine for node testing and for the advanced page */
+  /* -------- pixel-art disc sprites (generated at runtime) --------
+     Awake cat heads, 16x16, in the site cat's palette: cream cat for
+     white, black cat with amber eyes for black. The head breaks out
+     of the old disc circle — ears and all — with a 1px outline. */
+  var CAT_FACE_ROWS: string[] = [
+    "................",
+    "..ff........ff..",
+    "..fff......fff..",
+    "..fppf....fppf..",
+    "..ffffffffffff..",
+    ".ffffffddffffff.",
+    ".ffffffffffffff.",
+    ".fffveffffvefff.",
+    ".fffeeffffeefff.",
+    ".ffffffffffffff.",
+    ".ffffffnnffffff.",
+    ".fffffdfffdffff.",
+    ".ffffffffffffff.",
+    "..ffffffffffff..",
+    "...ffffffffff...",
+    ".....ffffff....."
+  ];
+  var _spriteCache: { [k: string]: string } = {};
+  function discSprite(color: string): string {
+    if (_spriteCache[color]) return _spriteCache[color];
+    if (typeof document === 'undefined') return '';
+    var S = 16;
+    var cv = document.createElement('canvas');
+    cv.width = S; cv.height = S;
+    var ctx = cv.getContext('2d');
+    if (!ctx) return '';
+    var edge = color === 'b' ? '#000000' : '#8f8874';
+    var pal: { [k: string]: string } = color === 'b'
+      ? { f: '#1a1611', d: '#57503f', p: '#D98A9B', n: '#E89AA8', e: '#E8A33D', v: '#5c3a10' }
+      : { f: '#f4efe1', d: '#8f8874', p: '#E8A0B8', n: '#E8A0B8', e: '#4A2C14', v: '#ffffff' };
+    /* eye accents: glints for the cream cat, pupils for the black cat */
+    var accent: { [k: string]: number } = color === 'b'
+      ? { '5,8': 1, '11,8': 1 }
+      : { '4,7': 1, '10,7': 1 };
+    function isFace(x: number, y: number): boolean {
+      return x >= 0 && y >= 0 && x < S && y < S && CAT_FACE_ROWS[y].charAt(x) !== '.';
+    }
+    var x: number, y: number, ox: number, oy: number;
+    /* pass 1: 1px outline hugging the head */
+    for (y = 0; y < S; y++) for (x = 0; x < S; x++) {
+      if (!isFace(x, y)) continue;
+      for (oy = -1; oy <= 1; oy++) for (ox = -1; ox <= 1; ox++) {
+        if (ox === 0 && oy === 0) continue;
+        var nx = x + ox, ny = y + oy;
+        if (nx < 0 || ny < 0 || nx >= S || ny >= S || isFace(nx, ny)) continue;
+        ctx.fillStyle = edge;
+        ctx.fillRect(nx, ny, 1, 1);
+      }
+    }
+    /* pass 2: the face itself */
+    for (y = 0; y < S; y++) for (x = 0; x < S; x++) {
+      var ch = CAT_FACE_ROWS[y].charAt(x);
+      if (ch === '.') continue;
+      ctx.fillStyle = accent[x + ',' + y] ? pal.v : (pal[ch] || pal.f);
+      ctx.fillRect(x, y, 1, 1);
+    }
+    var out = cv.toDataURL();
+    _spriteCache[color] = out;
+    return out;
+  }
+  var ENGINE_API = {
+    newGrid: newGrid, legalMoves: legalMoves, applyMove: applyMove,
+    countDiscs: countDiscs, evaluate: evaluate, aiChooseMove: aiChooseMove,
+    other: other, searchMove: searchMove, gradeMove: gradeMove,
+    moveName: moveName, discSprite: discSprite
+  };
+  if (typeof window !== 'undefined') window.OthelloEngine = ENGINE_API;
+  if (typeof module !== 'undefined' && module.exports) {
+    module.exports = ENGINE_API;
+    return;
+  }
+
+  /* ---------------- UI ---------------- */
+  var boardEl = document.getElementById('othello-board') as HTMLElement | null;
+  if (!boardEl) return;
+
+  var statusEl = document.getElementById('othello-status') as HTMLElement;
+  var youEl = document.getElementById('othello-you') as HTMLElement;
+  var aiEl = document.getElementById('othello-ai') as HTMLElement;
+  var youDiscEl = document.getElementById('othello-you-disc') as HTMLElement;
+  var aiDiscEl = document.getElementById('othello-ai-disc') as HTMLElement;
+  var newBtn = document.getElementById('othello-new') as HTMLElement;
+  var scoresBtn = document.getElementById('othello-scores-btn') as HTMLElement;
+  var helpBtn = document.getElementById('othello-help-btn') as HTMLElement;
+  var scoresPanel = document.getElementById('othello-scores-panel') as HTMLElement | null;
+  var helpPanel = document.getElementById('othello-help-panel') as HTMLElement | null;
+  var tipsPanel = document.getElementById('othello-tips-panel') as HTMLElement | null;
+  var exPanel = document.getElementById('othello-ex-panel') as HTMLElement | null;
+  var colorB = document.getElementById('othello-color-b') as HTMLElement;
+  var colorW = document.getElementById('othello-color-w') as HTMLElement;
+  var nameInput = document.getElementById('othello-name') as HTMLInputElement;
+  var addBtn = document.getElementById('othello-add') as HTMLElement;
+  var scoreList = document.getElementById('othello-score-list') as HTMLElement;
+  var scoreTabs = document.getElementById('othello-score-tabs') as HTMLElement;
+  var scoreNote = document.getElementById('othello-score-note') as HTMLElement;
+  var modePick = document.getElementById('mode-pick') as HTMLElement;
+  var beginnerGame = document.getElementById('beginner-game') as HTMLElement;
+  var modeBeginnerBtn = document.getElementById('mode-beginner') as HTMLElement;
+
+  var COLOR_KEY = 'amandata-othello-color';
+  var SCORE_KEY = 'amandata-othello-scores-v1';
+
+  var grid: OthelloGrid, turn: OthelloPlayer, aiThinking = false;
+  var lastMove: number[] | null = null, gameLive = true, aiBlunder = 0.75;
+  var human: OthelloPlayer = 'b', ai: OthelloPlayer = 'w';
+
+  function loadColor(): OthelloPlayer {
+    try {
+      var c = localStorage.getItem(COLOR_KEY);
+      if (c === 'w' || c === 'b') return c;
+    } catch (e) {}
+    return 'b';
+  }
+  function saveColor(c: OthelloPlayer): void {
+    try { localStorage.setItem(COLOR_KEY, c); } catch (e) {}
+  }
+
+  /* -------- scoreboard -------- */
+  function loadScores(): any {
+    try {
+      var s = JSON.parse(localStorage.getItem(SCORE_KEY) || 'null');
+      if (s && s.players) return s;
+    } catch (e) {}
+    return { players: {}, active: null };
+  }
+  function saveScores(s: any): void {
+    try { localStorage.setItem(SCORE_KEY, JSON.stringify(s)); } catch (e) {}
+  }
+  var scores = loadScores();
+  if (!scores.view) scores.view = '__all__';
+
+  function renderScores(): void {
+    scoreList.innerHTML = '';
+    scoreTabs.innerHTML = '';
+    var names = Object.keys(scores.players).sort();
+    if (scores.view !== '__all__' && !scores.players[scores.view]) scores.view = '__all__';
+
+    function addTab(label: string, view: string, title: string): void {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'score-tab' + (scores.view === view ? ' is-active' : '');
+      b.setAttribute('role', 'tab');
+      b.setAttribute('aria-selected', scores.view === view ? 'true' : 'false');
+      b.textContent = label;
+      if (title) b.title = title;
+      b.addEventListener('click', function () {
+        scores.view = view;
+        if (view !== '__all__') scores.active = view;
+        saveScores(scores);
+        renderScores();
+        setStatus(view === '__all__'
+          ? 'Showing everyone, all time.'
+          : 'Showing ' + view + ' vs the robot — tracking as ' + view + '.');
+      });
+      scoreTabs.appendChild(b);
+    }
+    addTab('Everyone', '__all__', 'Every player combined, all time');
+    names.forEach(function (name) {
+      addTab(name, name, name + ' vs the robot');
+    });
+
+    var rec: { w: number; l: number; d: number };
+    if (scores.view === '__all__') {
+      rec = { w: 0, l: 0, d: 0 };
+      names.forEach(function (n) {
+        var s = scores.players[n];
+        rec.w += s.w; rec.l += s.l; rec.d += s.d;
+      });
+    } else {
+      rec = scores.players[scores.view];
+    }
+    var total = rec.w + rec.l + rec.d;
+    if (!names.length) {
+      var p = document.createElement('p');
+      p.className = 'score-empty';
+      p.textContent = 'No players yet — add a username above and your results get tracked.';
+      scoreList.appendChild(p);
+    } else {
+      var big = document.createElement('div');
+      big.className = 'score-big';
+      big.innerHTML = '<span class="score-big__w">' + rec.w + '</span>' +
+        '<span class="score-big__sep">–</span>' +
+        '<span class="score-big__l">' + rec.l + '</span>' +
+        '<span class="score-big__sep">–</span>' +
+        '<span class="score-big__d">' + rec.d + '</span>';
+      scoreList.appendChild(big);
+      var lab = document.createElement('p');
+      lab.className = 'score-big__label';
+      lab.textContent = 'wins – losses – draws · ' + total + ' game' + (total === 1 ? '' : 's') +
+        (scores.view === '__all__' ? ' · everyone, all time' : ' · ' + scores.view + ' vs robot');
+      scoreList.appendChild(lab);
+    }
+    scoreNote.textContent = scores.active && scores.players[scores.active]
+      ? 'Tracking your games as ' + scores.active + '.'
+      : 'Pick your player tab above and your games get tracked under it.';
+  }
+
+  function addPlayer(): void {
+    var name = (nameInput.value || '').trim().slice(0, 16);
+    if (!name) return;
+    if (!scores.players[name]) scores.players[name] = { w: 0, l: 0, d: 0 };
+    scores.active = name;
+    scores.view = name;
+    saveScores(scores);
+    nameInput.value = '';
+    renderScores();
+    setStatus('Tracking scores as ' + name + '.');
+  }
+
+  function recordResult(result: string): void {
+    if (!scores.active || !scores.players[scores.active]) return;
+    var st = scores.players[scores.active];
+    if (result === 'win') st.w++;
+    else if (result === 'loss') st.l++;
+    else st.d++;
+    saveScores(scores);
+    renderScores();
+  }
+
+  var sprites: { [k: string]: string } = {};
+  function spriteFor(color: string): string {
+    return sprites[color] ? 'url(' + sprites[color] + ')' : '';
+  }
+  function reducedMotion(): boolean {
+    return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
+
+  /* stepped flip: squash to zero, swap sprite halfway, expand */
+  function animateFlips(flips: number[][], newColor: string, oldColor: string): void {
+    if (!flips || !flips.length || reducedMotion()) return;
+    flips.forEach(function (pos) {
+      var cell = boardEl!.children[pos[0] * N + pos[1]];
+      var disc = cell && cell.querySelector('.othello-disc') as HTMLElement | null;
+      if (!disc) return;
+      disc.style.backgroundImage = spriteFor(oldColor);
+      void disc.offsetWidth;
+      disc.classList.add('othello-disc--flipping');
+      setTimeout(function () { disc!.style.backgroundImage = spriteFor(newColor); }, 110);
+      setTimeout(function () { disc!.classList.remove('othello-disc--flipping'); }, 240);
+    });
+  }
+  function buildBoard(): void {
+    boardEl!.innerHTML = '';
+    for (var r = 0; r < N; r++) for (var c = 0; c < N; c++) {
+      (function (rr: number, cc: number) {
+        var cell = document.createElement('button');
+        cell.type = 'button';
+        cell.className = 'othello-cell';
+        cell.setAttribute('aria-label', 'row ' + (rr + 1) + ' column ' + (cc + 1));
+        cell.addEventListener('click', function () { onCell(rr, cc); });
+        boardEl!.appendChild(cell);
+      })(r, c);
+    }
+  }
+
+  function render(humanMoves: OthelloMove[] | null): void {
+    var cells = boardEl!.children;
+    var hintSet: { [k: number]: boolean } = {};
+    if (humanMoves) humanMoves.forEach(function (m) { hintSet[m.r * N + m.c] = true; });
+    for (var r = 0; r < N; r++) for (var c = 0; c < N; c++) {
+      var cell = cells[r * N + c];
+      cell.classList.toggle('othello-cell--hint', !!hintSet[r * N + c]);
+      var disc = cell.querySelector('.othello-disc') as HTMLElement | null;
+      var v = grid[r][c];
+      if (!v) { if (disc) disc.remove(); continue; }
+      if (!disc) {
+        disc = document.createElement('span');
+        disc.className = 'othello-disc';
+        cell.appendChild(disc);
+      }
+      disc.className = 'othello-disc othello-disc--' + v +
+        (lastMove && lastMove[0] === r && lastMove[1] === c ? ' othello-disc--last' : '');
+      disc.style.backgroundImage = spriteFor(v);
+    }
+    var n = countDiscs(grid);
+    youEl.textContent = String(human === 'b' ? n.b : n.w);
+    aiEl.textContent = String(ai === 'b' ? n.b : n.w);
+    youDiscEl.className = 'mini-disc mini-disc--' + human;
+    aiDiscEl.className = 'mini-disc mini-disc--' + ai;
+    youDiscEl.style.backgroundImage = spriteFor(human);
+    aiDiscEl.style.backgroundImage = spriteFor(ai);
+  }
+
+  function setStatus(t: string): void { statusEl.textContent = t; }
+
+  function colorName(c: OthelloPlayer): string { return c === 'b' ? 'black' : 'white'; }
+
+  function markColorButtons(): void {
+    colorB.classList.toggle('othello-seg--active', human === 'b');
+    colorW.classList.toggle('othello-seg--active', human === 'w');
+    colorB.setAttribute('aria-pressed', human === 'b' ? 'true' : 'false');
+    colorW.setAttribute('aria-pressed', human === 'w' ? 'true' : 'false');
+  }
+
+  function newGame(): void {
+    grid = newGrid();
+    turn = 'b';
+    aiThinking = false;
+    lastMove = null;
+    gameLive = true;
+    /* the robot's mood this game: 60-92% goof-off moves */
+    aiBlunder = 0.60 + Math.random() * 0.32;
+    markColorButtons();
+    if (turn === human) {
+      render(legalMoves(grid, human));
+      setStatus('Your move — you play ' + colorName(human) + '.');
+    } else {
+      render(null);
+      aiThinking = true;
+      setStatus('Robot opens as ' + colorName(ai) + '…');
+      setTimeout(aiMove, 500);
+    }
+  }
+
+  function setHumanColor(c: OthelloPlayer): void {
+    if (human === c && gameLive) { newGame(); return; }
+    human = c;
+    ai = other(c);
+    saveColor(c);
+    newGame();
+  }
+
+  function onCell(r: number, c: number): void {
+    if (!gameLive || aiThinking || turn !== human) return;
+    var moves = legalMoves(grid, human);
+    var mv: OthelloMove | null = null;
+    for (var i = 0; i < moves.length; i++) {
+      if (moves[i].r === r && moves[i].c === c) { mv = moves[i]; break; }
+    }
+    if (!mv) return;
+    var oldColor = other(human);
+    applyMove(grid, mv, human);
+    lastMove = [r, c];
+    advance();
+    animateFlips(mv.flips, human, oldColor);
+  }
+
+  function advance(): void {
+    var next = other(turn);
+    var nextMoves = legalMoves(grid, next);
+    if (nextMoves.length) {
+      turn = next;
+    } else {
+      if (!legalMoves(grid, turn).length) { gameOver(); return; }
+      setStatus((next === ai ? 'Robot' : 'You') + ' has no moves — pass.');
+    }
+    if (turn === ai) {
+      aiThinking = true;
+      render(null);
+      setStatus('Robot is thinking…');
+      setTimeout(aiMove, 450);
+    } else {
+      aiThinking = false;
+      var hm = legalMoves(grid, human);
+      render(hm);
+      if (gameLive && (statusEl.textContent || '').indexOf('pass') === -1) setStatus('Your move.');
+    }
+  }
+
+  function aiMove(): void {
+    if (!gameLive) return;
+    var mv = aiChooseMove(grid, legalMoves(grid, ai), ai, Math.random, aiBlunder);
+    if (mv) {
+      var oldColor = other(ai);
+      applyMove(grid, mv, ai);
+      lastMove = [mv.r, mv.c];
+      aiThinking = false;
+      advance();
+      animateFlips(mv.flips, ai, oldColor);
+    } else {
+      aiThinking = false;
+      advance();
+    }
+  }
+
+  function gameOver(): void {
+    gameLive = false;
+    aiThinking = false;
+    render(null);
+    var n = countDiscs(grid);
+    var hn = human === 'b' ? n.b : n.w;
+    var an = ai === 'b' ? n.b : n.w;
+    var who = scores.active ? ' (' + scores.active + ')' : '';
+    if (hn > an) {
+      recordResult('win');
+      setStatus('You win ' + hn + '–' + an + who + '! New game?');
+    } else if (an > hn) {
+      recordResult('loss');
+      setStatus('Robot wins ' + an + '–' + hn + who + '. Run it back.');
+    } else {
+      recordResult('draw');
+      setStatus('Draw, ' + hn + '–' + an + who + '.');
+    }
+  }
+
+  /* -------- wiring -------- */
+  newBtn.addEventListener('click', newGame);
+  colorB.addEventListener('click', function () { setHumanColor('b'); });
+  colorW.addEventListener('click', function () { setHumanColor('w'); });
+  function closePanels(except: HTMLElement | null): void {
+    [scoresPanel, helpPanel].forEach(function (p) {
+      if (p && p !== except) p.setAttribute('hidden', '');
+    });
+  }
+  function wirePanelToggle(btn: HTMLElement | null, panel: HTMLElement | null): void {
+    if (!btn || !panel) return;
+    btn.addEventListener('click', function () {
+      closePanels(panel);
+      panel.toggleAttribute('hidden');
+    });
+  }
+  wirePanelToggle(scoresBtn, scoresPanel);
+  wirePanelToggle(helpBtn, helpPanel);
+  addBtn.addEventListener('click', addPlayer);
+  nameInput.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') addPlayer();
+  });
+
+  var beginnerStarted = false;
+  function startBeginner(): void {
+    if (beginnerStarted) return;
+    beginnerStarted = true;
+    document.body.classList.remove('picking');
+    modePick.setAttribute('hidden', '');
+    beginnerGame.removeAttribute('hidden');
+    human = loadColor();
+    ai = other(human);
+    sprites.b = discSprite('b');
+    sprites.w = discSprite('w');
+    buildBoard();
+    renderScores();
+    newGame();
+    if (window.othelloExInit) window.othelloExInit();
+  }
+  modeBeginnerBtn.addEventListener('click', startBeginner);
+})();
