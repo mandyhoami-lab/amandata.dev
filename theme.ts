@@ -1,6 +1,6 @@
-/* color theme cycler — dark / light / pink / blue.
+/* Theme picker — solid "Change Theme" button; each theme listed under it.
    The initial theme is set by a tiny inline script in <head>
-   (before first paint); this wires the button. */
+   (before first paint); this wires the picker. */
 (function () {
   "use strict";
 
@@ -9,12 +9,6 @@
   function current(): string {
     var t: string | undefined = document.documentElement.dataset.theme;
     return (t !== undefined && THEMES.indexOf(t) !== -1) ? t : "dark";
-  }
-
-  function label(btn: HTMLElement): void {
-    /* names the theme a click will switch to */
-    var next = THEMES[(THEMES.indexOf(current()) + 1) % THEMES.length];
-    btn.textContent = next.charAt(0).toUpperCase() + next.slice(1);
   }
 
   /* Othello landing icon follows the theme — one gif variant per theme. */
@@ -34,25 +28,71 @@
   syncDemoGif();
 
   /* Non-null after the guard below (which still runs at runtime). */
-  const btn = document.getElementById("theme-toggle") as HTMLElement;
-  if (!btn) return;
+  const btn = document.getElementById("theme-toggle") as HTMLElement | null;
+  const menu = document.getElementById("theme-menu") as HTMLElement | null;
+  if (!btn || !menu) return;
+  /* Non-null inside closures below (TS does not narrow captured consts). */
+  const btnEl: HTMLElement = btn;
+  const menuEl: HTMLElement = menu;
   /* normalize anything stale to a known theme */
   if (THEMES.indexOf(document.documentElement.dataset.theme || "") === -1) {
     document.documentElement.dataset.theme = "dark";
   }
-  label(btn);
 
-  btn.addEventListener("click", function () {
-    var next = THEMES[(THEMES.indexOf(current()) + 1) % THEMES.length];
-    document.documentElement.dataset.theme = next;
-    try { localStorage.setItem("amandata-theme", next); } catch (e) {}
-    label(btn);
+  var opts: HTMLElement[] = Array.prototype.slice.call(
+    menuEl.querySelectorAll("[data-theme-name]")
+  );
+
+  function markCurrent(): void {
+    var c = current();
+    opts.forEach(function (o) {
+      if (o.getAttribute("data-theme-name") === c) o.setAttribute("aria-current", "true");
+      else o.removeAttribute("aria-current");
+    });
+  }
+
+  function setTheme(name: string): void {
+    if (THEMES.indexOf(name) === -1) return;
+    document.documentElement.dataset.theme = name;
+    try { localStorage.setItem("amandata-theme", name); } catch (e) {}
+    markCurrent();
     syncDemoGif();
+  }
+
+  function isOpen(): boolean { return !menuEl.hasAttribute("hidden"); }
+  function open(): void {
+    menuEl.removeAttribute("hidden");
+    btnEl.setAttribute("aria-expanded", "true");
+  }
+  function close(): void {
+    menuEl.setAttribute("hidden", "");
+    btnEl.setAttribute("aria-expanded", "false");
+  }
+
+  markCurrent();
+
+  btnEl.addEventListener("click", function (e) {
+    e.stopPropagation();
+    if (isOpen()) close(); else open();
+  });
+  opts.forEach(function (o) {
+    o.addEventListener("click", function () {
+      setTheme(o.getAttribute("data-theme-name") || "");
+      close();
+      btnEl.focus();
+    });
+  });
+  document.addEventListener("click", function (e) {
+    var t = e.target as HTMLElement | null;
+    if (isOpen() && t && !menuEl.contains(t)) close();
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && isOpen()) { close(); btnEl.focus(); }
   });
 
   /* catch theme changes from any other source */
   try {
-    var mo = new MutationObserver(function () { syncDemoGif(); });
+    var mo = new MutationObserver(function () { markCurrent(); syncDemoGif(); });
     mo.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
   } catch (e) { /* fail open */ }
 })();

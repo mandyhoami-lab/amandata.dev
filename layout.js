@@ -66,7 +66,15 @@
         DROPDOWNS.map(dropdown).join("") +
         LINKS.map(plainLink).join("") +
         "</div>" +
-        '<button class="theme-toggle" id="theme-toggle" aria-label="cycle color theme">Light</button>' +
+        '<div class="theme-picker">' +
+        '<button class="theme-toggle" id="theme-toggle" type="button" aria-expanded="false" aria-haspopup="true">Change Theme <span class="nav__caret" aria-hidden="true">▾</span></button>' +
+        '<div class="theme-menu" id="theme-menu" role="menu" aria-label="Color theme" hidden>' +
+        '<button class="theme-opt" type="button" role="menuitemradio" data-theme-name="dark">Dark</button>' +
+        '<button class="theme-opt" type="button" role="menuitemradio" data-theme-name="light">Light</button>' +
+        '<button class="theme-opt" type="button" role="menuitemradio" data-theme-name="pink">Pink</button>' +
+        '<button class="theme-opt" type="button" role="menuitemradio" data-theme-name="blue">Blue</button>' +
+        '</div>' +
+        '</div>' +
         (page === "home" ? '<div class="progress" id="progress" aria-hidden="true"></div>' : "") +
         "</nav>";
     var footerHtml = '<footer class="footer"><p>\u00a9 2026 Amanda Ta \u00b7 amandata.dev</p></footer>';

@@ -158,23 +158,57 @@ main, .footer{ position: relative; z-index: 1; }
   .nav__links{ margin-right: auto; margin-left: 2.5rem; }
 }
 
-/* dark/light toggle */
+/* dark/light toggle — solid "Change Theme" accordion button */
+.theme-picker{ position: relative; }
 .theme-toggle{
   font-family: var(--micro);
   -webkit-text-stroke: 0.5px currentColor;
   paint-order: stroke fill;
   font-size: 1.15rem;
   letter-spacing: 0.06em;
-  color: var(--nav-tag);
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.28);
+  color: var(--nav-bg);
+  background: var(--nav-tag);
+  border: none;
   border-radius: 4px;
-  padding: 0.25rem 0.7rem;
+  padding: 0.3rem 0.7rem;
   margin-left: 1rem;
   cursor: pointer;
-  transition: color 0.2s ease, border-color 0.2s ease;
+  transition: filter 0.2s ease;
 }
-.theme-toggle:hover{ color: var(--sand); border-color: var(--sand); }
+.theme-toggle:hover{ filter: brightness(1.1); }
+.theme-menu{
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  min-width: 11rem;
+  background: var(--nav-bg);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.4rem;
+  z-index: 60;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.35);
+}
+.theme-menu[hidden]{ display: none; }
+.theme-opt{
+  display: block;
+  width: 100%;
+  text-align: left;
+  font-family: var(--micro);
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  color: var(--nav-tag);
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 0.8rem;
+  cursor: pointer;
+}
+.theme-opt:hover{ color: var(--sand); background: rgba(255,255,255,0.06); }
+.theme-opt[aria-current="true"]{
+  color: var(--sand);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
 
 /* ================= NAV DROPDOWNS ================= */
 .nav__item{ position: relative; }
