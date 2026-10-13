@@ -131,7 +131,7 @@ main, .footer{ position: relative; z-index: 1; }
   font-family: var(--display);
   font-weight: 700;
   font-size: 1rem;
-  color: var(--nav-ink);
+  color: var(--tag);
   text-decoration: none;
 }
 .nav__mark:hover{ color: var(--sand); }
@@ -142,7 +142,7 @@ main, .footer{ position: relative; z-index: 1; }
   paint-order: stroke fill;
   font-size: 1.15rem;
   letter-spacing: 0.06em;
-  color: var(--nav-dim);
+  color: var(--tag);
   text-decoration: none;
   padding: 0.2rem 0;
   border-bottom: 2px solid transparent;
@@ -163,7 +163,7 @@ main, .footer{ position: relative; z-index: 1; }
   paint-order: stroke fill;
   font-size: 1.15rem;
   letter-spacing: 0.06em;
-  color: var(--nav-dim);
+  color: var(--tag);
   background: transparent;
   border: 1px solid rgba(255,255,255,0.28);
   border-radius: 4px;
@@ -182,7 +182,7 @@ main, .footer{ position: relative; z-index: 1; }
   paint-order: stroke fill;
   font-size: 1.15rem;
   letter-spacing: 0.06em;
-  color: var(--nav-dim);
+  color: var(--tag);
   background: transparent;
   border: none;
   border-bottom: 2px solid transparent;
@@ -200,7 +200,7 @@ main, .footer{ position: relative; z-index: 1; }
   font-family: var(--micro);
   font-size: 1.05rem;
   letter-spacing: 0.04em;
-  color: var(--nav-dim);
+  color: var(--tag);
   text-decoration: none;
   padding: 0.35rem 0;
 }
