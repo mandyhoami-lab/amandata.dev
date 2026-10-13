@@ -63,13 +63,17 @@
     var navHtml = '<nav class="nav">' +
         '<a class="nav__mark" href="' + markHref + '" aria-label="Home">' +
         '<svg class="nav__home" viewBox="0 0 16 14" width="26" height="23" aria-hidden="true" shape-rendering="crispEdges">' +
-        '<rect class="hm" x="6" y="0" width="1" height="1"/>' +
+        '<rect class="hm" x="5" y="0" width="1" height="1"/>' +
         '<rect class="hm" x="9" y="0" width="1" height="1"/>' +
-        '<rect class="hm" x="6" y="1" width="4" height="1"/>' +
-        '<rect class="hm" x="5" y="3" width="6" height="1"/>' +
-        '<rect class="hm" x="4" y="4" width="8" height="1"/>' +
-        '<rect class="hm" x="4" y="5" width="8" height="8"/>' +
-        '<rect class="hm-door" x="7" y="9" width="2" height="4"/>' +
+        '<rect class="hm" x="5" y="1" width="5" height="1"/>' +
+        '<rect class="hm-door" x="6" y="1" width="1" height="1"/>' +
+        '<rect class="hm-door" x="8" y="1" width="1" height="1"/>' +
+        '<rect class="hm" x="5" y="2" width="5" height="1"/>' +
+        '<rect class="hm" x="5" y="3" width="5" height="3"/>' +
+        '<rect class="hm" x="4" y="6" width="8" height="1"/>' +
+        '<rect class="hm" x="3" y="7" width="10" height="1"/>' +
+        '<rect class="hm" x="3" y="8" width="10" height="5"/>' +
+        '<rect class="hm-door" x="7" y="10" width="2" height="3"/>' +
         '</svg>' +
         '</a>' +
         '<div class="nav__links">' +
