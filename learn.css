@@ -1,9 +1,11 @@
 /* creations hub — pixel-art buttons, one per creation */
 
+/* app-store tiles: uniform, compact, icon on top */
+
 .creation-grid{
   display: flex;
   flex-wrap: wrap;
-  gap: 1.25rem;
+  gap: .9rem;
   margin: 1.25rem 0;
 }
 
@@ -11,14 +13,17 @@
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  gap: .55rem;
-  padding: 1.1rem 1.4rem 1rem;
+  gap: .45rem;
+  width: 152px;
+  min-height: 198px;
+  padding: .85rem .55rem .75rem;
+  text-align: center;
   text-decoration: none;
   color: var(--ink);
   background: var(--card-bg);
   border: 3px solid var(--ink);
   border-radius: 0;
-  box-shadow: 6px 6px 0 color-mix(in srgb, var(--ink) 25%, transparent);
+  box-shadow: 4px 4px 0 color-mix(in srgb, var(--ink) 25%, transparent);
 }
 .creation-btn:hover{
   filter: brightness(1.06);
@@ -29,55 +34,66 @@
   text-underline-offset: 4px;
 }
 
+/* fixed icon stage so every tile lines up */
+.creation-btn__icon{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 88px;
+}
+
 .creation-btn__board{
   display: grid;
-  grid-template-columns: repeat(4, 18px);
-  grid-template-rows: repeat(4, 18px);
+  grid-template-columns: repeat(4, 14px);
+  grid-template-rows: repeat(4, 14px);
   gap: 2px;
-  padding: 6px;
+  padding: 5px;
   background: color-mix(in srgb, var(--green) 48%, var(--panel));
   border: 3px solid var(--ink);
 }
 .creation-btn__cell{
-  width: 18px;
-  height: 18px;
+  width: 14px;
+  height: 14px;
   background: rgba(255,255,255,.14);
 }
-.creation-btn__cell--b{ background: #141414; box-shadow: inset -3px -3px 0 #000, inset 3px 3px 0 #3a3a3a; }
-.creation-btn__cell--w{ background: #f4f1ea; box-shadow: inset -3px -3px 0 #b9b2a1, inset 3px 3px 0 #ffffff; }
+.creation-btn__cell--b{ background: #141414; box-shadow: inset -2px -2px 0 #000, inset 2px 2px 0 #3a3a3a; }
+.creation-btn__cell--w{ background: #f4f1ea; box-shadow: inset -2px -2px 0 #b9b2a1, inset 2px 2px 0 #ffffff; }
 
 /* mini stacked-cards icon for the flashcard buttons */
 .creation-btn__cards{
   position: relative;
-  width: 76px; height: 64px;
+  width: 64px; height: 54px;
+  transform: none;
 }
 .creation-btn__cards i{
   position: absolute; display: block;
-  width: 44px; height: 56px;
+  width: 37px; height: 47px;
   background: var(--card-bg);
   border: 3px solid var(--ink);
 }
-.creation-btn__cards i:first-child{ left: 0; top: 8px; }
-.creation-btn__cards i:last-child{ left: 28px; top: 0;
+.creation-btn__cards i:first-child{ left: 0; top: 7px; }
+.creation-btn__cards i:last-child{ left: 24px; top: 0;
   background: color-mix(in srgb, var(--tag) 30%, var(--card-bg)); }
 .creation-btn__cards i:last-child::after{
   content: "?";
   position: absolute; inset: 0;
   display: flex; align-items: center; justify-content: center;
-  font-family: "Pixelify Sans", monospace; font-size: 1.6rem;
+  font-family: "Pixelify Sans", monospace; font-size: 1.35rem;
   color: var(--ink);
 }
 
 .creation-btn__label{
   font-family: "Pixelify Sans", "VT323", monospace;
-  font-size: 1.5rem;
+  font-size: 1.12rem;
   font-weight: 600;
   letter-spacing: .02em;
-  line-height: 1;
+  line-height: 1.15;
 }
 .creation-btn__sub{
-  font-size: .85rem;
+  font-size: .76rem;
   opacity: .75;
+  line-height: 1.35;
 }
 
 .creations-intro{
