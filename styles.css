@@ -130,13 +130,15 @@ main, .footer{ position: relative; z-index: 1; }
   border-bottom: 1px solid rgba(255,255,255,0.12);
 }
 .nav__mark{
-  font-family: var(--display);
-  font-weight: 700;
-  font-size: 1rem;
-  color: var(--nav-tag);
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem;
   text-decoration: none;
 }
-.nav__mark:hover{ color: var(--sand); }
+.nav__home{ display: block; }
+.nav__home .hm{ fill: var(--nav-tag); }
+.nav__home .hm-door{ fill: var(--nav-bg); }
+.nav__mark:hover .hm{ fill: var(--sand); }
 .nav__links{ display: flex; gap: 1.6rem; }
 .nav__link{
   font-family: var(--micro);

@@ -69,7 +69,17 @@
   var markHref = page === "home" ? "#top" : "/";
   var navHtml =
     '<nav class="nav">' +
-      '<a class="nav__mark" href="' + markHref + '">AT</a>' +
+      '<a class="nav__mark" href="' + markHref + '" aria-label="Home">' +
+        '<svg class="nav__home" viewBox="0 0 16 14" width="26" height="23" aria-hidden="true" shape-rendering="crispEdges">' +
+          '<rect class="hm" x="6" y="0" width="1" height="1"/>' +
+          '<rect class="hm" x="9" y="0" width="1" height="1"/>' +
+          '<rect class="hm" x="6" y="1" width="4" height="1"/>' +
+          '<rect class="hm" x="5" y="3" width="6" height="1"/>' +
+          '<rect class="hm" x="4" y="4" width="8" height="1"/>' +
+          '<rect class="hm" x="4" y="5" width="8" height="8"/>' +
+          '<rect class="hm-door" x="7" y="9" width="2" height="4"/>' +
+        '</svg>' +
+      '</a>' +
       '<div class="nav__links">' +
         DROPDOWNS.map(dropdown).join("") +
         LINKS.map(plainLink).join("") +
