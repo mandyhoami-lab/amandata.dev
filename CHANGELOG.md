@@ -3,6 +3,17 @@
 A catalog of the notable commits on this repo's `main` branch.
 Full history: `git log` on the repo, or the Commits page on GitHub.
 
+## 2026-10-14
+
+- **Mobile nav dropdowns no longer hide the navbar** (#1) — opening a
+  dropdown used to switch the scrollable nav link strip to
+  `overflow: visible`, so the hidden links spilled past the screen and
+  widened the page (378px → 640px on a phone), which knocked the sticky
+  navbar out of view near the bottom of the page. The strip now stays a
+  scroller and the dropdown panel is `position: fixed`, placed under its
+  toggle by `nav.js` and kept inside the viewport; swiping the strip
+  closes an open menu.
+
 ## 2026-10-12
 
 - **Othello mode-picker landing** — `/othello.html` now opens on just the

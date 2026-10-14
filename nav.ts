@@ -23,7 +23,6 @@
     dropdowns.forEach(function (dd) {
       if (dd.classList.contains('open')) anyOpen = true;
       dd.classList.remove('open');
-      dd.classList.remove('nav__dropdown--right');
       var t = dd.querySelector('.nav__toggle');
       if (t) t.setAttribute('aria-expanded', 'false');
     });
@@ -49,11 +48,17 @@
       toggle.setAttribute('aria-expanded', 'true');
       var nav = navEl();
       if (nav) nav.classList.add('nav--menu-open');
-      /* keep the floating panel inside the viewport on narrow screens:
-         right-align when it would otherwise spill past the right edge */
+      /* The panel is position:fixed (see styles.css) so the mobile scroll
+         strip can stay a scroll container and still not clip it. Place it
+         under the toggle, right-aligned when it would otherwise spill past
+         the right edge, and never past the left edge. */
       var r = toggle.getBoundingClientRect();
       var w = menu.offsetWidth || 240;
-      if (r.left + w > window.innerWidth - 8) dd.classList.add('nav__dropdown--right');
+      var left = r.left;
+      if (left + w > window.innerWidth - 8) left = r.right - w;
+      left = Math.max(8, Math.min(left, window.innerWidth - 8 - w));
+      menu.style.setProperty('--menu-top', Math.round(r.bottom + 9) + 'px');
+      menu.style.setProperty('--menu-left', Math.round(left) + 'px');
     }
 
     function close(refocus: boolean): void {
@@ -121,6 +126,11 @@
 
   /* a resize can move the toggle; don't leave a panel stranded mid-air */
   window.addEventListener('resize', function () { closeAll(); });
+
+  /* the panel is pinned to the viewport, so swiping the mobile link strip
+     would leave it detached from its toggle */
+  var strip = document.querySelector('.nav__links');
+  if (strip) strip.addEventListener('scroll', function () { closeAll(); }, { passive: true });
 
   /* a menu link navigating away should not leave the panel stuck open */
   document.addEventListener('focusin', function (e) {
