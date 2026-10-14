@@ -34,9 +34,9 @@
                 ["/#changelog", "Changelog"]
             ] },
         { key: "learn", label: "Learn", links: [
-                ["/learn.html", "Games"],
                 ["/othello.html", "Othello"],
-                ["/psy410-flashcards/", "Myers flashcards"]
+                ["/psy410-flashcards/", "Myers flashcards"],
+                ["/psy410.html", "PSY 410 Resources"]
             ] }
     ];
     function dropdown(d) {
