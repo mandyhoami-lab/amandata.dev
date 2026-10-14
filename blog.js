@@ -141,7 +141,17 @@
             document.head.appendChild(s);
         });
     }
+    /* Show/hide the pixelated top loading bar while posts load. */
+    function setLoading(on) {
+        if (window.SiteLoading) {
+            if (on)
+                window.SiteLoading.show();
+            else
+                window.SiteLoading.hide();
+        }
+    }
     function showList() {
+        setLoading(true);
         fetch(apiUrl("/rest/v1/posts?select=title,slug,body,created_at&published=eq.true&order=created_at.desc"), { headers: apiHeaders() })
             .then(function (res) {
             if (!res.ok)
@@ -164,11 +174,13 @@
             listEl.innerHTML = "<p>couldn't load posts — try refreshing.</p>";
             if (searchEl)
                 searchEl.hidden = true;
-        });
+        })
+            .finally(function () { setLoading(false); });
     }
     function showPost(slug) {
         listView.hidden = true;
         postView.hidden = false;
+        setLoading(true);
         fetch(apiUrl("/rest/v1/posts?select=title,body,created_at&slug=eq." + encodeURIComponent(slug) + "&published=eq.true&limit=1"), { headers: apiHeaders() })
             .then(function (res) {
             if (!res.ok)
@@ -195,7 +207,8 @@
         })
             .catch(function () {
             document.getElementById("post-body").innerHTML = "<p>couldn't load the post — try refreshing.</p>";
-        });
+        })
+            .finally(function () { setLoading(false); });
     }
     if (!cfg.SUPABASE_URL || cfg.SUPABASE_URL.indexOf("YOUR_") === 0) {
         listEl.innerHTML = "<p>blog is waking up — check back soon.</p>";

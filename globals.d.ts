@@ -44,12 +44,15 @@ interface FlashcardDeck {
   cards: { tag: string; term: string; def: string }[];
 }
 
+interface SiteLoadingApi { show: () => void; hide: () => void; }
+
 interface Window {
   SITE_DATA: SiteData;
   SUPABASE_CONFIG: SupabaseConfig;
   OthelloEngine: OthelloEngineApi;
   othelloExInit: () => void;
   FLASHCARD_DECK?: FlashcardDeck;
+  SiteLoading: SiteLoadingApi;
 }
 
 /* CDN globals (loaded via <script> tags in the HTML). */

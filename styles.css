@@ -121,6 +121,27 @@ main, .footer{ position: relative; z-index: 1; }
   background: linear-gradient(90deg, var(--green), var(--sand));
 }
 
+/* Pixelated loading bar — fixed at the very top of the viewport.
+   Hidden by default; shown via window.SiteLoading.show() while a page
+   is fetching data (e.g. blog posts). The fill marches in chunky
+   steps so it reads as pixel art, not a smooth gradient. */
+.site-loading{
+  position: fixed; top: 0; left: 0; right: 0; height: 10px;
+  z-index: 100; pointer-events: none; opacity: 0;
+  transition: opacity 0.2s;
+  background: var(--nav-bg);
+}
+.site-loading.on{ opacity: 1; }
+.site-loading__fill{
+  height: 100%; width: 40%;
+  background: repeating-linear-gradient(90deg, var(--green) 0 10px, var(--sand) 10px 12px);
+  animation: site-loading-march 1.1s steps(10) infinite;
+}
+@keyframes site-loading-march{
+  from{ transform: translateX(-100%); }
+  to{ transform: translateX(260%); }
+}
+
 /* ================= NAV ================= */
 .nav{
   position: sticky; top: 0; z-index: 50;
@@ -257,14 +278,11 @@ main, .footer{ position: relative; z-index: 1; }
 }
 .nav__menu-link:hover{ color: var(--sand); }
 /* JS armed: menus become floating dropdown panels, hidden until opened. */
-/* fixed, not absolute: the mobile/tablet link strip is an overflow-x
-   scroller, which would clip an absolute panel. nav.js sets the
-   coordinates under the toggle when it opens. */
 html.js-on .nav__menu{
   display: none;
-  position: fixed;
-  top: var(--menu-top, 4.5rem);
-  left: var(--menu-left, 0.5rem);
+  position: absolute;
+  top: calc(100% + 0.55rem);
+  left: 0;
   min-width: 15rem;
   background: var(--nav-bg);
   border: 1px solid var(--line);
@@ -284,13 +302,13 @@ html.js-on .nav__menu-link:focus-visible{
   outline: none;
 }
 .nav__dropdown.open .nav__menu{ display: block; }
-/* while a menu is open the edge-fade mask must not hide the panel.
-   The strip keeps its overflow-x scroller: switching it to visible let
-   the hidden links spill past the viewport on phones, widening the page
-   and knocking the sticky navbar out of view (issue #1).
+.nav__dropdown--right .nav__menu{ left: auto; right: 0; }
+/* while a menu is open the mobile scroll strip must not clip it,
+   and the edge-fade mask must not hide the panel below the strip.
    (Extra specificity: the .has-more mask rules below tie at 0,2,0,
    so this must outrank them regardless of source order.) */
 .nav.nav--menu-open .nav__links{
+  overflow: visible;
   -webkit-mask-image: none;
   mask-image: none;
 }

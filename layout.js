@@ -100,4 +100,15 @@
     body.insertBefore(canvas, body.firstChild);
     canvas.insertAdjacentHTML("afterend", navHtml);
     body.insertAdjacentHTML("beforeend", footerHtml);
+    /* Pixelated loading bar (fixed top strip, hidden until shown).
+       Pages with async loads (blog) toggle it via window.SiteLoading. */
+    var loadingBar = document.createElement("div");
+    loadingBar.className = "site-loading";
+    loadingBar.setAttribute("aria-hidden", "true");
+    loadingBar.innerHTML = '<div class="site-loading__fill"></div>';
+    body.insertBefore(loadingBar, body.firstChild);
+    window.SiteLoading = {
+        show: function () { loadingBar.classList.add("on"); },
+        hide: function () { loadingBar.classList.remove("on"); }
+    };
 })();
