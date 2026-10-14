@@ -11,6 +11,18 @@
     return (t !== undefined && THEMES.indexOf(t) !== -1) ? t : "dark";
   }
 
+  /* theme-color meta (overscroll / browser chrome on mobile) follows the theme bg */
+  var THEME_BGS: { [theme: string]: string } = {
+    dark: "#0A0C0A",
+    light: "#F7F3E9",
+    pink: "#FAF3EA",
+    blue: "#0A1220"
+  };
+  function syncThemeColor(): void {
+    var m = document.querySelector('meta[name="theme-color"]') as HTMLMetaElement | null;
+    if (m) m.setAttribute("content", THEME_BGS[current()] || THEME_BGS.dark);
+  }
+
   /* Othello landing icon follows the theme — one gif variant per theme. */
   var DEMO_GIFS: { [theme: string]: string } = {
     dark: "/assets/images/othello-demo.gif",
@@ -57,6 +69,7 @@
     try { localStorage.setItem("amandata-theme", name); } catch (e) {}
     markCurrent();
     syncDemoGif();
+    syncThemeColor();
   }
 
   function isOpen(): boolean { return !menuEl.hasAttribute("hidden"); }
@@ -70,6 +83,7 @@
   }
 
   markCurrent();
+  syncThemeColor();
 
   btnEl.addEventListener("click", function (e) {
     e.stopPropagation();
@@ -92,7 +106,7 @@
 
   /* catch theme changes from any other source */
   try {
-    var mo = new MutationObserver(function () { markCurrent(); syncDemoGif(); });
+    var mo = new MutationObserver(function () { markCurrent(); syncDemoGif(); syncThemeColor(); });
     mo.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
   } catch (e) { /* fail open */ }
 })();
