@@ -206,6 +206,25 @@
           (document.getElementById("post-date") as HTMLElement).textContent = fmtDate(post.created_at);
           var html = marked.parse(post.body || "");
           (document.getElementById("post-body") as HTMLElement).innerHTML = DOMPurify.sanitize(html);
+          /* Headings need ids for the in-post #anchor TOC links to work —
+             marked doesn't add them by default. */
+          (function (): void {
+            var body = document.getElementById("post-body") as HTMLElement;
+            var seen: { [k: string]: number } = {};
+            var heads = body.querySelectorAll("h1,h2,h3,h4,h5,h6");
+            for (var i = 0; i < heads.length; i++) {
+              var h = heads[i] as HTMLElement;
+              if (h.id) continue;
+              var slug = (h.textContent || "").toLowerCase().trim()
+                .replace(/[^\w\s-]/g, "")
+                .replace(/[\s_]+/g, "-")
+                .replace(/-+/g, "-");
+              if (!slug) continue;
+              if (seen[slug] !== undefined) { seen[slug]++; slug = slug + "-" + seen[slug]; }
+              else { seen[slug] = 0; }
+              h.id = slug;
+            }
+          })();
         });
       })
       .catch(function () {
