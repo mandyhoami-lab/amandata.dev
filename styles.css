@@ -140,7 +140,7 @@ main{ flex: 1 0 auto; }
    is fetching data (e.g. blog posts). The fill marches in chunky
    steps so it reads as pixel art, not a smooth gradient. */
 .site-loading{
-  position: fixed; top: 0; left: 0; right: 0; height: 10px;
+  position: fixed; top: 0; left: 0; right: 0; height: 4px;
   z-index: 100; pointer-events: none; opacity: 0;
   transition: opacity 0.2s;
   background: var(--nav-bg);
@@ -148,7 +148,7 @@ main{ flex: 1 0 auto; }
 .site-loading.on{ opacity: 1; }
 .site-loading__fill{
   height: 100%; width: 40%;
-  background: repeating-linear-gradient(90deg, var(--green) 0 10px, var(--sand) 10px 12px);
+  background: repeating-linear-gradient(90deg, var(--green) 0 4px, var(--sand) 4px 5px);
   animation: site-loading-march 1.1s steps(10) infinite;
 }
 @keyframes site-loading-march{
