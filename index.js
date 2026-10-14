@@ -1,6 +1,7 @@
 "use strict";
 /* Homepage shell — vignette + main, injected so the .html file stays a thin shell.
    Markup is byte-identical to what the .html file used to ship. */
+/* NOTE: compiled by GitHub Actions on push. */
 (function () {
     "use strict";
     var mount = document.getElementById("page-mount");

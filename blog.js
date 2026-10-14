@@ -1,5 +1,6 @@
 "use strict";
 /* blog reader — pulls posts from Supabase */
+/* NOTE: compiled by GitHub Actions on push — edit this file from anywhere. */
 (function () {
     "use strict";
     /* Page shell — vignette + main, injected so the .html file stays a thin shell.
