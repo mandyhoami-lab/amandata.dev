@@ -1,0 +1,125 @@
+"use strict";
+/* Homepage shell — vignette + main, injected so the .html file stays a thin shell.
+   Markup is byte-identical to what the .html file used to ship. */
+(function () {
+    "use strict";
+    var mount = document.getElementById("page-mount");
+    if (!mount)
+        return; /* shell already present (pre-conversion HTML) */
+    mount.outerHTML = `<!-- CRT vignette overlay -->
+<div class="vignette" aria-hidden="true"></div>
+
+<!-- ================= NAV ================= -->
+
+<!-- ================= HERO ================= -->
+<header class="hero" id="top">
+  <div class="ribbons" aria-hidden="true"></div>
+  <h1 class="hero__title">amandata<span class="hero__dev">.dev<span class="hero__cat" aria-hidden="true"><svg class="hero__cat-svg" viewBox="0 0 22 13" shape-rendering="crispEdges" aria-hidden="true"><rect class="pxf" x="7" y="0" width="1" height="1"/><rect class="pxf" x="8" y="0" width="1" height="1"/><rect class="pxf" x="12" y="0" width="1" height="1"/><rect class="pxf" x="13" y="0" width="1" height="1"/><rect class="pxf" x="6" y="1" width="1" height="1"/><rect class="pxp" x="7" y="1" width="1" height="1"/><rect class="pxp" x="8" y="1" width="1" height="1"/><rect class="pxf" x="9" y="1" width="1" height="1"/><rect class="pxf" x="12" y="1" width="1" height="1"/><rect class="pxp" x="13" y="1" width="1" height="1"/><rect class="pxp" x="14" y="1" width="1" height="1"/><rect class="pxf" x="15" y="1" width="1" height="1"/><rect class="pxf" x="6" y="2" width="1" height="1"/><rect class="pxf" x="7" y="2" width="1" height="1"/><rect class="pxf" x="8" y="2" width="1" height="1"/><rect class="pxf" x="9" y="2" width="1" height="1"/><rect class="pxf" x="10" y="2" width="1" height="1"/><rect class="pxf" x="11" y="2" width="1" height="1"/><rect class="pxf" x="12" y="2" width="1" height="1"/><rect class="pxf" x="13" y="2" width="1" height="1"/><rect class="pxf" x="14" y="2" width="1" height="1"/><rect class="pxf" x="15" y="2" width="1" height="1"/><rect class="pxf" x="5" y="3" width="1" height="1"/><rect class="pxf" x="6" y="3" width="1" height="1"/><rect class="pxf" x="7" y="3" width="1" height="1"/><rect class="pxf" x="8" y="3" width="1" height="1"/><rect class="pxf" x="9" y="3" width="1" height="1"/><rect class="pxf" x="10" y="3" width="1" height="1"/><rect class="pxf" x="11" y="3" width="1" height="1"/><rect class="pxf" x="12" y="3" width="1" height="1"/><rect class="pxf" x="13" y="3" width="1" height="1"/><rect class="pxf" x="14" y="3" width="1" height="1"/><rect class="pxf" x="15" y="3" width="1" height="1"/><rect class="pxf" x="16" y="3" width="1" height="1"/><rect class="pxf" x="5" y="4" width="1" height="1"/><rect class="pxd" x="6" y="4" width="1" height="1"/><rect class="pxd" x="7" y="4" width="1" height="1"/><rect class="pxf" x="8" y="4" width="1" height="1"/><rect class="pxf" x="9" y="4" width="1" height="1"/><rect class="pxf" x="10" y="4" width="1" height="1"/><rect class="pxf" x="11" y="4" width="1" height="1"/><rect class="pxf" x="12" y="4" width="1" height="1"/><rect class="pxf" x="13" y="4" width="1" height="1"/><rect class="pxd" x="14" y="4" width="1" height="1"/><rect class="pxd" x="15" y="4" width="1" height="1"/><rect class="pxf" x="16" y="4" width="1" height="1"/><rect class="pxf" x="5" y="5" width="1" height="1"/><rect class="pxf" x="6" y="5" width="1" height="1"/><rect class="pxf" x="7" y="5" width="1" height="1"/><rect class="pxe" x="8" y="5" width="1" height="1"/><rect class="pxe" x="9" y="5" width="1" height="1"/><rect class="pxf" x="10" y="5" width="1" height="1"/><rect class="pxf" x="11" y="5" width="1" height="1"/><rect class="pxf" x="12" y="5" width="1" height="1"/><rect class="pxf" x="13" y="5" width="1" height="1"/><rect class="pxf" x="14" y="5" width="1" height="1"/><rect class="pxe" x="15" y="5" width="1" height="1"/><rect class="pxe" x="16" y="5" width="1" height="1"/><rect class="pxf" x="5" y="6" width="1" height="1"/><rect class="pxf" x="6" y="6" width="1" height="1"/><rect class="pxf" x="7" y="6" width="1" height="1"/><rect class="pxf" x="8" y="6" width="1" height="1"/><rect class="pxf" x="9" y="6" width="1" height="1"/><rect class="pxf" x="10" y="6" width="1" height="1"/><rect class="pxp" x="11" y="6" width="1" height="1"/><rect class="pxf" x="12" y="6" width="1" height="1"/><rect class="pxf" x="13" y="6" width="1" height="1"/><rect class="pxf" x="14" y="6" width="1" height="1"/><rect class="pxf" x="15" y="6" width="1" height="1"/><rect class="pxf" x="16" y="6" width="1" height="1"/><rect class="pxf" x="5" y="7" width="1" height="1"/><rect class="pxf" x="6" y="7" width="1" height="1"/><rect class="pxf" x="7" y="7" width="1" height="1"/><rect class="pxf" x="8" y="7" width="1" height="1"/><rect class="pxf" x="9" y="7" width="1" height="1"/><rect class="pxf" x="10" y="7" width="1" height="1"/><rect class="pxf" x="11" y="7" width="1" height="1"/><rect class="pxf" x="12" y="7" width="1" height="1"/><rect class="pxf" x="13" y="7" width="1" height="1"/><rect class="pxf" x="14" y="7" width="1" height="1"/><rect class="pxf" x="15" y="7" width="1" height="1"/><rect class="pxf" x="16" y="7" width="1" height="1"/><rect class="pxf" x="3" y="8" width="1" height="1"/><rect class="pxf" x="4" y="8" width="1" height="1"/><rect class="pxd" x="5" y="8" width="1" height="1"/><rect class="pxd" x="6" y="8" width="1" height="1"/><rect class="pxf" x="7" y="8" width="1" height="1"/><rect class="pxf" x="8" y="8" width="1" height="1"/><rect class="pxd" x="9" y="8" width="1" height="1"/><rect class="pxd" x="10" y="8" width="1" height="1"/><rect class="pxf" x="11" y="8" width="1" height="1"/><rect class="pxf" x="12" y="8" width="1" height="1"/><rect class="pxd" x="13" y="8" width="1" height="1"/><rect class="pxd" x="14" y="8" width="1" height="1"/><rect class="pxf" x="15" y="8" width="1" height="1"/><rect class="pxf" x="16" y="8" width="1" height="1"/><rect class="pxf" x="17" y="8" width="1" height="1"/><rect class="pxf" x="18" y="8" width="1" height="1"/><rect class="pxf" x="19" y="8" width="1" height="1"/><rect class="pxf" x="2" y="9" width="1" height="1"/><rect class="pxf" x="3" y="9" width="1" height="1"/><rect class="pxf" x="4" y="9" width="1" height="1"/><rect class="pxf" x="5" y="9" width="1" height="1"/><rect class="pxf" x="6" y="9" width="1" height="1"/><rect class="pxf" x="7" y="9" width="1" height="1"/><rect class="pxf" x="8" y="9" width="1" height="1"/><rect class="pxf" x="9" y="9" width="1" height="1"/><rect class="pxf" x="10" y="9" width="1" height="1"/><rect class="pxf" x="11" y="9" width="1" height="1"/><rect class="pxf" x="12" y="9" width="1" height="1"/><rect class="pxf" x="13" y="9" width="1" height="1"/><rect class="pxf" x="14" y="9" width="1" height="1"/><rect class="pxf" x="15" y="9" width="1" height="1"/><rect class="pxf" x="16" y="9" width="1" height="1"/><rect class="pxf" x="17" y="9" width="1" height="1"/><rect class="pxf" x="18" y="9" width="1" height="1"/><rect class="pxf" x="19" y="9" width="1" height="1"/><rect class="pxf" x="20" y="9" width="1" height="1"/><rect class="pxd" x="21" y="9" width="1" height="1"/><rect class="pxf" x="2" y="10" width="1" height="1"/><rect class="pxf" x="3" y="10" width="1" height="1"/><rect class="pxl" x="4" y="10" width="1" height="1"/><rect class="pxl" x="5" y="10" width="1" height="1"/><rect class="pxf" x="6" y="10" width="1" height="1"/><rect class="pxf" x="7" y="10" width="1" height="1"/><rect class="pxf" x="8" y="10" width="1" height="1"/><rect class="pxf" x="9" y="10" width="1" height="1"/><rect class="pxf" x="10" y="10" width="1" height="1"/><rect class="pxf" x="11" y="10" width="1" height="1"/><rect class="pxf" x="12" y="10" width="1" height="1"/><rect class="pxf" x="13" y="10" width="1" height="1"/><rect class="pxf" x="14" y="10" width="1" height="1"/><rect class="pxf" x="15" y="10" width="1" height="1"/><rect class="pxf" x="16" y="10" width="1" height="1"/><rect class="pxl" x="17" y="10" width="1" height="1"/><rect class="pxl" x="18" y="10" width="1" height="1"/><rect class="pxf" x="19" y="10" width="1" height="1"/><rect class="pxf" x="20" y="10" width="1" height="1"/><rect class="pxl" x="21" y="10" width="1" height="1"/><rect class="pxf" x="2" y="11" width="1" height="1"/><rect class="pxf" x="3" y="11" width="1" height="1"/><rect class="pxf" x="4" y="11" width="1" height="1"/><rect class="pxf" x="5" y="11" width="1" height="1"/><rect class="pxf" x="6" y="11" width="1" height="1"/><rect class="pxf" x="7" y="11" width="1" height="1"/><rect class="pxf" x="8" y="11" width="1" height="1"/><rect class="pxf" x="9" y="11" width="1" height="1"/><rect class="pxf" x="10" y="11" width="1" height="1"/><rect class="pxf" x="11" y="11" width="1" height="1"/><rect class="pxf" x="12" y="11" width="1" height="1"/><rect class="pxf" x="13" y="11" width="1" height="1"/><rect class="pxf" x="14" y="11" width="1" height="1"/><rect class="pxf" x="15" y="11" width="1" height="1"/><rect class="pxf" x="16" y="11" width="1" height="1"/><rect class="pxf" x="17" y="11" width="1" height="1"/><rect class="pxf" x="18" y="11" width="1" height="1"/><rect class="pxf" x="19" y="11" width="1" height="1"/><rect class="pxf" x="20" y="11" width="1" height="1"/><rect class="pxf" x="3" y="12" width="1" height="1"/><rect class="pxf" x="4" y="12" width="1" height="1"/><rect class="pxf" x="5" y="12" width="1" height="1"/><rect class="pxf" x="6" y="12" width="1" height="1"/><rect class="pxf" x="7" y="12" width="1" height="1"/><rect class="pxf" x="8" y="12" width="1" height="1"/><rect class="pxf" x="9" y="12" width="1" height="1"/><rect class="pxf" x="10" y="12" width="1" height="1"/><rect class="pxf" x="11" y="12" width="1" height="1"/><rect class="pxf" x="12" y="12" width="1" height="1"/><rect class="pxf" x="13" y="12" width="1" height="1"/><rect class="pxf" x="14" y="12" width="1" height="1"/><rect class="pxf" x="15" y="12" width="1" height="1"/><rect class="pxf" x="16" y="12" width="1" height="1"/><rect class="pxf" x="17" y="12" width="1" height="1"/><rect class="pxf" x="18" y="12" width="1" height="1"/><rect class="pxf" x="19" y="12" width="1" height="1"/></svg><span class="cat-z">z</span><span class="cat-z">z</span><span class="cat-z">z</span></span></span></h1>
+  <p class="hero__tagline">
+    <span id="typewriter">Social scientist, researcher, web stuff. Welcome to my space.</span><span class="caret" aria-hidden="true"></span>
+  </p>
+  <p class="hero__scroll">Scroll <span class="hero__scroll-arrow" aria-hidden="true">↓</span></p>
+</header>
+
+<main>
+
+  <!-- ================= ABOUT ================= -->
+  <section class="section" id="about">
+    <div class="section__head">
+      <h2 class="section__title">About me</h2>
+      <span class="section__tag">Background</span>
+    </div>
+
+    <div class="section__body">
+      <p>Hi, it&rsquo;s Amanda. You can call me Mandy.</p>
+
+      <p>Big fan of the internet, Othello, and humans. I also skate.</p>
+
+      <p>Currently I&rsquo;m a psychology undergrad at SDSU. I&rsquo;m a research volunteer across a few labs&mdash; <a href="https://business.sdsu.edu/centers-institutes/ai" target="_blank" rel="noopener">JSBCAI</a>, the <a href="https://emilykappenman.org" target="_blank" rel="noopener">Kappenman lab</a>, and the <a href="https://cte.sdsu.edu/" target="_blank" rel="noopener">Center for Tobacco and the Environment</a>; looking at how public health, artificial intelligence, and neuroimaging play a role in clinical psychology and mental health.</p>
+
+      <p>I also enjoy social science history and theory, abstract strategy board games (Othello/Reversi), LLMs, statistics, personality models, psychometrics, neuroimaging, and humans in general. My influences include my mentors; <a href="https://psychology.sdsu.edu/people/georg-matt/" target="_blank" rel="noopener">Dr. Georg Matt</a>, <a href="https://policycte.sdsu.edu/lydia-greiner-drph-aprn/" target="_blank" rel="noopener">Dr. Lydia Greiner</a>, and <a href="https://emilykappenman.org" target="_blank" rel="noopener">Dr. Emily Kappenman</a>, along with other various cyber/internet science folk; <a href="https://www.penguinrandomhouse.com/authors/226907/mary-aiken" target="_blank" rel="noopener">Mary Aiken</a>, <a href="https://en.wikipedia.org/wiki/Hank_Green" target="_blank" rel="noopener">Hank Green</a>, and <a href="https://en.wikipedia.org/wiki/Alok_Kanojia" target="_blank" rel="noopener">Alok Kanojia</a> (or, HealthyGamerGG).</p>
+
+      <p>You can also call me Mandy. Education is for everyone.</p>
+
+      <p><strong>Toolkit:</strong> R &middot; HTML &middot; JavaScript &middot; SPSS</p>
+    </div>
+  </section>
+
+  <!-- ================= PROJECTS ================= -->
+  <section class="section" id="work">
+    <div class="section__head">
+      <h2 class="section__title">Projects</h2>
+      <span class="section__tag">cool stuff</span>
+    </div>
+    <div class="section__body">
+    <div class="proj-grid">
+      <a class="proj-box" href="/othello.html">
+        <span class="proj-box__title">Othello Reversi Coach</span>
+        <span class="proj-box__desc">Beginner robot · Advanced study mode · Engine-graded moves</span>
+      </a>
+      <a class="proj-box" href="/psy410-flashcards/">
+        <span class="proj-box__title">Myers Experimental Psychology Flashcards</span>
+        <span class="proj-box__desc">118 terms · Myers Exp. Psych Ch. 1–16</span>
+      </a>
+      <a class="proj-box" href="/blog.html">
+        <span class="proj-box__title">@tarotams — The amandata.dev Blog</span>
+        <span class="proj-box__desc">Essays · Process notes · Written as tarotams</span>
+      </a>
+      <a class="proj-box" href="https://amandata.org/" target="_blank" rel="noopener">
+        <span class="proj-box__title">amandata.org</span>
+        <span class="proj-box__desc">Research portfolio · Rebuilt from Carrd in clean HTML/CSS/JS</span>
+      </a>
+      <a class="proj-box" href="https://mandyhoami-lab.github.io/tgupsd.org/" target="_blank" rel="noopener">
+        <span class="proj-box__title">tgupsd.org</span>
+        <span class="proj-box__desc">Nonprofit site · Rebuilt from Carrd in clean HTML/CSS/JS</span>
+      </a>
+      <a class="proj-box" href="/">
+        <span class="proj-box__title">amandata.dev</span>
+        <span class="proj-box__desc">This site · Hand-built, pixel-art, always evolving</span>
+      </a>
+    </div>
+  </div>
+  </section>
+
+  <!-- ================= CV ================= -->
+  <section class="section" id="cv">
+    <div class="section__head">
+      <h2 class="section__title">Curriculum Vitae</h2>
+      <span class="section__tag">the record</span>
+    </div>
+
+    <!-- stat row -->
+    <div class="stats" role="list" id="cv-stats"></div>
+
+    <div id="cv-blocks"></div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section class="section" id="contact">
+    <div class="section__head">
+      <h2 class="section__title">Contact</h2>
+      <span class="section__tag">all welcome</span>
+    </div>
+    <p class="contact__intro">All welcome — I&rsquo;ll get to your message soon.</p>
+    <ul class="contact__list">
+      <li><a class="contact__link" id="email-link" href="#" data-user="ata3958" data-domain="sdsu.edu"><span class="blink"></span>Email</a></li>
+      <li><a class="contact__link" href="https://www.linkedin.com/in/amandahoamita" target="_blank" rel="noopener"><span class="blink"></span>LinkedIn</a></li>
+      <li><a class="contact__link" href="https://github.com/mandyhoami-lab" target="_blank" rel="noopener"><span class="blink"></span>GitHub</a></li>
+    </ul>
+  </section>
+
+  <!-- ================= CHANGELOG ================= -->
+  <section class="section" id="changelog">
+    <div class="section__head">
+      <h2 class="section__title">Changelog</h2>
+      <span class="section__tag">Site updates</span>
+    </div>
+    <div class="section__body">
+      <ul class="cv-list" id="changelog-list"></ul>
+      <p>Full history in the repo's <a href="https://github.com/mandyhoami-lab/amandata.dev/blob/main/CHANGELOG.md" target="_blank" rel="noopener">CHANGELOG.md</a>.</p>
+    </div>
+  </section>
+
+
+</main>`;
+})();
