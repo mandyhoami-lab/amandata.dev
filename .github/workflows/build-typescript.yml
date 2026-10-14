@@ -1,0 +1,33 @@
+name: Build TypeScript
+
+# When a .ts file (or tsconfig) is pushed, compile it in the cloud and commit
+# the compiled .js back, so editing TypeScript from a phone is enough — no
+# local tsc run needed. Pushes made by this workflow do not re-trigger it.
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**.ts'
+      - 'tsconfig.json'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Compile TypeScript
+        run: npx -y typescript@5.6.3 -p tsconfig.json
+      - name: Commit compiled JS
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add '*.js'
+          git diff --cached --quiet || git commit -m "chore: rebuild compiled JS from TypeScript [skip ci]"
+          git push
