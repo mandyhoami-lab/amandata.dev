@@ -9,6 +9,39 @@
 (function () {
   'use strict';
 
+  /* Page shell — vignette + main, injected so the .html file stays a thin shell.
+     Markup is byte-identical to what the .html file used to ship. */
+  (function () {
+    var mount = document.getElementById("page-mount");
+    if (!mount) return; /* shell already present (pre-conversion HTML) */
+    mount.outerHTML = `<div class="vignette" aria-hidden="true"></div>
+
+<!-- ================= NAV ================= -->
+
+<main>
+
+  <!-- ================= REPOSITORY ================= -->
+  <section class="section" id="repository">
+    <div class="section__head">
+      <h2 class="section__title">Repository</h2>
+      <span class="section__tag">open source</span>
+    </div>
+    <div class="section__body">
+
+      <p class="repo-intro">Everything behind this site — every page, the othello engine, the flashcards — lives in the open at <a class="repo-link" href="https://github.com/mandyhoami-lab/amandata.dev" target="_blank" rel="noopener">github.com/mandyhoami-lab/amandata.dev</a>. Browse the files below.</p>
+
+      <nav class="repo-crumbs" id="repo-crumbs" aria-label="Repository path"></nav>
+      <div class="repo-list" id="repo-list" aria-live="polite">
+        <p class="repo-status">Loading files&hellip;</p>
+      </div>
+
+    </div>
+  </section>
+
+</main>`;
+  })();
+
+
   var OWNER = 'mandyhoami-lab';
   var REPO = 'amandata.dev';
   var REPO_URL = 'https://github.com/' + OWNER + '/' + REPO;
