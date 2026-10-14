@@ -5,10 +5,10 @@
    find the elements they expect. Per-page config comes from
    <body data-nav="...">:
      home       -> mark links to #top, no active item, progress bar on
-     blog       -> Blog link active
-     learn      -> Learn dropdown active (learn.html, othello.html, othello-advanced.html)
-     psy410     -> PSY 410 link active
-     me         -> Me dropdown active (commissions.html)
+     me         -> Me dropdown active (about.html, cv.html, contact.html,
+                   commissions.html, blog.html)
+     learn      -> Learn dropdown active (learn.html, othello.html,
+                   othello-advanced.html, psy410.html)
      site       -> This Site dropdown active (repository.html)
      (anything else, e.g. admin) -> no active item
    No-JS fallback: each page ships a <noscript> link row; this script
@@ -39,11 +39,6 @@
                 ["/psy410-flashcards/", "Myers flashcards"]
             ] }
     ];
-    var LINKS = [
-        { key: "blog", href: "/blog.html", label: "Blog" },
-        { key: "othello", href: "/othello.html", label: "Play Othello" },
-        { key: "psy410", href: "/psy410.html", label: "PSY 410 Resources" }
-    ];
     function dropdown(d) {
         var active = page === d.key ? " is-active" : "";
         var items = d.links.map(function (l) {
@@ -55,10 +50,6 @@
             ' <span class="nav__caret" aria-hidden="true">\u25be</span></button>' +
             '<div class="nav__menu" id="nav-menu-' + d.key + '" role="menu" aria-labelledby="nav-toggle-' + d.key + '">' +
             items + "</div></div>";
-    }
-    function plainLink(l) {
-        var active = page === l.key ? " is-active" : "";
-        return '<div class="nav__item"><a class="nav__link' + active + '" href="' + l.href + '">' + l.label + "</a></div>";
     }
     var markHref = page === "home" ? "#top" : "/";
     var navHtml = '<nav class="nav">' +
@@ -79,7 +70,6 @@
         '</a>' +
         '<div class="nav__links">' +
         DROPDOWNS.map(dropdown).join("") +
-        LINKS.map(plainLink).join("") +
         "</div>" +
         '<div class="theme-picker">' +
         '<button class="theme-toggle" id="theme-toggle" type="button" aria-expanded="false" aria-haspopup="true">Change Theme <span class="nav__caret" aria-hidden="true">▾</span></button>' +
