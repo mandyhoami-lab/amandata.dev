@@ -1,4 +1,6 @@
 /* blog reader — pulls posts from Supabase */
+/* NOTE: compiled by GitHub Actions on push — edit this file from anywhere. */
+
 (function () {
   "use strict";
 
