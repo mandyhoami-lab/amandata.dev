@@ -23,7 +23,7 @@ jobs:
         with:
           node-version: 20
       - name: Compile TypeScript
-        run: npx -y typescript@5.6.3 -p tsconfig.json
+        run: npx -y -p typescript@5.6.3 tsc -p tsconfig.json
       - name: Commit compiled JS
         run: |
           git config user.name "github-actions[bot]"
