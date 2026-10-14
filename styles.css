@@ -76,7 +76,14 @@
 }
 
 *{ box-sizing: border-box; }
-html{ scroll-behavior: smooth; }
+html{
+  scroll-behavior: smooth;
+  /* Theme-colored backpage: shown in the blank area revealed when the
+     user overscrolls past the top or bottom of the page. Matches body
+     so the overscroll never flashes the browser default. */
+  background: var(--bg);
+  transition: background 0.3s ease;
+}
 
 body{
   margin: 0;
