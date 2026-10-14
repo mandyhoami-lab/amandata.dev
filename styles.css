@@ -88,6 +88,12 @@ body{
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   transition: background 0.3s ease, color 0.3s ease;
+  /* Sticky footer: body is a full-height column; main grows to push the
+     footer to the viewport bottom on short pages (e.g. Othello). */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100svh;
 }
 
 a{ color: var(--green); }
@@ -105,6 +111,7 @@ a{ color: var(--green); }
 
 /* content floats above the game */
 main, .footer{ position: relative; z-index: 1; }
+main{ flex: 1 0 auto; }
 
 /* vignette — pure overlay, never blocks clicks */
 .vignette{
