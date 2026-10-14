@@ -5,14 +5,32 @@ Full history: `git log` on the repo, or the Commits page on GitHub.
 
 ## 2026-10-14
 
-- **Mobile nav dropdowns no longer hide the navbar** (#1) — opening a
-  dropdown used to switch the scrollable nav link strip to
-  `overflow: visible`, so the hidden links spilled past the screen and
-  widened the page (378px → 640px on a phone), which knocked the sticky
-  navbar out of view near the bottom of the page. The strip now stays a
-  scroller and the dropdown panel is `position: fixed`, placed under its
-  toggle by `nav.js` and kept inside the viewport; swiping the strip
-  closes an open menu.
+- **Sticky footer** — body is now a full-height flex column
+  (`min-height: 100vh/100svh`, `main` grows), so the footer sits at the
+  viewport bottom on short pages like Othello instead of floating
+  mid-screen. Nav still sticks on long pages.
+
+## 2026-10-13
+
+- **TypeScript everywhere** — the remaining 8 pages (blog, home, learn,
+  commissions, repository, psy410, othello, othello-advanced) moved to
+  the thin-shell pattern: each page's HTML is a mount point and its
+  `.ts` builds the content. Markup verified byte-identical; compiled
+  with strict tsc.
+- **GitHub Actions auto-compile** — new
+  `.github/workflows/build-typescript.yml`: any push touching `**.ts`
+  or `tsconfig.json` compiles in the cloud and commits the `.js` back,
+  so TypeScript can be edited from a phone. (Fix: `npx` needs the `tsc`
+  binary — `npx -y -p typescript@5.6.3 tsc`.)
+- **Blog loads faster** — the 218KB Supabase SDK is gone; blog.ts
+  queries Supabase with a plain fetch to the PostgREST endpoint.
+  marked + DOMPurify now lazy-load only on single-post views, and a
+  static "Loading…" sits in the mount so the page isn't blank while
+  scripts download.
+- **Pixelated loading bar** — a 10px fixed top strip (green/sand
+  marching blocks, stepped animation) injected by layout.js as shared
+  chrome, toggled via `window.SiteLoading`; wired to the blog's fetch.
+  Hidden when idle.
 
 ## 2026-10-12
 

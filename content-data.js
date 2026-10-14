@@ -4,6 +4,11 @@
    Edit here instead of digging through index.html. */
 window.SITE_DATA = {
     changelog: [
+        { d: "Oct 14, 12:05 AM", h: "Sticky footer: on short pages like Othello, the copyright now sits at the bottom of the screen instead of floating mid-page." },
+        { d: "Oct 13, 9:50 PM", h: "New pixelated loading bar: green-and-sand blocks march across the very top of the page while the blog fetches posts." },
+        { d: "Oct 13, 9:45 PM", h: "Blog loads faster: the 218KB Supabase library is gone (posts load with a plain fetch), and the markdown libraries only download when you open a single post." },
+        { d: "Oct 13, 9:30 PM", h: "TypeScript now compiles itself: pushing a .ts change triggers GitHub Actions to rebuild the .js, so the site can be edited from a phone." },
+        { d: "Oct 13, 9:00 PM", h: "All 8 remaining pages moved to the TypeScript shell pattern — each page's HTML is now a thin shell and TypeScript builds the content." },
         { d: "Oct 12, 10:55 AM", h: "Smoother scrolling: the animated background now only redraws when something changes, and the nav dropped a costly invisible blur." },
         { d: "Oct 12, 10:55 AM", h: "New layouts for small phones, tablets, large desktops, and landscape mode — plus roomier touch targets." },
         { d: "Oct 12, 10:30 AM", h: "Othello now opens on just the two mode buttons; the game reveals itself after you pick." },
