@@ -25,7 +25,7 @@
                 ["/cv.html", "CV"],
                 ["/contact.html", "Contact"],
                 ["/commissions.html", "Commissions"],
-                ["/blog.html", "Blog"],
+                ["/blog.html", "Blog"]
             ] },
         { key: "site", label: "This Site", links: [
                 ["/blog.html?p=making-amandata-dev", "Making amandata.dev"],
