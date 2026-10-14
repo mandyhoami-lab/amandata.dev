@@ -1,0 +1,138 @@
+/* Othello (beginner) shell — vignette + main, injected so the .html file stays a thin shell.
+   Markup is byte-identical to what the .html file used to ship. */
+(function () {
+  "use strict";
+  var mount = document.getElementById("page-mount");
+  if (!mount) return; /* shell already present (pre-conversion HTML) */
+  mount.outerHTML = `<div class="vignette" aria-hidden="true"></div>
+
+<!-- ================= NAV ================= -->
+
+<main>
+
+  <!-- ================= OTHELLO ================= -->
+  <section class="section" id="othello">
+    <div class="section__head">
+      <h2 class="section__title">Othello</h2>
+      <span class="section__tag">reversi</span>
+    </div>
+    <div class="section__body">
+
+      <p class="games-note"><a href="/learn.html">&larr; Back to Learn</a></p>
+
+      <div class="game-card mode-pick" id="mode-pick">
+        <figure class="mode-pick__demo">
+          <p class="mode-pick__kicker">Play: Othello!</p>
+          <img id="mode-demo-gif" src="/assets/images/othello-demo.gif" alt="Gameplay on the pixel-cat Othello board — black and white trade moves and discs flip." width="150" height="150" loading="eager" fetchpriority="high">
+        </figure>
+        <div class="mode-pick__btns">
+          <button class="mode-btn" id="mode-beginner" type="button">
+            <span class="mode-btn__title">Beginner</span>
+            <span class="mode-btn__sub">Learn with a chill robot.</span>
+          </button>
+          <a class="mode-btn" href="/othello-advanced.html">
+            <span class="mode-btn__title">Advanced</span>
+            <span class="mode-btn__sub">Seasoned a little — engine grades every move.</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="game-card" id="beginner-game" hidden>
+        <h3 class="game-card__title">Othello</h3>
+        <p class="game-card__desc">Pick a color, then outflank the robot. Black moves first. Add a username to keep an all-time scoreboard on this device.</p>
+
+        <div class="othello-controls">
+          <div class="othello-seg" role="group" aria-label="Play as">
+            <span class="othello-seg__label">Play as</span>
+            <button class="othello-seg__btn" id="othello-color-b" type="button" aria-pressed="true">Black</button>
+            <button class="othello-seg__btn" id="othello-color-w" type="button" aria-pressed="false">White</button>
+          </div>
+        </div>
+
+        <div class="othello-hud">
+          <div class="othello-score" aria-live="polite">
+            <span class="mini-disc mini-disc--b" id="othello-you-disc" aria-hidden="true"></span>
+            <span>you</span>
+            <span id="othello-you">2</span>
+            <span class="othello-sep">&ndash;</span>
+            <span id="othello-ai">2</span>
+            <span>robot</span>
+            <span class="mini-disc mini-disc--w" id="othello-ai-disc" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="othello-board" id="othello-board" role="grid" aria-label="Othello board"></div>
+
+        <p class="othello-status" id="othello-status" aria-live="polite">Your move.</p>
+
+        <div class="othello-actions">
+          <button class="othello-btn" id="othello-new" type="button">New game</button>
+          <button class="othello-btn" id="othello-scores-btn" type="button">Scores</button>
+          <button class="othello-btn" id="othello-help-btn" type="button">How to play</button>
+          <button class="othello-btn" id="othello-tips-btn" type="button">Tips</button>
+          <button class="othello-btn" id="othello-ex-btn" type="button">Exercises</button>
+        </div>
+
+        <div class="othello-panel" id="othello-scores-panel" hidden>
+          <h4 class="othello-panel__title">All-time scoreboard</h4>
+          <div class="score-add">
+            <input class="score-input" id="othello-name" type="text" maxlength="16" placeholder="username" aria-label="Username">
+            <button class="othello-btn" id="othello-add" type="button">Add</button>
+          </div>
+          <div class="score-tabs" id="othello-score-tabs" role="tablist" aria-label="Scoreboard view"></div>
+          <div id="othello-score-list"></div>
+          <p class="score-note" id="othello-score-note"></p>
+        </div>
+
+        <div class="othello-panel" id="othello-help-panel" hidden>
+          <h4 class="othello-panel__title">How to play</h4>
+          <ul class="othello-rules">
+            <li>Black moves first. Tap a highlighted square to place your disc.</li>
+            <li>Your move must trap at least one opponent disc between your new disc and one of yours — horizontally, vertically, or diagonally.</li>
+            <li>Every trapped disc flips to your color.</li>
+            <li>No legal move? You pass automatically.</li>
+            <li>The game ends when neither side can move. Most discs wins.</li>
+            <li>The robot is still learning too — some games it goofs off, some games it locks in.</li>
+          </ul>
+        </div>
+
+        <div class="othello-panel" id="othello-tips-panel" hidden>
+          <h4 class="othello-panel__title">Tips</h4>
+          <ol class="tips-list">
+            <li><strong>Corners are forever.</strong> A corner disc can never be flipped. Take one whenever you legally can.</li>
+            <li><strong>Build on your corners.</strong> Discs sheltered by a corner often become unflippable &ldquo;stable discs.&rdquo;</li>
+            <li><strong>Never gift a corner.</strong> Your opponent can only take one if you play next to it first.</li>
+            <li><strong>Beware the X-square.</strong> The diagonal neighbor of a corner (b2, g2, b7, g7) — playing there early usually surrenders the corner.</li>
+            <li><strong>Respect the C-square.</strong> The edge square beside a corner is dangerous while the square between it and the corner sits empty. Safe once you hold the edge yourself.</li>
+            <li><strong>Stay quiet early.</strong> Discs touching empty squares (&ldquo;frontier discs&rdquo;) hand your opponent moves. Flip less now, choose more later.</li>
+          </ol>
+          <p class="book-credit">Tips adapted from <a href="https://eothello.com/pdf/othello-book-Brian-Rose.pdf"><em>Othello: A Minute to Learn&hellip; A Lifetime to Master</em></a> by Brian Rose. <a href="https://eothello.com/pdf/othello-book-Brian-Rose.pdf">Read the book (free PDF)</a></p>
+        </div>
+
+        <div class="othello-panel" id="othello-ex-panel" hidden>
+          <h4 class="othello-panel__title">Exercises</h4>
+          <p class="ex-credit">Find the best move in each position. Inspired by the end-of-chapter exercises in Brian Rose&rsquo;s book.</p>
+          <div class="ex-progress">
+            <div class="ex-bar"><div class="ex-barfill" id="ex-barfill"></div></div>
+            <p class="ex-ptext" id="ex-ptext"></p>
+          </div>
+          <div class="ex-board-wrap">
+            <div class="othello-board othello-board--mini" id="ex-board" role="grid" aria-label="Exercise board"></div>
+          </div>
+          <p class="ex-prompt" id="ex-prompt"></p>
+          <p class="ex-feedback" id="ex-feedback" aria-live="polite"></p>
+          <div class="ex-controls">
+            <button class="othello-btn" id="ex-answer-btn" type="button">Show answer</button>
+            <button class="othello-btn" id="ex-tryagain-btn" type="button" hidden>Try again</button>
+            <button class="othello-btn" id="ex-next-btn" type="button" hidden>Next</button>
+            <button class="othello-btn" id="ex-restart-btn" type="button">Restart</button>
+            <button class="othello-btn" id="ex-shuffle-btn" type="button">Shuffle</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>`;
+})();
