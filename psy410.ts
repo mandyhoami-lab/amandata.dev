@@ -18,6 +18,15 @@
     </div>
     <div class="section__body">
       <div class="guide">
+<section class="g-chapter" id="g-intro">
+<h3 class="g-h1">Welcome to PSY 410: Advanced Research Methods</h3>
+<p>This is a resource page I made for PSY 410: Advanced Research Methods at San Diego State University. Some chapter entries may be not up to date. It includes:</p>
+<ul class="g-list">
+<li>vocabulary drill flashcards (see link below)</li>
+<li>fully written entries covering the key concepts of each chapter in layman terms</li>
+<li>etymology tables of the chapter terms and definitions</li>
+</ul>
+</section>
 <section class="g-chapter" id="g-howto">
 <h3 class="g-h1">How to use this guide</h3>
 <p>Read the Key Concepts for a chapter straight through — that’s the story. Then cover the Definition column of the vocab table and quiz yourself out loud; uncover to check. Star anything you miss and hit it again tomorrow.</p>
