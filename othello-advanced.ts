@@ -5,6 +5,88 @@
    othello.js (window.OthelloEngine). */
 (function () {
   'use strict';
+
+  /* Page shell — vignette + main, injected so the .html file stays a thin shell.
+     Markup is byte-identical to what the .html file used to ship. */
+  (function () {
+    var mount = document.getElementById("page-mount");
+    if (!mount) return; /* shell already present (pre-conversion HTML) */
+    mount.outerHTML = `<div class="vignette" aria-hidden="true"></div>
+
+<!-- ================= NAV ================= -->
+
+<main>
+
+  <!-- ================= OTHELLO ADVANCED ================= -->
+  <section class="section" id="othello-advanced">
+    <div class="section__head">
+      <h2 class="section__title">Othello</h2>
+      <span class="section__tag">advanced · study mode</span>
+    </div>
+    <div class="section__body">
+
+      <p class="games-note"><a href="/learn.html">&larr; Back to Learn</a> · <a href="/othello.html">Beginner mode</a></p>
+
+      <div class="game-card">
+        <h3 class="game-card__title">Advanced</h3>
+        <p class="game-card__desc">For players with a few games under their belt. The engine grades every move the moment you play it — good, shaky, or blunder — and the eval graph shows exactly where the game swung.</p>
+
+        <div class="othello-controls">
+          <div class="othello-seg" role="group" aria-label="Play as">
+            <span class="othello-seg__label">Play as</span>
+            <button class="othello-seg__btn" id="adv-color-b" type="button" aria-pressed="true">Black</button>
+            <button class="othello-seg__btn" id="adv-color-w" type="button" aria-pressed="false">White</button>
+          </div>
+        </div>
+
+        <div class="adv-board-wrap">
+          <div class="adv-coords adv-coords--top" aria-hidden="true"><span></span><span>a</span><span>b</span><span>c</span><span>d</span><span>e</span><span>f</span><span>g</span><span>h</span></div>
+          <div class="adv-board-row">
+            <div class="adv-coords adv-coords--side" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span></div>
+            <div class="othello-board adv-board" id="adv-board" role="grid" aria-label="Othello board"></div>
+          </div>
+        </div>
+
+        <div class="othello-hud">
+          <span class="adv-move-no" id="adv-moveno">No. 1</span>
+          <div class="othello-score" aria-live="polite">
+            <span>you</span>
+            <span id="adv-you">2</span>
+            <span class="othello-sep">&ndash;</span>
+            <span id="adv-ai">2</span>
+            <span>robot</span>
+          </div>
+        </div>
+
+        <p class="adv-coach" id="adv-coach" aria-live="polite">Your move.</p>
+
+        <div class="othello-actions">
+          <button class="othello-btn" id="adv-new" type="button">New game</button>
+          <button class="othello-btn" id="adv-undo" type="button">Undo</button>
+          <button class="othello-btn" id="adv-redo" type="button">Redo</button>
+          <button class="othello-btn" id="adv-graph-btn" type="button" aria-expanded="false">Eval graph</button>
+        </div>
+
+        <div class="othello-panel" id="adv-graph-panel" hidden>
+          <h4 class="othello-panel__title">Evaluation</h4>
+          <canvas class="adv-graph" id="adv-graph" width="640" height="220" aria-label="Evaluation graph"></canvas>
+          <p class="score-note">Engine eval from your perspective after each move. Up = you're ahead, down = the robot is.</p>
+        </div>
+
+        <div class="othello-panel">
+          <h4 class="othello-panel__title">Moves</h4>
+          <ol class="adv-moves" id="adv-moves" aria-live="polite"></ol>
+        </div>
+
+        <p class="adv-credit">Study interface inspired by <strong>Hiyoko Reversi</strong> (ひよこリバーシ) — its post-game analysis and eval graph taught me what a teaching UI should do.</p>
+      </div>
+
+    </div>
+  </section>
+
+</main>`;
+  })();
+
   var E = window.OthelloEngine;
   if (!E) return;
 
