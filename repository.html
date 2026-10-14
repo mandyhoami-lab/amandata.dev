@@ -18,44 +18,20 @@
 /* theme init before first paint: saved choice, else system preference, else dark */
 (function(){try{var t=localStorage.getItem('amandata-theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='dark';}})();
 </script>
-<link rel="stylesheet" href="styles.css?v=43">
+<link rel="stylesheet" href="styles.css?v=42">
 <link rel="icon" href="/favicon.ico" sizes="any">
 </head>
 <body data-nav="site">
 <noscript><p class="noscript-nav">amandata.dev &mdash; <a href="/#about">About</a> &middot; <a href="/learn.html">Learn</a> &middot; <a href="/blog.html">Blog</a> &middot; <a href="/othello.html">Play Othello</a> &middot; <a href="/psy410.html">PSY 410 Resources</a></p></noscript>
 
 
-<div class="vignette" aria-hidden="true"></div>
-
-<!-- ================= NAV ================= -->
-
-<main>
-
-  <!-- ================= REPOSITORY ================= -->
-  <section class="section" id="repository">
-    <div class="section__head">
-      <h2 class="section__title">Repository</h2>
-      <span class="section__tag">open source</span>
-    </div>
-    <div class="section__body">
-
-      <p class="repo-intro">Everything behind this site — every page, the othello engine, the flashcards — lives in the open at <a class="repo-link" href="https://github.com/mandyhoami-lab/amandata.dev" target="_blank" rel="noopener">github.com/mandyhoami-lab/amandata.dev</a>. Browse the files below.</p>
-
-      <nav class="repo-crumbs" id="repo-crumbs" aria-label="Repository path"></nav>
-      <div class="repo-list" id="repo-list" aria-live="polite">
-        <p class="repo-status">Loading files&hellip;</p>
-      </div>
-
-    </div>
-  </section>
-
-</main>
+<div id="page-mount"></div>
 
 
 <script src="layout.js?v=6"></script>
 <script src="othello-bg.js?v=18"></script>
 <script src="theme.js?v=12"></script>
-<script src="nav.js?v=11"></script>
-<script src="repository.js?v=2"></script>
+<script src="nav.js?v=10"></script>
+<script src="repository.js?v=3"></script>
 </body>
 </html>
