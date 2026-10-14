@@ -1,8 +1,6 @@
 # amandata.dev
 
-My personal website. Plain HTML, CSS, and JS — no build step.
-
-Live at **https://amandata.dev** (GitHub Pages, custom domain).
+My personal website live at **https://amandata.dev**. GitHub Pages and custom domain.
 
 > **amandata.org** is kept as a separate professional portfolio. This repo is the personal site. In active development.
 
