@@ -21,9 +21,9 @@
     var page = body.getAttribute("data-nav") || "";
     var DROPDOWNS = [
         { key: "me", label: "Me", links: [
-                ["/#about", "About"],
-                ["/#cv", "CV"],
-                ["/#contact", "Contact"],
+                ["/about.html", "About"],
+                ["/cv.html", "CV"],
+                ["/contact.html", "Contact"],
                 ["/commissions.html", "Commissions"]
             ] },
         { key: "site", label: "This Site", links: [
