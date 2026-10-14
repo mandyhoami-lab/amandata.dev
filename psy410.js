@@ -25,6 +25,24 @@
 <p>Read the Key Concepts for a chapter straight through — that’s the story. Then cover the Definition column of the vocab table and quiz yourself out loud; uncover to check. Star anything you miss and hit it again tomorrow.</p>
 <p>Do one full pass over all 11 chapters, then a second pass over only your starred terms plus the Commonly Confused Pairs at the end.</p>
 <p>The Tips flag the exact traps this course’s quizzes reuse — if a Tip sounds familiar from a quiz you took, it’s likely to show up again.</p>
+<h4 class="g-h2">Flashcards</h4>
+<p>Drill the vocab with the <a href="/psy410-flashcards/">Myers flashcards deck</a> — the same terms as these chapters, with shuffle and missed-only mode.</p>
+<h4 class="g-h2">Chapters</h4>
+<ul class="g-list">
+<li><a href="#g-ch1">Chapter 1: Experimental Psychology and the Scientific Method</a></li>
+<li><a href="#g-ch2">Chapter 2: Research Ethics</a></li>
+<li><a href="#g-ch7">Chapter 7: The Basics of Experimentation</a></li>
+<li><a href="#g-ch8">Chapter 8: Between-Subjects Designs</a></li>
+<li><a href="#g-ch9">Chapter 9: Basic Between-Subjects Designs</a></li>
+<li><a href="#g-ch10">Chapter 10: Between-Subjects Factorial Designs</a></li>
+<li><a href="#g-ch11">Chapter 11: Within-Subjects Designs</a></li>
+<li><a href="#g-ch12">Chapter 12: Within-Subjects Designs: Small N</a></li>
+<li><a href="#g-ch14">Chapter 14: Drawing Conclusions</a></li>
+<li><a href="#g-ch15">Chapter 15: Quasi-Experimental Designs</a></li>
+<li><a href="#g-ch16">Chapter 16: Communicating Research: APA Style Manuscripts</a></li>
+<li><a href="#g-hardest">Hardest Chapters</a></li>
+<li><a href="#g-confused">Commonly Confused Pairs</a></li>
+</ul>
 </section>
 <section class="g-chapter" id="g-ch1">
 <h3 class="g-h1">Chapter 1: Experimental Psychology and the Scientific Method</h3>
