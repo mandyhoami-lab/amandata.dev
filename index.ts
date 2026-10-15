@@ -42,15 +42,7 @@
 
       <p>Education is for everyone.</p>
 
-      <div class="toolkit">
-        <h3 class="toolkit__title">My Toolkit</h3>
-        <div class="skills-grid toolkit__grid">
-          <div class="skills-col"><h4>Software</h4><p><strong>R</strong>, SPSS, JavaScript, PyCorder, Overleaf, Excel</p></div>
-          <div class="skills-col"><h4>Statistics</h4><p>Descriptive statistics, t-tests, ANOVA, correlation, linear regression</p></div>
-          <div class="skills-col"><h4>Methodology</h4><p>EEG data acquisition, qualitative coding (thematic analysis), survey &amp; interview design, database development</p></div>
-        </div>
-        <a class="btn" href="/cv.html">Research CV</a>
-      </div>
+      <a class="btn" href="/cv.html">Research CV</a>
     </div>
   </section>
 
@@ -90,6 +82,26 @@
   </div>
   </section>
   </div>
+
+  <!-- ================= RESEARCH ACTIVITY (short CV) ================= -->
+  <section class="section" id="research">
+    <div class="section__head">
+      <h2 class="section__title">Research Activity</h2>
+      <span class="section__tag">the record</span>
+    </div>
+
+    <!-- stat row -->
+    <div class="stats" role="list" id="cv-stats"></div>
+
+    <div class="toolkit">
+      <h3 class="toolkit__title">Toolkit</h3>
+      <div class="skills-grid">
+        <div class="skills-col"><h4>Software</h4><p><strong>R</strong>, SPSS, JavaScript, PyCorder, Overleaf, Excel</p></div>
+        <div class="skills-col"><h4>Statistics</h4><p>Descriptive statistics, t-tests, ANOVA, correlation, linear regression</p></div>
+        <div class="skills-col"><h4>Methodology</h4><p>EEG data acquisition, qualitative coding (thematic analysis), survey &amp; interview design, database development</p></div>
+      </div>
+    </div>
+  </section>
 
   <!-- ================= BLOG + CONTACT (two columns on desktop) ================= -->
   <div class="home-cols">
