@@ -451,8 +451,8 @@ html.js-on .nav__menu-link:focus-visible{
 
 /* ---------- pink (sakura) ---------- */
 [data-theme="pink"]{
-  --bg:      #FAF3EA;
-  --panel:   #FFF9F4;
+  --bg:      #F5F4F2;
+  --panel:   #FBFBFA;
   --ink:     #4E2440;
   --dim:     rgba(78,36,64,0.64);
   --faint:   rgba(78,36,64,0.40);
@@ -466,13 +466,13 @@ html.js-on .nav__menu-link:focus-visible{
   --tag:            #9A5F78;
   --nav-tag:        #F9D2E0;
   --body-text:      rgba(78,36,64,0.88);
-  --card-bg:        rgba(255,251,245,0.80);
+  --card-bg:        rgba(250,250,249,0.80);
   --card-shadow:    0 1px 3px rgba(78,36,64,0.06);
   --nav-bg:         #934A66;
   --vignette:       radial-gradient(ellipse at center, transparent 60%, rgba(154,95,120,0.10) 100%);
   --hero-glow:      0 0 26px rgba(201,111,142,0.22);
   --selection-ink:  #FFFFFF;
-  --work-note-bg:   rgba(255,251,245,0.55);
+  --work-note-bg:   rgba(250,250,249,0.55);
   --game-opacity:   0.50;
 }
 [data-theme="pink"] .ribbons{
