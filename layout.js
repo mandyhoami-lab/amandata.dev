@@ -5,8 +5,8 @@
    find the elements they expect. Per-page config comes from
    <body data-nav="...">:
      home       -> mark links to #top, no active item, progress bar on
-     me         -> Me dropdown active (about.html, cv.html, contact.html,
-                   commissions.html, blog.html)
+     me         -> Me dropdown active (about.html, projects.html, cv.html,
+                   contact.html, commissions.html, blog.html)
      learn      -> Learn dropdown active (learn.html, othello.html,
                    othello-advanced.html, psy410.html)
      site       -> This Site dropdown active (repository.html)
@@ -22,6 +22,7 @@
     var DROPDOWNS = [
         { key: "me", label: "Me", links: [
                 ["/about.html", "About"],
+                ["/projects.html", "Projects"],
                 ["/cv.html", "CV"],
                 ["/contact.html", "Contact"],
                 ["/commissions.html", "Commissions"],
