@@ -20,6 +20,8 @@
   --dim:     rgba(242,236,220,0.62);
   --faint:   rgba(242,236,220,0.38);
   --green:   #1DA05B;
+  --btn-bg:   #1DA05B;   /* button: near-black text on green reads well on dark */
+  --btn-text: #0A0C0A;
   --sand:    #D9BE7A;
   --line:    rgba(242,236,220,0.14);
   --heading: var(--ink);
@@ -60,6 +62,8 @@
   /* light is its own palette: leaf green replaces the neon green,
      headings go leaf instead of near-black, gold deepens for cream */
   --green:    #2E7B3E;   /* leaf green replaces the neon green */
+  --btn-bg:   #2E7B3E;   /* white text on leaf green */
+  --btn-text: #FFFFFF;
   --heading:  #2E7B3E;   /* headings go leaf instead of near-black */
   --sand:     #C2A14E;   /* deeper gold so accents read on cream */
   --data-accent: #B98F3E;  /* deep gold: warm contrast to leaf heading, gentle on cream */
@@ -459,6 +463,8 @@ html.js-on .nav__menu-link:focus-visible{
   --line:    rgba(78,36,64,0.13);
 
   --green:    #C96F8E;   /* soft rose replaces green */
+  --btn-bg:   #A94E70;   /* deeper rose: white text stays readable */
+  --btn-text: #FFFFFF;
   --heading:  #A94E70;
   --sand:     #D192AC;   /* rose pink replaces champagne — no more yellow accents */
   --data-accent: #7E3A5C;  /* deep rose: darker than the heading, an inverse highlight */
@@ -489,6 +495,8 @@ html.js-on .nav__menu-link:focus-visible{
   --line:    rgba(233,239,247,0.14);
 
   --green:    #5AA9E6;   /* sky accent replaces felt green */
+  --btn-bg:   #5AA9E6;   /* near-black text on sky reads well on midnight */
+  --btn-text: #0A1220;
   --sand:     #D9BE7A;
   --data-accent: #6FA8DC;  /* muted sky: analogous cool, soft on midnight */
 
@@ -994,8 +1002,8 @@ mark.key{
   font-family: var(--micro);
   font-size: 1.15rem;
   letter-spacing: 0.08em;
-  color: #fff;
-  background: var(--green);
+  color: var(--btn-text);
+  background: var(--btn-bg);
   border-radius: 4px;
   text-decoration: none;
   transition: filter 0.2s ease;
