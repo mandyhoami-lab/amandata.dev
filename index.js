@@ -44,7 +44,15 @@
 
       <p>You can also call me Mandy. Education is for everyone.</p>
 
-      <p><strong>Toolkit:</strong> R &middot; HTML &middot; JavaScript &middot; SPSS</p>
+      <div class="toolkit">
+        <h3 class="toolkit__title">My Toolkit</h3>
+        <div class="skills-grid toolkit__grid">
+          <div class="skills-col"><h4>Software</h4><p><strong>R</strong>, SPSS, JavaScript, PyCorder, Overleaf, Excel</p></div>
+          <div class="skills-col"><h4>Statistics</h4><p>Descriptive statistics, t-tests, ANOVA, correlation, linear regression</p></div>
+          <div class="skills-col"><h4>Methodology</h4><p>EEG data acquisition, qualitative coding (thematic analysis), survey &amp; interview design, database development</p></div>
+        </div>
+        <a class="btn" href="/cv.html">Research CV</a>
+      </div>
     </div>
   </section>
 
@@ -85,32 +93,31 @@
   </section>
   </div>
 
-  <!-- ================= CV ================= -->
-  <section class="section" id="cv">
+  <!-- ================= BLOG + CONTACT (two columns on desktop) ================= -->
+  <div class="home-cols">
+  <section class="section" id="blog-preview">
     <div class="section__head">
-      <h2 class="section__title">Curriculum Vitae</h2>
-      <span class="section__tag">the record</span>
+      <h2 class="section__title">Blog</h2>
+      <span class="section__tag">Notes &amp; essays</span>
     </div>
-
-    <!-- stat row -->
-    <div class="stats" role="list" id="cv-stats"></div>
-
-    <div id="cv-blocks"></div>
+    <div class="section__body">
+      <div id="home-posts" class="home-posts"><p>Loading…</p></div>
+      <p class="home-posts__more"><a href="/blog.html">all posts &rarr;</a></p>
+    </div>
   </section>
 
-  <!-- ================= CONTACT ================= -->
-  <section class="section" id="contact">
+  <section class="section contact--compact" id="contact">
     <div class="section__head">
       <h2 class="section__title">Contact</h2>
       <span class="section__tag">all welcome</span>
     </div>
-    <p class="contact__intro">All welcome — I&rsquo;ll get to your message soon.</p>
     <ul class="contact__list">
       <li><a class="contact__link" id="email-link" href="#" data-user="ata3958" data-domain="sdsu.edu"><span class="blink"></span>Email</a></li>
       <li><a class="contact__link" href="https://www.linkedin.com/in/amandahoamita" target="_blank" rel="noopener"><span class="blink"></span>LinkedIn</a></li>
       <li><a class="contact__link" href="https://github.com/mandyhoami-lab" target="_blank" rel="noopener"><span class="blink"></span>GitHub</a></li>
     </ul>
   </section>
+  </div>
 
   <!-- ================= CHANGELOG ================= -->
   <section class="section" id="changelog">
@@ -126,4 +133,38 @@
 
 
 </main>`;
+})();
+/* Homepage blog preview — latest 3 published posts from Supabase. */
+(function () {
+    "use strict";
+    var mount = document.getElementById("home-posts");
+    if (!mount)
+        return;
+    var cfg = window.SUPABASE_CONFIG || {};
+    function esc(s) {
+        return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    }
+    function fallback(html) { mount.innerHTML = html; }
+    if (!cfg.SUPABASE_URL || cfg.SUPABASE_URL.indexOf("YOUR_") === 0) {
+        fallback('<p><a href="/blog.html">visit the blog &rarr;</a></p>');
+        return;
+    }
+    var url = cfg.SUPABASE_URL.replace(/\/$/, "") +
+        "/rest/v1/posts?select=title,slug,created_at&published=eq.true&order=created_at.desc&limit=3";
+    fetch(url, { headers: { "apikey": cfg.SUPABASE_ANON_KEY, "Authorization": "Bearer " + cfg.SUPABASE_ANON_KEY } })
+        .then(function (res) { if (!res.ok)
+        throw new Error("posts failed"); return res.json(); })
+        .then(function (posts) {
+        if (!posts || !posts.length) {
+            fallback('<p>no posts yet — <a href="/blog.html">visit the blog</a>.</p>');
+            return;
+        }
+        fallback(posts.map(function (p) {
+            var d = new Date(p.created_at).toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
+            return '<a class="home-post" href="/blog.html?p=' + encodeURIComponent(p.slug) + '">' +
+                '<span class="home-post__title">' + esc(p.title) + "</span>" +
+                '<span class="home-post__date">' + esc(d) + "</span></a>";
+        }).join(""));
+    })
+        .catch(function () { fallback('<p><a href="/blog.html">visit the blog &rarr;</a></p>'); });
 })();
