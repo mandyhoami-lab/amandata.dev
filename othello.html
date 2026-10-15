@@ -19,7 +19,7 @@
 /* theme init before first paint: saved choice, else system preference, else dark */
 (function(){try{var t=localStorage.getItem('amandata-theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}var B={dark:'#0A0C0A',light:'#F7F3E9',pink:'#F5F4F2',blue:'#0A1220'};if(!B[t])t='dark';document.documentElement.dataset.theme=t;var m=document.getElementById('meta-theme-color');if(m)m.setAttribute('content',B[t]);}catch(e){document.documentElement.dataset.theme='dark';}})();
 </script>
-<link rel="stylesheet" href="styles.css?v=60">
+<link rel="stylesheet" href="styles.css?v=61">
 <link rel="stylesheet" href="othello.css?v=9">
 <link rel="icon" href="/favicon.ico" sizes="any">
 </head>
@@ -30,7 +30,7 @@
 <div id="page-mount"></div>
 
 
-<script src="layout.js?v=11"></script>
+<script src="layout.js?v=12"></script>
 <script src="othello-page.js?v=1"></script>
 <script src="othello-bg.js?v=18"></script>
 <script src="theme.js?v=14"></script>
