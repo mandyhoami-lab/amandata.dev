@@ -460,7 +460,7 @@ html.js-on .nav__menu-link:focus-visible{
 
   --green:    #C96F8E;   /* soft rose replaces green */
   --heading:  #A94E70;
-  --sand:     #DDB56A;   /* creamy champagne */
+  --sand:     #D192AC;   /* rose pink replaces champagne — no more yellow accents */
   --data-accent: #7E3A5C;  /* deep rose: darker than the heading, an inverse highlight */
 
   --tag:            #9A5F78;
@@ -476,9 +476,7 @@ html.js-on .nav__menu-link:focus-visible{
   --game-opacity:   0.50;
 }
 [data-theme="pink"] .ribbons{
-  background:
-    linear-gradient(115deg, transparent 42%, rgba(201,111,142,0.10) 47%, transparent 53%),
-    linear-gradient(115deg, transparent 55%, rgba(221,181,106,0.12) 60%, transparent 66%);
+  display: none;  /* sheen removed in pink */
 }
 
 /* ---------- blue (midnight) ---------- */
