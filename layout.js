@@ -53,6 +53,15 @@
             items + "</div></div>";
     }
     var markHref = page === "home" ? "#top" : "/";
+    /* Desktop-only top-level links (hidden on mobile via .nav__link--wide). */
+    var path = window.location.pathname;
+    var wideLinks = [
+        ["/blog.html", "Blog"],
+        ["/psy410.html", "PSY 410 Resources"]
+    ].map(function (l) {
+        var active = path === l[0] ? " is-active" : "";
+        return '<a class="nav__link nav__link--wide' + active + '" href="' + l[0] + '">' + l[1] + "</a>";
+    }).join("");
     var navHtml = '<nav class="nav">' +
         '<a class="nav__mark" href="' + markHref + '" aria-label="Home">' +
         '<svg class="nav__home" viewBox="0 0 16 14" width="26" height="23" aria-hidden="true" shape-rendering="crispEdges">' +
@@ -70,7 +79,7 @@
         '</svg>' +
         '</a>' +
         '<div class="nav__links">' +
-        DROPDOWNS.map(dropdown).join("") +
+        DROPDOWNS.map(dropdown).join("") + wideLinks +
         "</div>" +
         '<div class="theme-picker">' +
         '<button class="theme-toggle" id="theme-toggle" type="button" aria-expanded="false" aria-haspopup="true">Change Theme <span class="nav__caret" aria-hidden="true">▾</span></button>' +

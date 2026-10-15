@@ -284,6 +284,25 @@ main{ flex: 1 0 auto; }
 }
 .nav__toggle:hover{ color: var(--nav-ink); }
 .nav__toggle.is-active{ color: var(--sand); border-color: var(--sand); }
+/* Desktop-only top-level nav links (Blog, PSY 410 Resources). */
+.nav__link{
+  font-family: var(--micro);
+  -webkit-text-stroke: 0.5px currentColor;
+  paint-order: stroke fill;
+  font-size: 1.15rem;
+  letter-spacing: 0.06em;
+  color: var(--nav-tag);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  padding: 0.2rem 0;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.nav__link:hover{ color: var(--nav-ink); }
+.nav__link.is-active{ color: var(--sand); border-color: var(--sand); }
+.nav__link--wide{ display: none; }
+@media (min-width: 641px){
+  .nav__link--wide{ display: inline-block; }
+}
 .nav__caret{ font-size: 0.85em; margin-left: 0.15em; }
 /* No-JS fail-open: menus render as plain stacked links under their toggle. */
 .nav__menu{ padding: 0.25rem 0 0.5rem; }
