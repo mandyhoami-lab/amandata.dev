@@ -22,6 +22,8 @@
 
 <main>
 
+  <!-- ================= ABOUT + PROJECTS (two columns on desktop) ================= -->
+  <div class="home-cols">
   <!-- ================= ABOUT ================= -->
   <section class="section" id="about">
     <div class="section__head">
@@ -79,6 +81,7 @@
     </div>
   </div>
   </section>
+  </div>
 
   <!-- ================= CV ================= -->
   <section class="section" id="cv">
