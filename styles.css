@@ -958,6 +958,25 @@ mark.key{
   .hero__title{ font-size: clamp(2.6rem, 8vw, 4.5rem); }
 }
 
+/* ---------- desktop: two-column homepage (about left, projects right) ---------- */
+@media (min-width: 1025px){
+  .home-cols{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;              /* generous gutter keeps the columns visually separate */
+    align-items: start;     /* both column tops line up */
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 var(--edge);
+  }
+  .home-cols .section{
+    max-width: none;        /* fill the column instead of the 760px cap */
+    margin: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
 /* ---------- large desktops ---------- */
 @media (min-width: 1440px){
   :root{ --max: 800px; }
