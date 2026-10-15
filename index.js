@@ -103,6 +103,14 @@
         <div class="skills-col"><h4>Methodology</h4><p>EEG data acquisition, qualitative coding (thematic analysis), survey &amp; interview design, database development</p></div>
       </div>
     </div>
+
+    <div class="research-pubs">
+      <h3 class="cv-block__title">Academic Presentations</h3>
+      <ul class="cv-list">
+        <li><strong>Ta, A.</strong>, Matt, G. E., Wooldridge, G., &amp; Greiner, L. (2026). <em>Smoking and vaping policies in newly constructed, state-funded multiunit housing in California</em> [Poster presentation]. Third Annual Research Symposium on Tobacco and the Environment, Southeast Live Well Center, San Diego, CA.</li>
+        <li><strong>Ta, A.</strong>, Matt, G. E., Wooldridge, G., &amp; Greiner, L. (2026). <em>Smoking and vaping policies in newly constructed, state-funded multiunit housing in California</em> [Poster presentation]. SDSU Student Symposium (S3), San Diego State University, San Diego, CA.</li>
+      </ul>
+    </div>
   </section>
 
   <!-- ================= BLOG + CONTACT (two columns on desktop) ================= -->
