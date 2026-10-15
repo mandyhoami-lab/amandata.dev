@@ -1037,10 +1037,8 @@ mark.key{
 }
 .home-posts__more{ margin-top: 1rem; }
 
-/* compact contact: shrunk and right-aligned in its column */
-.contact--compact{ text-align: right; }
-.contact--compact .section__head{ justify-content: flex-end; }
-.contact--compact .contact__list{ align-items: flex-end; margin-top: 1.2rem; gap: 0.7rem; }
+/* compact contact: shrunk, left-aligned in its column */
+.contact--compact .contact__list{ margin-top: 1.2rem; gap: 0.7rem; }
 
 /* ---------- large desktops ---------- */
 @media (min-width: 1440px){
