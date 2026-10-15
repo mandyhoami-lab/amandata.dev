@@ -979,6 +979,7 @@ mark.key{
 
 /* ---------- homepage: toolkit, research cv button, blog preview, compact contact ---------- */
 .toolkit{ margin-top: 2.2rem; }
+.research-pubs{ margin-top: 2.2rem; }
 .toolkit__title{
   font-family: var(--micro);
   font-size: 1.4rem;
