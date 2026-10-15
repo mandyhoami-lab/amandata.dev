@@ -41,8 +41,6 @@
       <p>I also enjoy social science history and theory, abstract strategy board games (Othello/Reversi), LLMs, statistics, personality models, psychometrics, neuroimaging, and humans in general. My influences include my mentors; <a href="https://psychology.sdsu.edu/people/georg-matt/" target="_blank" rel="noopener">Dr. Georg Matt</a>, <a href="https://policycte.sdsu.edu/lydia-greiner-drph-aprn/" target="_blank" rel="noopener">Dr. Lydia Greiner</a>, and <a href="https://emilykappenman.org" target="_blank" rel="noopener">Dr. Emily Kappenman</a>, along with other various cyber/internet science folk; <a href="https://www.penguinrandomhouse.com/authors/226907/mary-aiken" target="_blank" rel="noopener">Mary Aiken</a>, <a href="https://en.wikipedia.org/wiki/Hank_Green" target="_blank" rel="noopener">Hank Green</a>, and <a href="https://en.wikipedia.org/wiki/Alok_Kanojia" target="_blank" rel="noopener">Alok Kanojia</a> (or, HealthyGamerGG).</p>
 
       <p>Education is for everyone.</p>
-
-      <a class="btn" href="/cv.html">Research CV</a>
     </div>
   </section>
 
@@ -50,7 +48,7 @@
   <section class="section" id="work">
     <div class="section__head">
       <h2 class="section__title">Projects</h2>
-      <span class="section__tag">cool stuff</span>
+      <span class="section__tag">cool stuff I've made</span>
     </div>
     <div class="section__body">
     <div class="proj-grid">
@@ -109,6 +107,8 @@
         <li><strong>Ta, A.</strong>, Matt, G. E., Wooldridge, G., &amp; Greiner, L. (2026). <em>Smoking and vaping policies in newly constructed, state-funded multiunit housing in California</em> [Poster presentation]. SDSU Student Symposium (S3), San Diego State University, San Diego, CA.</li>
       </ul>
     </div>
+
+    <a class="btn" href="/cv.html">See: Academic CV</a>
   </section>
 
   <!-- ================= BLOG + CONTACT (two columns on desktop) ================= -->
