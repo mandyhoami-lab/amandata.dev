@@ -42,7 +42,7 @@
 
       <p>I also enjoy social science history and theory, abstract strategy board games (Othello/Reversi), LLMs, statistics, personality models, psychometrics, neuroimaging, and humans in general. My influences include my mentors; <a href="https://psychology.sdsu.edu/people/georg-matt/" target="_blank" rel="noopener">Dr. Georg Matt</a>, <a href="https://policycte.sdsu.edu/lydia-greiner-drph-aprn/" target="_blank" rel="noopener">Dr. Lydia Greiner</a>, and <a href="https://emilykappenman.org" target="_blank" rel="noopener">Dr. Emily Kappenman</a>, along with other various cyber/internet science folk; <a href="https://www.penguinrandomhouse.com/authors/226907/mary-aiken" target="_blank" rel="noopener">Mary Aiken</a>, <a href="https://en.wikipedia.org/wiki/Hank_Green" target="_blank" rel="noopener">Hank Green</a>, and <a href="https://en.wikipedia.org/wiki/Alok_Kanojia" target="_blank" rel="noopener">Alok Kanojia</a> (or, HealthyGamerGG).</p>
 
-      <p>You can also call me Mandy. Education is for everyone.</p>
+      <p>Education is for everyone.</p>
 
       <div class="toolkit">
         <h3 class="toolkit__title">My Toolkit</h3>
