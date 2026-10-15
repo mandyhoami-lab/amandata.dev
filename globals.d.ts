@@ -48,6 +48,7 @@ interface SiteLoadingApi { show: () => void; hide: () => void; }
 
 interface Window {
   SITE_DATA: SiteData;
+  ABOUT_BIO_HTML: string;
   SUPABASE_CONFIG: SupabaseConfig;
   OthelloEngine: OthelloEngineApi;
   othelloExInit: () => void;
