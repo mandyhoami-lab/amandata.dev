@@ -102,7 +102,7 @@
       </ul>
     </div>
 
-    <a class="btn" href="/cv.html">See: Academic CV</a>
+    <div class="btn-center"><a class="btn" href="/cv.html">See: Academic CV</a></div>
   </section>
 
   <!-- ================= BLOG + CONTACT (two columns on desktop) ================= -->
