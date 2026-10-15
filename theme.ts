@@ -15,7 +15,7 @@
   var THEME_BGS: { [theme: string]: string } = {
     dark: "#0A0C0A",
     light: "#F7F3E9",
-    pink: "#FAF3EA",
+    pink: "#F5F4F2",
     blue: "#0A1220"
   };
   function syncThemeColor(): void {
