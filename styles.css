@@ -986,7 +986,6 @@ mark.key{
   color: var(--ink);
   margin: 0 0 1rem;
 }
-.toolkit .skills-grid{ grid-template-columns: 1fr; gap: 1rem; }  /* stack in the narrow column */
 .btn{
   display: inline-block;
   margin-top: 1.4rem;
