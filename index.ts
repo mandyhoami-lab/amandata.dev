@@ -34,7 +34,7 @@
     <div class="section__body">
       <p>Hi, it&rsquo;s Amanda. You can call me Mandy.</p>
 
-      <p>Big fan of the internet, Othello, and humans. I also skate.</p>
+      <p>Big fan of the internet, Othello, and humans. I also skate, and create and manage websites for fun.</p>
 
       <p>Currently I&rsquo;m a psychology undergrad at SDSU. I&rsquo;m a research volunteer across a few labs&mdash; <a href="https://business.sdsu.edu/centers-institutes/ai" target="_blank" rel="noopener">JSBCAI</a>, the <a href="https://emilykappenman.org" target="_blank" rel="noopener">Kappenman lab</a>, and the <a href="https://cte.sdsu.edu/" target="_blank" rel="noopener">Center for Tobacco and the Environment</a>; looking at how public health, artificial intelligence, and neuroimaging play a role in clinical psychology and mental health.</p>
 
