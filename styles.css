@@ -23,6 +23,7 @@
   --sand:    #D9BE7A;
   --line:    rgba(242,236,220,0.14);
   --heading: var(--ink);
+  --data-accent: #C9A961;  /* muted gold: warm like the heading, tied to --sand but softened */
 
   /* semantic tokens that flip with the theme */
   --tag:            #D9BE7A;
@@ -61,6 +62,7 @@
   --green:    #2E7B3E;   /* leaf green replaces the neon green */
   --heading:  #2E7B3E;   /* headings go leaf instead of near-black */
   --sand:     #C2A14E;   /* deeper gold so accents read on cream */
+  --data-accent: #B98F3E;  /* deep gold: warm contrast to leaf heading, gentle on cream */
 
   --tag:            #9A7B2D;
   --nav-tag:        #EACD85;
@@ -459,6 +461,7 @@ html.js-on .nav__menu-link:focus-visible{
   --green:    #C96F8E;   /* soft rose replaces green */
   --heading:  #A94E70;
   --sand:     #DDB56A;   /* creamy champagne */
+  --data-accent: #CFA15C;  /* soft champagne: analogous warmth to the rose heading */
 
   --tag:            #9A5F78;
   --nav-tag:        #F9D2E0;
@@ -489,6 +492,7 @@ html.js-on .nav__menu-link:focus-visible{
 
   --green:    #5AA9E6;   /* sky accent replaces felt green */
   --sand:     #D9BE7A;
+  --data-accent: #6FA8DC;  /* muted sky: analogous cool, soft on midnight */
 
   --tag:            #D9BE7A;
   --body-text:      rgba(233,239,247,0.88);
@@ -608,6 +612,13 @@ html.js-on .nav__menu-link:focus-visible{
   text-shadow: var(--hero-glow);
   /* slanted like a lean-forward italic; the nudge recenters the visual weight */
   transform: skewX(8deg) translateX(-0.12em);
+}
+/* "data" highlight: per-theme accent kept subtle — each hue is analogous to
+   its theme's heading/palette, just enough contrast to read as intentional.
+   stroke color follows the fill so the 2px outline doesn't halo. */
+.hero__title .hero__data{
+  color: var(--data-accent);
+  -webkit-text-stroke-color: var(--data-accent);
 }
 .hero__tagline{
   font-family: var(--micro);
