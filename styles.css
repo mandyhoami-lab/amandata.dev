@@ -62,7 +62,7 @@
   --green:    #2E7B3E;   /* leaf green replaces the neon green */
   --heading:  #2E7B3E;   /* headings go leaf instead of near-black */
   --sand:     #C2A14E;   /* deeper gold so accents read on cream */
-  --data-accent: #B98F3E;  /* deep gold: warm contrast to leaf heading, gentle on cream */
+  --data-accent: #1E5B2A;  /* deep leaf: darker than the heading, an inverse highlight */
 
   --tag:            #9A7B2D;
   --nav-tag:        #EACD85;
