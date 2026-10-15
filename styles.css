@@ -1009,6 +1009,7 @@ mark.key{
   transition: filter 0.2s ease;
 }
 .btn:hover{ filter: brightness(1.12); }
+.btn-center{ text-align: center; }
 
 .home-posts{ display: flex; flex-direction: column; gap: 0.9rem; }
 .home-post{
