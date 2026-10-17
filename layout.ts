@@ -69,14 +69,17 @@
   var navHtml =
     '<nav class="nav">' +
       '<a class="nav__mark" href="' + markHref + '" aria-label="Home">' +
-        '<svg class="nav__home" viewBox="0 0 16 14" width="26" height="23" aria-hidden="true">' +
-          '<ellipse class="hm" cx="2.8" cy="4.2" rx="1.5" ry="1.9"/>' +
-          '<ellipse class="hm" cx="6" cy="2.8" rx="1.7" ry="2.1"/>' +
-          '<ellipse class="hm" cx="10" cy="2.8" rx="1.7" ry="2.1"/>' +
-          '<ellipse class="hm" cx="13.2" cy="4.2" rx="1.5" ry="1.9"/>' +
-          '<ellipse class="hm" cx="6.2" cy="8.6" rx="2.2" ry="2.2"/>' +
-          '<ellipse class="hm" cx="9.8" cy="8.6" rx="2.2" ry="2.2"/>' +
-          '<ellipse class="hm" cx="8" cy="11" rx="4" ry="2.8"/>' +
+        '<svg class="nav__home" viewBox="0 0 16 14" width="26" height="23" aria-hidden="true" shape-rendering="crispEdges">' +
+          '<rect class="hm" x="1" y="4" width="2" height="3"/>' +
+          '<rect class="hm" x="5" y="3" width="2" height="3"/>' +
+          '<rect class="hm" x="9" y="3" width="2" height="3"/>' +
+          '<rect class="hm" x="13" y="4" width="2" height="3"/>' +
+          '<rect class="hm" x="5" y="7" width="2" height="1"/>' +
+          '<rect class="hm" x="9" y="7" width="2" height="1"/>' +
+          '<rect class="hm" x="5" y="8" width="6" height="1"/>' +
+          '<rect class="hm" x="4" y="9" width="8" height="3"/>' +
+          '<rect class="hm" x="5" y="12" width="6" height="1"/>' +
+          '<rect class="hm" x="6" y="13" width="4" height="1"/>' +
         '</svg>' +
       '</a>' +
       '<div class="nav__links">' +
