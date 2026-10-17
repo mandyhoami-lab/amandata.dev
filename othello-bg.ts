@@ -1,7 +1,7 @@
 /* =========================================================
    amandata.dev — abstract othello backdrop.
-   A quiet, graphic othello study behind the page: thin grid
-   lines, flat discs (solid vs. ring), a live game cycling
+   A quiet, graphic othello study behind the page: floating
+   flat discs (solid vs. ring), a live game cycling
    through think → place → flip. No physical board, no notes —
    the content stays the focus.
    ========================================================= */
@@ -160,28 +160,6 @@
     var cell = b.S / N;
     ctx.save();
     ctx.globalAlpha = b.alpha;
-
-    /* thin outer border */
-    ctx.strokeStyle = pal.grid;
-    ctx.lineWidth = Math.max(1, cell * 0.03);
-    ctx.strokeRect(b.OX, b.OY, b.S, b.S);
-
-    /* grid lines */
-    ctx.strokeStyle = pal.grid;
-    ctx.lineWidth = Math.max(1, cell * 0.018);
-    ctx.beginPath();
-    for (var i = 1; i < N; i++) {
-      ctx.moveTo(b.OX + i * cell, b.OY); ctx.lineTo(b.OX + i * cell, b.OY + b.S);
-      ctx.moveTo(b.OX, b.OY + i * cell); ctx.lineTo(b.OX + b.S, b.OY + i * cell);
-    }
-    ctx.stroke();
-
-    /* star points */
-    ctx.fillStyle = pal.grid;
-    [[1,1],[1,6],[6,1],[6,6]].forEach(function (p) {
-      var xy = cellXY(b, p[0], p[1]);
-      ctx.beginPath(); ctx.arc(xy[0], xy[1], cell * 0.045, 0, Math.PI * 2); ctx.fill();
-    });
 
     /* candidate rings while thinking */
     if (b.state === 'think' && b.moves.length) {
