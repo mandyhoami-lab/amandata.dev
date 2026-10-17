@@ -3,7 +3,7 @@
    Runs FIRST among body scripts so theme.js / nav.js / page scripts
    find the elements they expect. Per-page config comes from
    <body data-nav="...">:
-     home       -> mark links to #top, no active item, progress bar on
+     home       -> mark links to #top, mark underlined active, progress bar on
      me         -> Me dropdown active (about.html, projects.html, cv.html,
                    contact.html, commissions.html, blog.html)
      learn      -> Learn dropdown active (learn.html, othello.html,
@@ -57,6 +57,7 @@
   }
 
   var markHref = page === "home" ? "#top" : "/";
+  var markActive = page === "home" ? " is-active" : "";
   /* Desktop-only top-level links (hidden on mobile via .nav__link--wide). */
   var path = window.location.pathname;
   var wideLinks = [
@@ -68,7 +69,7 @@
   }).join("");
   var navHtml =
     '<nav class="nav">' +
-      '<a class="nav__mark" href="' + markHref + '" aria-label="Home">' +
+      '<a class="nav__mark' + markActive + '" href="' + markHref + '" aria-label="Home">' +
         '<svg class="nav__home" viewBox="0 0 16 14" width="26" height="23" aria-hidden="true">' +
           '<ellipse class="hm" cx="2.8" cy="4.2" rx="1.5" ry="1.9"/>' +
           '<ellipse class="hm" cx="6" cy="2.8" rx="1.7" ry="2.1"/>' +

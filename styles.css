@@ -175,6 +175,7 @@ main{ flex: 1 0 auto; }
   align-items: center;
   padding: 0.35rem;
   text-decoration: none;
+  position: relative;
 }
 .nav__home{ display: block; transform: rotate(-10deg); }
 .nav__home .hm{ fill: var(--nav-tag); }
@@ -194,7 +195,27 @@ main{ flex: 1 0 auto; }
   transition: color 0.2s ease, border-color 0.2s ease;
 }
 .nav__link:hover{ color: var(--nav-ink); }
-.nav__link.is-active{ color: var(--sand); border-color: var(--sand); }
+.nav__link.is-active{ color: var(--sand); }
+
+/* Active-page underline: green→sand gradient (matches the progress bar),
+   grows in from the left when the page loads. */
+.nav__link, .nav__toggle{ position: relative; }
+.nav__link.is-active::after,
+.nav__toggle.is-active::after,
+.nav__mark.is-active::after{
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -1px;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--green), var(--sand));
+  transform-origin: left center;
+  animation: nav-underline-in 0.5s ease-out both;
+}
+@keyframes nav-underline-in{
+  from{ transform: scaleX(0); }
+  to{ transform: scaleX(1); }
+}
 
 /* desktop: tilt the nav links left instead of centering them */
 @media (min-width: 641px){
@@ -283,7 +304,7 @@ main{ flex: 1 0 auto; }
   transition: color 0.2s ease, border-color 0.2s ease;
 }
 .nav__toggle:hover{ color: var(--nav-ink); }
-.nav__toggle.is-active{ color: var(--sand); border-color: var(--sand); }
+.nav__toggle.is-active{ color: var(--sand); }
 /* Desktop-only top-level nav links (Blog, PSY 410 Resources). */
 .nav__link{
   font-family: var(--micro);
@@ -298,7 +319,7 @@ main{ flex: 1 0 auto; }
   transition: color 0.2s ease, border-color 0.2s ease;
 }
 .nav__link:hover{ color: var(--nav-ink); }
-.nav__link.is-active{ color: var(--sand); border-color: var(--sand); }
+.nav__link.is-active{ color: var(--sand); }
 .nav__link--wide{ display: none; }
 @media (min-width: 641px){
   .nav__link--wide{ display: inline-block; }
