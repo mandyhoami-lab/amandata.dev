@@ -176,7 +176,7 @@ main{ flex: 1 0 auto; }
   padding: 0.35rem;
   text-decoration: none;
 }
-.nav__home{ display: block; }
+.nav__home{ display: block; transform: rotate(-10deg); }
 .nav__home .hm{ fill: var(--nav-tag); }
 .nav__home .hm-door{ fill: var(--nav-bg); }
 .nav__mark:hover .hm{ fill: var(--sand); }
