@@ -43,7 +43,7 @@
   --game-opacity:   0.55;
 
   --display: 'Pixelify Sans', 'Press Start 2P', monospace;
-  --micro:   'Silkscreen', 'VT323', monospace;
+  --micro:   'VT323', 'Silkscreen', monospace;
   --body:    'Nunito', sans-serif;
 
   --max: 760px;
