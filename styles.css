@@ -909,7 +909,7 @@ mark.key{
   border-top: 1px solid rgba(255,255,255,0.12);
   text-align: center;
   padding: 1.1rem var(--edge);
-  font-family: var(--micro);
+  font-family: 'Silkscreen', 'VT323', monospace;
   -webkit-text-stroke: 0.5px currentColor;
   paint-order: stroke fill;
   font-size: 1.05rem;
