@@ -17,7 +17,7 @@
     <div class="section__body">
       <div class="syn-wrap">
         <p class="syn-hello">Hello &mdash; you can find the blogpost on this <a href="/blog.html?p=synergy-corporate-buzzword-esolang">here</a>.</p>
-        <p class="syn-explain">Type buzzwords below and hit enter — the console runs each line and shows you what changed. This is how you learn the syntax.</p>
+        <p class="syn-explain">Type buzzwords below and hit enter — the console runs each line and shows you what changed.</p>
         <div class="syn-presets">
           <button type="button" data-preset="hi"><b>Say hi</b><span>prints "Hi"</span></button>
           <button type="button" data-preset="count"><b>Count to 5</b><span>prints 12345</span></button>
