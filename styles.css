@@ -1285,3 +1285,14 @@ a:focus-visible, button:focus-visible{
 
 [data-theme="white"] .hero__tagline{ color: #6B7280; }
 [data-theme="white"] .caret{ background: #6B7280; }
+
+/* synergy how-to panel */
+.syn-howto{
+  padding: 0.8rem 1rem; margin-bottom: 0.8rem;
+  background: var(--card-bg); border: 1px solid var(--line); border-radius: 8px;
+  font-size: 0.95rem;
+}
+.syn-howto p{ margin: 0 0 0.5rem; color: var(--body-text); }
+.syn-howto p:last-child{ margin-bottom: 0; }
+.syn-howto b{ color: var(--tag); }
+.syn-howto i{ color: var(--ink); }

@@ -19,6 +19,16 @@
     <div class="section__body">
       <div class="syn-wrap">
         <p class="syn-hello">Hello &mdash; you can find the blogpost on this <a href="/blog.html?p=synergy-corporate-buzzword-esolang">here</a>.</p>
+        <div class="syn-row">
+          <button id="syn-howto-btn" type="button">how to use this console</button>
+        </div>
+        <div class="syn-howto" id="syn-howto" hidden>
+          <p><b>1.</b> Type a buzzword (or a few, separated by commas) into the box and hit enter.</p>
+          <p><b>2.</b> The console runs it right away and shows what changed — the tape debugger above always shows your cells, with the pointer highlighted.</p>
+          <p><b>3.</b> Try <i>move the needle</i> three times, watch the first cell count up. Then <i>pivot</i> and watch the pointer move.</p>
+          <p><b>4.</b> <i>share out</i> prints the current cell as a letter. The debugger shows the letter next to the number.</p>
+          <p><b>5.</b> Loops need <i>sync up</i> … <i>circle back</i> on the same line. The preset buttons run full programs if you want to see one in action.</p>
+        </div>
         <p class="syn-explain">Type buzzwords below and hit enter — the console runs each line and shows you what changed.</p>
         <div class="syn-presets">
           <button type="button" data-preset="hi"><b>Say hi</b><span>prints "Hi"</span></button>
@@ -91,6 +101,13 @@
     var debug = document.getElementById("syn-debug");
     var input = document.getElementById("syn-input");
     var resetBtn = document.getElementById("syn-reset");
+    var howtoBtn = document.getElementById("syn-howto-btn");
+    var howto = document.getElementById("syn-howto");
+    if (howtoBtn && howto) {
+        howtoBtn.addEventListener("click", function () {
+            howto.hidden = !howto.hidden;
+        });
+    }
     function esc(s) {
         return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
     }
