@@ -1183,3 +1183,13 @@ a:focus-visible, button:focus-visible{
 .nav__search input:focus{ outline:none; border-color:var(--tag); width:170px; }
 .nav__search input::placeholder{ color:var(--dim); }
 @media (max-width:640px){ .nav__search input{ width:90px; } .nav__search input:focus{ width:120px; } }
+
+/* ---------- mobile: two-bar nav ---------- */
+@media (max-width: 640px){
+  .nav{ flex-wrap: wrap; row-gap: 0.45rem; }
+  .nav__search{ flex: 1 1 0; min-width: 0; }
+  .nav__search input{ width: 100%; }
+  .nav__search input:focus{ width: 100%; }
+  .theme-picker{ order: 2; }
+  .nav__links{ flex: 1 1 100%; order: 3; }
+}
