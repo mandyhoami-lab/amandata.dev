@@ -1227,13 +1227,13 @@ a:focus-visible, button:focus-visible{
   --data-accent: #1D4ED8;  /* deeper blue for data highlights */
 
   --tag:            #1D4ED8;
-  --nav-tag:        #1D4ED8;
+  --nav-tag:        #FFFFFF;
   --body-text:      rgba(17,17,17,0.88);
   --card-bg:        #FFFFFF;
   --card-shadow:    0 1px 4px rgba(17,17,17,0.08);
-  --nav-bg:         #FFFFFF;
-  --nav-ink:        #111111;
-  --nav-dim:        rgba(17,17,17,0.66);
+  --nav-bg:         #2563EB;
+  --nav-ink:        #FFFFFF;
+  --nav-dim:        rgba(255,255,255,0.72);
   --vignette:       none;
   --hero-glow:      none;
   --selection-ink:  #FFFFFF;
