@@ -82,8 +82,8 @@
           '<ellipse class="hm" cx="8" cy="11" rx="4" ry="2.8"/>' +
         '</svg>' +
       '</a>' +
-      '<form class="nav__search" id="nav-search" role="search" action="/blog.html" method="get">' +
-        '<input type="search" name="q" placeholder="search posts…" aria-label="search blog posts">' +
+      '<form class="nav__search" id="nav-search" role="search" action="/search.html" method="get">' +
+        '<input type="search" name="q" placeholder="search" aria-label="search site pages">' +
       '</form>' +
       '<div class="nav__links">' +
         DROPDOWNS.map(dropdown).join("") + wideLinks +
