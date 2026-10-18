@@ -31,7 +31,7 @@
   function init(container) {
     container.innerHTML =
       '<div class="code-wrap">' +
-      '<p class="code-note">a real R console in your browser. try <code>1 + 1</code>, then <code>x &lt;- c(1,2,3); mean(x)</code>.</p>' +
+      '<p class="code-note">try <code>1 + 1</code>, then <code>x &lt;- c(1,2,3); mean(x)</code>.</p>' +
       '<textarea class="code-input" spellcheck="false" rows="6" placeholder="x <- c(2, 4, 6)\nmean(x)"></textarea>' +
       '<div class="code-row"><button type="button" class="code-btn code-run">run</button></div>' +
       '<pre class="code-out" aria-live="polite">(output appears here)</pre>' +
