@@ -1282,3 +1282,6 @@ a:focus-visible, button:focus-visible{
   color: var(--dim); min-width: 2.2rem; text-align: center;
 }
 .syn-cell--ptr{ border-color: var(--tag); color: var(--tag); font-weight: bold; background: var(--hover, rgba(128,128,128,0.08)); }
+
+[data-theme="white"] .hero__tagline{ color: #6B7280; }
+[data-theme="white"] .caret{ background: #6B7280; }
