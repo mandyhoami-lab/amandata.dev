@@ -40,79 +40,54 @@ The characters are the variables. A noun is worth 1 or -1 (a "hero" is 1, a "cow
 
 ## Synergy
 
-I built Synergy because I wanted an esolang that reads like my calendar invites. The only keywords are corporate buzzwords. Everything reads like a progress meeting.
-
-### v1: the tape
-
-The first version mapped one-to-one onto [brainfuck](https://esolangs.org/wiki/Brainfuck): a tape of memory cells, a pointer, and buzzwords standing in for the 8 brainfuck commands.
+The only keywords are corporate buzzwords. Everything reads like a progress meeting.
 
 - `move the needle`, add 1
 - `take a step back`, subtract 1
 - `pivot`, move right, `deep dive`, move left
-- `share out`, print
+- `share out`, print 
 - `gather feedback`, read input
 - `sync up` ... `circle back`, loop
 - `hit a bottleneck`, stop the program (every corporate program ends at a bottleneck)
 - `per my last email`, comment
+- `low-hanging fruit`, set the cell to 0
+- `double-click on that`, print the cell as a number
+- `run it up the flagpole`, print the whole tape
+- `herding cats`, randomize the cell
+- `put a pin in it` / `pull the pin`, save / restore the tape
 
-It worked, and it was funny, but the tape fits corporate speak poorly. It's one anonymous pointer moving through identical cells, and you add 5 by writing the increment five times. Standup language is good at names and quantities, which the tape can't use.
-
-### v2: named counters
-
-So v2 dropped the tape. Now Synergy runs on **named counters**: integer variables with names like `headcount` or `budget`. Two counters with increment, decrement, and a zero-test are already Turing complete (a Minsky machine), so nothing is lost, and programs read like an actual standup because the names carry meaning.
-
-- `hire x`, add 1 to x
-- `layoff x`, subtract 1 from x
-- `increase x by 40`, add 40 (no more counting one by one)
-- `decrease x by 40`, subtract 40
-- `set x to 72`, set x directly
-- `while x is nonzero` ... `circle back`, loop
-- `share out x`, print x as a letter
-- `report x`, print x as a number
-- `gather feedback into x`, read input
-- `hit a bottleneck`, stop
-
-The v1 tape interpreter is preserved in git history.
-
-### Synergy vs brainfuck
+It can compute anything like any other language. The full command list lives on the [Synergy wiki](/synergy-wiki.html), every buzzword in plain language.
 
 <div class="wiki-preview">
 <p class="wiki-preview__tag">from the synergy wiki</p>
 <table>
-<tr><th></th><th>brainfuck</th><th>Synergy v2</th></tr>
-<tr><td>Memory</td><td>Tape of cells, one pointer</td><td>Named counters, no pointer</td></tr>
-<tr><td>Increment</td><td><code>+</code> (repeat N times)</td><td><code>hire x</code>, or <code>increase x by N</code></td></tr>
-<tr><td>Loop</td><td><code>[</code> … <code>]</code></td><td><code>while x is nonzero</code> … <code>circle back</code></td></tr>
-<tr><td>Set to N</td><td>n/a (must count up)</td><td><code>set x to N</code></td></tr>
+<tr><th>Paradigm(s)</th><td>imperative</td></tr>
+<tr><th>Designed by</th><td>tarotams</td></tr>
+<tr><th>Appeared in</th><td>2026</td></tr>
+<tr><th>Computational class</th><td>Turing complete</td></tr>
 </table>
-<p><a href="/synergy-wiki.html">Read the full wiki &rarr;</a></p>
+<p><b>Synergy</b> is an esoteric programming language where the only keywords are corporate buzzwords. <a href="/synergy-wiki.html">Read the full wiki &rarr;</a></p>
 </div>
-
-It can compute anything like any other language. The full command list lives on the [Synergy wiki](/synergy-wiki.html), every buzzword in plain language.
 
 ## how printing works
 
-Numbers are also letters. 72 is H, 105 is i, 32 is a space, that's ASCII, the standard pretty much all computers use to turn numbers into text. So to print "Hi": `set h to 72`, `share out h` prints H. `set i to 105`, `share out i` prints i. The console's variable inspector shows the letter next to each number so you can watch it happen.
+Numbers are also letters. 72 is H, 105 is i, 32 is a space, that's ASCII, the standard pretty much all computers use to turn numbers into text. So to print "Hi": count the first cell up to 72, `share out` prints H. `pivot` to the next cell, count up to 105, `share out` prints i. The console's tape debugger shows the letter next to each number so you can watch it happen.
 
 ## print: hello world
 
+This prints Hello World!. A hundred lines of Synergy and it says hello.
+
 ```
-per my last email, hello world
+per my last email, here are the action items from standup
 
-set h to 72, share out h,
-set e to 101, share out e,
-set l to 108, share out l, share out l,
-set o to 111, share out o,
-set space to 32, share out space,
-set w to 87, share out w,
-share out o, share out l,
-set d to 100, share out d,
-set bang to 33, share out bang.
-
+move the needle, move the needle, move the needle, move the needle,
+move the needle, move the needle, move the needle, move the needle,
+sync up, pivot, move the needle, move the needle, move the needle,
+[... 100 more lines of this ...]
 hit a bottleneck.
 ```
 
-This prints `Hello World!`. No counting up one by one, just set the number and share it out.
+This prints `Hello World!`. A hundred lines of Synergy and it says is hello.
 
 
 

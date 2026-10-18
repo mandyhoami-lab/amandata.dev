@@ -1,5 +1,5 @@
 "use strict";
-/* Synergy console v2 — named counters. */
+/* Synergy console shell, vignette + main, injected so the .html file stays a thin shell. */
 (function () {
     "use strict";
     var mount = document.getElementById("page-mount");
@@ -25,17 +25,17 @@
         </div>
         <div class="syn-howto" id="syn-howto" hidden>
           <p><b>1.</b> Type a buzzword (or a few, separated by commas) into the box and hit enter.</p>
-          <p><b>2.</b> The console runs it right away. The variable inspector above always shows your named counters.</p>
-          <p><b>3.</b> Try <i>hire headcount</i> three times, watch headcount go up.</p>
-          <p><b>4.</b> <i>share out headcount</i> prints it as a letter, numbers are also letters (72 is H, that's ASCII).</p>
-          <p><b>5.</b> Loops need <i>while x is nonzero</i> … <i>circle back</i> on the same line. The preset buttons run full programs.</p>
+          <p><b>2.</b> The console runs it right away and shows what changed, the tape debugger above always shows your cells, with the pointer highlighted.</p>
+          <p><b>3.</b> Try <i>move the needle</i> three times, watch the first cell count up. Then <i>pivot</i> and watch the pointer move.</p>
+          <p><b>4.</b> <i>share out</i> prints the current cell as a letter, numbers are also letters (72 is H, 105 is i). The debugger shows the letter next to the number.</p>
+          <p><b>5.</b> Loops need <i>sync up</i> … <i>circle back</i> on the same line. The preset buttons run full programs if you want to see one in action.</p>
         </div>
         <p class="syn-explain">Type buzzwords below and hit enter, the console runs each line and shows you what changed.</p>
         <div class="syn-examples-wrap">
           <p class="syn-examples__label">example programs</p>
           <div class="syn-examples" id="syn-examples" role="group" aria-label="example programs"></div>
         </div>
-        <div class="syn-debug" id="syn-debug" aria-label="variable inspector"></div>
+        <div class="syn-debug" id="syn-debug" aria-label="tape inspector"></div>
         <p class="syn-examples__label">output</p>
         <div class="syn-console" id="syn-console" aria-live="polite"></div>
         <div class="syn-inputrow">
@@ -47,25 +47,119 @@
         </div>
         <div class="syn-cheat">
           <p class="syn-cheat__head">Buzzwords key</p>
-          <p class="syn-cheat__intro">Synergy runs on named counters. Pick names like <i>headcount</i> or <i>budget</i>, they start at 0.</p>
-          <b>hire x</b>, add 1 to x &middot;
-          <b>move the needle on x</b>, same as hire<br>
-          <b>layoff x</b>, subtract 1 from x<br>
-          <b>increase x by 40</b>, add 40 to x &middot;
-          <b>decrease x by 40</b>, subtract 40<br>
-          <b>set x to 72</b>, set x to 72<br>
-          <b>while x is nonzero</b> … <b>circle back</b>, loop while x is not 0<br>
-          <b>share out x</b>, print x as a letter &middot;
-          <b>report x</b>, print x as a number<br>
-          <b>gather feedback into x</b>, read a character into x<br>
-          <b>hit a bottleneck</b>, stop the program<br>
-          <b>per my last email</b>, a comment, ignored
+          <p class="syn-cheat__intro">Synergy has a row of numbered cells called the tape. You always point at one cell, the debugger above shows you which.</p>
+          <b>move the needle</b>, add 1 to the cell you're pointing at &middot;
+          <b>take a step back</b>, subtract 1 from it<br>
+          <b>pivot</b> / <b>deep dive</b>, point at the next / previous cell<br>
+          <b>share out</b>, print the current cell as a letter &middot;
+          <b>gather feedback</b>, read a typed letter into the current cell<br>
+          <b>sync up</b> … <b>circle back</b>, repeat everything between until the current cell hits zero<br>
+          <b>hit a bottleneck</b>, stop &middot;
+          <b>per my last email</b>, a comment, the computer ignores the line<br>
+          <b>low-hanging fruit</b>, set the cell to 0 &middot;
+          <b>double-click on that</b>, print the cell as a number<br>
+          <b>run it up the flagpole</b>, print the whole tape &middot;
+          <b>herding cats</b>, randomize the cell<br>
+          <b>put a pin in it</b> / <b>pull the pin</b>, save / restore the tape
         </div>
+        <p class="games-note"><a href="/synergy-wiki.html">Synergy wiki &rarr;</a> &middot; <a href="/creations.html">&larr; Back to Creations</a></p>
       </div>
     </div>
   </section>
 
 </main>`;
+    var PRESETS = {};
+    function fmtProgram(phrases, comment) {
+        var lines = [comment, ""];
+        for (var i = 0; i < phrases.length; i += 5) {
+            lines.push(phrases.slice(i, i + 5).join(", ") + ".");
+        }
+        lines.push("", "hit a bottleneck.");
+        return lines.join("\n");
+    }
+    function bfPhrases(bf) {
+        return window.Synergy.fromBrainfuck(bf).split(". ").filter(function (s) { return s.length > 0; });
+    }
+    var FROG_BF = "++++++++++++++++++++++++++++++++.......++++++++++++++.-..+.------------------------------------.++++++++++++++++++++++......++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.-------------.----------------.++++++++++++++++.-------------------------------------------------------------------------------.++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.------------------------------------------------------------------------------------------------------------------.++++++++++++++++++++++......++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.------------------------------------------------------------------.+++++++++++++++++++++++++++++++++++++.------------------------------------------------.---------------.++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.------------------------------------------------------------------------------------------------------------------.++++++++++++++++++++++.....+++++++++++++++..---------------...++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.------------------------------------------------------------.++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.----------------------------------------------------------------------------------.++++++++++++++++++++++....++++++++.++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.--------------------------------------------------------------------------------------------.....++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.--------------------------------------------------------------------------------------------.+++++++++.-------------------------------.++++++++++++++++++++++...+++++++++++++++.--------.+++++++++++++++++++++++++++++++++++++++++++++++++++++.+++.---------------------------------------------------------------...+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.------------------------------------------------.+++++++++++++++++++++++++++++++++++++++++++++++++.----.----------------------------------------------------------------------------------.++++++++++++++++++++++...++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.+++...------------------------------------------------------.++++++++++++++++++++.---------------------.+++++++++++++++++++++++++++++++++++++++++++++++++++++++...------------------------------------------------.";
+    var CAT_BF = "++++++++++++++++++++++++++++++++..+++++++++++++++.+++++++++++++++++++++++++++++++++++++++++++++.+++.------------------------------------------------.+++++++++++++++++++++++++++++++++++++++++++++.----------------------------------------------------------------------------------.++++++++++++++++++++++.++++++++.--------.+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.-----------------------------------------------------------------.+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.-------------------------------------------------------------------------------.+++++++++.-------------------------------.++++++++++++++++++++++..++++++++++++++++++++++++++++++.------------------------------.++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.--------------------------------------------------------------.++++++++++++++++++++++++++++.";
+    function getPreset(name) {
+        if (PRESETS[name])
+            return PRESETS[name];
+        var phrases;
+        var comment;
+        if (name === "count") {
+            var bf = "";
+            for (var i = 0; i < 49; i++)
+                bf += "+";
+            bf += ".+.+.+.+.";
+            phrases = bfPhrases(bf);
+            comment = "per my last email, counting to five";
+        }
+        else if (name === "hello") {
+            var helloBf = "++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.";
+            phrases = bfPhrases(helloBf);
+            comment = "per my last email, here are the action items from standup";
+        }
+        else if (name === "add") {
+            phrases = bfPhrases("+++>++++<[>+<-]>");
+            phrases.push("double-click on that");
+            comment = "per my last email, adding 3 + 4";
+        }
+        else if (name === "multiply") {
+            phrases = bfPhrases("+++[>++++<-]>");
+            phrases.push("double-click on that");
+            comment = "per my last email, multiplying 3 x 4";
+        }
+        else if (name === "alphabet") {
+            var az = ">"; // cell1 = 65 ('A')
+            for (var a = 0; a < 65; a++)
+                az += "+";
+            az += "<"; // back to cell0
+            for (var b = 0; b < 26; b++)
+                az += "+"; // cell0 = 26 counter
+            az += "[>.+<-]"; // print cell1, inc, dec counter
+            phrases = bfPhrases(az);
+            comment = "per my last email, the alphabet";
+        }
+        else if (name === "countdown") {
+            phrases = bfPhrases("+++++");
+            phrases.push("sync up", "double-click on that", "take a step back", "circle back");
+            comment = "per my last email, counting down from five";
+        }
+        else if (name === "frog") {
+            phrases = bfPhrases(FROG_BF);
+            comment = "per my last email, a frog";
+        }
+        else if (name === "cat") {
+            phrases = bfPhrases(CAT_BF);
+            comment = "per my last email, a cat";
+        }
+        else {
+            var hiBf = "++++++++[>+++++++++<-]>.";
+            for (var j = 0; j < 33; j++)
+                hiBf += "+";
+            hiBf += ".";
+            phrases = bfPhrases(hiBf);
+            comment = "per my last email, just saying hi";
+        }
+        var prog = fmtProgram(phrases, comment);
+        PRESETS[name] = prog;
+        return prog;
+    }
+    var EXAMPLES = [
+        { id: "hi", label: "Say hi", desc: 'prints "Hi"' },
+        { id: "count", label: "Count to 5", desc: "prints 12345" },
+        { id: "hello", label: "Hello world", desc: "the classic, in Synergy" },
+        { id: "add", label: "Add 3 + 4", desc: "prints 7" },
+        { id: "multiply", label: "Multiply 3 × 4", desc: "prints 12" },
+        { id: "alphabet", label: "Alphabet", desc: "prints A to Z" },
+        { id: "countdown", label: "Countdown", desc: "prints 5 4 3 2 1" },
+        { id: "frog", label: "Frog", desc: "ascii art frog" },
+        { id: "cat", label: "Cat", desc: "text symbol cat" }
+    ];
+    var session = window.Synergy.createSession();
+    var con = document.getElementById("syn-console");
+    var debug = document.getElementById("syn-debug");
     var input = document.getElementById("syn-input");
     var resetBtn = document.getElementById("syn-reset");
     var howtoBtn = document.getElementById("syn-howto-btn");
@@ -75,83 +169,27 @@
             howto.hidden = !howto.hidden;
         });
     }
-    var con = document.getElementById("syn-console");
-    var debug = document.getElementById("syn-debug");
-    var examplesEl = document.getElementById("syn-examples");
-    var EXAMPLES = [
-        { id: "hi", label: "Say hi", desc: 'prints "Hi"' },
-        { id: "count", label: "Count to 5", desc: "prints 1 2 3 4 5" },
-        { id: "add", label: "Add 3 + 4", desc: "prints 7" },
-        { id: "loop", label: "Countdown", desc: "5 4 3 2 1" },
-        { id: "frog", label: "Frog", desc: "ascii art frog" },
-        { id: "cat", label: "Cat", desc: "ascii art cat" },
-        { id: "hilong", label: "Hi (the long way)", desc: "177 move the needles" },
-    ];
-    var PRESETS = {};
-    var FROG_BF = "[-]++++++++++++++++++++++++++++++++........++++++++++++++++++++++++++++++++.------------------..++++++++++++++++++.------------------------------------------------------.++++++++++++++++++++++.......++++++++.+++++....----.-------------------------------.++++++++++++++++++++++.....++++++++.--------.++++++++++++++++++++++++++++++.+++++++++++++++++++++++++++++++++..-----------------------------------.----------------------------.+++++++++.-------------------------------.++++++++++++++++++++++.....++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++..--------------------------------------------------------------.++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++..----------------------------------------------------------------------------------------------.++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++..";
-    var CAT_BF = "[-]++++++++++++++++++++++++++++++++.+++++++++++++++.+++++++++++++++++++++++++++++++++++++++++++++.+++.------------------------------------------------.+++++++++++++++++++++++++++++++++++++++++++++.------------------------------------------------------------.----------------------.++++++++++++++++++++++++++++++.--------.+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.-----------------------------------------------------------------.+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.-------------------------------------------------------------------------------.+++++++++.-------------------------------.++++++++++++++++++++++.++++++++++++++++++++++++++++++.------------------------------.++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.--------------------------------------------------------------.++++++++++++++++++++++++++++.----------------------------.";
-    function getPreset(name) {
-        if (PRESETS[name])
-            return PRESETS[name];
-        var prog;
-        if (name === "hi") {
-            prog = "per my last email, just saying hi\n\nset h to 72, share out h, set i to 105, share out i.\n\nhit a bottleneck.";
-        }
-        else if (name === "count") {
-            prog = "per my last email, counting to five\n\nset n to 1, while n is nonzero, report n, hire n, decrease n by 0, circle back.\n\nper my last email, that loops forever, so instead:\n\nset n to 5, set i to 1, while i is nonzero, report i, hire i, layoff n, circle back.\n\nhit a bottleneck.";
-        }
-        else if (name === "add") {
-            prog = "per my last email, adding 3 and 4\n\nset a to 3, set b to 4, increase a by 4, report a.\n\nhit a bottleneck.";
-        }
-        else if (name === "loop") {
-            prog = "per my last email, counting down\n\nset n to 5, while n is nonzero, report n, layoff n, circle back.\n\nhit a bottleneck.";
-        }
-        else if (name === "frog") {
-            prog = "per my last email, a frog\n\n" + window.Synergy.fromBrainfuck(FROG_BF) + "\n\nhit a bottleneck.";
-        }
-        else if (name === "cat") {
-            prog = "per my last email, a cat\n\n" + window.Synergy.fromBrainfuck(CAT_BF) + "\n\nhit a bottleneck.";
-        }
-        else if (name === "hilong") {
-            var hp = "per my last email, saying hi the hard way\n\n";
-            for (var hi = 0; hi < 72; hi++)
-                hp += "move the needle on h, ";
-            hp += "share out h.\n\n";
-            for (var ii = 0; ii < 105; ii++)
-                hp += "move the needle on i, ";
-            hp += "share out i.\n\n";
-            hp += "hit a bottleneck.";
-            prog = hp;
-        }
-        else {
-            prog = "per my last email, just saying hi\n\nset h to 72, share out h, set i to 105, share out i.\n\nhit a bottleneck.";
-        }
-        PRESETS[name] = prog;
-        return prog;
-    }
-    var session = window.Synergy.createSession();
-    /* debug: show named variables as a grid */
-    function renderDebug() {
-        var st = session.state();
-        var names = Object.keys(st.vars).sort();
-        var cells = [];
-        if (names.length === 0) {
-            debug.innerHTML = '<span class="syn-debug__label">variables</span><span class="syn-debug__empty">no counters yet, try <i>hire headcount</i></span>';
-            return;
-        }
-        names.forEach(function (name) {
-            var v = st.vars[name];
-            var ch = v >= 32 && v < 127 ? String.fromCharCode(v) : " ";
-            cells.push('<div class="syn-cell">' +
-                '<span class="syn-cell__idx">' + esc(name) + "</span>" +
-                '<span class="syn-cell__val">' + v + "</span>" +
-                '<span class="syn-cell__char">' + esc(ch) + "</span>" +
-                "</div>");
-        });
-        debug.innerHTML = '<span class="syn-debug__label">variables</span><div class="syn-grid">' + cells.join("") + "</div>";
-    }
     function esc(s) {
         return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+    /* debug: visual grid of the tape */
+    function renderDebug() {
+        var st = session.state();
+        var cells = [];
+        var n = Math.max(st.tape.length, 6);
+        for (var i = 0; i < n; i++) {
+            var v = st.tape[i] || 0;
+            var cls = i === st.ptr ? "syn-cell syn-cell--ptr" : "syn-cell";
+            var ch = v >= 32 && v < 127 ? String.fromCharCode(v) : " ";
+            var bar = Math.round((v / 255) * 100);
+            cells.push('<div class="' + cls + '">' +
+                '<span class="syn-cell__idx">' + i + "</span>" +
+                '<span class="syn-cell__val">' + v + "</span>" +
+                '<span class="syn-cell__char">' + ch + "</span>" +
+                '<span class="syn-cell__bar"><i style="width:' + bar + '%"></i></span>' +
+                "</div>");
+        }
+        debug.innerHTML = '<span class="syn-debug__label">tape</span><div class="syn-grid">' + cells.join("") + "</div>";
     }
     function logLine(html, cls) {
         var div = document.createElement("div");
@@ -161,10 +199,9 @@
         con.scrollTop = con.scrollHeight;
     }
     function printable(out) {
+        /* show control chars as codes so learners see what share out actually did */
         return out.split("").map(function (c) {
             var code = c.charCodeAt(0);
-            if (code === 10 || code === 13 || code === 9)
-                return c;
             return code >= 32 && code < 127 ? c : "&#9000;" + code;
         }).join("");
     }
@@ -178,20 +215,18 @@
             if (out)
                 logLine('<span class="syn-out">' + printable(esc(out)) + "</span>");
             var st = session.state();
-            var names = Object.keys(st.vars).sort();
-            var summary = names.map(function (n) { return n + "=" + st.vars[n]; }).join(", ") || "no variables";
-            logLine('<span class="syn-state">' + esc(summary) + "</span>", "syn-line--dim");
+            logLine('<span class="syn-state">cell[' + st.ptr + "] = " + (st.tape[st.ptr] || 0) + "</span>", "syn-line--dim");
         }
         catch (e) {
             var msg = e instanceof Error ? e.message : String(e);
             logLine('<span class="syn-err">that didn\u2019t run: ' + esc(msg) + "</span>");
             var hint = "";
-            if (msg.indexOf("circle back without while") >= 0)
-                hint = "every circle back needs a while before it.";
-            else if (msg.indexOf("while without circle back") >= 0)
-                hint = "every while needs a circle back after it.";
-            else if (msg.indexOf("I don't know") === 0)
-                hint = "check the buzzwords key below for the exact phrasing.";
+            if (msg.indexOf("circle back without sync up") >= 0)
+                hint = "every circle back needs a sync up before it.";
+            else if (msg.indexOf("sync up without circle back") >= 0)
+                hint = "every sync up needs a circle back after it.";
+            else if (window.Synergy.tokenize(line).length === 0)
+                hint = "that line had no buzzwords in it. check the key below.";
             if (hint)
                 logLine('<span class="syn-hint">try this: ' + esc(hint) + "</span>");
         }
@@ -206,10 +241,12 @@
     resetBtn.addEventListener("click", function () {
         session.reset();
         con.innerHTML = "";
-        logLine('<span class="syn-state">fresh meeting. counters cleared.</span>', "syn-line--dim");
         renderDebug();
+        logLine('<span class="syn-state">fresh meeting. tape cleared.</span>', "syn-line--dim");
     });
+    var examplesEl = document.getElementById("syn-examples");
     function renderExamples() {
+        examplesEl.innerHTML = "";
         EXAMPLES.forEach(function (ex) {
             var b = document.createElement("button");
             b.type = "button";
