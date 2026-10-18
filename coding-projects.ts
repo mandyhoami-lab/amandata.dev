@@ -28,7 +28,7 @@
         <div class="proj-box">
           <span class="proj-box__title">Synergy Console</span>
           <span class="proj-box__desc">The corporate-buzzword esolang</span>
-          <span class="proj-box__links"><a href="/synergy.html">try it</a> · <a href="https://github.com/mandyhoami-lab/synergy" target="_blank" rel="noopener">repo</a> · <a href="/blog.html?p=synergy-corporate-buzzword-esolang">blog</a></span>
+          <span class="proj-box__links"><a href="/synergy.html">try it</a> · <a href="/synergy-wiki.html">wiki</a> · <a href="https://github.com/mandyhoami-lab/synergy" target="_blank" rel="noopener">repo</a> · <a href="/blog.html?p=synergy-corporate-buzzword-esolang">blog</a></span>
         </div>
       </div>
       <p class="games-note"><a href="/">← Back to Home</a></p>
