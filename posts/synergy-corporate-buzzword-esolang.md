@@ -1,6 +1,6 @@
 #  programming language but it's all corporate buzzword
 
-**On this page:** [What are esoslangs](#post-title) · [What that looks like](#what-that-looks-like) · [Synergy](#i-made-one) · [Print: hello world](#print-hello-world)
+**On this page:** [What are esoslangs](#post-title) · [What that looks like](#what-that-looks-like) · [Synergy](#synergy) · [Print: hello world](#print-hello-world)
 
 Esoslangs are short for "esoteric programming languages", and they live on a wiki called [esolangs.org](https://esolangs.org/wiki/Esoteric_programming_language). I like to imagine them as.. fully functioning satirical programming languages or coding art projects rather than any practical applications.
 
@@ -36,7 +36,7 @@ Hamlet:
 
 Positive adjectives count as +1, negative ones as −1, and nouns have numeric values so the dialogue adds up to the letter codes that spell out the message. The characters are the variables, the acts are the program's sections, and the stage directions control the flow.
 
-## i made one 
+## Synergy
 
 The only keywords are corporate buzzwords. Everything reads like a progress meeting.
 
