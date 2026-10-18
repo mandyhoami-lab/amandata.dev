@@ -105,3 +105,39 @@
 .creations-intro{
   max-width: 60ch;
 }
+
+/* ---------- synergy playground ---------- */
+.syn-wrap{ max-width: 640px; margin: 0 auto; }
+#syn-src{
+  width: 100%; box-sizing: border-box; min-height: 170px;
+  background: var(--card-bg); color: var(--ink);
+  border: 2px solid var(--line); border-radius: 10px;
+  padding: 0.8rem; font-family: ui-monospace, monospace; font-size: 0.85rem;
+  resize: vertical;
+}
+.syn-row{ display: flex; gap: 0.6rem; margin: 0.8rem 0; }
+.syn-row button{
+  flex: 1; padding: 0.7rem; border: none; border-radius: 10px;
+  font-family: 'Nunito', var(--body); font-weight: 800; font-size: 1rem; cursor: pointer;
+  background: var(--green); color: #0A0C0A;
+}
+.syn-row button.syn-ghost{
+  flex: 0.6; background: transparent; color: var(--tag);
+  border: 2px solid var(--tag);
+}
+#syn-out{
+  background: var(--card-bg); border: 2px solid var(--line); border-radius: 10px;
+  padding: 0.8rem; min-height: 3rem; white-space: pre-wrap; font-size: 0.95rem; margin: 0;
+}
+.syn-cheat{ margin-top: 1rem; font-size: 0.82rem; color: var(--dim); line-height: 1.9; }
+.syn-cheat b{ color: var(--tag); }
+
+/* synergy button icon: bar chart, needle going up */
+.creation-btn__bars{ position: relative; width: 64px; height: 54px; }
+.creation-btn__bars i{
+  position: absolute; bottom: 0; width: 12px; display: block;
+  background: var(--green); border: 2px solid var(--ink); border-bottom: none;
+}
+.creation-btn__bars i:nth-child(1){ left: 6px; height: 18px; }
+.creation-btn__bars i:nth-child(2){ left: 26px; height: 32px; }
+.creation-btn__bars i:nth-child(3){ left: 46px; height: 46px; }

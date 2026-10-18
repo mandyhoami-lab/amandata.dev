@@ -46,6 +46,12 @@ interface FlashcardDeck {
 
 interface SiteLoadingApi { show: () => void; hide: () => void; }
 
+interface SynergyApi {
+  run(src: string, input?: string): string;
+  tokenize(src: string): string[];
+  fromBrainfuck(bf: string): string;
+}
+
 interface Window {
   SITE_DATA: SiteData;
   ABOUT_BIO_HTML: string;
@@ -54,6 +60,7 @@ interface Window {
   othelloExInit: () => void;
   FLASHCARD_DECK?: FlashcardDeck;
   SiteLoading: SiteLoadingApi;
+  Synergy: SynergyApi;
 }
 
 /* CDN globals (loaded via <script> tags in the HTML). */

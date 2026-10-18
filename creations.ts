@@ -31,6 +31,11 @@
           <span class="creation-btn__label">Myers Exp. Psych</span>
           <span class="creation-btn__sub">Ch. 1–16 · 118 terms</span>
         </a>
+        <a class="creation-btn" href="/synergy.html">
+          <span class="creation-btn__icon" aria-hidden="true"><span class="creation-btn__bars"><i></i><i></i><i></i></span></span>
+          <span class="creation-btn__label">Synergy</span>
+          <span class="creation-btn__sub">the corporate esolang</span>
+        </a>
       </div>
 
       <p class="games-note">More toys eventually. Requests welcome.</p>
