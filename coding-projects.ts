@@ -31,7 +31,7 @@
           <span class="proj-box__links"><a href="/synergy.html">try it</a> · <a href="https://github.com/mandyhoami-lab/synergy" target="_blank" rel="noopener">repo</a> · <a href="/blog.html?p=synergy-corporate-buzzword-esolang">blog</a></span>
         </div>
       </div>
-      <p class="games-note"><a href="/creations.html">&larr; Back to Creations</a></p>
+      <p class="games-note"><a href="/">← Back to Home</a></p>
     </div>
   </section>
 

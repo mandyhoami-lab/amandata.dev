@@ -32,7 +32,7 @@
           <span class="proj-box__links"><a href="https://amandata.org/" target="_blank" rel="noopener">visit</a> · <a href="https://github.com/mandyhoami-lab/amandata.org" target="_blank" rel="noopener">repo</a></span>
         </div>
       </div>
-      <p class="games-note"><a href="/creations.html">&larr; Back to Creations</a></p>
+      <p class="games-note"><a href="/">← Back to Home</a></p>
     </div>
   </section>
 
