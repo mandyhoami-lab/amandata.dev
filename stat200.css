@@ -5,20 +5,25 @@
 }
 
 .s2-wrap{ max-width: 720px; margin: 0 auto; }
-.s2-units{ display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
-.s2-unit{
-  padding: 0.5rem 0.9rem; border: 2px solid var(--line); border-radius: 10px;
-  background: var(--card-bg); color: var(--ink); cursor: pointer;
-  font-family: 'VT323', monospace; font-size: 1.1rem;
+.s2-label{
+  font-family: 'VT323', monospace; font-size: 1.05rem; color: var(--dim);
+  text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 0.4rem;
 }
-.s2-unit.is-active{ border-color: var(--tag); color: var(--tag); }
-.s2-modes{ display: flex; gap: 0.5rem; margin-bottom: 1.2rem; flex-wrap: wrap; }
-.s2-mode{
-  padding: 0.5rem 0.9rem; border: 2px solid var(--line); border-radius: 10px;
-  background: transparent; color: var(--dim); cursor: pointer;
-  font-family: 'VT323', monospace; font-size: 1.1rem;
+/* segmented toggle groups */
+.s2-units, .s2-modes{
+  display: inline-flex; flex-wrap: wrap; gap: 0; margin-bottom: 1.1rem;
+  border: 2px solid var(--line); border-radius: 12px; overflow: hidden;
+  max-width: 100%;
 }
-.s2-mode.is-active{ background: var(--green); border-color: var(--green); color: #0A0C0A; }
+.s2-unit, .s2-mode{
+  padding: 0.55rem 0.95rem; border: none; border-right: 2px solid var(--line);
+  background: var(--card-bg); color: var(--dim); cursor: pointer;
+  font-family: 'VT323', monospace; font-size: 1.15rem; white-space: nowrap;
+}
+.s2-unit:last-child, .s2-mode:last-child{ border-right: none; }
+.s2-unit.is-active, .s2-mode.is-active{
+  background: var(--green); color: #0A0C0A; font-weight: 700;
+}
 .s2-stage{
   background: var(--card-bg); border: 2px solid var(--line);
   border-radius: 12px; padding: 1.2rem; min-height: 300px;

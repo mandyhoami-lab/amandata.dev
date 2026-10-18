@@ -16,10 +16,12 @@
     </div>
     <div class="section__body">
       <div class="s2-wrap">
-        <div class="s2-units" id="s2-units"></div>
-        <div class="s2-modes" id="s2-modes">
+        <p class="s2-label">concept to practice</p>
+        <div class="s2-units" id="s2-units" role="group" aria-label="concept to practice"></div>
+        <p class="s2-label">practice mode</p>
+        <div class="s2-modes" id="s2-modes" role="group" aria-label="practice mode">
           <button type="button" class="s2-mode is-active" data-mode="flash">Flashcards</button>
-          <button type="button" class="s2-mode" data-mode="typing">Typing drills</button>
+          <button type="button" class="s2-mode" data-mode="typing">Typing</button>
           <button type="button" data-mode="quiz" class="s2-mode">Quiz</button>
           <button type="button" class="s2-mode" data-mode="code">Code lab</button>
           <button type="button" class="s2-mode" data-mode="etym">Etymology</button>
