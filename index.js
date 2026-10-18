@@ -19,6 +19,11 @@
   <p class="hero__tagline">
     <span id="typewriter">Social scientist, researcher, web stuff. Welcome to my space.</span><span class="caret" aria-hidden="true"></span>
   </p>
+  <nav class="hero__hubs" aria-label="hubs">
+    <a class="hero__hub" href="/coding-projects.html">Coding projects</a>
+    <a class="hero__hub" href="/website-management.html">Website management</a>
+    <a class="hero__hub" href="/research-activity.html">Research activity</a>
+  </nav>
   <p class="hero__scroll">Scroll <span class="hero__scroll-arrow" aria-hidden="true">↓</span></p>
 </header>
 

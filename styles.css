@@ -1151,3 +1151,15 @@ a:focus-visible, button:focus-visible{
 /* skip rendering off-screen sections until scrolled near;
    intrinsic-size keeps the scrollbar stable */
 .section{ content-visibility:auto; contain-intrinsic-size:auto 700px; }
+
+/* multi-link project cards */
+.proj-box__links{ display:block; margin-top:0.6rem; font-family:'VT323',monospace; font-size:1.05rem; }
+.proj-box__links a{ color:var(--tag); }
+/* homepage hero hub buttons */
+.hero__hubs{ display:flex; gap:0.6rem; justify-content:center; flex-wrap:wrap; margin:1rem 0 0.4rem; }
+.hero__hub{
+  padding:0.6rem 1.2rem; border:2px solid var(--line); border-radius:10px;
+  background:var(--card-bg); color:var(--ink); text-decoration:none;
+  font-family:'VT323',monospace; font-size:1.2rem;
+}
+.hero__hub:hover{ border-color:var(--tag); color:var(--tag); }
