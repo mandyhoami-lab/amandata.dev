@@ -80,7 +80,12 @@
             .replace(/"/g, "&quot;");
     }
     function excerpt(body) {
-        var text = String(body).replace(/[#>*`_~|-]/g, "").replace(/\n+/g, " ").trim();
+        var text = String(body)
+            .replace(/!\[([^\]]*)\]\([^)]*\)/g, "$1") /* images -> alt text */
+            .replace(/\[([^\]]*)\]\([^)]*\)/g, "$1") /* links -> link text */
+            .replace(/[#>*`_~|-]/g, "")
+            .replace(/\[|\]|\(|\)/g, "")
+            .replace(/\n+/g, " ").trim();
         return text.length > 160 ? text.slice(0, 160) + "…" : text;
     }
     function highlight(text, q) {
