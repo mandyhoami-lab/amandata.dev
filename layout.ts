@@ -82,8 +82,9 @@
           '<ellipse class="hm" cx="8" cy="11" rx="4" ry="2.8"/>' +
         '</svg>' +
       '</a>' +
-      '<form class="nav__search" id="nav-search" role="search" action="/search.html" method="get">' +
-        '<input type="search" name="q" placeholder="search" aria-label="search site pages">' +
+      '<form class="nav__search" id="nav-search" role="search" action="/search.html" method="get" autocomplete="off">' +
+        '<input type="search" name="q" id="nav-search-input" placeholder="search" aria-label="search site pages">' +
+        '<div class="nav__suggest" id="nav-suggest" hidden></div>' +
       '</form>' +
       '<div class="nav__links">' +
         DROPDOWNS.map(dropdown).join("") + wideLinks +
@@ -123,4 +124,38 @@
     show: function () { loadingBar.classList.add("on"); },
     hide: function () { loadingBar.classList.remove("on"); }
   };
+
+  /* Nav search autocomplete — up to 5 page suggestions as you type. */
+  (function () {
+    var input = document.getElementById("nav-search-input") as HTMLInputElement | null;
+    var box = document.getElementById("nav-suggest") as HTMLElement | null;
+    if (!input || !box) return;
+    function esc(s: string): string {
+      return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    }
+    function suggest(): void {
+      var q = input!.value.trim().toLowerCase();
+      var pages: any[] = (window as any).SITE_INDEX || [];
+      if (!q || !pages.length) { box!.hidden = true; box!.innerHTML = ""; return; }
+      var words = q.split(/\s+/);
+      var hits = pages.filter(function (p: any) {
+        var hay = (p.title + " " + p.desc + " " + p.keys).toLowerCase();
+        return words.every(function (w: string) { return hay.indexOf(w) !== -1; });
+      }).slice(0, 5);
+      if (!hits.length) { box!.hidden = true; box!.innerHTML = ""; return; }
+      box!.innerHTML = hits.map(function (p: any) {
+        return '<a class="nav__suggest-item" href="' + p.url + '"><span class="nav__suggest-title">' +
+          esc(p.title) + '</span><span class="nav__suggest-desc">' + esc(p.desc) + "</span></a>";
+      }).join("");
+      box!.hidden = false;
+    }
+    input.addEventListener("input", suggest);
+    input.addEventListener("focus", suggest);
+    input.addEventListener("keydown", function (e: KeyboardEvent) {
+      if (e.key === "Escape") { box!.hidden = true; input!.blur(); }
+    });
+    document.addEventListener("click", function (e: Event) {
+      if (!(e.target as HTMLElement).closest("#nav-search")) { box!.hidden = true; }
+    });
+  })();
 })();

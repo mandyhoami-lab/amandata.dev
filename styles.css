@@ -1193,3 +1193,19 @@ a:focus-visible, button:focus-visible{
   .theme-picker{ order: 2; }
   .nav__links{ flex: 1 1 100%; order: 3; }
 }
+
+/* nav search autocomplete */
+.nav__search{ position: relative; }
+.nav__suggest{
+  position: absolute; top: calc(100% + 6px); left: 0; right: 0; min-width: 220px;
+  background: var(--card-bg); border: 1px solid var(--line); border-radius: 8px;
+  box-shadow: var(--card-shadow); overflow: hidden; z-index: 60;
+}
+.nav__suggest-item{
+  display: flex; flex-direction: column; gap: 0.1rem;
+  padding: 0.5rem 0.8rem; text-decoration: none; border-bottom: 1px solid var(--line);
+}
+.nav__suggest-item:last-child{ border-bottom: none; }
+.nav__suggest-item:hover{ background: var(--hover, rgba(128,128,128,0.12)); }
+.nav__suggest-title{ font-family: var(--micro); font-size: 1.05rem; color: var(--ink); }
+.nav__suggest-desc{ font-size: 0.8rem; color: var(--dim); }
