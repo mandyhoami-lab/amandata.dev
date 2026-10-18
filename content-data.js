@@ -4,6 +4,13 @@
    Edit here instead of digging through index.html. */
 window.SITE_DATA = {
     changelog: [
+        { d: "Oct 18, 12:30 PM", h: "New white theme: clean white background with industry-blue accents, a blue nav bar, and its own blue Othello board." },
+        { d: "Oct 18, 12:00 PM", h: "Synergy is now a console: type a buzzword, hit enter, and watch the tape debugger show what changed. Five new commands added (low-hanging fruit, double-click on that, run it up the flagpole, herding cats, put a pin in it / pull the pin), all documented on the new Synergy wiki page." },
+        { d: "Oct 18, 11:00 AM", h: "Homepage hero tagline updated, and Web projects / Website management pages now link back home." },
+        { d: "Oct 18, 6:00 AM", h: "Nav search with autocomplete: type from the first letter to jump to any page." },
+        { d: "Oct 18, 5:30 AM", h: "Homepage hub buttons: Web projects, Website management, and Research activity, right under the tagline." },
+        { d: "Oct 18, 4:00 AM", h: "R Practice Hub: flashcards, typing drills, quizzes, and a real R console for STAT 200, under Creations." },
+        { d: "Oct 18, 2:00 AM", h: "Blog moved off Supabase: posts are now markdown files, with copy-link buttons and reading-time estimates." },
         { d: "Oct 14, 12:05 AM", h: "Sticky footer: on short pages like Othello, the copyright now sits at the bottom of the screen instead of floating mid-page." },
         { d: "Oct 13, 9:50 PM", h: "New pixelated loading bar: green-and-sand blocks march across the very top of the page while the blog fetches posts." },
         { d: "Oct 13, 9:45 PM", h: "Blog loads faster: the 218KB Supabase library is gone (posts load with a plain fetch), and the markdown libraries only download when you open a single post." },
