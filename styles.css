@@ -1357,3 +1357,14 @@ a:focus-visible, button:focus-visible{
 .wiki-preview p:last-child{ margin-bottom: 0 !important; }
 
 .wiki-credit{ font-size: 0.85rem; color: var(--dim); margin-top: 1.5rem; border-top: 1px solid var(--line); padding-top: 0.8rem; }
+
+/* project card buttons */
+.proj-box__title[href]{ color: var(--ink); text-decoration: none; }
+.proj-box__title[href]:hover{ color: var(--tag); }
+.proj-box__links{ display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.6rem; }
+.proj-btn{
+  display: inline-block; padding: 0.3rem 0.8rem; border: 2px solid var(--line);
+  border-radius: 8px; background: var(--card-bg); color: var(--ink) !important;
+  font-family: 'VT323', monospace; font-size: 1rem; text-decoration: none; cursor: pointer;
+}
+.proj-btn:hover{ border-color: var(--tag); color: var(--tag) !important; }

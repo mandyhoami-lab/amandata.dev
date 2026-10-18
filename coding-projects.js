@@ -18,19 +18,19 @@
     <div class="section__body">
       <div class="proj-grid">
         <div class="proj-box">
-          <span class="proj-box__title">Othello Reversi Coach</span>
+          <a class="proj-box__title" href="/othello.html">Othello Reversi Coach</a>
           <span class="proj-box__desc">Study interface inspired by <a href="https://apps.apple.com/us/app/piyo-reversi/id1197944711" target="_blank" rel="noopener">Hiyoko Reversi</a> (ひよこリバーシ) for post-game analysis and eval graph</span>
-          <span class="proj-box__links"><a href="/othello.html">play</a> · <a href="https://github.com/mandyhoami-lab/reversi-coach" target="_blank" rel="noopener">repo</a></span>
+          <span class="proj-box__links"><a class="proj-btn" href="/othello.html">play</a><a class="proj-btn" href="https://github.com/mandyhoami-lab/reversi-coach" target="_blank" rel="noopener">repo</a></span>
         </div>
         <div class="proj-box">
-          <span class="proj-box__title">R Practice Hub</span>
+          <a class="proj-box__title" href="/stat200-practice.html">R Practice Hub</a>
           <span class="proj-box__desc">Flashcards · Typing drills · Quizzes · R console · Etymology</span>
-          <span class="proj-box__links"><a href="/stat200-practice.html">practice</a> · <a href="https://github.com/mandyhoami-lab/r-practice-hub" target="_blank" rel="noopener">repo</a></span>
+          <span class="proj-box__links"><a class="proj-btn" href="/stat200-practice.html">practice</a><a class="proj-btn" href="https://github.com/mandyhoami-lab/r-practice-hub" target="_blank" rel="noopener">repo</a></span>
         </div>
         <div class="proj-box">
-          <span class="proj-box__title">Synergy Console</span>
+          <a class="proj-box__title" href="/synergy.html">Synergy Console</a>
           <span class="proj-box__desc">The corporate-buzzword esolang</span>
-          <span class="proj-box__links"><a href="/synergy.html">try it</a> · <a href="/synergy-wiki.html">wiki</a> · <a href="https://github.com/mandyhoami-lab/synergy" target="_blank" rel="noopener">repo</a> · <a href="/blog.html?p=synergy-corporate-buzzword-esolang">blog</a></span>
+          <span class="proj-box__links"><a class="proj-btn" href="/synergy.html">try it</a><a class="proj-btn" href="/synergy-wiki.html">wiki</a><a class="proj-btn" href="https://github.com/mandyhoami-lab/synergy" target="_blank" rel="noopener">repo</a><a class="proj-btn" href="/blog.html?p=synergy-corporate-buzzword-esolang">blog</a></span>
         </div>
       </div>
       <p class="games-note"><a href="/">← Back to Home</a></p>
