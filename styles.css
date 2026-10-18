@@ -42,9 +42,9 @@
   --work-note-bg:   transparent;
   --game-opacity:   0.55;
 
-  --display: 'Nunito', sans-serif;
-  --micro:   'Nunito', sans-serif;
-  --body:    'Nunito', sans-serif;
+  --display: 'Pixelify Sans', 'Press Start 2P', monospace;
+  --micro:   'VT323', 'Silkscreen', monospace;
+  --body:    'VT323', 'Silkscreen', monospace;
   --pixel:   'Pixelify Sans', 'Press Start 2P', monospace;
 
   --max: 760px;
@@ -936,12 +936,6 @@ mark.key{
 
 /* ================= responsive ================= */
 @media (max-width: 640px){
-  /* friendlier mobile type: slightly smaller, more compressed */
-  body{ font-size: 15.5px; line-height: 1.55; }
-  .nav__link, .nav__toggle, .theme-toggle,
-  .hero__kicker, .section__tag, .post__meta{
-    letter-spacing: 0.02em;
-  }
   .nav{ gap: 0.75rem; }
   .nav__mark{ flex: 0 0 auto; }
   .nav__links{
