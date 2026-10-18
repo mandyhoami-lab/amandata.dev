@@ -151,24 +151,17 @@
 
 </main>`;
 })();
-/* Homepage blog preview — latest 3 published posts from Supabase. */
+/* Homepage blog preview — 2 most recent posts from posts/index.json. */
 (function () {
     "use strict";
     var mount = document.getElementById("home-posts");
     if (!mount)
         return;
-    var cfg = window.SUPABASE_CONFIG || {};
     function esc(s) {
         return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
     }
     function fallback(html) { mount.innerHTML = html; }
-    if (!cfg.SUPABASE_URL || cfg.SUPABASE_URL.indexOf("YOUR_") === 0) {
-        fallback('<p><a href="/blog.html">visit the blog &rarr;</a></p>');
-        return;
-    }
-    var url = cfg.SUPABASE_URL.replace(/\/$/, "") +
-        "/rest/v1/posts?select=title,slug,created_at&published=eq.true&order=created_at.desc&limit=3";
-    fetch(url, { headers: { "apikey": cfg.SUPABASE_ANON_KEY, "Authorization": "Bearer " + cfg.SUPABASE_ANON_KEY } })
+    fetch("posts/index.json")
         .then(function (res) { if (!res.ok)
         throw new Error("posts failed"); return res.json(); })
         .then(function (posts) {
@@ -176,8 +169,9 @@
             fallback('<p>no posts yet — <a href="/blog.html">visit the blog</a>.</p>');
             return;
         }
-        fallback(posts.map(function (p) {
-            var d = new Date(p.created_at).toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
+        var latest = posts.slice(0, 2);
+        fallback(latest.map(function (p) {
+            var d = new Date(p.date + "T12:00:00").toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
             return '<a class="home-post" href="/blog.html?p=' + encodeURIComponent(p.slug) + '">' +
                 '<span class="home-post__title">' + esc(p.title) + "</span>" +
                 '<span class="home-post__date">' + esc(d) + "</span></a>";
