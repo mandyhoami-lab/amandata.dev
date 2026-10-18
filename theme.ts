@@ -4,7 +4,7 @@
 (function () {
   "use strict";
 
-  var THEMES: string[] = ["white", "dark", "light", "pink", "blue"];
+  var THEMES: string[] = ["dark", "light", "white", "pink", "blue"];
 
   function current(): string {
     var t: string | undefined = document.documentElement.dataset.theme;

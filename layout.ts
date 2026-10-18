@@ -92,9 +92,9 @@
       '<div class="theme-picker">' +
         '<button class="theme-toggle" id="theme-toggle" type="button" aria-expanded="false" aria-haspopup="true">Change Theme <span class="nav__caret" aria-hidden="true"></span></button>' +
         '<div class="theme-menu" id="theme-menu" role="menu" aria-label="Color theme" hidden>' +
-          '<button class="theme-opt" type="button" role="menuitemradio" data-theme-name="white"><span class="theme-swatches" aria-hidden="true"><i style="background:#FFFFFF"></i><i style="background:#2563EB"></i><i style="background:#111111"></i></span>White</button>' +
           '<button class="theme-opt" type="button" role="menuitemradio" data-theme-name="dark"><span class="theme-swatches" aria-hidden="true"><i style="background:#0A0C0A"></i><i style="background:#1DA05B"></i><i style="background:#D9BE7A"></i></span>Dark</button>' +
           '<button class="theme-opt" type="button" role="menuitemradio" data-theme-name="light"><span class="theme-swatches" aria-hidden="true"><i style="background:#F7F3E9"></i><i style="background:#2E7B3E"></i><i style="background:#9A7B2D"></i></span>Light</button>' +
+          '<button class="theme-opt" type="button" role="menuitemradio" data-theme-name="white"><span class="theme-swatches" aria-hidden="true"><i style="background:#FFFFFF"></i><i style="background:#2563EB"></i><i style="background:#111111"></i></span>White</button>' +
           '<button class="theme-opt" type="button" role="menuitemradio" data-theme-name="pink"><span class="theme-swatches" aria-hidden="true"><i style="background:#FAF3EA"></i><i style="background:#C96F8E"></i><i style="background:#934A66"></i></span>Pink</button>' +
           '<button class="theme-opt" type="button" role="menuitemradio" data-theme-name="blue"><span class="theme-swatches" aria-hidden="true"><i style="background:#0A1220"></i><i style="background:#5AA9E6"></i><i style="background:#D9BE7A"></i></span>Blue</button>' +
         '</div>' +

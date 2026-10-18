@@ -4,7 +4,7 @@
    (before first paint); this wires the picker. */
 (function () {
     "use strict";
-    var THEMES = ["white", "dark", "light", "pink", "blue"];
+    var THEMES = ["dark", "light", "white", "pink", "blue"];
     function current() {
         var t = document.documentElement.dataset.theme;
         return (t !== undefined && THEMES.indexOf(t) !== -1) ? t : "dark";
