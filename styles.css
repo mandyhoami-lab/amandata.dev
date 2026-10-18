@@ -1355,3 +1355,5 @@ a:focus-visible, button:focus-visible{
 .wiki-preview th{ color: var(--dim); font-weight: normal; }
 .wiki-preview td{ color: var(--ink); }
 .wiki-preview p:last-child{ margin-bottom: 0 !important; }
+
+.wiki-credit{ font-size: 0.85rem; color: var(--dim); margin-top: 1.5rem; border-top: 1px solid var(--line); padding-top: 0.8rem; }
