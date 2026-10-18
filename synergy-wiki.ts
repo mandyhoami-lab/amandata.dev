@@ -178,7 +178,7 @@ share out.</pre>
 
         <figure class="wiki-fig">
           <img src="/assets/images/synergy-frog.png" alt="Frog ascii art" loading="lazy">
-          <figcaption>Fig. 2: the Synergy frog, drawn by the <a href="/synergy.html">console</a></figcaption>
+          <figcaption>Fig. 2: frog, dithered</figcaption>
         </figure>
 
         <h4>Try it</h4>
