@@ -59,7 +59,7 @@
       </a>
       <a class="proj-box" href="/blog.html">
         <span class="proj-box__title">@tarotams — The amandata.dev Blog</span>
-        <span class="proj-box__desc">Essays · Process notes · Written as tarotams</span>
+        <span class="proj-box__desc">Essays · Process notes</span>
       </a>
       <a class="proj-box" href="https://amandata.org/" target="_blank" rel="noopener">
         <span class="proj-box__title">amandata.org</span>
