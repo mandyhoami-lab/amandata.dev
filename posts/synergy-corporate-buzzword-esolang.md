@@ -8,33 +8,35 @@ Esoslangs are short for "esoteric programming languages", and they live on a wik
 
 ## what that looks like
 
-A brainfuck program that prints "Hi" would look like this"
+The canonical brainfuck "Hello World!" from the [esolangs wiki](https://esolangs.org/wiki/Brainfuck):
 
 ```
-++++++++[>+++++++++<-]>.+++++++++++++++++++++++++++++++++.
+++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.
 ```
 
-That's the whole program. 
+That's the whole program. It sets up a few memory cells with a multiplication trick, then nudges each one up or down to the letter codes it needs — 72 for H, 101 for e, and so on — printing each with `.`. Every symbol is a command: `+` adds one, `-` subtracts one, `>` and `<` move between memory slots, `[` and `]` loop, and `.` prints.
 
-It counts up to 72 (the number computers use for the letter H), prints it, counts up 33 more to 105 (the letter i), and prints that. Every symbol is a command: `+` adds one, `-` subtracts one, `>` and `<` move between memory slots, `[` and `]` loop, and `.` prints.
-
- Here's the opening of the Shakespeare program and it prints "Hello World!":
+Here's the opening of the Shakespeare "Hello World!" from the [esolangs wiki](https://esolangs.org/wiki/Shakespeare) — a full program written as a play:
 
 ```
+The Infamous Hello World Program.
+
 Romeo, a young man with a remarkable patience.
 Juliet, a likewise young woman of remarkable grace.
 
-Act I: Hamlet's insults and flattery.
+                    Act I: Hamlet's insults and flattery.
 
-Scene I: The insulting of Romeo.
+                    Scene I: The insulting of Romeo.
 
 [Enter Hamlet and Romeo]
 
 Hamlet:
-  You lying stupid fatherless big smelly half-witted coward!
+ You lying stupid fatherless big smelly half-witted coward!
+ You are as stupid as the difference between a handsome rich brave
+ hero and thyself! Speak your mind!
 ```
 
-Positive adjectives count as +1, negative ones as −1, and nouns have numeric values so the dialogue adds up to the letter codes that spell out the message. The characters are the variables, the acts are the program's sections, and the stage directions control the flow.
+The characters are the variables. A noun is worth 1 or -1 (a "hero" is 1, a "coward" is -1), and every adjective doubles it — so "a handsome rich brave hero" is 2³ = 8. The dialogue does arithmetic on the characters' values, and "Speak your mind!" prints the value as a letter.
 
 ## Synergy
 
