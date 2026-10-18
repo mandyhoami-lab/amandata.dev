@@ -17,7 +17,7 @@
 
         <table class="wiki-infobox">
           <tr><th>Paradigm(s)</th><td>imperative</td></tr>
-          <tr><th>Designed by</th><td>tarotams</td></tr>
+          <tr><th>Designed by</th><td>mandy</td></tr>
           <tr><th>Appeared in</th><td>2026</td></tr>
           <tr><th>Memory system</th><td>cell-based</td></tr>
           <tr><th>Dimensions</th><td>one-dimensional</td></tr>
