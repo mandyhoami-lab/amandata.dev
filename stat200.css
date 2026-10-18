@@ -105,3 +105,9 @@
 .etym-table td{ padding: 0.55rem 0.5rem; border-bottom: 1px solid var(--line); vertical-align: top; }
 .etym-table td:first-child{ font-family: ui-monospace, monospace; color: var(--ink); white-space: nowrap; }
 .etym-table td:nth-child(2){ color: var(--tag); }
+
+/* flashcard prev/next: readable on all themes */
+.s2-stage .fc-grade button{
+  background: var(--green); border-color: var(--green); color: #0A0C0A;
+  font-weight: 700;
+}
