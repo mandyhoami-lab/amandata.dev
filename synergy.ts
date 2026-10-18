@@ -28,10 +28,9 @@
           <p><b>5.</b> Loops need <i>sync up</i> … <i>circle back</i> on the same line. The preset buttons run full programs if you want to see one in action.</p>
         </div>
         <p class="syn-explain">Type buzzwords below and hit enter — the console runs each line and shows you what changed.</p>
-        <div class="syn-presets">
-          <button type="button" data-preset="hi"><b>Say hi</b><span>prints "Hi"</span></button>
-          <button type="button" data-preset="count"><b>Count to 5</b><span>prints 12345</span></button>
-          <button type="button" data-preset="hello"><b>Hello world</b><span>the classic, in Synergy</span></button>
+        <div class="syn-examples-wrap">
+          <p class="syn-examples__label">example programs</p>
+          <div class="syn-examples" id="syn-examples" role="group" aria-label="example programs"></div>
         </div>
         <div class="syn-debug" id="syn-debug" aria-label="tape inspector"></div>
         <div class="syn-console" id="syn-console" aria-live="polite"></div>
@@ -78,26 +77,65 @@
     return lines.join("\n");
   }
 
+  function bfPhrases(bf: string): string[] {
+    return window.Synergy.fromBrainfuck(bf).split(". ").filter(function (s) { return s.length > 0; });
+  }
+
   function getPreset(name: string): string {
     if (PRESETS[name]) return PRESETS[name];
-    var prog: string;
+    var phrases: string[];
+    var comment: string;
     if (name === "count") {
       var bf = "";
       for (var i = 0; i < 49; i++) bf += "+";
       bf += ".+.+.+.+.";
-      prog = fmtProgram(window.Synergy.fromBrainfuck(bf).split(". "), "per my last email, counting to five");
+      phrases = bfPhrases(bf);
+      comment = "per my last email, counting to five";
     } else if (name === "hello") {
       var helloBf = "++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.";
-      prog = fmtProgram(window.Synergy.fromBrainfuck(helloBf).split(". "), "per my last email, here are the action items from standup");
+      phrases = bfPhrases(helloBf);
+      comment = "per my last email, here are the action items from standup";
+    } else if (name === "add") {
+      phrases = bfPhrases("+++>++++<[>+<-]>");
+      phrases.push("double-click on that");
+      comment = "per my last email, adding 3 + 4";
+    } else if (name === "multiply") {
+      phrases = bfPhrases("+++[>++++<-]>");
+      phrases.push("double-click on that");
+      comment = "per my last email, multiplying 3 x 4";
+    } else if (name === "alphabet") {
+      var az = ">"; // cell1 = 65 ('A')
+      for (var a = 0; a < 65; a++) az += "+";
+      az += "<"; // back to cell0
+      for (var b = 0; b < 26; b++) az += "+"; // cell0 = 26 counter
+      az += "[>.+<-]"; // print cell1, inc, dec counter
+      phrases = bfPhrases(az);
+      comment = "per my last email, the alphabet";
+    } else if (name === "countdown") {
+      phrases = bfPhrases("+++++");
+      phrases.push("sync up", "double-click on that", "take a step back", "circle back");
+      comment = "per my last email, counting down from five";
     } else {
       var hiBf = "++++++++[>+++++++++<-]>.";
       for (var j = 0; j < 33; j++) hiBf += "+";
       hiBf += ".";
-      prog = fmtProgram(window.Synergy.fromBrainfuck(hiBf).split(". "), "per my last email, just saying hi");
+      phrases = bfPhrases(hiBf);
+      comment = "per my last email, just saying hi";
     }
+    var prog = fmtProgram(phrases, comment);
     PRESETS[name] = prog;
     return prog;
   }
+
+  var EXAMPLES: { id: string; label: string; desc: string }[] = [
+    { id: "hi", label: "Say hi", desc: 'prints "Hi"' },
+    { id: "count", label: "Count to 5", desc: "prints 12345" },
+    { id: "hello", label: "Hello world", desc: "the classic, in Synergy" },
+    { id: "add", label: "Add 3 + 4", desc: "prints 7" },
+    { id: "multiply", label: "Multiply 3 × 4", desc: "prints 12" },
+    { id: "alphabet", label: "Alphabet", desc: "prints A to Z" },
+    { id: "countdown", label: "Countdown", desc: "prints 5 4 3 2 1" }
+  ];
 
   var session = window.Synergy.createSession();
   var con = document.getElementById("syn-console") as HTMLElement;
@@ -185,18 +223,24 @@
     input.focus();
   });
 
-  var presetBtns = document.querySelectorAll(".syn-presets button");
-  for (var k = 0; k < presetBtns.length; k++) {
-    (function (btn: Element) {
-      btn.addEventListener("click", function () {
-        var name = (btn as HTMLElement).getAttribute("data-preset") || "hi";
+  var examplesEl = document.getElementById("syn-examples") as HTMLElement;
+  function renderExamples(): void {
+    examplesEl.innerHTML = "";
+    EXAMPLES.forEach(function (ex) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "syn-example";
+      b.innerHTML = "<b>" + ex.label + "</b><span>" + ex.desc + "</span>";
+      b.addEventListener("click", function () {
         session.reset();
         con.innerHTML = "";
-        submit(getPreset(name));
+        submit(getPreset(ex.id));
         input.focus();
       });
-    })(presetBtns[k]);
+      examplesEl.appendChild(b);
+    });
   }
+  renderExamples();
 
   renderDebug();
   logLine('<span class="syn-state">welcome to the synergy console. type a buzzword and hit enter.</span>', "syn-line--dim");
