@@ -141,3 +141,17 @@
 .creation-btn__bars i:nth-child(1){ left: 6px; height: 18px; }
 .creation-btn__bars i:nth-child(2){ left: 26px; height: 32px; }
 .creation-btn__bars i:nth-child(3){ left: 46px; height: 46px; }
+
+.syn-explain{ color: var(--dim); font-size: 0.95rem; margin: 0 0 0.8rem; }
+.syn-presets{ display: flex; gap: 0.6rem; margin-bottom: 0.8rem; flex-wrap: wrap; }
+.syn-presets button{
+  flex: 1 1 0; min-width: 140px; padding: 0.6rem 0.5rem;
+  background: var(--card-bg); color: var(--ink);
+  border: 2px solid var(--line); border-radius: 10px; cursor: pointer;
+  font-family: 'Nunito', var(--body);
+  display: flex; flex-direction: column; gap: 0.15rem; align-items: center;
+}
+.syn-presets button:hover{ border-color: var(--tag); }
+.syn-presets button b{ font-weight: 800; font-size: 0.95rem; }
+.syn-presets button span{ font-size: 0.78rem; color: var(--dim); }
+.syn-cheat__head{ font-weight: 800; color: var(--ink); margin: 0 0 0.3rem; }
