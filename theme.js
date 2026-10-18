@@ -4,13 +4,14 @@
    (before first paint); this wires the picker. */
 (function () {
     "use strict";
-    var THEMES = ["dark", "light", "pink", "blue"];
+    var THEMES = ["white", "dark", "light", "pink", "blue"];
     function current() {
         var t = document.documentElement.dataset.theme;
         return (t !== undefined && THEMES.indexOf(t) !== -1) ? t : "dark";
     }
     /* theme-color meta (overscroll / browser chrome on mobile) follows the theme bg */
     var THEME_BGS = {
+        white: "#FFFFFF",
         dark: "#0A0C0A",
         light: "#F7F3E9",
         pink: "#F5F4F2",
@@ -23,6 +24,7 @@
     }
     /* Othello landing icon follows the theme — one gif variant per theme. */
     var DEMO_GIFS = {
+        white: "/assets/images/othello-demo-light.gif",
         dark: "/assets/images/othello-demo.gif",
         light: "/assets/images/othello-demo-light.gif",
         pink: "/assets/images/othello-demo-pink.gif",

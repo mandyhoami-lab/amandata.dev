@@ -45,50 +45,27 @@
     ] }
   ];
 
-  function dropdown(d: NavDropdown): string {
-    var active = page === d.key ? " is-active" : "";
-    var items = d.links.map(function (l: string[]) {
-      return '<a class="nav__menu-link" role="menuitem" href="' + l[0] + '">' + l[1] + "</a>";
+  function fullMenu(): string {
+    var home = '<a class="nav__full-link nav__full-home" href="/">Home</a>';
+    var groups = DROPDOWNS.map(function (d: NavDropdown) {
+      var items = d.links.map(function (l: string[]) {
+        return '<a class="nav__full-link" href="' + l[0] + '">' + l[1] + "</a>";
+      }).join("");
+      return '<div class="nav__full-group"><span class="nav__full-label">' + d.label + "</span>" + items + "</div>";
     }).join("");
-    return '<div class="nav__item nav__dropdown">' +
-      '<button class="nav__toggle' + active + '" type="button" aria-expanded="false" aria-haspopup="true" ' +
-      'aria-controls="nav-menu-' + d.key + '" id="nav-toggle-' + d.key + '">' + d.label +
-      ' <span class="nav__caret" aria-hidden="true"></span></button>' +
-      '<div class="nav__menu" id="nav-menu-' + d.key + '" role="menu" aria-labelledby="nav-toggle-' + d.key + '">' +
-      items + "</div></div>";
+    return home + groups;
   }
 
-  var markHref = page === "home" ? "#top" : "/";
-  var markActive = page === "home" ? " is-active" : "";
-  /* Desktop-only top-level links (hidden on mobile via .nav__link--wide). */
-  var path = window.location.pathname;
-  var wideLinks = [
-    ["/blog.html", "Blog"],
-    ["/psy410.html", "PSY 410 Resources"]
-  ].map(function (l: string[]) {
-    var active = path === l[0] ? " is-active" : "";
-    return '<a class="nav__link nav__link--wide' + active + '" href="' + l[0] + '">' + l[1] + "</a>";
-  }).join("");
   var navHtml =
     '<nav class="nav">' +
-      '<a class="nav__mark' + markActive + '" href="' + markHref + '" aria-label="Home">' +
-        '<svg class="nav__home" viewBox="0 0 16 14" width="26" height="23" aria-hidden="true">' +
-          '<ellipse class="hm" cx="2.8" cy="4.2" rx="1.5" ry="1.9"/>' +
-          '<ellipse class="hm" cx="6" cy="2.8" rx="1.7" ry="2.1"/>' +
-          '<ellipse class="hm" cx="10" cy="2.8" rx="1.7" ry="2.1"/>' +
-          '<ellipse class="hm" cx="13.2" cy="4.2" rx="1.5" ry="1.9"/>' +
-          '<ellipse class="hm" cx="6.2" cy="8.6" rx="2.2" ry="2.2"/>' +
-          '<ellipse class="hm" cx="9.8" cy="8.6" rx="2.2" ry="2.2"/>' +
-          '<ellipse class="hm" cx="8" cy="11" rx="4" ry="2.8"/>' +
-        '</svg>' +
-      '</a>' +
+      '<button class="nav__burger" id="nav-burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav-fullmenu">' +
+        '<span></span><span></span><span></span>' +
+      '</button>' +
+      '<div class="nav__fullmenu" id="nav-fullmenu" hidden>' + fullMenu() + "</div>" +
       '<form class="nav__search" id="nav-search" role="search" action="/search.html" method="get" autocomplete="off">' +
         '<input type="search" name="q" id="nav-search-input" placeholder="search" aria-label="search site pages">' +
         '<div class="nav__suggest" id="nav-suggest" hidden></div>' +
       '</form>' +
-      '<div class="nav__links">' +
-        DROPDOWNS.map(dropdown).join("") + wideLinks +
-      "</div>" +
       '<div class="theme-picker">' +
         '<button class="theme-toggle" id="theme-toggle" type="button" aria-expanded="false" aria-haspopup="true">Change Theme <span class="nav__caret" aria-hidden="true"></span></button>' +
         '<div class="theme-menu" id="theme-menu" role="menu" aria-label="Color theme" hidden>' +
@@ -125,6 +102,33 @@
     show: function () { loadingBar.classList.add("on"); },
     hide: function () { loadingBar.classList.remove("on"); }
   };
+
+  /* Hamburger menu toggle */
+  (function () {
+    var btn = document.getElementById("nav-burger") as HTMLButtonElement | null;
+    var menu = document.getElementById("nav-fullmenu") as HTMLElement | null;
+    if (!btn || !menu) return;
+    function close(): void {
+      menu!.hidden = true;
+      btn!.setAttribute("aria-expanded", "false");
+      btn!.classList.remove("is-open");
+    }
+    btn.addEventListener("click", function (e: Event) {
+      e.stopPropagation();
+      var open = menu!.hidden;
+      if (open) {
+        menu!.hidden = false;
+        btn!.setAttribute("aria-expanded", "true");
+        btn!.classList.add("is-open");
+      } else close();
+    });
+    document.addEventListener("click", function (e: Event) {
+      if (!(e.target as HTMLElement).closest("#nav-fullmenu")) close();
+    });
+    document.addEventListener("keydown", function (e: KeyboardEvent) {
+      if (e.key === "Escape") close();
+    });
+  })();
 
   /* Nav search autocomplete — up to 5 page suggestions as you type. */
   (function () {
