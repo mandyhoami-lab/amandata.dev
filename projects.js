@@ -28,6 +28,14 @@
         <span class="proj-box__title">Myers Experimental Psychology Flashcards</span>
         <span class="proj-box__desc">118 terms · Myers Exp. Psych Ch. 1–16</span>
       </a>
+      <a class="proj-box" href="/synergy.html">
+        <span class="proj-box__title">Synergy</span>
+        <span class="proj-box__desc">The corporate-buzzword esolang · Brainfuck-complete</span>
+      </a>
+      <a class="proj-box" href="/stat200-practice.html">
+        <span class="proj-box__title">R Practice Hub</span>
+        <span class="proj-box__desc">STAT 200 drills, quizzes + a real R console</span>
+      </a>
       <a class="proj-box" href="/blog.html">
         <span class="proj-box__title">@tarotams — The amandata.dev Blog</span>
         <span class="proj-box__desc">Essays · Process notes · Written as tarotams</span>
