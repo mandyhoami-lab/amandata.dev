@@ -33,6 +33,7 @@
           <div class="syn-examples" id="syn-examples" role="group" aria-label="example programs"></div>
         </div>
         <div class="syn-debug" id="syn-debug" aria-label="tape inspector"></div>
+        <p class="syn-examples__label">output</p>
         <div class="syn-console" id="syn-console" aria-live="polite"></div>
         <div class="syn-inputrow">
           <span class="syn-prompt" aria-hidden="true">&gt;</span>
