@@ -38,6 +38,11 @@
           <span class="creation-btn__label">Synergy</span>
           <span class="creation-btn__sub">the corporate esolang</span>
         </a>
+        <a class="creation-btn" href="/stat200-practice.html">
+          <span class="creation-btn__icon" aria-hidden="true"><span class="creation-btn__bars"><i></i><i></i><i></i></span></span>
+          <span class="creation-btn__label">STAT 200 Practice</span>
+          <span class="creation-btn__sub">R drills, quizzes + console</span>
+        </a>
       </div>
 
       <p class="games-note">More toys eventually. Requests welcome.</p>

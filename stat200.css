@@ -1,0 +1,107 @@
+/* STAT 200 practice hub styles — pixel chrome, readable body. */
+:root{
+  --display: 'Pixelify Sans', 'Press Start 2P', monospace;
+  --micro: 'VT323', 'Silkscreen', monospace;
+}
+
+.s2-wrap{ max-width: 720px; margin: 0 auto; }
+.s2-units{ display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+.s2-unit{
+  padding: 0.5rem 0.9rem; border: 2px solid var(--line); border-radius: 10px;
+  background: var(--card-bg); color: var(--ink); cursor: pointer;
+  font-family: 'VT323', monospace; font-size: 1.1rem;
+}
+.s2-unit.is-active{ border-color: var(--tag); color: var(--tag); }
+.s2-modes{ display: flex; gap: 0.5rem; margin-bottom: 1.2rem; flex-wrap: wrap; }
+.s2-mode{
+  padding: 0.5rem 0.9rem; border: 2px solid var(--line); border-radius: 10px;
+  background: transparent; color: var(--dim); cursor: pointer;
+  font-family: 'VT323', monospace; font-size: 1.1rem;
+}
+.s2-mode.is-active{ background: var(--green); border-color: var(--green); color: #0A0C0A; }
+.s2-stage{
+  background: var(--card-bg); border: 2px solid var(--line);
+  border-radius: 12px; padding: 1.2rem; min-height: 300px;
+}
+
+/* flashcards reuse .fc-* from flashcards.css; ensure it loads */
+.s2-stage .fc-wrap{ max-width: none; margin: 0; padding: 0; }
+
+/* typing drills */
+.drill-progress{ margin-bottom: 1rem; }
+.drill-bar{ height: 8px; background: var(--line); border-radius: 4px; overflow: hidden; }
+.drill-fill{ height: 100%; background: var(--green); width: 0; transition: width 0.3s; }
+.drill-ptext{ font-size: 0.85rem; color: var(--dim); margin-top: 0.3rem; }
+.drill-prompt{ font-size: 1.05rem; margin-bottom: 0.8rem; }
+.drill-input{
+  width: 100%; box-sizing: border-box; padding: 0.7rem;
+  background: var(--bg); color: var(--ink); border: 2px solid var(--line);
+  border-radius: 8px; font-family: ui-monospace, monospace; font-size: 0.95rem;
+}
+.drill-input:disabled{ opacity: 0.7; }
+.drill-hint{ margin-top: 0.6rem; font-size: 0.9rem; color: var(--tag); }
+.drill-row{ display: flex; gap: 0.5rem; margin-top: 0.8rem; }
+.drill-btn{
+  padding: 0.55rem 1.1rem; border: none; border-radius: 8px; cursor: pointer;
+  font-family: 'Nunito', var(--body); font-weight: 800; font-size: 0.92rem;
+  background: var(--green); color: #0A0C0A;
+}
+.drill-btn.drill-show-hint, .drill-btn.drill-skip{ background: transparent; color: var(--dim); border: 2px solid var(--line); }
+.drill-feedback{ margin-top: 0.8rem; font-family: ui-monospace, monospace; font-size: 0.9rem; }
+.drill-good{ color: var(--green); }
+.drill-bad{ color: #E06C5B; }
+.drill-next{ margin-top: 0.8rem; }
+.drill-done, .quiz-done{ text-align: center; padding: 2rem 0; }
+.drill-done h3, .quiz-done h3{ font-family: 'Pixelify Sans', monospace; font-size: 1.6rem; }
+
+/* quizzes */
+.quiz-progress{ font-size: 0.85rem; color: var(--dim); margin-bottom: 0.8rem; }
+.quiz-q{ font-size: 1.05rem; margin-bottom: 1rem; }
+.quiz-choices{ display: flex; flex-direction: column; gap: 0.5rem; }
+.quiz-choice{
+  text-align: left; padding: 0.7rem 0.9rem; border-radius: 8px; cursor: pointer;
+  background: var(--bg); color: var(--ink); border: 2px solid var(--line);
+  font-family: var(--body); font-size: 0.95rem;
+}
+.quiz-choice:hover:not(:disabled){ border-color: var(--tag); }
+.quiz-choice.quiz-right{ border-color: var(--green); background: rgba(127,176,105,0.12); }
+.quiz-choice.quiz-wrong{ border-color: #E06C5B; background: rgba(224,108,91,0.12); }
+.quiz-feedback{ margin-top: 0.9rem; font-size: 0.92rem; }
+.quiz-good{ color: var(--green); }
+.quiz-bad{ color: #E06C5B; }
+.quiz-btn{
+  margin-top: 0.9rem; padding: 0.55rem 1.2rem; border: none; border-radius: 8px;
+  background: var(--green); color: #0A0C0A; cursor: pointer;
+  font-family: 'Nunito', var(--body); font-weight: 800;
+}
+
+/* code runner */
+.code-note{ font-size: 0.9rem; color: var(--dim); margin: 0 0 0.8rem; }
+.code-note code{ color: var(--tag); }
+.code-input{
+  width: 100%; box-sizing: border-box; padding: 0.8rem;
+  background: #0d100c; color: #d8e6c8; border: 2px solid var(--line);
+  border-radius: 8px; font-family: ui-monospace, monospace; font-size: 0.9rem;
+  resize: vertical;
+}
+.code-row{ margin: 0.7rem 0; }
+.code-btn{
+  padding: 0.6rem 1.4rem; border: none; border-radius: 8px; cursor: pointer;
+  background: var(--green); color: #0A0C0A;
+  font-family: 'Nunito', var(--body); font-weight: 800; font-size: 0.95rem;
+}
+.code-out{
+  background: #0d100c; color: #d8e6c8; border: 2px solid var(--line);
+  border-radius: 8px; padding: 0.8rem; min-height: 3rem;
+  font-family: ui-monospace, monospace; font-size: 0.9rem; white-space: pre-wrap; margin: 0;
+}
+
+/* etymology */
+.etym-table{ width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+.etym-table th{
+  text-align: left; font-family: 'VT323', monospace; font-size: 1.05rem;
+  color: var(--tag); padding: 0.5rem; border-bottom: 2px solid var(--line);
+}
+.etym-table td{ padding: 0.55rem 0.5rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+.etym-table td:first-child{ font-family: ui-monospace, monospace; color: var(--ink); white-space: nowrap; }
+.etym-table td:nth-child(2){ color: var(--tag); }

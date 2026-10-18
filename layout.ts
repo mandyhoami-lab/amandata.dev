@@ -40,6 +40,7 @@
       ["/othello.html", "Othello"],
       ["/psy410-flashcards/", "Myers flashcards"],
       ["/synergy.html", "Synergy"],
+      ["/stat200-practice.html", "STAT 200 Practice"],
       ["/psy410.html", "PSY 410 Resources"]
     ] }
   ];
