@@ -1,22 +1,24 @@
-# a programming language but it's all corporate buzzword
+#  programming language but it's all corporate buzzword
 
-**On this page:** [What that actually looks like](#what-that-actually-looks-like) · [Synergy](#synergy) · [Hello world, as meeting notes](#hello-world-as-meeting-notes)
+**On this page:** [What are esoslangs](#post-title) · [What that looks like](#what-that-looks-like) · [I made one](#i-made-one) · [Print: hello world](#print-hello-world)
 
-Esoslangs are short for "esoteric programming languages", and they live on a wiki called [esolangs.org](https://esolangs.org/wiki/Esoteric_programming_language).
+Esoslangs are short for "esoteric programming languages", and they live on a wiki called [esolangs.org](https://esolangs.org/wiki/Esoteric_programming_language). I like to imagine them as.. fully functioning satirical programming languages or coding art projects rather than any practical applications.
 
- Famous ones include [**brainfuck**](https://esolangs.org/wiki/Brainfuck), which has only 8 commands and looks like someone fell asleep on their keyboard, and [**Shakespeare**](https://esolangs.org/wiki/Shakespeare), where your program has to read like a Shakespeare play where variables are characters, and you give them stage directions. Anyone can write real and working programs in these.
+ Some famous ones include [**brainfuck**](https://esolangs.org/wiki/Brainfuck), which has only 8 commands and looks like someone fell asleep on their keyboard, and [**Shakespeare**](https://esolangs.org/wiki/Shakespeare), where your program has to read like a Shakespeare play where variables are characters, and you give them stage directions. And anyone can write real and working programs in these.
 
-## what that actually looks like
+## what that looks like
 
-Here's a brainfuck program that prints "Hi":
+A brainfuck program that prints "Hi" would look like this"
 
 ```
 ++++++++[>+++++++++<-]>.+++++++++++++++++++++++++++++++++.
 ```
 
-That's the whole program. It counts up to 72 (the number computers use for the letter H), prints it, counts up 33 more to 105 (the letter i), and prints that. Every symbol is a command: `+` adds one, `-` subtracts one, `>` and `<` move between memory slots, `[` and `]` loop, and `.` prints.
+That's the whole program. 
 
-And here's the opening of a real Shakespeare program — the entire thing is a play, and it prints "Hello World!":
+It counts up to 72 (the number computers use for the letter H), prints it, counts up 33 more to 105 (the letter i), and prints that. Every symbol is a command: `+` adds one, `-` subtracts one, `>` and `<` move between memory slots, `[` and `]` loop, and `.` prints.
+
+ Here's the opening of the Shakespeare program and it prints "Hello World!":
 
 ```
 Romeo, a young man with a remarkable patience.
@@ -32,11 +34,11 @@ Hamlet:
   You lying stupid fatherless big smelly half-witted coward!
 ```
 
-The trick: every insult is secretly arithmetic. Positive adjectives count as +1, negative ones as −1, and nouns have hidden numeric values — so the dialogue adds up to the letter codes that spell out the message. The characters are the variables, the acts are the program's sections, and stage directions control the flow.
+Positive adjectives count as +1, negative ones as −1, and nouns have numeric values so the dialogue adds up to the letter codes that spell out the message. The characters are the variables, the acts are the program's sections, and the stage directions control the flow.
 
-## Synergy
+## i made one 
 
-The only keywords are corporate buzzwords. Every program reads like a standup meeting:
+The only keywords are corporate buzzwords. Everything reads like a progress meeting.
 
 - `move the needle` — add 1
 - `take a step back` — subtract 1
@@ -47,9 +49,9 @@ The only keywords are corporate buzzwords. Every program reads like a standup me
 - `hit a bottleneck` — stop the program (every corporate program ends at a bottleneck)
 - `per my last email` — comment
 
-It can compute anything any other language.
+It can compute anything like any other language.
 
-## hello world, as meeting notes
+## print: hello world
 
 ```
 per my last email, here are the action items from standup
@@ -61,10 +63,8 @@ sync up, pivot, move the needle, move the needle, move the needle,
 hit a bottleneck.
 ```
 
-This prints `Hello World!`. A hundred lines of Synergy, and it says is hello.
+This prints `Hello World!`. A hundred lines of Synergy and it says is hello.
 
 
 
-Try it: 
-
-there's a [playground on my creations page](/synergy.html) where you can write a standup and run it. The code is [on GitHub](https://github.com/mandyhoami-lab/synergy). If you want to read the interpreter it's one small file.
+There's a [playground on my creations page](/synergy.html) where you can write a standup and run it. The code is [on GitHub](https://github.com/mandyhoami-lab/synergy). If you want to read the interpreter it's one small file.
