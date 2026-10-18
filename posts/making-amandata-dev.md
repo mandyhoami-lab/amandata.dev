@@ -2,7 +2,7 @@
 
 **On this page:** [History](#history) · [Development workflow](#development-workflow) · [Design system](#design-system) · [The othello theme](#the-othello-theme) · [PSY 410 resources](#psy-410-resources) · [Content](#content) · [Milestones](#milestones) · [Technical details](#technical-details)
 
-This is the first of many blog posts, and I wanted it to be about the site you are reading it on. amandata.dev started as a Carrd page I was renting space on and became something I built file by file — with help from [KoriKosmos](https://korikosmos.dev). What follows includes a lot of dates, stages, and tables, but the reason it exists is simpler; I wanted my own little place on the internet.
+This is the first of many blog posts, and I wanted it to be about the site you are reading it on. amandata.dev started as a Carrd page I was renting space on and became something I built file by file, with help from [KoriKosmos](https://korikosmos.dev). What follows includes a lot of dates, stages, and tables, but the reason it exists is simpler; I wanted my own little place on the internet.
 
 ---
 
@@ -61,13 +61,13 @@ Recurring visual motifs include a pixel-art cat that crawls in and sleeps over t
 
 Othello is the site's through-line, and the choice is personal: abstract strategy board games were among my favorite childhood games, and I follow othello communities online. The motif appears in three places: the ambient page backdrop, the playable game, and the study mode.
 
-The backdrop (September 30) began as small blurred self-playing boards at the page edges, passed through a phase as a physical wooden board with green felt, 3D discs, and animated strategy notes (candidate moves, arrows, tips, live score), and was finally flattened into an abstract graphic — thin grid, solid and ring discs, spread to the edges — so the content stays the focus.
+The backdrop (September 30) began as small blurred self-playing boards at the page edges, passed through a phase as a physical wooden board with green felt, 3D discs, and animated strategy notes (candidate moves, arrows, tips, live score), and was finally flattened into an abstract graphic, thin grid, solid and ring discs, spread to the edges, so the content stays the focus.
 
 The playable game began as a single easy mode: a teachable robot that samples a blunder rate each game (60–92% of its moves are random legal squares) and plays genuine 1-ply positional othello when focused, with an all-time scoreboard tracking wins, losses, and draws per player and combined, stored on the device. On October 1 it split into Beginner (the preserved easy game) and Advanced, a study mode in which a full-strength alpha-beta engine grades every move the moment it is played.
 
 Two outside influences are credited on the site. [Hiyoko Reversi (ひよこリバーシ)](https://apps.apple.com/jp/app/id1197944711), a Japanese reversi application, supplied the model for the teaching interface: its post-game analysis and evaluation graph demonstrated what a study UI should do, reflected here in the board coordinates, last-move highlight, running move list, and eval graph. The progressive robot opponents and the persistent per-player statistics take cues from [Reversi Online](https://cardgames.io/reversi/): its named robot opponents and smart-opponent options were the model for a ladder of personalities worth beating.
 
-Beginner mode has since grown its own teaching layer: a Tips section with six strategy tips adapted from Brian Rose's *Othello: A Minute to Learn… A Lifetime to Master* (credited on the page, with a link to the free PDF), and six interactive exercises — find the best move in positions about corners, X-squares, C-squares, and quiet play — with the engine checking your answer.
+Beginner mode has since grown its own teaching layer: a Tips section with six strategy tips adapted from Brian Rose's *Othello: A Minute to Learn… A Lifetime to Master* (credited on the page, with a link to the free PDF), and six interactive exercises, find the best move in positions about corners, X-squares, C-squares, and quiet play, with the engine checking your answer.
 
 ## PSY 410 resources
 

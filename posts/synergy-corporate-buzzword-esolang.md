@@ -14,9 +14,9 @@ The canonical brainfuck "Hello World!" from the [esolangs wiki](https://esolangs
 ++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.
 ```
 
-That's the whole program. It sets up a few memory cells with a multiplication trick, then nudges each one up or down to the letter codes it needs — 72 for H, 101 for e, and so on — printing each with `.`. Every symbol is a command: `+` adds one, `-` subtracts one, `>` and `<` move between memory slots, `[` and `]` loop, and `.` prints.
+That's the whole program. It sets up a few memory cells with a multiplication trick, then nudges each one up or down to the letter codes it needs, 72 for H, 101 for e, and so on, printing each with `.`. Every symbol is a command: `+` adds one, `-` subtracts one, `>` and `<` move between memory slots, `[` and `]` loop, and `.` prints.
 
-Here's the opening of the Shakespeare "Hello World!" from the [esolangs wiki](https://esolangs.org/wiki/Shakespeare) — a full program written as a play:
+Here's the opening of the Shakespeare "Hello World!" from the [esolangs wiki](https://esolangs.org/wiki/Shakespeare), a full program written as a play:
 
 ```
 The Infamous Hello World Program.
@@ -36,27 +36,27 @@ Hamlet:
  hero and thyself! Speak your mind!
 ```
 
-The characters are the variables. A noun is worth 1 or -1 (a "hero" is 1, a "coward" is -1), and every adjective doubles it — so "a handsome rich brave hero" is 2³ = 8. The dialogue does arithmetic on the characters' values, and "Speak your mind!" prints the value as a letter.
+The characters are the variables. A noun is worth 1 or -1 (a "hero" is 1, a "coward" is -1), and every adjective doubles it, so "a handsome rich brave hero" is 2³ = 8. The dialogue does arithmetic on the characters' values, and "Speak your mind!" prints the value as a letter.
 
 ## Synergy
 
 The only keywords are corporate buzzwords. Everything reads like a progress meeting.
 
-- `move the needle` — add 1
-- `take a step back` — subtract 1
-- `pivot` — move right, `deep dive` — move left
-- `share out` — print 
-- `gather feedback` — read input
-- `sync up` ... `circle back` — loop
-- `hit a bottleneck` — stop the program (every corporate program ends at a bottleneck)
-- `per my last email` — comment
-- `low-hanging fruit` — set the cell to 0
-- `double-click on that` — print the cell as a number
-- `run it up the flagpole` — print the whole tape
-- `herding cats` — randomize the cell
-- `put a pin in it` / `pull the pin` — save / restore the tape
+- `move the needle`, add 1
+- `take a step back`, subtract 1
+- `pivot`, move right, `deep dive`, move left
+- `share out`, print 
+- `gather feedback`, read input
+- `sync up` ... `circle back`, loop
+- `hit a bottleneck`, stop the program (every corporate program ends at a bottleneck)
+- `per my last email`, comment
+- `low-hanging fruit`, set the cell to 0
+- `double-click on that`, print the cell as a number
+- `run it up the flagpole`, print the whole tape
+- `herding cats`, randomize the cell
+- `put a pin in it` / `pull the pin`, save / restore the tape
 
-It can compute anything like any other language. The full command list lives on the [Synergy wiki](/synergy-wiki.html) — every buzzword in plain language.
+It can compute anything like any other language. The full command list lives on the [Synergy wiki](/synergy-wiki.html), every buzzword in plain language.
 
 <div class="wiki-preview">
 <p class="wiki-preview__tag">from the synergy wiki</p>
@@ -71,7 +71,7 @@ It can compute anything like any other language. The full command list lives on 
 
 ## how printing works
 
-Numbers are also letters. 72 is H, 105 is i, 32 is a space — that's just how computers do it. So to print "Hi": count the first cell up to 72, `share out` prints H. `pivot` to the next cell, count up to 105, `share out` prints i. The console's tape debugger shows the letter next to each number so you can watch it happen.
+Numbers are also letters. 72 is H, 105 is i, 32 is a space, that's ASCII, the standard pretty much all computers use to turn numbers into text. So to print "Hi": count the first cell up to 72, `share out` prints H. `pivot` to the next cell, count up to 105, `share out` prints i. The console's tape debugger shows the letter next to each number so you can watch it happen.
 
 ## print: hello world
 
