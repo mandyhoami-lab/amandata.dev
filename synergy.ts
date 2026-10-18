@@ -195,9 +195,11 @@
   }
 
   function printable(out: string): string {
-    /* show control chars as codes so learners see what share out actually did */
+    /* show control chars as codes so learners see what share out actually did,
+       but keep newlines/tabs as real whitespace so art renders */
     return out.split("").map(function (c) {
       var code = c.charCodeAt(0);
+      if (code === 10 || code === 13 || code === 9) return c;
       return code >= 32 && code < 127 ? c : "&#9000;" + code;
     }).join("");
   }
