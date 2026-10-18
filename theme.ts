@@ -26,7 +26,7 @@
 
   /* Othello landing icon follows the theme — one gif variant per theme. */
   var DEMO_GIFS: { [theme: string]: string } = {
-    white: "/assets/images/othello-demo-light.gif",
+    white: "/assets/images/othello-demo-white.gif",
     dark: "/assets/images/othello-demo.gif",
     light: "/assets/images/othello-demo-light.gif",
     pink: "/assets/images/othello-demo-pink.gif",
