@@ -1,5 +1,5 @@
 "use strict";
-/* Shared searchable index of site pages — used by the nav autocomplete and /search.html. */
+/* Shared searchable index of site pages, used by the nav autocomplete and /search.html. */
 (function () {
     "use strict";
     var pages = [

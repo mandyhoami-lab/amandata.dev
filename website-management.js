@@ -1,5 +1,5 @@
 "use strict";
-/* Website management page — the sites she runs, same card layout as coding projects. */
+/* Website management page, the sites she runs, same card layout as coding projects. */
 (function () {
     "use strict";
     var mount = document.getElementById("page-mount");

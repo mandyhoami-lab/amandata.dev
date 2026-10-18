@@ -1,5 +1,5 @@
 "use strict";
-/* STAT 200 practice hub — unit selector + mode tabs.
+/* STAT 200 practice hub, unit selector + mode tabs.
    Modes: flashcards (flip viewer), typing drills, quizzes, code lab (WebR), etymology. */
 (function () {
     "use strict";

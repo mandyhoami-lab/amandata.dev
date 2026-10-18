@@ -23,7 +23,7 @@
     var gotBtn = document.getElementById('fc-got');
     if (!deckEl)
         return;
-    document.title = D.title + ' — Amanda Ta';
+    document.title = D.title + ' - Amanda Ta';
     document.getElementById('fc-title').textContent = D.title;
     document.getElementById('fc-sub').textContent = D.sub;
     var tags = [];

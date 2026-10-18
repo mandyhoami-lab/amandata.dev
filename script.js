@@ -1,10 +1,10 @@
 "use strict";
 /* =========================================================
-   amandata.dev — vanilla JS behavior, no build step.
+   amandata.dev, vanilla JS behavior, no build step.
 
    Three rules (carried over from the old amandata.dev):
    1. Everything fails open. The hidden pre-reveal state only
-      exists because this script adds `js-on` to <html> — a JS
+      exists because this script adds `js-on` to <html>, a JS
       error or disabled JS leaves the page fully readable.
    2. prefers-reduced-motion lands every effect in its final
       state instantly instead of animating.
@@ -17,7 +17,7 @@
         reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     }
     catch (e) { /* fail open */ }
-    /* Mark JS as working — this is what arms the hidden states in CSS. */
+    /* Mark JS as working, this is what arms the hidden states in CSS. */
     document.documentElement.classList.add('js-on');
     /* ---------------- typewriter tagline ---------------- */
     (function typewriter() {
@@ -172,7 +172,7 @@
         const links = document.querySelector('.nav__links');
         if (!links)
             return;
-        /* Overflow only changes on resize/font load — never mid-scroll. Cache it
+        /* Overflow only changes on resize/font load, never mid-scroll. Cache it
            so the scroll handler never forces layout (that was the mobile jank). */
         var maxScroll = 0;
         var ticking = false;

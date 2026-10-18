@@ -1,6 +1,6 @@
 "use strict";
 /* =========================================================
-   amandata.dev — repository file browser.
+   amandata.dev, repository file browser.
 
    Client-side browser for the public GitHub repo
    mandyhoami-lab/amandata.dev via the GitHub contents API.
@@ -9,7 +9,7 @@
    ========================================================= */
 (function () {
     'use strict';
-    /* Page shell — vignette + main, injected so the .html file stays a thin shell.
+    /* Page shell, vignette + main, injected so the .html file stays a thin shell.
        Markup is byte-identical to what the .html file used to ship. */
     (function () {
         var mount = document.getElementById("page-mount");
@@ -29,7 +29,7 @@
     </div>
     <div class="section__body">
 
-      <p class="repo-intro">Everything behind this site — every page, the othello engine, the flashcards — lives in the open at <a class="repo-link" href="https://github.com/mandyhoami-lab/amandata.dev" target="_blank" rel="noopener">github.com/mandyhoami-lab/amandata.dev</a>. Browse the files below.</p>
+      <p class="repo-intro">Everything behind this site, every page, the othello engine, the flashcards, lives in the open at <a class="repo-link" href="https://github.com/mandyhoami-lab/amandata.dev" target="_blank" rel="noopener">github.com/mandyhoami-lab/amandata.dev</a>. Browse the files below.</p>
 
       <nav class="repo-crumbs" id="repo-crumbs" aria-label="Repository path"></nav>
       <div class="repo-list" id="repo-list" aria-live="polite">

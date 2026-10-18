@@ -1,5 +1,5 @@
 "use strict";
-/* Research activity page — CV + LinkedIn. */
+/* Research activity page, CV + LinkedIn. */
 (function () {
     "use strict";
     var mount = document.getElementById("page-mount");

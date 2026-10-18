@@ -1,5 +1,5 @@
 "use strict";
-/* Creations shell — vignette + main, injected so the .html file stays a thin shell.
+/* Creations shell, vignette + main, injected so the .html file stays a thin shell.
    Markup is byte-identical to what the .html file used to ship. */
 (function () {
     "use strict";

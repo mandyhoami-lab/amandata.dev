@@ -1,5 +1,5 @@
 "use strict";
-/* Site search page shell — vignette + main, injected so the .html file stays a thin shell. */
+/* Site search page shell, vignette + main, injected so the .html file stays a thin shell. */
 (function () {
     "use strict";
     var mount = document.getElementById("page-mount");

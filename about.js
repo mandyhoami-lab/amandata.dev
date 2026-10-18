@@ -1,5 +1,5 @@
 "use strict";
-/* About page shell — vignette + main, injected so the .html file stays a thin shell.
+/* About page shell, vignette + main, injected so the .html file stays a thin shell.
    Section markup copied verbatim from the homepage (index.ts). */
 (function () {
     "use strict";

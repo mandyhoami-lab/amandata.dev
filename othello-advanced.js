@@ -1,12 +1,12 @@
 "use strict";
-/* Othello Advanced — study mode.
+/* Othello Advanced, study mode.
    Hiyoko Reversi-inspired teaching UI: the engine grades every human
    move the moment it is played, with coordinates, a move list,
    undo/redo, and an evaluation graph. Engine + sprites come from
    othello.js (window.OthelloEngine). */
 (function () {
     'use strict';
-    /* Page shell — vignette + main, injected so the .html file stays a thin shell.
+    /* Page shell, vignette + main, injected so the .html file stays a thin shell.
        Markup is byte-identical to what the .html file used to ship. */
     (function () {
         var mount = document.getElementById("page-mount");
@@ -30,7 +30,7 @@
 
       <div class="game-card">
         <h3 class="game-card__title">Advanced</h3>
-        <p class="game-card__desc">For players with a few games under their belt. The engine grades every move the moment you play it — good, shaky, or blunder — and the eval graph shows exactly where the game swung.</p>
+        <p class="game-card__desc">For players with a few games under their belt. The engine grades every move the moment you play it, good, shaky, or blunder, and the eval graph shows exactly where the game swung.</p>
 
         <div class="othello-controls">
           <div class="othello-seg" role="group" aria-label="Play as">
@@ -79,7 +79,7 @@
           <ol class="adv-moves" id="adv-moves" aria-live="polite"></ol>
         </div>
 
-        <p class="adv-credit">Study interface inspired by <strong>Hiyoko Reversi</strong> (ひよこリバーシ) — its post-game analysis and eval graph taught me what a teaching UI should do.</p>
+        <p class="adv-credit">Study interface inspired by <strong>Hiyoko Reversi</strong> (ひよこリバーシ), its post-game analysis and eval graph taught me what a teaching UI should do.</p>
       </div>
 
     </div>
@@ -134,7 +134,7 @@
             }
         return out;
     }
-    /* stepped flip: set old sprite, squash, swap sprite halfway, expand —
+    /* stepped flip: set old sprite, squash, swap sprite halfway, expand.
        same feel as the beginner board */
     function animateFlips(list) {
         if (!list || !list.length || reducedMotion())
@@ -306,14 +306,14 @@
     function verdictFor(gr, mv) {
         var nm = E.moveName(mv);
         if (gr.playedBest || gr.diff < 1)
-            return { text: nm + ' — best move!', tag: 'best', cls: 'best' };
+            return { text: nm + ', best move!', tag: 'best', cls: 'best' };
         if (gr.diff < 25)
-            return { text: nm + ' — good move.', tag: 'good', cls: 'good' };
+            return { text: nm + ', good move.', tag: 'good', cls: 'good' };
         if (gr.diff < 70)
-            return { text: nm + ' — okay, but ' + E.moveName(gr.best) + ' was a little stronger.', tag: 'ok', cls: 'ok' };
+            return { text: nm + ', okay, but ' + E.moveName(gr.best) + ' was a little stronger.', tag: 'ok', cls: 'ok' };
         if (gr.diff < 150)
-            return { text: nm + ' — risky, ' + E.moveName(gr.best) + ' was stronger.', tag: 'risky', cls: 'risky' };
-        return { text: nm + ' — blunder, ' + E.moveName(gr.best) + ' was much stronger.', tag: 'blunder', cls: 'blunder' };
+            return { text: nm + ', risky, ' + E.moveName(gr.best) + ' was stronger.', tag: 'risky', cls: 'risky' };
+        return { text: nm + ', blunder, ' + E.moveName(gr.best) + ' was much stronger.', tag: 'blunder', cls: 'blunder' };
     }
     function gradeHumanMove(gridBefore, mv, id) {
         /* async so the board updates first */
@@ -422,7 +422,7 @@
         drawGraph();
         if (turn === human) {
             render(E.legalMoves(grid, human));
-            setCoach('Your move — you play ' + colorName(human) + '.');
+            setCoach('Your move, you play ' + colorName(human) + '.');
         }
         else {
             robotTurn();
@@ -452,7 +452,7 @@
         pushEval();
         renderMoves();
         updateHud();
-        setCoach('Played ' + E.moveName(mv) + ' — checking…');
+        setCoach('Played ' + E.moveName(mv) + ', checking…');
         gradeHumanMove(gridBefore, mv, id);
         var flips = flippedCells(gridBefore, grid);
         advance();
@@ -472,7 +472,7 @@
         }
         else {
             passed = true;
-            setCoach((next === ai ? 'Robot' : 'You') + ' has no moves — pass.', null);
+            setCoach((next === ai ? 'Robot' : 'You') + ' has no moves, pass.', null);
         }
         if (turn === ai) {
             robotTurn();

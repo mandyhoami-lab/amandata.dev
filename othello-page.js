@@ -1,5 +1,5 @@
 "use strict";
-/* Othello (beginner) shell — vignette + main, injected so the .html file stays a thin shell.
+/* Othello (beginner) shell, vignette + main, injected so the .html file stays a thin shell.
    Markup is byte-identical to what the .html file used to ship. */
 (function () {
     "use strict";
@@ -25,7 +25,7 @@
       <div class="game-card mode-pick" id="mode-pick">
         <figure class="mode-pick__demo">
           <p class="mode-pick__kicker">Play: Othello!</p>
-          <img id="mode-demo-gif" src="/assets/images/othello-demo.gif" alt="Gameplay on the pixel-cat Othello board — black and white trade moves and discs flip." width="150" height="150" loading="eager" fetchpriority="high">
+          <img id="mode-demo-gif" src="/assets/images/othello-demo.gif" alt="Gameplay on the pixel-cat Othello board, black and white trade moves and discs flip." width="150" height="150" loading="eager" fetchpriority="high">
         </figure>
         <div class="mode-pick__btns">
           <button class="mode-btn" id="mode-beginner" type="button">
@@ -34,7 +34,7 @@
           </button>
           <a class="mode-btn" href="/othello-advanced.html">
             <span class="mode-btn__title">Advanced</span>
-            <span class="mode-btn__sub">Seasoned a little — engine grades every move.</span>
+            <span class="mode-btn__sub">Seasoned a little, engine grades every move.</span>
           </a>
         </div>
       </div>
@@ -90,11 +90,11 @@
           <h4 class="othello-panel__title">How to play</h4>
           <ul class="othello-rules">
             <li>Black moves first. Tap a highlighted square to place your disc.</li>
-            <li>Your move must trap at least one opponent disc between your new disc and one of yours — horizontally, vertically, or diagonally.</li>
+            <li>Your move must trap at least one opponent disc between your new disc and one of yours, horizontally, vertically, or diagonally.</li>
             <li>Every trapped disc flips to your color.</li>
             <li>No legal move? You pass automatically.</li>
             <li>The game ends when neither side can move. Most discs wins.</li>
-            <li>The robot is still learning too — some games it goofs off, some games it locks in.</li>
+            <li>The robot is still learning too, some games it goofs off, some games it locks in.</li>
           </ul>
         </div>
 
@@ -104,7 +104,7 @@
             <li><strong>Corners are forever.</strong> A corner disc can never be flipped. Take one whenever you legally can.</li>
             <li><strong>Build on your corners.</strong> Discs sheltered by a corner often become unflippable &ldquo;stable discs.&rdquo;</li>
             <li><strong>Never gift a corner.</strong> Your opponent can only take one if you play next to it first.</li>
-            <li><strong>Beware the X-square.</strong> The diagonal neighbor of a corner (b2, g2, b7, g7) — playing there early usually surrenders the corner.</li>
+            <li><strong>Beware the X-square.</strong> The diagonal neighbor of a corner (b2, g2, b7, g7), playing there early usually surrenders the corner.</li>
             <li><strong>Respect the C-square.</strong> The edge square beside a corner is dangerous while the square between it and the corner sits empty. Safe once you hold the edge yourself.</li>
             <li><strong>Stay quiet early.</strong> Discs touching empty squares (&ldquo;frontier discs&rdquo;) hand your opponent moves. Flip less now, choose more later.</li>
           </ol>

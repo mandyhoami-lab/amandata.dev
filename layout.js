@@ -116,7 +116,7 @@
         show: function () { loadingBar.classList.add("on"); },
         hide: function () { loadingBar.classList.remove("on"); }
     };
-    /* Nav search autocomplete — up to 5 page suggestions as you type. */
+    /* Nav search autocomplete: up to 5 page suggestions as you type. */
     (function () {
         var input = document.getElementById("nav-search-input");
         var box = document.getElementById("nav-suggest");

@@ -1,5 +1,5 @@
 "use strict";
-/* Commissions shell — vignette + main, injected so the .html file stays a thin shell.
+/* Commissions shell, vignette + main, injected so the .html file stays a thin shell.
    Markup is byte-identical to what the .html file used to ship. */
 (function () {
     "use strict";
@@ -20,7 +20,7 @@
     </div>
     <div class="section__body">
 
-      <p class="commissions-intro">Want something made? I take on small commissions — artwork, design, tiny web builds. Tell me what you're after and we'll talk details, timeline, and price.</p>
+      <p class="commissions-intro">Want something made? I take on small commissions, artwork, design, tiny web builds. Tell me what you're after and we'll talk details, timeline, and price.</p>
 
       <form class="commission-form" id="commission-form" data-user="ata3958" data-domain="sdsu.edu" novalidate>
         <label class="commission-field">
@@ -33,7 +33,7 @@
         </label>
         <label class="commission-field">
           <span class="commission-label">What would you like made?</span>
-          <textarea class="commission-input commission-textarea" name="message" required rows="6" maxlength="2000" placeholder="describe the piece, size, vibe, deadline — whatever you've got"></textarea>
+          <textarea class="commission-input commission-textarea" name="message" required rows="6" maxlength="2000" placeholder="describe the piece, size, vibe, deadline, whatever you've got"></textarea>
         </label>
         <button class="commission-submit" type="submit">Send request</button>
         <p class="commission-note" id="commission-note" aria-live="polite"></p>
@@ -44,7 +44,7 @@
 
 </main>`;
 })();
-/* Commissions form — validate, then open a prefilled email (no backend).
+/* Commissions form, validate, then open a prefilled email (no backend).
    Moved verbatim from the inline <script> that used to live in the HTML. */
 (function () {
     const form = document.getElementById("commission-form");

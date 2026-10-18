@@ -1,9 +1,9 @@
 "use strict";
 /* =========================================================
-   amandata.dev — abstract othello backdrop.
+   amandata.dev: abstract othello backdrop.
    A quiet, graphic othello study behind the page: floating
    flat discs (solid vs. ring), a live game cycling
-   through think → place → flip. No physical board, no notes —
+   through think → place → flip. No physical board, no notes.
    the content stays the focus.
    ========================================================= */
 (function () {
@@ -13,7 +13,7 @@
         return;
     var dctx = canvas.getContext('2d');
     /* pixel look: paint the study onto a tiny offscreen buffer, then upscale
-       with smoothing off. Same art, same opacity — chunky pixels instead. */
+       with smoothing off. Same art, same opacity, chunky pixels instead. */
     var PIXEL = 3;
     var buf = document.createElement('canvas');
     var ctx = buf.getContext('2d');
@@ -185,7 +185,7 @@
             });
             ctx.setLineDash([]);
         }
-        /* discs — flat: solid dot vs ring */
+        /* discs, flat: solid dot vs ring */
         for (var r = 0; r < N; r++)
             for (var c = 0; c < N; c++) {
                 var v = b.grid[r][c];
