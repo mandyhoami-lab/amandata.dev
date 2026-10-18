@@ -40,7 +40,7 @@
       ["/othello.html", "Othello"],
       ["/psy410-flashcards/", "Myers flashcards"],
       ["/synergy.html", "Synergy esoslang"],
-      ["/stat200-practice.html", "Learn R"],
+      ["/stat200-practice.html", "R Practice Hub"],
       ["/psy410.html", "PSY 410 Resources"]
     ] }
   ];
