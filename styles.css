@@ -224,7 +224,9 @@ main{ flex: 1 0 auto; }
 /* dark/light toggle — solid "Change Theme" accordion button */
 .theme-picker{ position: relative; flex: 0 0 auto; }
 .theme-toggle{
-  font-family: var(--micro);
+  font-family: 'VT323', 'Silkscreen', monospace;
+  -webkit-text-stroke: 0.5px currentColor;
+  paint-order: stroke fill;
   font-size: 1.15rem;
   letter-spacing: 0.06em;
   color: var(--nav-bg);
@@ -773,7 +775,7 @@ mark.key{
   display: flex; flex-direction: column; gap: 0.35rem;
 }
 .stat__num{
-  font-family: var(--micro);
+  font-family: 'VT323', 'Silkscreen', monospace;
   font-size: 2.6rem;
   line-height: 1;
   color: var(--green);
@@ -917,7 +919,9 @@ mark.key{
   border-top: 1px solid rgba(255,255,255,0.12);
   text-align: center;
   padding: 1.1rem var(--edge);
-  font-family: var(--micro);
+  font-family: 'Silkscreen', 'VT323', monospace;
+  -webkit-text-stroke: 0.5px currentColor;
+  paint-order: stroke fill;
   font-size: 1.05rem;
   letter-spacing: 0.08em;
   color: var(--nav-ink);
