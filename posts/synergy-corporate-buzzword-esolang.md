@@ -58,6 +58,31 @@ The only keywords are corporate buzzwords. Everything reads like a progress meet
 
 It can compute anything like any other language. The full command list lives on the [Synergy wiki](/synergy-wiki.html), every buzzword in plain language.
 
+### Synergy vs brainfuck
+
+The eight core buzzwords map one-to-one onto brainfuck. The rest are Synergy-only.
+
+| brainfuck | Synergy | Does |
+|---|---|---|
+| `+` | `move the needle` | Add 1 to the cell |
+| `-` | `take a step back` | Subtract 1 |
+| `>` | `pivot` | Move the pointer right |
+| `<` | `deep dive` | Move the pointer left |
+| `.` | `share out` | Print the cell as a letter |
+| `,` | `gather feedback` | Read input into the cell |
+| `[` | `sync up` | Loop start |
+| `]` | `circle back` | Loop end |
+
+| Synergy-only | Does | brainfuck equivalent |
+|---|---|---|
+| `low-hanging fruit` | Set the cell to 0 | `[-]` |
+| `double-click on that` | Print the cell as a number | None, must build it |
+| `run it up the flagpole` | Print the whole tape | None |
+| `herding cats` | Randomize the cell | None |
+| `put a pin in it` / `pull the pin` | Save / restore the tape | None |
+| `hit a bottleneck` | Stop the program | None (bf just ends) |
+| `per my last email` | Comment | Any non-command char |
+
 <div class="wiki-preview">
 <p class="wiki-preview__tag">from the synergy wiki</p>
 <table>
