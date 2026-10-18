@@ -251,8 +251,11 @@
   }
 
   var slug = new URLSearchParams(location.search).get("p");
+  var qParam = new URLSearchParams(location.search).get("q");
   if (searchEl) {
     searchEl.addEventListener("input", renderList);
+    /* nav search passes ?q= — pre-fill so renderList filters on load */
+    if (qParam) searchEl.value = qParam;
   }
   if (slug) {
     /* These two posts live under "This Site" in the nav, not "Me" —

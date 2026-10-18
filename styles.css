@@ -1172,3 +1172,14 @@ a:focus-visible, button:focus-visible{
   font-family:'VT323',monospace; font-size:1.05rem;
 }
 .copy-link-btn:hover{ border-color:var(--tag); color:var(--tag); }
+
+/* nav search */
+.nav__search{ display:flex; align-items:center; }
+.nav__search input{
+  width:130px; padding:0.35rem 0.7rem; border:2px solid var(--line); border-radius:20px;
+  background:var(--card-bg); color:var(--ink);
+  font-family:var(--body); font-size:0.85rem;
+}
+.nav__search input:focus{ outline:none; border-color:var(--tag); width:170px; }
+.nav__search input::placeholder{ color:var(--dim); }
+@media (max-width:640px){ .nav__search input{ width:90px; } .nav__search input:focus{ width:120px; } }
