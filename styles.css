@@ -1209,3 +1209,41 @@ a:focus-visible, button:focus-visible{
 .nav__suggest-item:hover{ background: var(--hover, rgba(128,128,128,0.12)); }
 .nav__suggest-title{ font-family: var(--micro); font-size: 1.05rem; color: var(--ink); }
 .nav__suggest-desc{ font-size: 0.8rem; color: var(--dim); }
+
+/* ---------- white (industry clean) ---------- */
+[data-theme="white"]{
+  --bg:      #FFFFFF;
+  --panel:   #FFFFFF;
+  --ink:     #111111;
+  --dim:     rgba(17,17,17,0.64);
+  --faint:   rgba(17,17,17,0.40);
+  --line:    rgba(17,17,17,0.12);
+
+  --green:    #2563EB;   /* industry blue replaces green */
+  --btn-bg:   #2563EB;   /* white text on blue */
+  --btn-text: #FFFFFF;
+  --heading:  #111111;   /* headings stay black, accents go blue */
+  --sand:     #3B82F6;   /* blue accent replaces champagne */
+  --data-accent: #1D4ED8;  /* deeper blue for data highlights */
+
+  --tag:            #1D4ED8;
+  --nav-tag:        #1D4ED8;
+  --body-text:      rgba(17,17,17,0.88);
+  --card-bg:        #FFFFFF;
+  --card-shadow:    0 1px 4px rgba(17,17,17,0.08);
+  --nav-bg:         #FFFFFF;
+  --nav-ink:        #111111;
+  --nav-dim:        rgba(17,17,17,0.66);
+  --vignette:       none;
+  --hero-glow:      none;
+  --selection-ink:  #FFFFFF;
+  --work-note-bg:   rgba(37,99,235,0.06);
+  --game-opacity:   0.50;
+}
+[data-theme="white"] .ribbons{
+  display: none;  /* clean: no sheen */
+}
+[data-theme="white"]{
+  --cat-fur: #9AA3B2; --cat-shade: #6B7280; --cat-light: #CBD5E1;
+  --cat-pink: #F0A6B8; --cat-eye: #111111;
+}
