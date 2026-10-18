@@ -66,9 +66,9 @@
         <p class="othello-status" id="othello-status" aria-live="polite">Your move.</p>
 
         <div class="othello-actions">
+          <button class="othello-btn" id="othello-help-btn" type="button">How to play</button>
           <button class="othello-btn" id="othello-new" type="button">New game</button>
           <button class="othello-btn" id="othello-scores-btn" type="button">Scores</button>
-          <button class="othello-btn" id="othello-help-btn" type="button">How to play</button>
           <button class="othello-btn" id="othello-tips-btn" type="button">Tips</button>
           <button class="othello-btn" id="othello-ex-btn" type="button">Exercises</button>
         </div>
