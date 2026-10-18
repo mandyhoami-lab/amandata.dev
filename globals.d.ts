@@ -49,7 +49,7 @@ interface SynergyApi {
   run(src: string, input?: string): string;
   tokenize(src: string): string[];
   fromBrainfuck(bf: string): string;
-  createSession(): { exec(src: string, input?: string): string; state(): { tape: number[]; ptr: number }; reset(): void };
+  createSession(): { exec(src: string, input?: string): string; state(): { vars: { [k: string]: number } }; reset(): void };
 }
 
 interface Window {
