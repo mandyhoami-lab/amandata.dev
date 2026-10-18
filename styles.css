@@ -1163,3 +1163,12 @@ a:focus-visible, button:focus-visible{
   font-family:'VT323',monospace; font-size:1.2rem;
 }
 .hero__hub:hover{ border-color:var(--tag); color:var(--tag); }
+
+/* blog copy-link button */
+.post-toprow{ display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem; }
+.copy-link-btn{
+  padding:0.4rem 0.9rem; border:2px solid var(--line); border-radius:8px; cursor:pointer;
+  background:var(--card-bg); color:var(--dim);
+  font-family:'VT323',monospace; font-size:1.05rem;
+}
+.copy-link-btn:hover{ border-color:var(--tag); color:var(--tag); }

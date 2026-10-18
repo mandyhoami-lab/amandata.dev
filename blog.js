@@ -52,7 +52,7 @@
 
   <!-- ================= SINGLE POST ================= -->
   <section class="section" id="view-post" hidden>
-    <a class="back-link" href="/blog.html">&larr; all posts</a>
+    <div class="post-toprow"><a class="back-link" href="/blog.html">&larr; all posts</a><button type="button" class="copy-link-btn" id="copy-link">copy link</button></div>
     <div class="section__head">
       <h2 class="section__title" id="post-title"></h2>
     </div>
@@ -279,4 +279,31 @@
     }
     else
         showList();
+    /* copy-link button */
+    var copyBtn = document.getElementById("copy-link");
+    if (copyBtn) {
+        copyBtn.addEventListener("click", function () {
+            var url = window.location.href;
+            function done(ok) {
+                copyBtn.textContent = ok ? "copied!" : "copy failed";
+                setTimeout(function () { copyBtn.textContent = "copy link"; }, 1500);
+            }
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(function () { done(true); }, function () { done(false); });
+            }
+            else {
+                var ta = document.createElement("textarea");
+                ta.value = url;
+                document.body.appendChild(ta);
+                ta.select();
+                try {
+                    done(document.execCommand("copy"));
+                }
+                catch (e) {
+                    done(false);
+                }
+                document.body.removeChild(ta);
+            }
+        });
+    }
 })();
