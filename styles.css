@@ -1320,3 +1320,23 @@ a:focus-visible, button:focus-visible{
 .syn-example:hover{ border-color: var(--tag); }
 .syn-example b{ font-size: 0.95rem; }
 .syn-example span{ font-size: 0.8rem; color: var(--dim); }
+
+/* wiki tables (esolangs format) */
+.wiki-infobox{
+  float: right; margin: 0 0 1rem 1.2rem; border-collapse: collapse;
+  border: 1px solid var(--line); font-size: 0.9rem; max-width: 280px;
+}
+.wiki-infobox th, .wiki-infobox td{ border: 1px solid var(--line); padding: 0.35rem 0.6rem; text-align: left; }
+.wiki-infobox th{ background: var(--card-bg); color: var(--dim); font-weight: normal; }
+.wiki-infobox td{ color: var(--ink); }
+.wiki-cmds{ border-collapse: collapse; margin: 0.8rem 0; width: 100%; font-size: 0.92rem; }
+.wiki-cmds th, .wiki-cmds td{ border: 1px solid var(--line); padding: 0.4rem 0.6rem; text-align: left; vertical-align: top; }
+.wiki-cmds th{ background: var(--card-bg); color: var(--tag); }
+.wiki-cmds td{ color: var(--body-text); }
+.wiki-cmds code, .wiki-infobox code{ color: var(--tag); font-size: 0.88rem; }
+.wiki-wrap h4{ font-family: var(--micro); font-size: 1.15rem; color: var(--ink); margin: 1.2rem 0 0.4rem; }
+.wiki-code{
+  background: #0d1117; color: #e6edf3; padding: 0.8rem 1rem; border-radius: 8px;
+  overflow-x: auto; font-size: 0.85rem; line-height: 1.5; white-space: pre;
+}
+@media (max-width: 640px){ .wiki-infobox{ float: none; margin: 0 0 1rem 0; max-width: 100%; } }
