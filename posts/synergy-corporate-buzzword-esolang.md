@@ -1,6 +1,6 @@
 #  programming language but it's all corporate buzzword
 
-**On this page:** [What are esoslangs](#post-title) · [What that looks like](#what-that-looks-like) · [Synergy](#synergy) · [Print: hello world](#print-hello-world)
+**On this page:** [What are esoslangs](#post-title) · [Examples of esoslangs](#what-that-looks-like) · [Synergy: Corporate buzzword programing langauge](#synergy) · [Print: hello world](#print-hello-world)
 
 Esoslangs are short for "esoteric programming languages", and they live on a wiki called [esolangs.org](https://esolangs.org/wiki/Esoteric_programming_language). I like to imagine them as.. fully functioning satirical programming languages or coding art projects rather than any practical applications.
 
