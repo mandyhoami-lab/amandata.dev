@@ -18,9 +18,9 @@
     <div class="section__body">
       <div class="proj-grid">
         <div class="proj-box">
-          <a class="proj-box__title" href="/othello.html">Othello Reversi Coach</a>
-          <span class="proj-box__desc">Study interface inspired by <a href="https://apps.apple.com/us/app/piyo-reversi/id1197944711" target="_blank" rel="noopener">Hiyoko Reversi</a> (ひよこリバーシ); post-game analysis and eval graph</span>
-          <span class="proj-box__links"><a class="proj-btn" href="/othello.html">play</a><a class="proj-btn" href="https://github.com/mandyhoami-lab/reversi-coach" target="_blank" rel="noopener">repo</a></span>
+          <a class="proj-box__title" href="/synergy.html">Synergy Console</a>
+          <span class="proj-box__desc">The corporate-buzzword esolang</span>
+          <span class="proj-box__links"><a class="proj-btn" href="/synergy.html">try it</a><a class="proj-btn" href="/synergy-wiki.html">wiki</a><a class="proj-btn" href="https://github.com/mandyhoami-lab/synergy" target="_blank" rel="noopener">repo</a><a class="proj-btn" href="/blog.html?p=synergy-corporate-buzzword-esolang">blog</a></span>
         </div>
         <div class="proj-box">
           <a class="proj-box__title" href="/stat200-practice.html">R Practice Hub</a>
@@ -28,9 +28,9 @@
           <span class="proj-box__links"><a class="proj-btn" href="/stat200-practice.html">practice</a><a class="proj-btn" href="https://github.com/mandyhoami-lab/r-practice-hub" target="_blank" rel="noopener">repo</a></span>
         </div>
         <div class="proj-box">
-          <a class="proj-box__title" href="/synergy.html">Synergy Console</a>
-          <span class="proj-box__desc">The corporate-buzzword esolang</span>
-          <span class="proj-box__links"><a class="proj-btn" href="/synergy.html">try it</a><a class="proj-btn" href="/synergy-wiki.html">wiki</a><a class="proj-btn" href="https://github.com/mandyhoami-lab/synergy" target="_blank" rel="noopener">repo</a><a class="proj-btn" href="/blog.html?p=synergy-corporate-buzzword-esolang">blog</a></span>
+          <a class="proj-box__title" href="/othello.html">Othello Reversi Coach</a>
+          <span class="proj-box__desc">Study interface inspired by <a href="https://apps.apple.com/us/app/piyo-reversi/id1197944711" target="_blank" rel="noopener">Hiyoko Reversi</a> (ひよこリバーシ); post-game analysis and eval graph</span>
+          <span class="proj-box__links"><a class="proj-btn" href="/othello.html">play</a><a class="proj-btn" href="https://github.com/mandyhoami-lab/reversi-coach" target="_blank" rel="noopener">repo</a></span>
         </div>
       </div>
       <p class="games-note"><a href="/">← Back to Home</a></p>

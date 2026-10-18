@@ -18,21 +18,21 @@
     </div>
     <div class="section__body">
     <div class="proj-grid">
-      <a class="proj-box" href="/othello.html">
-        <span class="proj-box__title">Othello Reversi Coach</span>
-        <span class="proj-box__desc">Beginner robot · Advanced study mode · Engine-graded moves</span>
+      <a class="proj-box" href="/synergy.html">
+        <span class="proj-box__title">Synergy</span>
+        <span class="proj-box__desc">The corporate-buzzword esolang</span>
       </a>
       <a class="proj-box" href="/psy410-flashcards/">
         <span class="proj-box__title">Myers Experimental Psychology Flashcards</span>
         <span class="proj-box__desc">118 terms · Myers Exp. Psych Ch. 1–16</span>
       </a>
-      <a class="proj-box" href="/synergy.html">
-        <span class="proj-box__title">Synergy</span>
-        <span class="proj-box__desc">The corporate-buzzword esolang</span>
-      </a>
       <a class="proj-box" href="/stat200-practice.html">
         <span class="proj-box__title">R Practice Hub</span>
         <span class="proj-box__desc">STAT 200 drills, quizzes + a real R console</span>
+      </a>
+      <a class="proj-box" href="/othello.html">
+        <span class="proj-box__title">Othello Reversi Coach</span>
+        <span class="proj-box__desc">Beginner robot · Advanced study mode · Engine-graded moves</span>
       </a>
       <a class="proj-box" href="/blog.html">
         <span class="proj-box__title">@tarotams, The amandata.dev Blog</span>

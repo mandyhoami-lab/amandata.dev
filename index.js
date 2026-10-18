@@ -51,13 +51,13 @@
     </div>
     <div class="section__body">
     <div class="proj-grid">
-      <a class="proj-box" href="/othello.html">
-        <span class="proj-box__title">Othello Reversi Coach</span>
-        <span class="proj-box__desc">Study interface inspired by Hiyoko Reversi (ひよこリバーシ); post-game analysis and eval graph</span>
-      </a>
       <a class="proj-box" href="/psy410-flashcards/">
         <span class="proj-box__title">Myers Experimental Psychology Flashcards</span>
         <span class="proj-box__desc">118 terms · Myers Exp. Psych Ch. 1–16</span>
+      </a>
+      <a class="proj-box" href="/othello.html">
+        <span class="proj-box__title">Othello Reversi Coach</span>
+        <span class="proj-box__desc">Study interface inspired by Hiyoko Reversi (ひよこリバーシ); post-game analysis and eval graph</span>
       </a>
       <a class="proj-box" href="/blog.html">
         <span class="proj-box__title">@tarotams, The amandata.dev Blog</span>

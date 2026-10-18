@@ -223,14 +223,14 @@ share out.</pre>
           <tr><td><code>]</code></td><td><code>circle back</code></td><td>Loop end</td></tr>
         </table>
         <table class="wiki-cmds">
-          <tr><th>Synergy-only</th><th>Does</th><th>brainfuck equivalent</th></tr>
-          <tr><td><code>low-hanging fruit</code></td><td>Set the cell to 0</td><td><code>[-]</code></td></tr>
-          <tr><td><code>double-click on that</code></td><td>Print the cell as a number</td><td>None, must build it</td></tr>
-          <tr><td><code>run it up the flagpole</code></td><td>Print the whole tape</td><td>None</td></tr>
-          <tr><td><code>herding cats</code></td><td>Randomize the cell</td><td>None</td></tr>
-          <tr><td><code>put a pin in it</code> / <code>pull the pin</code></td><td>Save / restore the tape</td><td>None</td></tr>
-          <tr><td><code>hit a bottleneck</code></td><td>Stop the program</td><td>None (bf just ends)</td></tr>
-          <tr><td><code>per my last email</code></td><td>Comment</td><td>Any non-command char</td></tr>
+          <tr><th>Synergy-only</th><th>Does</th></tr>
+          <tr><td><code>low-hanging fruit</code></td><td>Set the cell to 0</td></tr>
+          <tr><td><code>double-click on that</code></td><td>Print the cell as a number</td></tr>
+          <tr><td><code>run it up the flagpole</code></td><td>Print the whole tape</td></tr>
+          <tr><td><code>herding cats</code></td><td>Randomize the cell</td></tr>
+          <tr><td><code>put a pin in it</code> / <code>pull the pin</code></td><td>Save / restore the tape</td></tr>
+          <tr><td><code>hit a bottleneck</code></td><td>Stop the program</td></tr>
+          <tr><td><code>per my last email</code></td><td>Comment</td></tr>
         </table>
 
         <h3 id="wiki-related">Related languages</h3>

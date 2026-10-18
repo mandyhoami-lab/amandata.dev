@@ -73,15 +73,15 @@ The eight core buzzwords map one-to-one onto brainfuck. The rest are Synergy-onl
 | `[` | `sync up` | Loop start |
 | `]` | `circle back` | Loop end |
 
-| Synergy-only | Does | brainfuck equivalent |
-|---|---|---|
-| `low-hanging fruit` | Set the cell to 0 | `[-]` |
-| `double-click on that` | Print the cell as a number | None, must build it |
-| `run it up the flagpole` | Print the whole tape | None |
-| `herding cats` | Randomize the cell | None |
-| `put a pin in it` / `pull the pin` | Save / restore the tape | None |
-| `hit a bottleneck` | Stop the program | None (bf just ends) |
-| `per my last email` | Comment | Any non-command char |
+| Synergy-only | Does |
+|---|---|
+| `low-hanging fruit` | Set the cell to 0 |
+| `double-click on that` | Print the cell as a number |
+| `run it up the flagpole` | Print the whole tape |
+| `herding cats` | Randomize the cell |
+| `put a pin in it` / `pull the pin` | Save / restore the tape |
+| `hit a bottleneck` | Stop the program |
+| `per my last email` | Comment |
 
 <div class="wiki-preview">
 <p class="wiki-preview__tag">from the synergy wiki</p>
