@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://amandata.dev/</loc><priority>1.0</priority></url>
+  <url><loc>https://amandata.dev/about.html</loc><priority>0.8</priority></url>
+  <url><loc>https://amandata.dev/blog.html</loc><priority>0.8</priority></url>
+  <url><loc>https://amandata.dev/coding-projects.html</loc><priority>0.8</priority></url>
+  <url><loc>https://amandata.dev/commissions.html</loc><priority>0.8</priority></url>
+  <url><loc>https://amandata.dev/contact.html</loc><priority>0.8</priority></url>
+  <url><loc>https://amandata.dev/creations.html</loc><priority>0.8</priority></url>
+  <url><loc>https://amandata.dev/cv.html</loc><priority>0.8</priority></url>
+  <url><loc>https://amandata.dev/othello-advanced.html</loc><priority>0.8</priority></url>
+  <url><loc>https://amandata.dev/othello.html</loc><priority>0.8</priority></url>
+  <url><loc>https://amandata.dev/projects.html</loc><priority>0.8</priority></url>
+  <url><loc>https://amandata.dev/psy410.html</loc><priority>0.8</priority></url>
+  <url><loc>https://amandata.dev/research-activity.html</loc><priority>0.8</priority></url>
+  <url><loc>https://amandata.dev/search.html</loc><priority>0.8</priority></url>
+  <url><loc>https://amandata.dev/stat200-practice.html</loc><priority>0.8</priority></url>
+  <url><loc>https://amandata.dev/synergy-wiki.html</loc><priority>0.8</priority></url>
+  <url><loc>https://amandata.dev/synergy.html</loc><priority>0.8</priority></url>
+  <url><loc>https://amandata.dev/website-management.html</loc><priority>0.8</priority></url>
+  <url><loc>https://amandata.dev/blog.html?p=synergy-corporate-buzzword-esolang</loc><priority>0.6</priority></url>
+  <url><loc>https://amandata.dev/blog.html?p=building-the-reversi-coach-turning-the-othello-bot-into-a-learning-system</loc><priority>0.6</priority></url>
+  <url><loc>https://amandata.dev/blog.html?p=making-amandata-dev</loc><priority>0.6</priority></url>
+</urlset>
