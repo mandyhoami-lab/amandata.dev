@@ -1,3 +1,9 @@
+/* Game UI stays pixel-art: re-assert pixel stacks (site chrome moved to Inter). */
+:root{
+  --display: 'Pixelify Sans', 'Press Start 2P', monospace;
+  --micro: 'VT323', 'Silkscreen', monospace;
+}
+
 /* Shared flashcard deck styling — theme-aware, pixel-art look.
    Used by /psy410-flashcards/ and /research-methods-flashcards/.
    Relies on the site token system in styles.css

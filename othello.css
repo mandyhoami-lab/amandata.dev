@@ -1,3 +1,9 @@
+/* Game UI stays pixel-art: re-assert pixel stacks (site chrome moved to Inter). */
+:root{
+  --display: 'Pixelify Sans', 'Press Start 2P', monospace;
+  --micro: 'VT323', 'Silkscreen', monospace;
+}
+
 /* =========================================================
    amandata.dev — playable othello styles.
    Everything keys off the theme tokens (--green, --sand,

@@ -1,3 +1,9 @@
+/* Game UI stays pixel-art: re-assert pixel stacks (site chrome moved to Inter). */
+:root{
+  --display: 'Pixelify Sans', 'Press Start 2P', monospace;
+  --micro: 'VT323', 'Silkscreen', monospace;
+}
+
 /* creations hub — pixel-art buttons, one per creation */
 
 /* app-store tiles: uniform, compact, icon on top */
