@@ -18,7 +18,7 @@
     </div>
     <div class="section__body">
 
-      <p class="games-note"><a href="/learn.html">&larr; Back to Learn</a></p>
+      <p class="games-note"><a href="/creations.html">&larr; Back to Creations</a></p>
 
       <div class="game-card mode-pick" id="mode-pick">
         <figure class="mode-pick__demo">

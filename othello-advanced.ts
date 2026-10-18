@@ -25,7 +25,7 @@
     </div>
     <div class="section__body">
 
-      <p class="games-note"><a href="/learn.html">&larr; Back to Learn</a> · <a href="/othello.html">Beginner mode</a></p>
+      <p class="games-note"><a href="/creations.html">&larr; Back to Creations</a> · <a href="/othello.html">Beginner mode</a></p>
 
       <div class="game-card">
         <h3 class="game-card__title">Advanced</h3>

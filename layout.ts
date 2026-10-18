@@ -6,7 +6,7 @@
      home       -> mark links to #top, mark underlined active, progress bar on
      me         -> Me dropdown active (about.html, projects.html, cv.html,
                    contact.html, commissions.html, blog.html)
-     learn      -> Learn dropdown active (learn.html, othello.html,
+     creations  -> Creations dropdown active (creations.html, othello.html,
                    othello-advanced.html, psy410.html)
      site       -> This Site dropdown active (repository.html)
      (anything else, e.g. admin) -> no active item
@@ -36,7 +36,7 @@
       ["/repository.html", "Repository"],
       ["/#changelog", "Changelog"]
     ] },
-    { key: "learn", label: "Learn", links: [
+    { key: "creations", label: "Creations", links: [
       ["/othello.html", "Othello"],
       ["/psy410-flashcards/", "Myers flashcards"],
       ["/psy410.html", "PSY 410 Resources"]
@@ -51,7 +51,7 @@
     return '<div class="nav__item nav__dropdown">' +
       '<button class="nav__toggle' + active + '" type="button" aria-expanded="false" aria-haspopup="true" ' +
       'aria-controls="nav-menu-' + d.key + '" id="nav-toggle-' + d.key + '">' + d.label +
-      ' <span class="nav__caret" aria-hidden="true">\u25be</span></button>' +
+      ' <span class="nav__caret" aria-hidden="true"></span></button>' +
       '<div class="nav__menu" id="nav-menu-' + d.key + '" role="menu" aria-labelledby="nav-toggle-' + d.key + '">' +
       items + "</div></div>";
   }
@@ -84,7 +84,7 @@
         DROPDOWNS.map(dropdown).join("") + wideLinks +
       "</div>" +
       '<div class="theme-picker">' +
-        '<button class="theme-toggle" id="theme-toggle" type="button" aria-expanded="false" aria-haspopup="true">Change Theme <span class="nav__caret" aria-hidden="true">▾</span></button>' +
+        '<button class="theme-toggle" id="theme-toggle" type="button" aria-expanded="false" aria-haspopup="true">Change Theme <span class="nav__caret" aria-hidden="true"></span></button>' +
         '<div class="theme-menu" id="theme-menu" role="menu" aria-label="Color theme" hidden>' +
           '<button class="theme-opt" type="button" role="menuitemradio" data-theme-name="dark"><span class="theme-swatches" aria-hidden="true"><i style="background:#0A0C0A"></i><i style="background:#1DA05B"></i><i style="background:#D9BE7A"></i></span>Dark</button>' +
           '<button class="theme-opt" type="button" role="menuitemradio" data-theme-name="light"><span class="theme-swatches" aria-hidden="true"><i style="background:#F7F3E9"></i><i style="background:#2E7B3E"></i><i style="background:#9A7B2D"></i></span>Light</button>' +
