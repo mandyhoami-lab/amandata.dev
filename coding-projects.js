@@ -19,7 +19,7 @@
       <div class="proj-grid">
         <div class="proj-box">
           <span class="proj-box__title">Othello Reversi Coach</span>
-          <span class="proj-box__desc">Beginner robot · Advanced study mode · Engine-graded moves</span>
+          <span class="proj-box__desc">Study interface inspired by Hiyoko Reversi (ひよこリバーシ) for post-game analysis and eval graph</span>
           <span class="proj-box__links"><a href="/othello.html">play</a> · <a href="https://github.com/mandyhoami-lab/reversi-coach" target="_blank" rel="noopener">repo</a></span>
         </div>
         <div class="proj-box">
