@@ -103,10 +103,16 @@
     return esc.replace(new RegExp("(" + qesc + ")", "gi"), "<mark>$1</mark>");
   }
 
+  function readTime(body: string): string {
+    var words = String(body).trim().split(/\s+/).length;
+    var mins = Math.max(1, Math.round(words / 200));
+    return mins + " min";
+  }
+
   function cardHtml(p: any, q: string): string {
     return '<a class="post-card" href="/blog.html?p=' + encodeURIComponent(p.slug) + '">' +
       '<h3 class="post-card__title">' + highlight(p.title, q) + "</h3>" +
-      '<span class="post-card__date">' + fmtDate(p.date) + "</span>" +
+      '<span class="post-card__date">' + fmtDate(p.date) + " · " + readTime(p.body) + "</span>" +
       '<p class="post-card__excerpt">' + highlight(excerpt(p.body), q) + "</p></a>";
   }
 
@@ -214,7 +220,7 @@
         ]).then(function () {
           document.title = post.title + " — Amanda Ta";
           (document.getElementById("post-title") as HTMLElement).textContent = post.title;
-          (document.getElementById("post-date") as HTMLElement).textContent = fmtDate(post.date);
+          (document.getElementById("post-date") as HTMLElement).textContent = fmtDate(post.date) + " · " + readTime(post.body);
           var html = marked.parse(post.body || "");
           (document.getElementById("post-body") as HTMLElement).innerHTML = DOMPurify.sanitize(html);
           /* Headings need ids for the in-post #anchor TOC links to work —
