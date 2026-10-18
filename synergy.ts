@@ -34,12 +34,13 @@
         </div>
         <div class="syn-cheat">
           <p class="syn-cheat__head">Buzzwords key</p>
-          <b>move the needle</b> — count up by one &middot;
-          <b>take a step back</b> — count down by one<br>
-          <b>pivot</b> / <b>deep dive</b> — move to the next / previous slot<br>
-          <b>share out</b> — print the current slot as a letter &middot;
-          <b>gather feedback</b> — read a typed letter in<br>
-          <b>sync up</b> … <b>circle back</b> — repeat everything between, until the slot hits zero<br>
+          <p class="syn-cheat__intro">Synergy has a row of numbered cells called the tape. You always point at one cell — the debugger above shows you which.</p>
+          <b>move the needle</b> — add 1 to the cell you're pointing at &middot;
+          <b>take a step back</b> — subtract 1 from it<br>
+          <b>pivot</b> / <b>deep dive</b> — point at the next / previous cell<br>
+          <b>share out</b> — print the current cell as a letter &middot;
+          <b>gather feedback</b> — read a typed letter into the current cell<br>
+          <b>sync up</b> … <b>circle back</b> — repeat everything between until the current cell hits zero<br>
           <b>hit a bottleneck</b> — stop &middot;
           <b>per my last email</b> — a comment, the computer ignores the line
         </div>
