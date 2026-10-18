@@ -4,6 +4,8 @@ Esoslangs are short for "esoteric programming languages", and they live on a wik
 
  Famous ones include [**brainfuck**](https://esolangs.org/wiki/Brainfuck), which has only 8 commands and looks like someone fell asleep on their keyboard, and [**Shakespeare**](https://esolangs.org/wiki/Shakespeare), where your program has to read like a Shakespeare play where variables are characters, and you give them stage directions. Anyone can write real and working programs in these.
 
+**On this page:** [What that actually looks like](#what-that-actually-looks-like) · [Synergy](#synergy) · [Hello world, as meeting notes](#hello-world-as-meeting-notes)
+
 ## what that actually looks like
 
 Here's a brainfuck program that prints "Hi":
@@ -32,7 +34,7 @@ Hamlet:
 
 The trick: every insult is secretly arithmetic. Positive adjectives count as +1, negative ones as −1, and nouns have hidden numeric values — so the dialogue adds up to the letter codes that spell out the message. The characters are the variables, the acts are the program's sections, and stage directions control the flow.
 
-## Synergy 
+## Synergy
 
 The only keywords are corporate buzzwords. Every program reads like a standup meeting:
 
