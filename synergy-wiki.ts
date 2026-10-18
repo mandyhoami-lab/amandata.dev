@@ -76,7 +76,7 @@ pivot, move the needle, move the needle, share out.
 hit a bottleneck.</pre>
 
         <h4>Try it</h4>
-        <p>The <a href="/synergy.html">Synergy console</a> runs every command above — type a buzzword, hit enter, and watch the tape debugger show what changed.</p>
+        <p>The <a href="/synergy.html">Synergy console</a> runs every command above. You can type one of the buzzwords from the key, hit enter, and watch the tape debugger show what changed.</p>
 
         <h3>Gallery</h3>
         <p>Synergy in action:</p>
