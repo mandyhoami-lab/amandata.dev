@@ -13,7 +13,7 @@
       <h2 class="section__title">Synergy</h2>
       <p class="creations-intro">programming language made of office buzzwords.<br>
       every program reads like a standup meeting, and the computer runs it.</p>
-      <p class="creations-intro">hello — you can find the blogpost on this <a href="/blog.html?p=synergy-corporate-buzzword-esolang">here</a>.</p>
+      <p class="creations-intro">Hello, you can find the blogpost <a href="/blog.html?p=synergy-corporate-buzzword-esolang">here</a>.</p>
     </div>
     <div class="section__body">
       <div class="syn-wrap">
