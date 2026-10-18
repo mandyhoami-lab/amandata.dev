@@ -39,6 +39,7 @@
   function parseToken(tok) {
     var m;
     if ((m = tok.match(/^hire\s+([a-z][a-z0-9]*)$/))) return { op: "hire", name: m[1] };
+    if ((m = tok.match(/^move\s+the\s+needle\s+on\s+([a-z][a-z0-9]*)$/))) return { op: "hire", name: m[1] };
     if ((m = tok.match(/^layoff\s+([a-z][a-z0-9]*)$/))) return { op: "layoff", name: m[1] };
     if ((m = tok.match(/^increase\s+([a-z][a-z0-9]*)\s+by\s+(-?\d+)$/))) return { op: "increase", name: m[1], num: parseInt(m[2], 10) };
     if ((m = tok.match(/^decrease\s+([a-z][a-z0-9]*)\s+by\s+(-?\d+)$/))) return { op: "decrease", name: m[1], num: parseInt(m[2], 10) };

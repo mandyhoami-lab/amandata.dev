@@ -49,6 +49,7 @@
           <p class="syn-cheat__head">Buzzwords key</p>
           <p class="syn-cheat__intro">Synergy runs on named counters. Pick names like <i>headcount</i> or <i>budget</i>, they start at 0.</p>
           <b>hire x</b>, add 1 to x &middot;
+          <b>move the needle on x</b>, same as hire<br>
           <b>layoff x</b>, subtract 1 from x<br>
           <b>increase x by 40</b>, add 40 to x &middot;
           <b>decrease x by 40</b>, subtract 40<br>

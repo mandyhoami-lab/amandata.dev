@@ -44,7 +44,7 @@
 
         <table class="wiki-cmds">
           <tr><th>Command</th><th>Description</th></tr>
-          <tr><td><code>hire x</code></td><td>Add 1 to x</td></tr>
+          <tr><td><code>hire x</code> / <code>move the needle on x</code></td><td>Add 1 to x</td></tr>
           <tr><td><code>layoff x</code></td><td>Subtract 1 from x</td></tr>
           <tr><td><code>increase x by 40</code></td><td>Add 40 to x (any integer)</td></tr>
           <tr><td><code>decrease x by 40</code></td><td>Subtract 40 from x</td></tr>
