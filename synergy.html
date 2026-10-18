@@ -19,7 +19,7 @@
 /* theme init before first paint: saved choice, else system preference, else dark */
 (function(){try{var t=localStorage.getItem('amandata-theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}var B={dark:'#0A0C0A',light:'#F7F3E9',pink:'#F5F4F2',blue:'#0A1220'};if(!B[t])t='dark';document.documentElement.dataset.theme=t;var m=document.getElementById('meta-theme-color');if(m)m.setAttribute('content',B[t]);}catch(e){document.documentElement.dataset.theme='dark';}})();
 </script>
-<link rel="stylesheet" href="styles.css?v=85">
+<link rel="stylesheet" href="styles.css?v=86">
 <link rel="stylesheet" href="creations.css?v=5">
 <link rel="icon" href="/favicon.ico" sizes="any">
 </head>
@@ -32,8 +32,8 @@
 
 <script src="site-index.js?v=1"></script>
 <script src="layout.js?v=32"></script>
-<script src="synergy-lang.js?v=1"></script>
-<script src="synergy.js?v=8"></script>
+<script src="synergy-lang.js?v=2"></script>
+<script src="synergy.js?v=9"></script>
 <script src="othello-bg.js?v=19"></script>
 <script src="theme.js?v=2"></script>
 <script src="nav.js?v=10"></script>

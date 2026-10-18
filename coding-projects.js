@@ -28,7 +28,7 @@
           <span class="proj-box__links"><a href="/stat200-practice.html">practice</a> · <a href="https://github.com/mandyhoami-lab/r-practice-hub" target="_blank" rel="noopener">repo</a></span>
         </div>
         <div class="proj-box">
-          <span class="proj-box__title">Synergy</span>
+          <span class="proj-box__title">Synergy Console</span>
           <span class="proj-box__desc">The corporate-buzzword esolang · Brainfuck-complete</span>
           <span class="proj-box__links"><a href="/synergy.html">try it</a> · <a href="https://github.com/mandyhoami-lab/synergy" target="_blank" rel="noopener">repo</a> · <a href="/blog.html?p=synergy-corporate-buzzword-esolang">blog</a></span>
         </div>

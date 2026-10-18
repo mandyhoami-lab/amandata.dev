@@ -106,7 +106,59 @@
       .map(function (c) { return BF_MAP[c]; }).join('. ') + '.';
   }
 
-  var API = { run: run, tokenize: tokenize, fromBrainfuck: fromBrainfuck };
+  /* Stateful session for the console: tape + pointer persist across exec() calls. */
+  function createSession() {
+    var tape = [0], ptr = 0;
+    function cell() { return tape[ptr] || 0; }
+    function set(v) { tape[ptr] = ((v % 256) + 256) % 256; }
+    function buildJump(tokens) {
+      var jump = {}, stack = [];
+      for (var i = 0; i < tokens.length; i++) {
+        if (tokens[i] === 'loop_start') stack.push(i);
+        else if (tokens[i] === 'loop_end') {
+          var open = stack.pop();
+          if (open === undefined) throw new Error("circle back without sync up");
+          jump[open] = i;
+          jump[i] = open;
+        }
+      }
+      if (stack.length) throw new Error("sync up without circle back");
+      return jump;
+    }
+    return {
+      exec: function (src, input) {
+        input = input || '';
+        var tokens = tokenize(src);
+        var jump = buildJump(tokens);
+        var out = '', inPtr = 0, pc = 0;
+        var steps = 0, LIMIT = 1000000;
+        while (pc < tokens.length && steps < LIMIT) {
+          steps++;
+          var t = tokens[pc];
+          if (t === 'inc') set(cell() + 1);
+          else if (t === 'dec') set(cell() - 1);
+          else if (t === 'right') { ptr++; if (ptr >= tape.length) tape.push(0); }
+          else if (t === 'left') { ptr = Math.max(0, ptr - 1); }
+          else if (t === 'out') out += String.fromCharCode(cell());
+          else if (t === 'in') { set(inPtr < input.length ? input.charCodeAt(inPtr++) : 0); }
+          else if (t === 'loop_start') { if (cell() === 0) pc = jump[pc]; }
+          else if (t === 'loop_end') { if (cell() !== 0) pc = jump[pc]; }
+          else if (t === 'halt') break;
+          pc++;
+        }
+        return out;
+      },
+      /* snapshot of tape state for the debugger */
+      state: function () {
+        return { tape: tape.slice(), ptr: ptr };
+      },
+      reset: function () {
+        tape.length = 0; tape.push(0); ptr = 0;
+      }
+    };
+  }
+
+  var API = { run: run, tokenize: tokenize, fromBrainfuck: fromBrainfuck, createSession: createSession };
   if (typeof window !== 'undefined') window.Synergy = API;
   if (typeof module !== 'undefined' && module.exports) module.exports = API;
 })();

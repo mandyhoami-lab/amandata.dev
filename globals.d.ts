@@ -50,6 +50,7 @@ interface SynergyApi {
   run(src: string, input?: string): string;
   tokenize(src: string): string[];
   fromBrainfuck(bf: string): string;
+  createSession(): { exec(src: string, input?: string): string; state(): { tape: number[]; ptr: number }; reset(): void };
 }
 
 interface Window {
@@ -61,6 +62,10 @@ interface Window {
   FLASHCARD_DECK?: FlashcardDeck;
   SiteLoading: SiteLoadingApi;
   Synergy: SynergyApi;
+  STAT200: { units: any[] };
+  StatDrills: { init(c: HTMLElement, items: any[]): void };
+  StatQuiz: { init(c: HTMLElement, items: any[]): void };
+  StatCode: { init(c: HTMLElement): void };
 }
 
 /* CDN globals (loaded via <script> tags in the HTML). */

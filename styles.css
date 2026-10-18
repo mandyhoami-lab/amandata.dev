@@ -1248,3 +1248,37 @@ a:focus-visible, button:focus-visible{
   --cat-pink: #F0A6B8; --cat-eye: #111111;
 }
 
+
+/* synergy console */
+.syn-console{
+  min-height: 180px; max-height: 320px; overflow-y: auto;
+  background: #0d1117; border: 1px solid var(--line); border-radius: 8px;
+  padding: 0.8rem 1rem; font-family: ui-monospace, 'VT323', monospace; font-size: 1.05rem;
+  margin-bottom: 0.6rem;
+}
+.syn-line{ padding: 0.15rem 0; color: #e6edf3; word-break: break-word; }
+.syn-line--dim .syn-state{ color: #8b949e; }
+.syn-echo{ color: #7ee787; }
+.syn-out{ color: #e6edf3; white-space: pre-wrap; }
+.syn-state{ color: #8b949e; font-size: 0.95rem; }
+.syn-err{ color: #f85149; }
+.syn-inputrow{ display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.8rem; }
+.syn-prompt{ font-family: ui-monospace, monospace; color: var(--tag); font-size: 1.2rem; }
+.syn-inputrow input{
+  flex: 1; padding: 0.55rem 0.8rem; border: 2px solid var(--line); border-radius: 8px;
+  background: var(--card-bg); color: var(--ink); font-family: ui-monospace, monospace; font-size: 1rem;
+}
+.syn-inputrow input:focus{ outline: none; border-color: var(--tag); }
+/* tape debugger */
+.syn-debug{
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem;
+  padding: 0.6rem 0.8rem; margin-bottom: 0.6rem;
+  background: var(--card-bg); border: 1px solid var(--line); border-radius: 8px;
+  font-family: ui-monospace, monospace; font-size: 0.95rem;
+}
+.syn-debug__label{ color: var(--dim); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.1em; margin-right: 0.3rem; }
+.syn-cell{
+  padding: 0.25rem 0.5rem; border: 1px solid var(--line); border-radius: 4px;
+  color: var(--dim); min-width: 2.2rem; text-align: center;
+}
+.syn-cell--ptr{ border-color: var(--tag); color: var(--tag); font-weight: bold; background: var(--hover, rgba(128,128,128,0.08)); }
