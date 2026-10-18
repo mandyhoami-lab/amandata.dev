@@ -42,9 +42,9 @@
   --work-note-bg:   transparent;
   --game-opacity:   0.55;
 
-  --display: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --micro:   'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --body:    'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --display: 'Nunito', sans-serif;
+  --micro:   'Nunito', sans-serif;
+  --body:    'Nunito', sans-serif;
   --pixel:   'Pixelify Sans', 'Press Start 2P', monospace;
 
   --max: 760px;
