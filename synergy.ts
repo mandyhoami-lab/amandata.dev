@@ -29,7 +29,7 @@
         </div>
         <pre id="syn-out" aria-live="polite">(output appears here)</pre>
         <div class="syn-cheat">
-          <p class="syn-cheat__head">what the buzzwords mean</p>
+          <p class="syn-cheat__head">Buzzwords key</p>
           <b>move the needle</b> — count up by one &middot;
           <b>take a step back</b> — count down by one<br>
           <b>pivot</b> / <b>deep dive</b> — move to the next / previous slot<br>
