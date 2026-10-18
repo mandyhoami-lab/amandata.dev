@@ -242,6 +242,26 @@
   if (searchEl) {
     searchEl.addEventListener("input", renderList);
   }
-  if (slug) showPost(slug);
+  if (slug) {
+    /* These two posts live under "This Site" in the nav, not "Me" —
+       move the highlight accordingly (blog.html hardcodes data-nav="me"). */
+    var sitePosts = [
+      "making-amandata-dev",
+      "building-the-reversi-coach-turning-the-othello-bot-into-a-learning-system"
+    ];
+    if (sitePosts.indexOf(slug) !== -1) {
+      document.body.setAttribute("data-nav", "site");
+      var meToggle = document.getElementById("nav-toggle-me");
+      var siteToggle = document.getElementById("nav-toggle-site");
+      if (meToggle) meToggle.classList.remove("is-active");
+      if (siteToggle) siteToggle.classList.add("is-active");
+      var wideLinks = document.querySelectorAll(".nav__link--wide");
+      for (var wi = 0; wi < wideLinks.length; wi++) {
+        var wa = wideLinks[wi] as HTMLAnchorElement;
+        if (wa.getAttribute("href") === "/blog.html") wa.classList.remove("is-active");
+      }
+    }
+    showPost(slug);
+  }
   else showList();
 })();
