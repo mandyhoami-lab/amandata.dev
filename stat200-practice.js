@@ -12,7 +12,7 @@
     <div class="section__head">
       <p class="section__tag">stat 200</p>
       <h2 class="section__title">R Practice Hub</h2>
-      <p class="creations-intro">drills, quizzes, and a real R console — by unit.</p>
+      <p class="creations-intro">drills, quizzes, and an R console for each unit.</p>
     </div>
     <div class="section__body">
       <div class="s2-wrap">
