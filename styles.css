@@ -1252,16 +1252,16 @@ a:focus-visible, button:focus-visible{
 /* synergy console */
 .syn-console{
   min-height: 180px; max-height: 320px; overflow-y: auto; overflow-x: auto;
-  background: #0d1117; border: 2px solid var(--tag); border-radius: 8px;
+  background: var(--card-bg); border: 2px solid var(--tag); border-radius: 8px;
   padding: 0.8rem 1rem; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.95rem;
   margin-bottom: 0.6rem; white-space: pre; line-height: 1.4;
 }
-.syn-line{ padding: 0.15rem 0; color: #e6edf3; }
+.syn-line{ padding: 0.15rem 0; color: var(--ink); }
 .syn-line .syn-echo, .syn-line .syn-state, .syn-line .syn-err{ word-break: break-word; }
-.syn-line--dim .syn-state{ color: #8b949e; }
-.syn-echo{ color: #7ee787; }
-.syn-out{ color: #e6edf3; }
-.syn-state{ color: #8b949e; font-size: 0.95rem; }
+.syn-line--dim .syn-state{ color: var(--dim); }
+.syn-echo{ color: var(--tag); }
+.syn-out{ color: var(--ink); }
+.syn-state{ color: var(--dim); font-size: 0.95rem; }
 .syn-err{ color: #f85149; }
 .syn-inputrow{ display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.8rem; }
 .syn-prompt{ font-family: ui-monospace, monospace; color: var(--tag); font-size: 1.2rem; }
