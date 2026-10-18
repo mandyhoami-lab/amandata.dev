@@ -37,7 +37,7 @@
         { key: "creations", label: "Creations", links: [
                 ["/othello.html", "Othello"],
                 ["/psy410-flashcards/", "Myers flashcards"],
-                ["/synergy.html", "Synergy"],
+                ["/synergy.html", "Synergy esoslang"],
                 ["/stat200-practice.html", "Learn R"],
                 ["/psy410.html", "PSY 410 Resources"]
             ] }
