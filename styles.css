@@ -1296,3 +1296,13 @@ a:focus-visible, button:focus-visible{
 .syn-howto p:last-child{ margin-bottom: 0; }
 .syn-howto b{ color: var(--tag); }
 .syn-howto i{ color: var(--ink); }
+
+/* synergy wiki */
+.wiki-wrap{ max-width: 640px; }
+.wiki-wrap h3{ font-family: var(--micro); font-size: 1.4rem; color: var(--tag); margin: 1.6rem 0 0.6rem; }
+.wiki-wrap h3:first-child{ margin-top: 0; }
+.wiki-wrap p{ color: var(--body-text); margin: 0 0 0.8rem; line-height: 1.6; }
+.wiki-dl{ margin: 0 0 0.4rem; }
+.wiki-dl dt{ margin-top: 0.7rem; }
+.wiki-dl dt b{ color: var(--ink); }
+.wiki-dl dd{ margin: 0.15rem 0 0 0; color: var(--body-text); }

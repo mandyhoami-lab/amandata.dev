@@ -48,8 +48,13 @@ The only keywords are corporate buzzwords. Everything reads like a progress meet
 - `sync up` ... `circle back` — loop
 - `hit a bottleneck` — stop the program (every corporate program ends at a bottleneck)
 - `per my last email` — comment
+- `low-hanging fruit` — set the cell to 0
+- `double-click on that` — print the cell as a number
+- `run it up the flagpole` — print the whole tape
+- `herding cats` — randomize the cell
+- `put a pin in it` / `pull the pin` — save / restore the tape
 
-It can compute anything like any other language.
+It can compute anything like any other language. The full command list lives on the [Synergy wiki](/synergy-wiki.html) — every buzzword in plain language.
 
 ## how printing works
 

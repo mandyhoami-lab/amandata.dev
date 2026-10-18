@@ -53,9 +53,14 @@
           <b>gather feedback</b> — read a typed letter into the current cell<br>
           <b>sync up</b> … <b>circle back</b> — repeat everything between until the current cell hits zero<br>
           <b>hit a bottleneck</b> — stop &middot;
-          <b>per my last email</b> — a comment, the computer ignores the line
+          <b>per my last email</b> — a comment, the computer ignores the line<br>
+          <b>low-hanging fruit</b> — set the cell to 0 &middot;
+          <b>double-click on that</b> — print the cell as a number<br>
+          <b>run it up the flagpole</b> — print the whole tape &middot;
+          <b>herding cats</b> — randomize the cell<br>
+          <b>put a pin in it</b> / <b>pull the pin</b> — save / restore the tape
         </div>
-        <p class="games-note"><a href="/creations.html">&larr; Back to Creations</a></p>
+        <p class="games-note"><a href="/synergy-wiki.html">Synergy wiki &rarr;</a> &middot; <a href="/creations.html">&larr; Back to Creations</a></p>
       </div>
     </div>
   </section>

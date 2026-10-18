@@ -31,6 +31,12 @@
     ['share out', 'out'],
     ['deep dive', 'left'],
     ['sync up', 'loop_start'],
+    ['run it up the flagpole', 'tape_out'],
+    ['low-hanging fruit', 'clear'],
+    ['double-click on that', 'num_out'],
+    ['put a pin in it', 'pin'],
+    ['pull the pin', 'unpin'],
+    ['herding cats', 'random'],
     ['pivot', 'right']
   ];
 
@@ -77,6 +83,7 @@
       }
     }
     var tape = [0], ptr = 0, out = '', inPtr = 0, pc = 0;
+    var pins = [];
     var steps = 0, LIMIT = 10000000;
     function cell() { return tape[ptr] || 0; }
     function set(v) { tape[ptr] = ((v % 256) + 256) % 256; }
@@ -89,6 +96,12 @@
       else if (t === 'left') { ptr = Math.max(0, ptr - 1); }
       else if (t === 'out') out += String.fromCharCode(cell());
       else if (t === 'in') { set(inPtr < input.length ? input.charCodeAt(inPtr++) : 0); }
+      else if (t === 'pin') pins.push({ tape: tape.slice(), ptr: ptr });
+      else if (t === 'unpin') { var s = pins.pop(); if (s) { tape = s.tape; ptr = s.ptr; } }
+      else if (t === 'clear') set(0);
+      else if (t === 'num_out') out += cell() + ' ';
+      else if (t === 'tape_out') out += tape.join(' ') + '\n';
+      else if (t === 'random') set(Math.floor(Math.random() * 256));
       else if (t === 'loop_start') { if (cell() === 0) pc = jump[pc]; }
       else if (t === 'loop_end') { if (cell() !== 0) pc = jump[pc]; }
       else if (t === 'halt') break;
@@ -109,6 +122,7 @@
   /* Stateful session for the console: tape + pointer persist across exec() calls. */
   function createSession() {
     var tape = [0], ptr = 0;
+    var pins = [];
     function cell() { return tape[ptr] || 0; }
     function set(v) { tape[ptr] = ((v % 256) + 256) % 256; }
     function buildJump(tokens) {
@@ -141,6 +155,12 @@
           else if (t === 'left') { ptr = Math.max(0, ptr - 1); }
           else if (t === 'out') out += String.fromCharCode(cell());
           else if (t === 'in') { set(inPtr < input.length ? input.charCodeAt(inPtr++) : 0); }
+          else if (t === 'pin') pins.push({ tape: tape.slice(), ptr: ptr });
+          else if (t === 'unpin') { var s2 = pins.pop(); if (s2) { tape = s2.tape; ptr = s2.ptr; } }
+          else if (t === 'clear') set(0);
+          else if (t === 'num_out') out += cell() + ' ';
+          else if (t === 'tape_out') out += tape.join(' ') + '\n';
+          else if (t === 'random') set(Math.floor(Math.random() * 256));
           else if (t === 'loop_start') { if (cell() === 0) pc = jump[pc]; }
           else if (t === 'loop_end') { if (cell() !== 0) pc = jump[pc]; }
           else if (t === 'halt') break;

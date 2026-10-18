@@ -15,6 +15,7 @@
         { url: "/psy410.html", title: "PSY 410 Resources", desc: "myers exp psych study hub", keys: "psy410 psychology myers study flashcards resources" },
         { url: "/psy410-flashcards/", title: "Myers Flashcards", desc: "170-card exp psych deck", keys: "flashcards myers psychology study cards" },
         { url: "/synergy.html", title: "Synergy", desc: "the corporate buzzword esolang", keys: "synergy esolang programming language code buzzword corporate" },
+        { url: "/synergy-wiki.html", title: "Synergy Wiki", desc: "every buzzword in plain language", keys: "synergy wiki commands reference help buzzwords" },
         { url: "/stat200-practice.html", title: "R Practice Hub", desc: "stat 200 drills, quizzes + console", keys: "stat200 r practice drills quiz console statistics" },
         { url: "/coding-projects.html", title: "Web projects", desc: "othello, r hub, synergy", keys: "web projects code software" },
         { url: "/website-management.html", title: "Website management", desc: "amandata.dev, tgupsd.org, amandata.org", keys: "website management sites web" },
