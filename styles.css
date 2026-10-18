@@ -319,7 +319,13 @@ main{ flex: 1 0 auto; }
 @media (min-width: 641px){
   .nav__link--wide{ display: inline-block; }
 }
-.nav__caret{ font-size: 0.85em; margin-left: 0.15em; }
+.nav__caret{
+  display: inline-block; width: 0; height: 0;
+  border-left: 0.32em solid transparent;
+  border-right: 0.32em solid transparent;
+  border-top: 0.44em solid currentColor;
+  margin-left: 0.35em; vertical-align: 0.08em;
+}
 /* No-JS fail-open: menus render as plain stacked links under their toggle. */
 .nav__menu{ padding: 0.25rem 0 0.5rem; }
 .nav__menu-link{
