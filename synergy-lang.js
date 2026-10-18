@@ -25,11 +25,13 @@
     var lines = src.split(/[\n;]+/);
     var tokens = [];
     lines.forEach(function (line) {
+      var trimmed = line.trim().toLowerCase();
+      if (!trimmed) return;
+      if (trimmed.indexOf("per my last email") === 0) return; // whole line is a comment
       var parts = line.split(/[,.]+/);
       parts.forEach(function (part) {
         var p = part.trim().toLowerCase();
         if (!p) return;
-        if (p.indexOf("per my last email") === 0) return;
         tokens.push(p);
       });
     });

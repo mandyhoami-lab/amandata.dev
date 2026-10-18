@@ -85,6 +85,7 @@
     { id: "loop", label: "Countdown", desc: "5 4 3 2 1" },
     { id: "frog", label: "Frog", desc: "ascii art frog" },
     { id: "cat", label: "Cat", desc: "ascii art cat" },
+    { id: "hilong", label: "Hi (the long way)", desc: "177 move the needles" },
   ];
 
   var PRESETS: { [k: string]: string } = {};
@@ -105,6 +106,14 @@
       prog = "per my last email, a frog\n\n" + window.Synergy.fromBrainfuck(FROG_BF) + "\n\nhit a bottleneck.";
     } else if (name === "cat") {
       prog = "per my last email, a cat\n\n" + window.Synergy.fromBrainfuck(CAT_BF) + "\n\nhit a bottleneck.";
+    } else if (name === "hilong") {
+      var hp = "per my last email, saying hi the hard way\n\n";
+      for (var hi = 0; hi < 72; hi++) hp += "move the needle on h, ";
+      hp += "share out h.\n\n";
+      for (var ii = 0; ii < 105; ii++) hp += "move the needle on i, ";
+      hp += "share out i.\n\n";
+      hp += "hit a bottleneck.";
+      prog = hp;
     } else {
       prog = "per my last email, just saying hi\n\nset h to 72, share out h, set i to 105, share out i.\n\nhit a bottleneck.";
     }
