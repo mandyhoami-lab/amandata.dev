@@ -38,7 +38,7 @@
         <div class="syn-console" id="syn-console" aria-live="polite"></div>
         <div class="syn-inputrow">
           <span class="syn-prompt" aria-hidden="true">&gt;</span>
-          <input id="syn-input" type="text" spellcheck="false" autocomplete="off" aria-label="type synergy code" placeholder="move the needle">
+          <input id="syn-input" type="text" spellcheck="false" autocomplete="off" aria-label="type synergy code">
         </div>
         <div class="syn-row">
           <button id="syn-run" type="button">run it</button>
@@ -166,7 +166,6 @@
         runBtn.addEventListener("click", function () {
             submit(input.value);
             input.value = "";
-            input.focus();
         });
     }
     var howtoBtn = document.getElementById("syn-howto-btn");
@@ -235,7 +234,6 @@
         con.innerHTML = "";
         renderDebug();
         logLine('<span class="syn-state">fresh meeting. tape cleared.</span>', "syn-line--dim");
-        input.focus();
     });
     var examplesEl = document.getElementById("syn-examples");
     function renderExamples() {
@@ -249,7 +247,6 @@
                 session.reset();
                 con.innerHTML = "";
                 submit(getPreset(ex.id));
-                input.focus();
             });
             examplesEl.appendChild(b);
         });
@@ -257,5 +254,4 @@
     renderExamples();
     renderDebug();
     logLine('<span class="syn-state">welcome to the synergy console. type a buzzword and hit enter.</span>', "syn-line--dim");
-    input.focus();
 })();

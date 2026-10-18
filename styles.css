@@ -1251,15 +1251,16 @@ a:focus-visible, button:focus-visible{
 
 /* synergy console */
 .syn-console{
-  min-height: 180px; max-height: 320px; overflow-y: auto;
+  min-height: 180px; max-height: 320px; overflow-y: auto; overflow-x: auto;
   background: #0d1117; border: 1px solid var(--line); border-radius: 8px;
   padding: 0.8rem 1rem; font-family: ui-monospace, 'VT323', monospace; font-size: 1.05rem;
   margin-bottom: 0.6rem;
 }
-.syn-line{ padding: 0.15rem 0; color: #e6edf3; word-break: break-word; }
+.syn-line{ padding: 0.15rem 0; color: #e6edf3; }
+.syn-line .syn-echo, .syn-line .syn-state, .syn-line .syn-err{ word-break: break-word; }
 .syn-line--dim .syn-state{ color: #8b949e; }
 .syn-echo{ color: #7ee787; }
-.syn-out{ color: #e6edf3; white-space: pre-wrap; }
+.syn-out{ color: #e6edf3; white-space: pre; display: inline-block; min-width: 100%; }
 .syn-state{ color: #8b949e; font-size: 0.95rem; }
 .syn-err{ color: #f85149; }
 .syn-inputrow{ display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.8rem; }
