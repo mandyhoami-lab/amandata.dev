@@ -1252,15 +1252,15 @@ a:focus-visible, button:focus-visible{
 /* synergy console */
 .syn-console{
   min-height: 180px; max-height: 320px; overflow-y: auto; overflow-x: auto;
-  background: #0d1117; border: 1px solid var(--line); border-radius: 8px;
-  padding: 0.8rem 1rem; font-family: ui-monospace, 'VT323', monospace; font-size: 1.05rem;
-  margin-bottom: 0.6rem;
+  background: #0d1117; border: 2px solid var(--tag); border-radius: 8px;
+  padding: 0.8rem 1rem; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.95rem;
+  margin-bottom: 0.6rem; white-space: pre; line-height: 1.4;
 }
 .syn-line{ padding: 0.15rem 0; color: #e6edf3; }
 .syn-line .syn-echo, .syn-line .syn-state, .syn-line .syn-err{ word-break: break-word; }
 .syn-line--dim .syn-state{ color: #8b949e; }
 .syn-echo{ color: #7ee787; }
-.syn-out{ color: #e6edf3; white-space: pre; display: inline-block; min-width: 100%; }
+.syn-out{ color: #e6edf3; }
 .syn-state{ color: #8b949e; font-size: 0.95rem; }
 .syn-err{ color: #f85149; }
 .syn-inputrow{ display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.8rem; }
@@ -1278,11 +1278,20 @@ a:focus-visible, button:focus-visible{
   font-family: ui-monospace, monospace; font-size: 0.95rem;
 }
 .syn-debug__label{ color: var(--dim); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.1em; margin-right: 0.3rem; }
+.syn-grid{ display: grid; grid-template-columns: repeat(auto-fill, minmax(64px, 1fr)); gap: 0.4rem; flex: 1; }
 .syn-cell{
-  padding: 0.25rem 0.5rem; border: 1px solid var(--line); border-radius: 4px;
-  color: var(--dim); min-width: 2.2rem; text-align: center;
+  display: flex; flex-direction: column; align-items: center;
+  border: 1px solid var(--line); border-radius: 6px; padding: 0.4rem 0.2rem;
+  background: var(--card-bg); min-width: 0;
 }
-.syn-cell--ptr{ border-color: var(--tag); color: var(--tag); font-weight: bold; background: var(--hover, rgba(128,128,128,0.08)); }
+.syn-cell__idx{ font-size: 0.7rem; color: var(--dim); }
+.syn-cell__val{ font-size: 1.3rem; font-weight: bold; color: var(--ink); line-height: 1.2; }
+.syn-cell__char{ font-size: 0.9rem; color: var(--dim); min-height: 1.2em; }
+.syn-cell__bar{ width: 80%; height: 4px; background: var(--line); border-radius: 2px; margin-top: 0.25rem; overflow: hidden; }
+.syn-cell__bar i{ display: block; height: 100%; background: var(--tag); border-radius: 2px; }
+.syn-cell--ptr{ border-color: var(--tag); border-width: 2px; }
+.syn-cell--ptr .syn-cell__val{ color: var(--tag); }
+.syn-hint{ color: var(--tag); font-size: 0.95rem; }
 
 [data-theme="white"] .hero__tagline{ color: #6B7280; }
 [data-theme="white"] .caret{ background: #6B7280; }
