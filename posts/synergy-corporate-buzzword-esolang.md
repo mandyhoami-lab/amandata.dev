@@ -1,10 +1,10 @@
 # a programming language but it's all corporate buzzword
 
+**On this page:** [What that actually looks like](#what-that-actually-looks-like) · [Synergy](#synergy) · [Hello world, as meeting notes](#hello-world-as-meeting-notes)
+
 Esoslangs are short for "esoteric programming languages", and they live on a wiki called [esolangs.org](https://esolangs.org/wiki/Esoteric_programming_language).
 
  Famous ones include [**brainfuck**](https://esolangs.org/wiki/Brainfuck), which has only 8 commands and looks like someone fell asleep on their keyboard, and [**Shakespeare**](https://esolangs.org/wiki/Shakespeare), where your program has to read like a Shakespeare play where variables are characters, and you give them stage directions. Anyone can write real and working programs in these.
-
-**On this page:** [What that actually looks like](#what-that-actually-looks-like) · [Synergy](#synergy) · [Hello world, as meeting notes](#hello-world-as-meeting-notes)
 
 ## what that actually looks like
 
