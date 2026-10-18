@@ -30,7 +30,7 @@
       </a>
       <a class="proj-box" href="/synergy.html">
         <span class="proj-box__title">Synergy</span>
-        <span class="proj-box__desc">The corporate-buzzword esolang · Brainfuck-complete</span>
+        <span class="proj-box__desc">The corporate-buzzword esolang</span>
       </a>
       <a class="proj-box" href="/stat200-practice.html">
         <span class="proj-box__title">R Practice Hub</span>

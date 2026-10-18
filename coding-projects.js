@@ -29,7 +29,7 @@
         </div>
         <div class="proj-box">
           <span class="proj-box__title">Synergy Console</span>
-          <span class="proj-box__desc">The corporate-buzzword esolang · Brainfuck-complete</span>
+          <span class="proj-box__desc">The corporate-buzzword esolang</span>
           <span class="proj-box__links"><a href="/synergy.html">try it</a> · <a href="https://github.com/mandyhoami-lab/synergy" target="_blank" rel="noopener">repo</a> · <a href="/blog.html?p=synergy-corporate-buzzword-esolang">blog</a></span>
         </div>
       </div>
