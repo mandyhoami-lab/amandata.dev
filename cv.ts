@@ -15,7 +15,7 @@
       <h2 class="section__title">Curriculum Vitae</h2>
       <span class="section__tag">the record</span>
     </div>
-    <div class="btn-center" style="margin-bottom:1.5rem"><a class="btn" href="/Amanda-Ta-CV.pdf" target="_blank" rel="noopener">View Academic CV</a></div>
+    <div class="btn-center"><a class="btn" href="/Amanda-Ta-CV.pdf" target="_blank" rel="noopener">View Academic CV</a></div>
 
     <!-- stat row -->
     <div class="stats" role="list" id="cv-stats"></div>
