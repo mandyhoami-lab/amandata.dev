@@ -11,8 +11,8 @@
     <div class="section__head">
       <p class="section__tag">esolang</p>
       <h2 class="section__title">Synergy</h2>
-      <p class="creations-intro">a programming language made of office buzzwords.<br>
-      every program reads like a standup meeting — but the computer runs it for real.</p>
+      <p class="creations-intro">programming language made of office buzzwords.<br>
+      every program reads like a standup meeting, and the computer runs it.</p>
     </div>
     <div class="section__body">
       <div class="syn-wrap">
