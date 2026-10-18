@@ -44,7 +44,7 @@
 
   --display: 'Pixelify Sans', 'Press Start 2P', monospace;
   --micro:   'VT323', 'Silkscreen', monospace;
-  --body:    system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --body:    'Nunito', system-ui, sans-serif;
   --pixel:   'Pixelify Sans', 'Press Start 2P', monospace;
 
   --max: 760px;
