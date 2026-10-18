@@ -21,7 +21,7 @@
         <div class="syn-presets">
           <button type="button" data-preset="hi"><b>Say hi</b><span>prints "Hi"</span></button>
           <button type="button" data-preset="count"><b>Count to 5</b><span>prints 12345</span></button>
-          <button type="button" data-preset="hello"><b>Hello world</b><span>the classic, as meeting notes</span></button>
+          <button type="button" data-preset="hello"><b>Hello world</b><span>the classic, in Synergy</span></button>
         </div>
         <textarea id="syn-src" spellcheck="false" aria-label="synergy program"></textarea>
         <div class="syn-row">
