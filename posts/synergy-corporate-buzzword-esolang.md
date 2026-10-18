@@ -1,6 +1,6 @@
 #  programming language but it's all corporate buzzword
 
-**On this page:** [What are esoslangs](#post-title) · [Examples of esoslangs](#what-that-looks-like) · [Synergy: Corporate buzzword programing langauge](#synergy) · [Print: hello world](#print-hello-world)
+**On this page:** [What are esoslangs](#post-title) · [Examples of esoslangs](#what-that-looks-like) · [Synergy: Corporate buzzword programing langauge](#synergy) · [How printing works](#how-printing-works) · [Print: hello world](#print-hello-world)
 
 Esoslangs are short for "esoteric programming languages", and they live on a wiki called [esolangs.org](https://esolangs.org/wiki/Esoteric_programming_language). I like to imagine them as.. fully functioning satirical programming languages or coding art projects rather than any practical applications.
 
@@ -50,6 +50,10 @@ The only keywords are corporate buzzwords. Everything reads like a progress meet
 - `per my last email` — comment
 
 It can compute anything like any other language.
+
+## how printing works
+
+Every number is secretly a letter. 72 is H, 105 is i, 32 is a space — that's just how computers do it. So to print "Hi": count the first cell up to 72, `share out` prints H. `pivot` to the next cell, count up to 105, `share out` prints i. The console's tape debugger shows the letter next to each number so you can watch it happen.
 
 ## print: hello world
 
