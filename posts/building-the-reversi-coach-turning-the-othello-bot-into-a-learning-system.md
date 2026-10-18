@@ -2,7 +2,7 @@
 
 From a teachable robot to a study mode that grades every move: how a childhood favorite became the site's learning system.
 
-**On this page:** [Why othello](#why-othello) · [The engine](#the-engine) · [Grading moves](#grading-moves) · [The teaching UI](#the-teaching-ui) · [What broke along the way](#what-broke-along-the-way) · [Scope notes](#scope-notes) · [What's next](#whats-next)
+**On this page:** [Why othello](#why-othello) · [The engine](#the-engine) · [Grading moves](#grading-moves) · [The teaching UI](#the-teaching-ui) · [Scope notes](#scope-notes) · [What's next](#whats-next)
 
 ## Why othello
 
@@ -47,14 +47,10 @@ The progressive robot opponents and the persistent per-player statistics take cu
 
 The discs are the same pixel-art cat heads as the beginner game — generated at runtime on a 16px canvas, scaled up with `image-rendering: pixelated`. Cream cat for white, black cat with amber eyes for black. They break out of the disc circle, at my specific request.
 
-## What broke along the way
-
-Two bugs were instructive. First, undo/redo stored only the *lengths* of the move and evaluation arrays in each history snapshot, so redoing after an undo produced undefined entries. Snapshots now carry full copies. Second, the coaching verdict was being overwritten by "Your move." the moment the robot finished replying; now the verdict is sticky until your next move.
-
 ## Scope notes
 
 Records are honest about what they are: the scoreboard (Everyone plus one tab per username, W-L-D) lives in localStorage, so "all-time" means all-time on this device. The static site has no backend, and the page says so. True cross-device records would need a server; that's a future decision, not a silent promise.
 
 ## What's next
 
-The bigger plan is a real learning system, and this is the foundation: an engine that can judge, a UI that can explain, and a beginner mode that doesn't scare people off. Since this post was drafted, Beginner has grown a Tips section (six strategy tips adapted from Brian Rose's *Othello: A Minute to Learn… A Lifetime to Master*) and six interactive exercises — find the best move in positions about corners, X-squares, C-squares, and quiet play. Next up would be per-player advanced records and maybe an opening book. For now: play a game, watch the graph, and find the move where it all went wrong. That's where the learning lives.
+The bigger plan is a real learning system, and this is the foundation: an engine that can judge, a UI that can explain, and a beginner mode that doesn't scare people off. Since this post was drafted, Beginner has grown a Tips section (six strategy tips adapted from Brian Rose's *Othello: A Minute to Learn… A Lifetime to Master*) and six interactive exercises — find the best move in positions about corners, X-squares, C-squares, and quiet play. Next up would be per-player advanced records and maybe an opening book. For now: play a game, watch the graph, and find the move where it all went wrong.
