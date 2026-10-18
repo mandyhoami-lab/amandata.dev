@@ -13,10 +13,11 @@
       <h2 class="section__title">Synergy</h2>
       <p class="creations-intro">programming language made of office buzzwords.<br>
       every program reads like a standup meeting, and the computer runs it.</p>
+      <p class="creations-intro">hello — you can find the blogpost on this <a href="/blog.html?p=synergy-corporate-buzzword-esolang">here</a>.</p>
     </div>
     <div class="section__body">
       <div class="syn-wrap">
-        <p class="syn-explain">Pick an example to see what one does, or write your own meeting below and run it.</p>
+        <p class="syn-explain">Pick an example to see the syntax, or try writing your own code below.</p>
         <div class="syn-presets">
           <button type="button" data-preset="hi"><b>Say hi</b><span>prints "Hi"</span></button>
           <button type="button" data-preset="count"><b>Count to 5</b><span>prints 12345</span></button>
