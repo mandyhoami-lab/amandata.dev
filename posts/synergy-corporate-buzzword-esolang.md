@@ -1,6 +1,36 @@
+# a programming language but it's all corporate buzzword
+
 Esoslangs are short for "esoteric programming languages", and they live on a wiki called [esolangs.org](https://esolangs.org/wiki/Esoteric_programming_language).
 
  Famous ones include [**brainfuck**](https://esolangs.org/wiki/Brainfuck), which has only 8 commands and looks like someone fell asleep on their keyboard, and [**Shakespeare**](https://esolangs.org/wiki/Shakespeare), where your program has to read like a Shakespeare play where variables are characters, and you give them stage directions. Anyone can write real and working programs in these.
+
+## what that actually looks like
+
+Here's a brainfuck program that prints "Hi":
+
+```
+++++++++[>+++++++++<-]>.+++++++++++++++++++++++++++++++++.
+```
+
+That's the whole program. It counts up to 72 (the number computers use for the letter H), prints it, counts up 33 more to 105 (the letter i), and prints that. Every symbol is a command: `+` adds one, `-` subtracts one, `>` and `<` move between memory slots, `[` and `]` loop, and `.` prints.
+
+And here's the opening of a real Shakespeare program — the entire thing is a play, and it prints "Hello World!":
+
+```
+Romeo, a young man with a remarkable patience.
+Juliet, a likewise young woman of remarkable grace.
+
+Act I: Hamlet's insults and flattery.
+
+Scene I: The insulting of Romeo.
+
+[Enter Hamlet and Romeo]
+
+Hamlet:
+  You lying stupid fatherless big smelly half-witted coward!
+```
+
+The trick: every insult is secretly arithmetic. Positive adjectives count as +1, negative ones as −1, and nouns have hidden numeric values — so the dialogue adds up to the letter codes that spell out the message. The characters are the variables, the acts are the program's sections, and stage directions control the flow.
 
 ## Synergy 
 
