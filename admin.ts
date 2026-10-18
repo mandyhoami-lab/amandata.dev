@@ -1,4 +1,4 @@
-/* admin — email+password sign in (owner only) + publish/edit posts in Supabase */
+/* admin, email+password sign in (owner only) + publish/edit posts in Supabase */
 (function () {
   "use strict";
 
@@ -50,7 +50,7 @@
   function lockoutMsg(): string {
     var s = throttleState();
     var secs = Math.max(1, Math.ceil(((s.lockedUntil || 0) - Date.now()) / 1000));
-    return "too many tries — wait " + secs + "s, then try again.";
+    return "too many tries, wait " + secs + "s, then try again.";
   }
   function recordFailure(): void {
     var s = throttleState();
@@ -199,7 +199,7 @@
     loginMsg.className = "";
     loginMsg.textContent = "sending…";
     if (email !== OWNER_EMAIL) {
-      /* generic reply either way — don't reveal which emails have accounts */
+      /* generic reply either way, don't reveal which emails have accounts */
       loginMsg.className = "form-ok";
       loginMsg.textContent = "if that email has an account, a reset link is on its way.";
       return;
@@ -209,7 +209,7 @@
     }).then(function (res: any) {
       loginMsg.className = res.error ? "form-error" : "form-ok";
       loginMsg.textContent = res.error
-        ? "couldn't send the reset email — try again in a bit."
+        ? "couldn't send the reset email, try again in a bit."
         : "check your inbox for the reset link, then set a new password here.";
     });
   });
@@ -232,7 +232,7 @@
     client.auth.updateUser({ password: p1 }).then(function (res: any) {
       if (res.error) {
         loginMsg.className = "form-error";
-        loginMsg.textContent = "couldn't save — reopen the reset link and try again.";
+        loginMsg.textContent = "couldn't save, reopen the reset link and try again.";
         return;
       }
       loginMsg.className = "form-ok";
@@ -281,7 +281,7 @@
         title: title, slug: slug, body: body, published: published
       }).then(function (res: any) {
         if (res.error) {
-          // slug taken — retry once with a short suffix
+          // slug taken, retry once with a short suffix
           if (res.error.code === "23505" && !retried) {
             attempt(base + "-" + Date.now().toString(36).slice(-4), true);
             return;

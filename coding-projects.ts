@@ -1,4 +1,4 @@
-/* Coding projects page — like the projects page, but only Othello, R hub, Synergy.
+/* Coding projects page, like the projects page, but only Othello, R hub, Synergy.
    Each card links the live page, the repo, and the blog post if one exists. */
 (function () {
   "use strict";

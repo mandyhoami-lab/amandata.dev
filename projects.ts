@@ -1,4 +1,4 @@
-/* Projects page shell — vignette + main, injected so the .html file stays a thin shell.
+/* Projects page shell, vignette + main, injected so the .html file stays a thin shell.
    Project list mirrors the homepage (index.ts). */
 /* NOTE: compiled by GitHub Actions on push. */
 (function () {
@@ -35,7 +35,7 @@
         <span class="proj-box__desc">STAT 200 drills, quizzes + a real R console</span>
       </a>
       <a class="proj-box" href="/blog.html">
-        <span class="proj-box__title">@tarotams — The amandata.dev Blog</span>
+        <span class="proj-box__title">@tarotams, The amandata.dev Blog</span>
         <span class="proj-box__desc">Essays · Process notes</span>
       </a>
       <a class="proj-box" href="https://amandata.org/" target="_blank" rel="noopener">

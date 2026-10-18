@@ -1,5 +1,5 @@
 /* =========================================================
-   amandata.dev — beginner Othello exercises.
+   amandata.dev, beginner Othello exercises.
    A find-the-best-move deck teaching concepts from Brian Rose's
    "Othello: A Minute to Learn… A Lifetime to Master".
    Lazy-inits on first Exercises-button click. Black to play in
@@ -12,7 +12,7 @@
   var BOOK_URL = 'https://eothello.com/pdf/othello-book-Brian-Rose.pdf';
 
   /* rows: 8 strings, '.'=empty, 'b'/'w'=discs, row 0 at TOP.
-     best: engine-best square. trap: {sq, refute, msg} — a tempting
+     best: engine-best square. trap: {sq, refute, msg}, a tempting
      blunder, demonstrated live with White's refutation. */
   interface Exercise {
     title: string; rows: string[]; side: OthelloPlayer;
@@ -24,47 +24,47 @@
       title: 'Take the corner',
       rows: ['........', 'w.......', 'b.......', '...wb...', '...bw...', '........', '........', '........'],
       side: 'b', best: 'a1', trap: null, greedy: null,
-      why: 'a1 is a corner — once taken, it can never be flipped.',
-      wrongMsg: 'Legal — but the corner is right there. Try again.'
+      why: 'a1 is a corner, once taken, it can never be flipped.',
+      wrongMsg: 'Legal, but the corner is right there. Try again.'
     },
     {
       title: 'Dodge the X-square',
       rows: ['........', '........', '.ww.....', '.b..wb..', '...bw...', '........', '........', '........'],
       side: 'b', best: 'f3',
-      trap: { sq: 'b2', refute: 'a1', msg: 'b2 is the X-square — the diagonal neighbor of the corner. White takes a1 next.' },
+      trap: { sq: 'b2', refute: 'a1', msg: 'b2 is the X-square, the diagonal neighbor of the corner. White takes a1 next.' },
       greedy: null,
       why: 'f3 develops quietly while b2 hands White the corner. Never play the X-square early.',
-      wrongMsg: 'Legal — but there is a stronger square. Try again.'
+      wrongMsg: 'Legal, but there is a stronger square. Try again.'
     },
     {
       title: 'Dodge the C-square',
       rows: ['..w.....', '.w......', '.b......', '...wb...', '...bw...', '........', '........', '........'],
       side: 'b', best: 'f5',
-      trap: { sq: 'b1', refute: 'a1', msg: 'b1 is the C-square — with the corner exposed, White takes a1 on the spot.' },
+      trap: { sq: 'b1', refute: 'a1', msg: 'b1 is the C-square, with the corner exposed, White takes a1 on the spot.' },
       greedy: null,
       why: 'f5 keeps developing while b1 gifts the corner. Respect the C-square.',
-      wrongMsg: 'Legal — but there is a stronger square. Try again.'
+      wrongMsg: 'Legal, but there is a stronger square. Try again.'
     },
     {
       title: 'Play quiet',
       rows: ['........', '........', '........', '..wwwb..', '...wb...', '...bw...', '........', '........'],
       side: 'b', best: 'f6', trap: null, greedy: 'b4',
-      why: 'f6 flips a single disc. Quiet moves keep your options open — b4 grabs three and hands White new squares.',
-      wrongMsg: 'Legal — but there is a quieter square. Try again.'
+      why: 'f6 flips a single disc. Quiet moves keep your options open, b4 grabs three and hands White new squares.',
+      wrongMsg: 'Legal, but there is a quieter square. Try again.'
     },
     {
       title: 'Corner beats greed',
       rows: ['........', 'w.......', 'b.......', '..wwwwb.', '...bw...', '........', '........', '........'],
       side: 'b', best: 'a1', trap: null, greedy: 'b4',
       why: 'Four discs now versus a disc that is yours forever. Take the corner.',
-      wrongMsg: 'Legal — but greed loses to the corner. Try again.'
+      wrongMsg: 'Legal, but greed loses to the corner. Try again.'
     },
     {
       title: 'Punish their C-square',
       rows: ['.wb.....', '........', '........', '...wb...', '...bw...', '........', '........', '........'],
       side: 'b', best: 'a1', trap: null, greedy: null,
-      why: "White's C-square handed you the corner — take it.",
-      wrongMsg: 'Legal — but White handed you a corner. Try again.'
+      why: "White's C-square handed you the corner, take it.",
+      wrongMsg: 'Legal, but White handed you a corner. Try again.'
     }
   ];
 
@@ -177,7 +177,7 @@
     current = EXERCISES[order[idx]];
     tries = 0;
     revealed = false;
-    promptEl.textContent = current.title + ' — Black to play, find the best move.';
+    promptEl.textContent = current.title + ', Black to play. Tap the best move, highlighted squares are legal.';
     setupPosition();
     updateProgress();
   }
@@ -226,7 +226,14 @@
     for (var i = 0; i < legal.length; i++) {
       if (legal[i].r === r && legal[i].c === c) { mv = legal[i]; break; }
     }
-    if (!mv) return;
+    if (!mv) {
+      /* dead clicks: an illegal tap used to be silently ignored:
+         say so instead of counting it as a try */
+      setFeedback(legal.length ? 'Not a legal move, tap a highlighted square.'
+                              : 'Nothing to play here, use the try again button.',
+                  'bad');
+      return;
+    }
     var ex = current as Exercise;
     var name = E.moveName(mv);
     if (name === ex.best) { resolveGood(); return; }

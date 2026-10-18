@@ -1,11 +1,11 @@
-/* blog reader — posts are plain markdown files in /posts/ (see posts/index.json).
+/* blog reader, posts are plain markdown files in /posts/ (see posts/index.json).
    To publish: add posts/<slug>.md and one line in posts/index.json. No database. */
-/* NOTE: compiled by GitHub Actions on push — edit this file from anywhere. */
+/* NOTE: compiled by GitHub Actions on push, edit this file from anywhere. */
 
 (function () {
   "use strict";
 
-  /* Page shell — vignette + main, injected so the .html file stays a thin shell.
+  /* Page shell, vignette + main, injected so the .html file stays a thin shell.
      Markup is byte-identical to what the .html file used to ship. */
   (function () {
     var mount = document.getElementById("page-mount");
@@ -132,8 +132,8 @@
       }
     }
     if (!matches.length) {
-      listEl.innerHTML = q ? "<p>no posts match — try another search.</p>"
-                           : "<p>no posts yet — check back soon.</p>";
+      listEl.innerHTML = q ? "<p>no posts match, try another search.</p>"
+                           : "<p>no posts yet, check back soon.</p>";
       return;
     }
     listEl.innerHTML = matches.map(function (p) { return cardHtml(p, q); }).join("");
@@ -184,7 +184,7 @@
     loadPosts()
       .then(function (data: any) {
         if (!data || !data.length) {
-          listEl.innerHTML = "<p>no posts yet — check back soon.</p>";
+          listEl.innerHTML = "<p>no posts yet, check back soon.</p>";
           if (searchEl) searchEl.hidden = true;
           return;
         }
@@ -193,7 +193,7 @@
         renderList();
       })
       .catch(function () {
-        listEl.innerHTML = "<p>couldn't load posts — try refreshing.</p>";
+        listEl.innerHTML = "<p>couldn't load posts, try refreshing.</p>";
         if (searchEl) searchEl.hidden = true;
       })
       .finally(function () { setLoading(false); });
@@ -218,12 +218,12 @@
           loadScript("https://cdn.jsdelivr.net/npm/marked/marked.min.js"),
           loadScript("https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js")
         ]).then(function () {
-          document.title = post.title + " — Amanda Ta";
+          document.title = post.title + ", Amanda Ta";
           (document.getElementById("post-title") as HTMLElement).textContent = post.title;
           (document.getElementById("post-date") as HTMLElement).textContent = fmtDate(post.date) + " · " + readTime(post.body);
           var html = marked.parse(post.body || "");
           (document.getElementById("post-body") as HTMLElement).innerHTML = DOMPurify.sanitize(html);
-          /* Headings need ids for the in-post #anchor TOC links to work —
+          /* Headings need ids for the in-post #anchor TOC links to work:
              marked doesn't add them by default. */
           (function (): void {
             var body = document.getElementById("post-body") as HTMLElement;
@@ -245,7 +245,7 @@
         });
       })
       .catch(function () {
-        (document.getElementById("post-body") as HTMLElement).innerHTML = "<p>couldn't load the post — try refreshing.</p>";
+        (document.getElementById("post-body") as HTMLElement).innerHTML = "<p>couldn't load the post, try refreshing.</p>";
       })
       .finally(function () { setLoading(false); });
   }
@@ -254,11 +254,11 @@
   var qParam = new URLSearchParams(location.search).get("q");
   if (searchEl) {
     searchEl.addEventListener("input", renderList);
-    /* nav search passes ?q= — pre-fill so renderList filters on load */
+    /* nav search passes ?q=, pre-fill so renderList filters on load */
     if (qParam) searchEl.value = qParam;
   }
   if (slug) {
-    /* These two posts live under "This Site" in the nav, not "Me" —
+    /* These two posts live under "This Site" in the nav, not "Me":
        move the highlight accordingly (blog.html hardcodes data-nav="me"). */
     var sitePosts = [
       "making-amandata-dev",

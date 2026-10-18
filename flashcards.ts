@@ -22,7 +22,7 @@
   var gotBtn = document.getElementById('fc-got') as HTMLButtonElement;
   if (!deckEl) return;
 
-  document.title = D.title + ' — Amanda Ta';
+  document.title = D.title + ' - Amanda Ta';
   (document.getElementById('fc-title') as HTMLElement).textContent = D.title;
   (document.getElementById('fc-sub') as HTMLElement).textContent = D.sub;
 

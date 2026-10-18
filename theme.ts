@@ -1,4 +1,4 @@
-/* Theme picker — solid "Change Theme" button; each theme listed under it.
+/* Theme picker, solid "Change Theme" button; each theme listed under it.
    The initial theme is set by a tiny inline script in <head>
    (before first paint); this wires the picker. */
 (function () {
@@ -24,7 +24,7 @@
     if (m) m.setAttribute("content", THEME_BGS[current()] || THEME_BGS.dark);
   }
 
-  /* Othello landing icon follows the theme — one gif variant per theme. */
+  /* Othello landing icon follows the theme, one gif variant per theme. */
   var DEMO_GIFS: { [theme: string]: string } = {
     white: "/assets/images/othello-demo-white.gif",
     dark: "/assets/images/othello-demo.gif",

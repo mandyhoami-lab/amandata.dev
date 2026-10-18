@@ -1,5 +1,5 @@
 /* =========================================================
-   amandata.dev — playable Othello vs. the robot.
+   amandata.dev, playable Othello vs. the robot.
    No levels, no limits: a teachable robot that's easy to beat
    (you choose black or white). Optional all-time scoreboard
    with usernames (localStorage), plus a how-to-play panel.
@@ -56,7 +56,7 @@
      a blunder rate between 60% and 92%. Most moves it just picks
      a random legal square (easy to beat, easy to learn against),
      but when it focuses it plays a real 1-ply positional game with
-     a mobility term — so you still see what good Othello looks like.
+     a mobility term, so you still see what good Othello looks like.
      Some games it goofs off, some games it locks in: expect a mix
      of wins and losses, no two games alike. */
   var WEIGHTS: number[] = [
@@ -103,7 +103,7 @@
   /* Deeper search (negamax + alpha-beta) used by the advanced
      teaching mode: grading human moves and powering the robot.
      (cloneGrid above is shared; the duplicate declaration the file
-     once carried is gone — the two were identical.) */
+     once carried is gone, the two were identical.) */
   function negamax(g: OthelloGrid, color: OthelloPlayer, depth: number, alpha: number, beta: number): number {
     var ms = legalMoves(g, color);
     if (ms.length === 0) {
@@ -158,7 +158,7 @@
   /* -------- pixel-art disc sprites (generated at runtime) --------
      Awake cat heads, 16x16, in the site cat's palette: cream cat for
      white, black cat with amber eyes for black. The head breaks out
-     of the old disc circle — ears and all — with a 1px outline. */
+     of the old disc circle, ears and all, with a 1px outline. */
   var CAT_FACE_ROWS: string[] = [
     "................",
     "..ff........ff..",
@@ -314,7 +314,7 @@
         renderScores();
         setStatus(view === '__all__'
           ? 'Showing everyone, all time.'
-          : 'Showing ' + view + ' vs the robot — tracking as ' + view + '.');
+          : 'Showing ' + view + ' vs the robot, tracking as ' + view + '.');
       });
       scoreTabs.appendChild(b);
     }
@@ -337,7 +337,7 @@
     if (!names.length) {
       var p = document.createElement('p');
       p.className = 'score-empty';
-      p.textContent = 'No players yet — add a username above and your results get tracked.';
+      p.textContent = 'No players yet, add a username above and your results get tracked.';
       scoreList.appendChild(p);
     } else {
       var big = document.createElement('div');
@@ -467,7 +467,7 @@
     markColorButtons();
     if (turn === human) {
       render(legalMoves(grid, human));
-      setStatus('Your move — you play ' + colorName(human) + '.');
+      setStatus('Your move, you play ' + colorName(human) + '.');
     } else {
       render(null);
       aiThinking = true;
@@ -506,7 +506,7 @@
       turn = next;
     } else {
       if (!legalMoves(grid, turn).length) { gameOver(); return; }
-      setStatus((next === ai ? 'Robot' : 'You') + ' has no moves — pass.');
+      setStatus((next === ai ? 'Robot' : 'You') + ' has no moves, pass.');
     }
     if (turn === ai) {
       aiThinking = true;

@@ -1,4 +1,4 @@
-/* Homepage shell — vignette + main, injected so the .html file stays a thin shell.
+/* Homepage shell, vignette + main, injected so the .html file stays a thin shell.
    Markup is byte-identical to what the .html file used to ship. */
 /* NOTE: compiled by GitHub Actions on push. */
 (function () {
@@ -58,7 +58,7 @@
         <span class="proj-box__desc">118 terms · Myers Exp. Psych Ch. 1–16</span>
       </a>
       <a class="proj-box" href="/blog.html">
-        <span class="proj-box__title">@tarotams — The amandata.dev Blog</span>
+        <span class="proj-box__title">@tarotams, The amandata.dev Blog</span>
         <span class="proj-box__desc">Essays · Process notes</span>
       </a>
       <a class="proj-box" href="https://amandata.org/" target="_blank" rel="noopener">
@@ -150,7 +150,7 @@
 </main>`;
 })();
 
-/* Homepage blog preview — 2 most recent posts from posts/index.json. */
+/* Homepage blog preview, 2 most recent posts from posts/index.json. */
 (function () {
   "use strict";
   var mount = document.getElementById("home-posts");
@@ -163,7 +163,7 @@
     .then(function (res) { if (!res.ok) throw new Error("posts failed"); return res.json(); })
     .then(function (posts: any[]) {
       if (!posts || !posts.length) {
-        fallback('<p>no posts yet — <a href="/blog.html">visit the blog</a>.</p>');
+        fallback('<p>no posts yet, <a href="/blog.html">visit the blog</a>.</p>');
         return;
       }
       var latest = posts.slice(0, 2);

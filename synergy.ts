@@ -1,4 +1,4 @@
-/* Synergy console shell — vignette + main, injected so the .html file stays a thin shell. */
+/* Synergy console shell, vignette + main, injected so the .html file stays a thin shell. */
 (function () {
   "use strict";
   var mount = document.getElementById("page-mount");
@@ -16,18 +16,19 @@
     </div>
     <div class="section__body">
       <div class="syn-wrap">
-        <p class="syn-hello">Hello &mdash; you can find the blogpost on this <a href="/blog.html?p=synergy-corporate-buzzword-esolang">here</a>.</p>
+        <p class="syn-hello">Hello, you can find the blogpost on this <a href="/blog.html?p=synergy-corporate-buzzword-esolang">here</a>.</p>
+        <p class="syn-hello">You can find the full wiki on this language <a href="/synergy-wiki.html">here</a>.</p>
         <div class="syn-row">
           <button id="syn-howto-btn" type="button">how to use this console</button>
         </div>
         <div class="syn-howto" id="syn-howto" hidden>
           <p><b>1.</b> Type a buzzword (or a few, separated by commas) into the box and hit enter.</p>
-          <p><b>2.</b> The console runs it right away and shows what changed — the tape debugger above always shows your cells, with the pointer highlighted.</p>
+          <p><b>2.</b> The console runs it right away and shows what changed, the tape debugger above always shows your cells, with the pointer highlighted.</p>
           <p><b>3.</b> Try <i>move the needle</i> three times, watch the first cell count up. Then <i>pivot</i> and watch the pointer move.</p>
-          <p><b>4.</b> <i>share out</i> prints the current cell as a letter — numbers are also letters (72 is H, 105 is i). The debugger shows the letter next to the number.</p>
+          <p><b>4.</b> <i>share out</i> prints the current cell as a letter, numbers are also letters (72 is H, 105 is i). The debugger shows the letter next to the number.</p>
           <p><b>5.</b> Loops need <i>sync up</i> … <i>circle back</i> on the same line. The preset buttons run full programs if you want to see one in action.</p>
         </div>
-        <p class="syn-explain">Type buzzwords below and hit enter — the console runs each line and shows you what changed.</p>
+        <p class="syn-explain">Type buzzwords below and hit enter, the console runs each line and shows you what changed.</p>
         <div class="syn-examples-wrap">
           <p class="syn-examples__label">example programs</p>
           <div class="syn-examples" id="syn-examples" role="group" aria-label="example programs"></div>
@@ -40,25 +41,24 @@
           <input id="syn-input" type="text" spellcheck="false" autocomplete="off" aria-label="type synergy code">
         </div>
         <div class="syn-row">
-          <button id="syn-run" type="button">run it</button>
           <button id="syn-reset" type="button">reset the meeting</button>
         </div>
         <div class="syn-cheat">
           <p class="syn-cheat__head">Buzzwords key</p>
-          <p class="syn-cheat__intro">Synergy has a row of numbered cells called the tape. You always point at one cell — the debugger above shows you which.</p>
-          <b>move the needle</b> — add 1 to the cell you're pointing at &middot;
-          <b>take a step back</b> — subtract 1 from it<br>
-          <b>pivot</b> / <b>deep dive</b> — point at the next / previous cell<br>
-          <b>share out</b> — print the current cell as a letter &middot;
-          <b>gather feedback</b> — read a typed letter into the current cell<br>
-          <b>sync up</b> … <b>circle back</b> — repeat everything between until the current cell hits zero<br>
-          <b>hit a bottleneck</b> — stop &middot;
-          <b>per my last email</b> — a comment, the computer ignores the line<br>
-          <b>low-hanging fruit</b> — set the cell to 0 &middot;
-          <b>double-click on that</b> — print the cell as a number<br>
-          <b>run it up the flagpole</b> — print the whole tape &middot;
-          <b>herding cats</b> — randomize the cell<br>
-          <b>put a pin in it</b> / <b>pull the pin</b> — save / restore the tape
+          <p class="syn-cheat__intro">Synergy has a row of numbered cells called the tape. You always point at one cell, the debugger above shows you which.</p>
+          <b>move the needle</b>, add 1 to the cell you're pointing at &middot;
+          <b>take a step back</b>, subtract 1 from it<br>
+          <b>pivot</b> / <b>deep dive</b>, point at the next / previous cell<br>
+          <b>share out</b>, print the current cell as a letter &middot;
+          <b>gather feedback</b>, read a typed letter into the current cell<br>
+          <b>sync up</b> … <b>circle back</b>, repeat everything between until the current cell hits zero<br>
+          <b>hit a bottleneck</b>, stop &middot;
+          <b>per my last email</b>, a comment, the computer ignores the line<br>
+          <b>low-hanging fruit</b>, set the cell to 0 &middot;
+          <b>double-click on that</b>, print the cell as a number<br>
+          <b>run it up the flagpole</b>, print the whole tape &middot;
+          <b>herding cats</b>, randomize the cell<br>
+          <b>put a pin in it</b> / <b>pull the pin</b>, save / restore the tape
         </div>
         <p class="games-note"><a href="/synergy-wiki.html">Synergy wiki &rarr;</a> &middot; <a href="/creations.html">&larr; Back to Creations</a></p>
       </div>
@@ -154,13 +154,6 @@
   var debug = document.getElementById("syn-debug") as HTMLElement;
   var input = document.getElementById("syn-input") as HTMLInputElement;
   var resetBtn = document.getElementById("syn-reset") as HTMLButtonElement;
-  var runBtn = document.getElementById("syn-run") as HTMLButtonElement | null;
-  if (runBtn) {
-    runBtn.addEventListener("click", function () {
-      submit(input.value);
-      input.value = "";
-      });
-  }
   var howtoBtn = document.getElementById("syn-howto-btn") as HTMLButtonElement | null;
   var howto = document.getElementById("syn-howto") as HTMLElement | null;
   if (howtoBtn && howto) {
@@ -173,7 +166,7 @@
     return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
 
-  /* debug: show the tape with the pointer highlighted */
+  /* debug: visual grid of the tape */
   function renderDebug(): void {
     var st = session.state();
     var cells: string[] = [];
@@ -181,11 +174,16 @@
     for (var i = 0; i < n; i++) {
       var v = st.tape[i] || 0;
       var cls = i === st.ptr ? "syn-cell syn-cell--ptr" : "syn-cell";
-      /* show printable chars too, so share out makes sense */
-      var ch = v >= 32 && v < 127 ? " '" + String.fromCharCode(v) + "'" : "";
-      cells.push('<span class="' + cls + '">' + v + ch + "</span>");
+      var ch = v >= 32 && v < 127 ? String.fromCharCode(v) : " ";
+      var bar = Math.round((v / 255) * 100);
+      cells.push('<div class="' + cls + '">' +
+        '<span class="syn-cell__idx">' + i + "</span>" +
+        '<span class="syn-cell__val">' + v + "</span>" +
+        '<span class="syn-cell__char">' + ch + "</span>" +
+        '<span class="syn-cell__bar"><i style="width:' + bar + '%"></i></span>' +
+        "</div>");
     }
-    debug.innerHTML = '<span class="syn-debug__label">tape</span>' + cells.join("");
+    debug.innerHTML = '<span class="syn-debug__label">tape</span><div class="syn-grid">' + cells.join("") + "</div>";
   }
 
   function logLine(html: string, cls?: string): void {
@@ -214,7 +212,13 @@
       var st = session.state();
       logLine('<span class="syn-state">cell[' + st.ptr + "] = " + (st.tape[st.ptr] || 0) + "</span>", "syn-line--dim");
     } catch (e) {
-      logLine('<span class="syn-err">the meeting went off the rails: ' + esc(e instanceof Error ? e.message : String(e)) + "</span>");
+      var msg = e instanceof Error ? e.message : String(e);
+      logLine('<span class="syn-err">that didn\u2019t run: ' + esc(msg) + "</span>");
+      var hint = "";
+      if (msg.indexOf("circle back without sync up") >= 0) hint = "every circle back needs a sync up before it.";
+      else if (msg.indexOf("sync up without circle back") >= 0) hint = "every sync up needs a circle back after it.";
+      else if (window.Synergy.tokenize(line).length === 0) hint = "that line had no buzzwords in it. check the key below.";
+      if (hint) logLine('<span class="syn-hint">try this: ' + esc(hint) + "</span>");
     }
     renderDebug();
   }

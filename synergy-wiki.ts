@@ -1,4 +1,4 @@
-/* Synergy wiki shell — vignette + main, injected so the .html file stays a thin shell. */
+/* Synergy wiki shell, vignette + main, injected so the .html file stays a thin shell. */
 (function () {
   "use strict";
   var mount = document.getElementById("page-mount");

@@ -22,7 +22,7 @@ interface OthelloEngineApi {
   discSprite(color: string): string;
 }
 
-/* SITE_DATA (content-data.ts) — changelog + CV, rendered by content.ts. */
+/* SITE_DATA (content-data.ts): changelog + CV, rendered by content.ts. */
 interface ChangelogEntry { d: string; h: string; }
 interface CvStat { n: number; label: string; }
 interface CvEntry { meta: string[]; role: string; lab: string; mentor: string; body: string[]; }
@@ -38,7 +38,7 @@ interface SiteData {
 
 interface SupabaseConfig { SUPABASE_URL: string; SUPABASE_ANON_KEY: string; }
 
-/* window.FLASHCARD_DECK — set by each deck page before flashcards.ts loads. */
+/* window.FLASHCARD_DECK: set by each deck page before flashcards.ts loads. */
 interface FlashcardDeck {
   title: string; sub: string; backHref: string; backLabel: string;
   cards: { tag: string; term: string; def: string }[];
