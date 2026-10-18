@@ -1,6 +1,6 @@
 "use strict";
-/* blog reader — pulls posts from Supabase via plain fetch (no SDK download).
-   marked + DOMPurify load lazily, only for a single-post view. */
+/* blog reader — posts are plain markdown files in /posts/ (see posts/index.json).
+   To publish: add posts/<slug>.md and one line in posts/index.json. No database. */
 /* NOTE: compiled by GitHub Actions on push — edit this file from anywhere. */
 (function () {
     "use strict";
@@ -62,7 +62,6 @@
 
 </main>`;
     })();
-    var cfg = window.SUPABASE_CONFIG || {};
     var listEl = document.getElementById("post-list");
     var searchEl = document.getElementById("post-search");
     var listView = document.getElementById("view-list");
@@ -94,7 +93,7 @@
     function cardHtml(p, q) {
         return '<a class="post-card" href="/blog.html?p=' + encodeURIComponent(p.slug) + '">' +
             '<h3 class="post-card__title">' + highlight(p.title, q) + "</h3>" +
-            '<span class="post-card__date">' + fmtDate(p.created_at) + "</span>" +
+            '<span class="post-card__date">' + fmtDate(p.date) + "</span>" +
             '<p class="post-card__excerpt">' + highlight(excerpt(p.body), q) + "</p></a>";
     }
     function renderList() {
@@ -121,14 +120,27 @@
         }
         listEl.innerHTML = matches.map(function (p) { return cardHtml(p, q); }).join("");
     }
-    function apiUrl(path) {
-        return cfg.SUPABASE_URL.replace(/\/$/, "") + path;
-    }
-    function apiHeaders() {
-        return {
-            "apikey": cfg.SUPABASE_ANON_KEY,
-            "Authorization": "Bearer " + cfg.SUPABASE_ANON_KEY
-        };
+    /* Load the post manifest, then each markdown file (for excerpts + search). */
+    function loadPosts() {
+        return fetch("posts/index.json")
+            .then(function (res) {
+            if (!res.ok)
+                throw new Error("index request failed");
+            return res.json();
+        })
+            .then(function (index) {
+            return Promise.all(index.map(function (meta) {
+                return fetch("posts/" + meta.slug + ".md")
+                    .then(function (res) {
+                    if (!res.ok)
+                        throw new Error("post request failed");
+                    return res.text();
+                })
+                    .then(function (body) {
+                    return { slug: meta.slug, title: meta.title, date: meta.date, body: body };
+                });
+            }));
+        });
     }
     /* Lazy-load a script on demand. marked + DOMPurify are only needed for a
        single-post view, so the list page never downloads them. */
@@ -152,12 +164,7 @@
     }
     function showList() {
         setLoading(true);
-        fetch(apiUrl("/rest/v1/posts?select=title,slug,body,created_at&published=eq.true&order=created_at.desc"), { headers: apiHeaders() })
-            .then(function (res) {
-            if (!res.ok)
-                throw new Error("posts request failed");
-            return res.json();
-        })
+        loadPosts()
             .then(function (data) {
             if (!data || !data.length) {
                 listEl.innerHTML = "<p>no posts yet — check back soon.</p>";
@@ -181,14 +188,15 @@
         listView.hidden = true;
         postView.hidden = false;
         setLoading(true);
-        fetch(apiUrl("/rest/v1/posts?select=title,body,created_at&slug=eq." + encodeURIComponent(slug) + "&published=eq.true&limit=1"), { headers: apiHeaders() })
-            .then(function (res) {
-            if (!res.ok)
-                throw new Error("post request failed");
-            return res.json();
-        })
+        loadPosts()
             .then(function (data) {
-            var post = data && data[0];
+            var post = null;
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].slug === slug) {
+                    post = data[i];
+                    break;
+                }
+            }
             if (!post) {
                 document.getElementById("post-title").textContent = "not found";
                 document.getElementById("post-body").innerHTML = "<p>that post doesn't exist.</p>";
@@ -200,7 +208,7 @@
             ]).then(function () {
                 document.title = post.title + " — Amanda Ta";
                 document.getElementById("post-title").textContent = post.title;
-                document.getElementById("post-date").textContent = fmtDate(post.created_at);
+                document.getElementById("post-date").textContent = fmtDate(post.date);
                 var html = marked.parse(post.body || "");
                 document.getElementById("post-body").innerHTML = DOMPurify.sanitize(html);
                 /* Headings need ids for the in-post #anchor TOC links to work —
@@ -235,10 +243,6 @@
             document.getElementById("post-body").innerHTML = "<p>couldn't load the post — try refreshing.</p>";
         })
             .finally(function () { setLoading(false); });
-    }
-    if (!cfg.SUPABASE_URL || cfg.SUPABASE_URL.indexOf("YOUR_") === 0) {
-        listEl.innerHTML = "<p>blog is waking up — check back soon.</p>";
-        return;
     }
     var slug = new URLSearchParams(location.search).get("p");
     if (searchEl) {

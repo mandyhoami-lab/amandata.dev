@@ -77,18 +77,8 @@
 
     <!-- editor -->
     <div id="editor-view" class="section__body" hidden>
-      <form id="post-form" class="form">
-        <label>title<input type="text" id="post-title" required maxlength="120" placeholder="A tiny essay on…"></label>
-        <label>body <span class="hint">(markdown — # headings, **bold**, *italic*, [links](url))</span><textarea id="post-body" rows="14" required placeholder="Write it here…"></textarea></label>
-        <label class="check"><input type="checkbox" id="post-published" checked> Published</label>
-        <button type="submit" id="post-submit-btn">Publish post</button>
-        <button type="button" id="cancel-edit-btn" class="ghost" hidden>Cancel editing</button>
-      </form>
-      <p id="post-status"></p>
-      <div id="existing-posts">
-        <p class="hint">existing posts</p>
-        <ul id="posts-list"></ul>
-      </div>
+      <p class="contact__intro">the blog moved off the database — posts are now markdown files.</p>
+      <p>to publish: add <code>posts/&lt;slug&gt;.md</code> and one line to <code>posts/index.json</code>, then push.</p>
       <p><button id="logout-btn" class="ghost form">Sign out</button></p>
     </div>
   </section>
