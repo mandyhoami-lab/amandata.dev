@@ -42,6 +42,7 @@
           <input id="syn-input" type="text" spellcheck="false" autocomplete="off" aria-label="type synergy code" placeholder="move the needle">
         </div>
         <div class="syn-row">
+          <button id="syn-run" type="button">run it</button>
           <button id="syn-reset" type="button">reset the meeting</button>
         </div>
         <div class="syn-cheat">
@@ -101,6 +102,14 @@
     var debug = document.getElementById("syn-debug");
     var input = document.getElementById("syn-input");
     var resetBtn = document.getElementById("syn-reset");
+    var runBtn = document.getElementById("syn-run");
+    if (runBtn) {
+        runBtn.addEventListener("click", function () {
+            submit(input.value);
+            input.value = "";
+            input.focus();
+        });
+    }
     var howtoBtn = document.getElementById("syn-howto-btn");
     var howto = document.getElementById("syn-howto");
     if (howtoBtn && howto) {
