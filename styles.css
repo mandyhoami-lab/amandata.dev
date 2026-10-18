@@ -1377,3 +1377,10 @@ a:focus-visible, button:focus-visible{
   font-family: 'VT323', monospace; font-size: 1rem; text-decoration: none; cursor: pointer;
 }
 .proj-btn:hover{ border-color: var(--tag); color: var(--tag) !important; }
+
+.wiki-toc{ line-height: 1.7; }
+.wiki-toc ol{ margin: 0.2rem 0 0.2rem 1.2rem; }
+.wiki-fig{ margin: 1rem 0; text-align: center; }
+.wiki-fig img{ border: 1px solid var(--line); border-radius: 8px; background: #0d1117; padding: 0.5rem; }
+.wiki-fig figcaption{ font-size: 0.85rem; color: var(--dim); margin-top: 0.4rem; }
+.wiki-wrap ul{ line-height: 1.7; }
