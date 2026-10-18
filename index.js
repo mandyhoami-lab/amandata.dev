@@ -20,7 +20,7 @@
     <span id="typewriter">Social science enthusiast, researcher, web development. Welcome to my space.</span><span class="caret" aria-hidden="true"></span>
   </p>
   <nav class="hero__hubs" aria-label="hubs">
-    <a class="hero__hub" href="/coding-projects.html">Coding projects</a>
+    <a class="hero__hub" href="/coding-projects.html">Web projects</a>
     <a class="hero__hub" href="/website-management.html">Website management</a>
     <a class="hero__hub" href="/research-activity.html">Research activity</a>
   </nav>

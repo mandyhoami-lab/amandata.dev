@@ -11,7 +11,7 @@
   <section class="section" id="coding-projects">
     <div class="section__head">
       <p class="section__tag">code</p>
-      <h2 class="section__title">Coding projects</h2>
+      <h2 class="section__title">Web projects</h2>
     </div>
     <div class="section__body">
       <div class="proj-grid">
