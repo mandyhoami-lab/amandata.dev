@@ -58,6 +58,17 @@ The only keywords are corporate buzzwords. Everything reads like a progress meet
 
 It can compute anything like any other language. The full command list lives on the [Synergy wiki](/synergy-wiki.html) — every buzzword in plain language.
 
+<div class="wiki-preview">
+<p class="wiki-preview__tag">from the synergy wiki</p>
+<table>
+<tr><th>Paradigm(s)</th><td>imperative</td></tr>
+<tr><th>Designed by</th><td>tarotams</td></tr>
+<tr><th>Appeared in</th><td>2026</td></tr>
+<tr><th>Computational class</th><td>Turing complete</td></tr>
+</table>
+<p><b>Synergy</b> is an esoteric programming language where the only keywords are corporate buzzwords. <a href="/synergy-wiki.html">Read the full wiki &rarr;</a></p>
+</div>
+
 ## how printing works
 
 Numbers are also letters. 72 is H, 105 is i, 32 is a space — that's just how computers do it. So to print "Hi": count the first cell up to 72, `share out` prints H. `pivot` to the next cell, count up to 105, `share out` prints i. The console's tape debugger shows the letter next to each number so you can watch it happen.

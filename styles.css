@@ -1340,3 +1340,18 @@ a:focus-visible, button:focus-visible{
   overflow-x: auto; font-size: 0.85rem; line-height: 1.5; white-space: pre;
 }
 @media (max-width: 640px){ .wiki-infobox{ float: none; margin: 0 0 1rem 0; max-width: 100%; } }
+
+/* wiki preview card (inside blog posts) */
+.wiki-preview{
+  border: 1px solid var(--line); border-radius: 8px; padding: 1rem 1.2rem;
+  margin: 1.2rem 0; background: var(--card-bg);
+}
+.wiki-preview__tag{
+  font-family: var(--micro); font-size: 0.95rem; color: var(--dim);
+  text-transform: uppercase; letter-spacing: 0.1em; margin: 0 0 0.6rem !important;
+}
+.wiki-preview table{ border-collapse: collapse; font-size: 0.9rem; margin-bottom: 0.8rem; }
+.wiki-preview th, .wiki-preview td{ border: 1px solid var(--line); padding: 0.3rem 0.6rem; text-align: left; }
+.wiki-preview th{ color: var(--dim); font-weight: normal; }
+.wiki-preview td{ color: var(--ink); }
+.wiki-preview p:last-child{ margin-bottom: 0 !important; }
