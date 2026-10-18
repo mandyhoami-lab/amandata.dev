@@ -53,6 +53,8 @@ It can compute anything like any other language.
 
 ## print: hello world
 
+This prints Hello World!. A hundred lines of Synergy and it says hello.
+
 ```
 per my last email, here are the action items from standup
 
