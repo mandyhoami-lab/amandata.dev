@@ -666,8 +666,8 @@ html.js-on .nav__menu-link:focus-visible{
   -webkit-text-stroke-color: var(--data-accent);
 }
 .hero__tagline{
-  font-family: var(--micro);
-  font-size: 1.12rem;
+  font-family: 'VT323', 'Silkscreen', monospace;
+  font-size: 1.35rem;
   letter-spacing: 0.06em;
   line-height: 1.8;
   color: var(--green);
@@ -936,6 +936,12 @@ mark.key{
 
 /* ================= responsive ================= */
 @media (max-width: 640px){
+  /* friendlier mobile type: slightly smaller, more compressed */
+  body{ font-size: 15.5px; line-height: 1.55; }
+  .nav__link, .nav__toggle, .theme-toggle,
+  .hero__kicker, .section__tag, .post__meta{
+    letter-spacing: 0.02em;
+  }
   .nav{ gap: 0.75rem; }
   .nav__mark{ flex: 0 0 auto; }
   .nav__links{
