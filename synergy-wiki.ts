@@ -184,8 +184,6 @@ share out.</pre>
         <h4>Try it</h4>
         <p>The <a href="/synergy.html">Synergy console</a> runs every command above. You can type one of the buzzwords from the key, hit enter, and watch the tape debugger show what changed.</p>
 
-        <h3>Gallery</h3>
-        <p>Synergy in action:</p>
         <p><img src="/assets/images/synergy-typing.gif" alt="Synergy code being typed into the console" width="400" height="120" loading="lazy"></p>
 
         <h3 id="wiki-memory">Memory</h3>
