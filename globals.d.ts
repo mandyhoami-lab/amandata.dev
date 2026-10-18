@@ -36,7 +36,6 @@ interface SiteData {
   cv: { stats: CvStat[]; blocks: CvBlock[] };
 }
 
-interface SupabaseConfig { SUPABASE_URL: string; SUPABASE_ANON_KEY: string; }
 
 /* window.FLASHCARD_DECK: set by each deck page before flashcards.ts loads. */
 interface FlashcardDeck {
@@ -56,7 +55,6 @@ interface SynergyApi {
 interface Window {
   SITE_DATA: SiteData;
   ABOUT_BIO_HTML: string;
-  SUPABASE_CONFIG: SupabaseConfig;
   OthelloEngine: OthelloEngineApi;
   othelloExInit: () => void;
   FLASHCARD_DECK?: FlashcardDeck;
@@ -69,7 +67,6 @@ interface Window {
 }
 
 /* CDN globals (loaded via <script> tags in the HTML). */
-declare const supabase: any;
 declare const marked: any;
 declare const DOMPurify: any;
 /* node-test export shim used by othello.ts and othello-exercises.ts. */

@@ -1,3 +1,4 @@
+// hand-written, not compiled from .ts
 /* =========================================================
    synergy — an esoteric programming language where the only
    keywords are corporate buzzwords. Brainfuck-complete, so it

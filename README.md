@@ -1,14 +1,17 @@
 # amandata.dev
 
-My personal website live at **https://amandata.dev**. GitHub Pages and custom domain.
+My personal website, live at **https://amandata.dev**. GitHub Pages and custom domain.
 
 > **amandata.org** is kept as a separate professional portfolio. This repo is the personal site. In active development.
 
-## Edit me
+## How it's built
 
-- `index.html` — all the words on the site
-- `styles.css` — colors and fonts (tokens at the top)
-- `script.js` — animations (othello background gameplay, typewriter, scroll reveals)
+- **Pages are thin HTML shells.** Each `*.html` is mostly a `<head>` and an empty `<main>`; the content is injected by its matching TypeScript file.
+- **TypeScript sources** (`*.ts`) compile to the `*.js` files next to them. Edit the `.ts`, never the compiled `.js`. A GitHub Action (`.github/workflows/build-typescript.yml`) auto-compiles on push, so the `.js` is build output.
+- **Hand-written `.js`** files are marked with a `// hand-written, not compiled from .ts` header: the `stat200-*` practice hub files and `synergy-lang.js` (the Synergy esolang interpreter).
+- **Shared chrome** (nav, theme toggle, footer) is injected by `layout.js` on every page.
+- **Blog posts** are markdown files in `posts/` with a `posts/index.json` manifest. To publish: add `posts/<slug>.md`, add one line to `index.json`, push.
+- **No build step needed locally** beyond `npx tsc -p tsconfig.json` if you want to check compilation. `npm run build` does the same.
 
 ## Preview
 
@@ -28,36 +31,3 @@ DNS: apex A records pointing at GitHub Pages (see repo settings).
 See [CHANGELOG.md](CHANGELOG.md) for a catalog of notable commits.
 
 The old Carrd-based site is kept on the `archive` branch.
-
-### How the Carrd mirror became the site
-
-*Written by KoriKosmos — restored from the original README:*
-
-This started as a read-only mirror of the live site (built and hosted on Carrd),
-produced by `tools/mirror.sh`. That's how `index.html` and `assets/` got here,
-and it's still where the current markup came from.
-
-**It is no longer just a mirror.** It's the working copy now. The direction is:
-
-1. Edit here, in the repo.
-2. Preview those edits locally and raise them as suggestions against the live
-   design.
-3. Port the agreed ones upstream while Carrd is still the host.
-4. Eventually stop doing step 3 — drop Carrd and serve the site straight from
-   this repo.
-
-So the mirror is a starting point, not the source of truth. Divergence from the
-live site is expected and intentional.
-
-## Contributors
-
-- **[Mandy](https://github.com/mandyhoami-lab)** — the original live site was entirely built by me.
-- **[KoriKosmos](https://github.com/KoriKosmos)** — coauthored by, KoriKosmos. Wrote the original full README and led the Carrd-mirror-to-working-copy transition.
-- Assisted rebuilt commits with **Claude** ; **[KoriKosmos](https://github.com/KoriKosmos)** and **2.0** (Muse, Meta); **[Mandy](https://github.com/mandyhoami-lab)** 
-
-## To do
-
-- [ ] Fill in the "My Work" section
-- [ ] Update changelogs and tweak navbar
-- [ ] Search function in nav
-- [ ] cat interactive elements...

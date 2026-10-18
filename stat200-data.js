@@ -1,3 +1,4 @@
+// hand-written, not compiled from .ts
 /* STAT 200 practice-hub content: flashcards, typing drills, quizzes, etymology.
    window.STAT200 = { units: [...] } — plain, simple language throughout. */
 window.STAT200 = {

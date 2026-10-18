@@ -1,3 +1,4 @@
+// hand-written, not compiled from .ts
 /* Multiple-choice quizzes — midterm-style.
    window.StatQuiz.init(container, items)
    items: [{ q, choices[4], correct (0-3), explain }] */

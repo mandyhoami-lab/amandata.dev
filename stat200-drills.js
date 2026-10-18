@@ -1,3 +1,4 @@
+// hand-written, not compiled from .ts
 /* Typing drills — type the R code from a plain-English prompt.
    window.StatDrills.init(container, items)
    items: [{ prompt, answer, hint }] */

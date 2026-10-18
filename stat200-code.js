@@ -1,3 +1,4 @@
+// hand-written, not compiled from .ts
 /* R code runner via WebR (R compiled to WebAssembly). Lazy-loads on first use.
    window.StatCode.init(container) */
 (function () {
