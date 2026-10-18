@@ -58,7 +58,7 @@ It can compute anything like any other language. The full command list lives on 
 
 ## how printing works
 
-Every number is secretly a letter. 72 is H, 105 is i, 32 is a space — that's just how computers do it. So to print "Hi": count the first cell up to 72, `share out` prints H. `pivot` to the next cell, count up to 105, `share out` prints i. The console's tape debugger shows the letter next to each number so you can watch it happen.
+Numbers are also letters. 72 is H, 105 is i, 32 is a space — that's just how computers do it. So to print "Hi": count the first cell up to 72, `share out` prints H. `pivot` to the next cell, count up to 105, `share out` prints i. The console's tape debugger shows the letter next to each number so you can watch it happen.
 
 ## print: hello world
 

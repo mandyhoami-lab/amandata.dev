@@ -26,7 +26,7 @@
           <p><b>1.</b> Type a buzzword (or a few, separated by commas) into the box and hit enter.</p>
           <p><b>2.</b> The console runs it right away and shows what changed — the tape debugger above always shows your cells, with the pointer highlighted.</p>
           <p><b>3.</b> Try <i>move the needle</i> three times, watch the first cell count up. Then <i>pivot</i> and watch the pointer move.</p>
-          <p><b>4.</b> <i>share out</i> prints the current cell as a letter — every number is secretly a letter (72 is H, 105 is i). The debugger shows the letter next to the number.</p>
+          <p><b>4.</b> <i>share out</i> prints the current cell as a letter — numbers are also letters (72 is H, 105 is i). The debugger shows the letter next to the number.</p>
           <p><b>5.</b> Loops need <i>sync up</i> … <i>circle back</i> on the same line. The preset buttons run full programs if you want to see one in action.</p>
         </div>
         <p class="syn-explain">Type buzzwords below and hit enter — the console runs each line and shows you what changed.</p>

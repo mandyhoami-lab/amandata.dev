@@ -18,7 +18,7 @@
 
         <h3>How it works</h3>
         <p>Synergy has a row of numbered boxes called the <b>tape</b>. Each box (a <b>cell</b>) holds one number, from 0 to 255. You're always pointing at one cell. Every buzzword does one small thing: change the number, move the pointer, print something, or repeat.</p>
-        <p>Numbers are secretly letters. 72 is H, 105 is i, 32 is a space — that's just how computers do it. So counting a cell up to 72 and printing it gives you H.</p>
+        <p>Numbers are also letters. 72 is H, 105 is i, 32 is a space — that's just how computers do it. So counting a cell up to 72 and printing it gives you H.</p>
 
         <h3>Changing numbers</h3>
         <dl class="wiki-dl">
