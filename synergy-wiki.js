@@ -179,11 +179,6 @@ circle back,
 move the needle (x48),
 share out.</pre>
 
-        <figure class="wiki-fig">
-          <img src="/assets/images/synergy-frog.png" alt="Frog ascii art" loading="lazy">
-          <figcaption>Fig. 2: the Synergy frog, drawn by the <a href="/synergy.html">console</a></figcaption>
-        </figure>
-
         <h4>Try it</h4>
         <p>The <a href="/synergy.html">Synergy console</a> runs every command above. You can type one of the buzzwords from the key, hit enter, and watch the tape debugger show what changed.</p>
 
