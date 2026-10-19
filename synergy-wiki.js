@@ -130,10 +130,6 @@ sync up,
   gather feedback,
   share out,
 circle back.</pre>
-        <figure class="wiki-fig">
-          <img src="/assets/images/synergy-cat.png" alt="Cat ascii art" loading="lazy">
-          <figcaption>Fig. 1: the Synergy cat, drawn by the <a href="/synergy.html">console</a></figcaption>
-        </figure>
 
         <h4 id="wiki-cellsize">Cell size</h4>
         <p>This program outputs the cell width of the interpreter:</p>
