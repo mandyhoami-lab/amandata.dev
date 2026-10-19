@@ -85,7 +85,6 @@
         DROPDOWNS.map(dropdown).join("") + wideLinks +
         "</div>" +
         '<div class="nav__quick">' +
-        '<a class="nav__link" href="/synergy.html">Synergy</a>' +
         '<a class="nav__link" href="/othello.html">Play Othello!</a>' +
         '</div>' +
         '<div class="theme-picker">' +
