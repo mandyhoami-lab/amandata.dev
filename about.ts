@@ -18,6 +18,7 @@
 
     <div class=\"section__body\">
       ${window.ABOUT_BIO_HTML}
+      <p class="games-note"><a href="/">← Back to Home</a></p>
     </div>
   </section>
 
