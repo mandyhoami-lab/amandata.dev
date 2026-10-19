@@ -62,10 +62,7 @@
   var markActive = page === "home" ? " is-active" : "";
   /* Desktop-only top-level links (hidden on mobile via .nav__link--wide). */
   var path = window.location.pathname;
-  var wideLinks = [
-    ["/blog.html", "Blog"],
-    ["/psy410.html", "PSY 410 Resources"]
-  ].map(function (l: string[]) {
+  var wideLinks = [].map(function (l: string[]) {
     var active = path === l[0] ? " is-active" : "";
     return '<a class="nav__link nav__link--wide' + active + '" href="' + l[0] + '">' + l[1] + "</a>";
   }).join("");
