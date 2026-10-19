@@ -223,16 +223,7 @@ main{ flex: 1 0 auto; }
 
 /* dark/light toggle — solid "Change Theme" accordion button */
 .theme-picker{ position: relative; flex: 0 0 auto; }
-.nav__quick{ display: flex; gap: 0.4rem; flex: 0 0 auto; }
-.nav__quickbtn{
-  font-family: 'VT323', 'Silkscreen', monospace;
-  font-size: 1.15rem; letter-spacing: 0.06em;
-  color: var(--nav-bg); background: var(--nav-tag);
-  border: none; border-radius: 4px;
-  padding: 0.3rem 0.7rem; text-decoration: none;
-  display: inline-flex; align-items: center;
-}
-.nav__quickbtn:hover{ filter: brightness(1.1); }
+.nav__quick{ display: flex; gap: 0.2rem; flex: 0 0 auto; }
 @media (max-width: 640px){ .nav__quick{ display: none; } }
 .theme-toggle{
   font-family: 'VT323', 'Silkscreen', monospace;

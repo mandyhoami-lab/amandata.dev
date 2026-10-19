@@ -84,6 +84,10 @@
         '<div class="nav__links">' +
         DROPDOWNS.map(dropdown).join("") + wideLinks +
         "</div>" +
+        '<div class="nav__quick">' +
+        '<a class="nav__link" href="/synergy.html">Synergy</a>' +
+        '<a class="nav__link" href="/othello.html">Play Othello!</a>' +
+        '</div>' +
         '<div class="theme-picker">' +
         '<button class="theme-toggle" id="theme-toggle" type="button" aria-expanded="false" aria-haspopup="true">Change Theme <span class="nav__caret" aria-hidden="true"></span></button>' +
         '<div class="theme-menu" id="theme-menu" role="menu" aria-label="Color theme" hidden>' +
@@ -93,10 +97,6 @@
         '<button class="theme-opt" type="button" role="menuitemradio" data-theme-name="pink"><span class="theme-swatches" aria-hidden="true"><i style="background:#FAF3EA"></i><i style="background:#C96F8E"></i><i style="background:#934A66"></i></span>Pink</button>' +
         '<button class="theme-opt" type="button" role="menuitemradio" data-theme-name="blue"><span class="theme-swatches" aria-hidden="true"><i style="background:#0A1220"></i><i style="background:#5AA9E6"></i><i style="background:#D9BE7A"></i></span>Blue</button>' +
         '</div>' +
-        '</div>' +
-        '<div class="nav__quick">' +
-        '<a class="nav__quickbtn" href="/synergy.html">synergy</a>' +
-        '<a class="nav__quickbtn" href="/othello.html">play othello</a>' +
         '</div>' +
         (page === "home" ? '<div class="progress" id="progress" aria-hidden="true"></div>' : "") +
         "</nav>";
