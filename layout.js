@@ -7,7 +7,7 @@
      home       -> mark links to #top, mark underlined active, progress bar on
      me         -> Me dropdown active (about.html, projects.html, cv.html,
                    contact.html, commissions.html, blog.html)
-     creations  -> Creations dropdown active (creations.html, othello.html,
+     creations  -> Extras dropdown active (creations.html, othello.html,
                    othello-advanced.html, psy410.html)
      site       -> This Site dropdown active (repository.html)
      (anything else, e.g. admin) -> no active item
@@ -34,7 +34,7 @@
                 ["/repository.html", "Repository"],
                 ["/#changelog", "Changelog"]
             ] },
-        { key: "creations", label: "Creations", links: [
+        { key: "creations", label: "Extras", links: [
                 ["/othello.html", "Othello"],
                 ["/psy410-flashcards/", "Myers flashcards"],
                 ["/synergy.html", "Synergy esoslang"],

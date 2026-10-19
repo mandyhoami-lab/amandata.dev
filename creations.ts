@@ -13,7 +13,7 @@
   <!-- ================= CREATIONS ================= -->
   <section class="section" id="creations">
     <div class="section__head">
-      <h2 class="section__title">Creations</h2>
+      <h2 class="section__title">Extras</h2>
       <span class="section__tag">playground</span>
     </div>
     <div class="section__body">

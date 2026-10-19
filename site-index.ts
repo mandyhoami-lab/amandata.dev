@@ -10,7 +10,7 @@
     { url: "/contact.html", title: "Contact", desc: "get in touch", keys: "contact email reach message" },
     { url: "/commissions.html", title: "Commissions", desc: "hire me for a build", keys: "commissions hire freelance work" },
     { url: "/blog.html", title: "Blog", desc: "posts and essays", keys: "blog posts writing essays" },
-    { url: "/creations.html", title: "Creations", desc: "things i build to play with", keys: "creations play games playground" },
+    { url: "/creations.html", title: "Extras", desc: "things i build to play with", keys: "creations play games playground" },
     { url: "/othello.html", title: "Othello", desc: "reversi, beginner + advanced", keys: "othello reversi game board play coach" },
     { url: "/psy410.html", title: "PSY 410 Resources", desc: "myers exp psych study hub", keys: "psy410 psychology myers study flashcards resources" },
     { url: "/psy410-flashcards/", title: "Myers Flashcards", desc: "170-card exp psych deck", keys: "flashcards myers psychology study cards" },
