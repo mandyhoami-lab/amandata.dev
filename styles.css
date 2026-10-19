@@ -1047,6 +1047,7 @@ mark.key{
 }
 .btn:hover{ filter: brightness(1.12); }
 .btn-center{ text-align: center; }
+.btn-spaced{ margin-bottom: 1.5rem; }
 
 .home-posts{ display: flex; flex-direction: column; gap: 0.9rem; }
 .home-post{
