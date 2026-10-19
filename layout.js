@@ -78,7 +78,7 @@
         '</svg>' +
         '</a>' +
         '<form class="nav__search" id="nav-search" role="search" action="/search.html" method="get" autocomplete="off">' +
-        '<input type="search" name="q" id="nav-search-input" placeholder="search" aria-label="search site pages">' +
+        '<input type="search" name="q" id="nav-search-input" placeholder="search pages" aria-label="search site pages">' +
         '<div class="nav__suggest" id="nav-suggest" hidden></div>' +
         '</form>' +
         '<div class="nav__links">' +
