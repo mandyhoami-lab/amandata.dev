@@ -99,6 +99,10 @@
           '<button class="theme-opt" type="button" role="menuitemradio" data-theme-name="blue"><span class="theme-swatches" aria-hidden="true"><i style="background:#0A1220"></i><i style="background:#5AA9E6"></i><i style="background:#D9BE7A"></i></span>Blue</button>' +
         '</div>' +
       '</div>' +
+      '<div class="nav__quick">' +
+        '<a class="nav__quickbtn" href="/synergy.html">synergy</a>' +
+        '<a class="nav__quickbtn" href="/othello.html">play othello</a>' +
+      '</div>' +
       (page === "home" ? '<div class="progress" id="progress" aria-hidden="true"></div>' : "") +
     "</nav>";
 
