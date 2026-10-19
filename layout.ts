@@ -140,12 +140,18 @@
     function suggest(): void {
       var q = input!.value.trim().toLowerCase();
       var pages: any[] = (window as any).SITE_INDEX || [];
-      if (!q || !pages.length) { box!.hidden = true; box!.innerHTML = ""; return; }
-      var words = q.split(/\s+/);
-      var hits = pages.filter(function (p: any) {
-        var hay = (p.title + " " + p.desc + " " + p.keys).toLowerCase();
-        return words.every(function (w: string) { return hay.indexOf(w) !== -1; });
-      }).slice(0, 5);
+      if (!pages.length) { box!.hidden = true; box!.innerHTML = ""; return; }
+      var hits: any[];
+      if (!q) {
+        // empty: show every page in order for free exploration
+        hits = pages;
+      } else {
+        var words = q.split(/\s+/);
+        hits = pages.filter(function (p: any) {
+          var hay = (p.title + " " + p.desc + " " + p.keys).toLowerCase();
+          return words.every(function (w: string) { return hay.indexOf(w) !== -1; });
+        }).slice(0, 5);
+      }
       if (!hits.length) { box!.hidden = true; box!.innerHTML = ""; return; }
       box!.innerHTML = hits.map(function (p: any) {
         return '<a class="nav__suggest-item" href="' + p.url + '"><span class="nav__suggest-title">' +

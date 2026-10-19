@@ -131,16 +131,23 @@
         function suggest() {
             var q = input.value.trim().toLowerCase();
             var pages = window.SITE_INDEX || [];
-            if (!q || !pages.length) {
+            if (!pages.length) {
                 box.hidden = true;
                 box.innerHTML = "";
                 return;
             }
-            var words = q.split(/\s+/);
-            var hits = pages.filter(function (p) {
-                var hay = (p.title + " " + p.desc + " " + p.keys).toLowerCase();
-                return words.every(function (w) { return hay.indexOf(w) !== -1; });
-            }).slice(0, 5);
+            var hits;
+            if (!q) {
+                // empty: show every page in order for free exploration
+                hits = pages;
+            }
+            else {
+                var words = q.split(/\s+/);
+                hits = pages.filter(function (p) {
+                    var hay = (p.title + " " + p.desc + " " + p.keys).toLowerCase();
+                    return words.every(function (w) { return hay.indexOf(w) !== -1; });
+                }).slice(0, 5);
+            }
             if (!hits.length) {
                 box.hidden = true;
                 box.innerHTML = "";
