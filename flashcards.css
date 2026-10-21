@@ -41,7 +41,7 @@
 .fc-card{ position:relative; width:100%; min-height:320px; cursor:pointer;
   outline-offset:4px; }
 .fc-inner{ position:absolute; inset:0; transform-style:preserve-3d;
-  transition:transform .45s cubic-bezier(.2,.7,.2,1);
+  transition:transform .7s cubic-bezier(.2,.7,.2,1);
   will-change:transform; }
 .fc-card.flipped .fc-inner{ transform:rotateY(180deg); }
 .fc-face{ position:absolute; inset:0; backface-visibility:hidden;
