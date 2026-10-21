@@ -116,12 +116,3 @@
   background: var(--green); border-color: var(--green); color: #0A0C0A;
   font-weight: 700;
 }
-
-/* smooth flip: flashcards.css uses steps(9), which reads as lag here */
-.s2-stage .fc-inner{
-  transition: transform .45s cubic-bezier(.2,.7,.2,1);
-  will-change: transform;
-}
-@media (prefers-reduced-motion: reduce){
-  .s2-stage .fc-inner{ transition: none; }
-}
