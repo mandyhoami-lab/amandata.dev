@@ -72,7 +72,9 @@
       var s = document.createElement('script');
       s.type = 'module';
       s.textContent =
-        "import { Console } from 'https://webr.r-wasm.org/v0.4.2/webr.mjs';" +
+        // webR v0.5.4 — the 0.4.x repo has no RCurl/curl, which swirl needs;
+        // the 0.5.x repo ships both
+        "import { Console } from 'https://webr.r-wasm.org/v0.5.4/webr.mjs';" +
         "window.__rconReady(new Console({" +
         "  stdout: function (line) { window.__rconOut(line + '\\n'); }," +
         "  stderr: function (line) { window.__rconOut(line + '\\n'); }," +
