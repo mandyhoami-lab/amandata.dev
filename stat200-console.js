@@ -95,7 +95,9 @@
         con = c;
         delete window.__rconReady;
         c.run();
-        // plots draw at half the canvas size
+        // plots draw at half the canvas size; echo the line so the
+        // transcript reads normally (it consumes the first prompt)
+        print('options(device=webr::canvas(300, 180))\n');
         c.stdin('options(device=webr::canvas(300, 180))');
         resolve(c);
       };
