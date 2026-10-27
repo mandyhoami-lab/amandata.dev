@@ -30,6 +30,18 @@
       </div>
     </div>
   </section>
+  <section class="section" id="rcon-section">
+    <div class="section__head">
+      <p class="section__tag">stat 200</p>
+      <h2 class="section__title">R Console</h2>
+      <p class="creations-intro">a regular R console — install any CRAN package, run swirl lessons.</p>
+    </div>
+    <div class="section__body">
+      <div class="s2-wrap">
+        <div id="rcon"></div>
+      </div>
+    </div>
+  </section>
 </main>`;
 
   var unitsEl = document.getElementById("s2-units") as HTMLElement;
