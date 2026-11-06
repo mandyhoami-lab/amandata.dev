@@ -29,7 +29,25 @@
   .post-search[hidden]{display:none}
   .post-count{font-family:var(--micro);font-size:1rem;letter-spacing:0.05em;color:var(--dim);margin:-0.7rem 0 1rem}
   .post-count[hidden]{display:none}
-  .post-card mark{background:var(--sand);color:#1a1a1a;padding:0 0.1em;border-radius:2px}`;
+  .post-card mark{background:var(--sand);color:#1a1a1a;padding:0 0.1em;border-radius:2px}
+  .post-comments{margin-top:2rem;border-top:1px solid var(--line);padding-top:1.25rem}
+  .post-comments h3{font-family:var(--micro);letter-spacing:0.04em;color:var(--ink);margin:0 0 0.75rem}
+  .reactions{display:flex;flex-wrap:wrap;gap:0.5rem;margin:0 0 1.25rem}
+  .reaction-btn{background:var(--card-bg);border:1px solid var(--line);border-radius:20px;padding:0.35rem 0.75rem;font-size:1rem;color:var(--ink);cursor:pointer;font-family:var(--micro);letter-spacing:0.03em}
+  .reaction-btn:hover{border-color:var(--green)}
+  .reaction-btn.is-active{border-color:var(--green);background:var(--panel)}
+  .reaction-btn:disabled{opacity:0.6;cursor:default}
+  .comment-list{list-style:none;margin:0 0 1.25rem;padding:0}
+  .comment{padding:0.8rem 0;border-bottom:1px solid var(--line)}
+  .comment__meta{font-family:var(--micro);font-size:1rem;letter-spacing:0.05em;color:var(--dim);margin-bottom:0.3rem}
+  .comment__body{color:var(--body-text);margin:0;white-space:pre-wrap;overflow-wrap:break-word}
+  .comment-form input,.comment-form textarea{display:block;width:100%;box-sizing:border-box;margin-bottom:0.6rem;padding:0.55rem 0.9rem;background:var(--card-bg);border:1px solid var(--line);border-radius:4px;color:var(--ink);font-family:var(--micro);font-size:1.1rem;letter-spacing:0.03em}
+  .comment-form textarea{min-height:5rem;resize:vertical}
+  .comment-form input:focus,.comment-form textarea:focus{outline:none;border-color:var(--green)}
+  .comment-form button{background:var(--green);color:#fff;border:none;border-radius:4px;padding:0.55rem 1.1rem;font-family:var(--micro);font-size:1.1rem;letter-spacing:0.05em;cursor:pointer}
+  .comment-form button:disabled{opacity:0.6;cursor:default}
+  .comment-note{font-size:0.9rem;color:var(--dim);margin:0.5rem 0 0}
+  .comment-status{color:var(--dim);font-size:0.95rem;margin:0 0 0.75rem}`;
     document.head.appendChild(style);
     mount.outerHTML = `<div class="vignette" aria-hidden="true"></div>
 
@@ -58,6 +76,21 @@
     </div>
     <p class="contact__intro" id="post-date"></p>
     <div id="post-body" class="section__body"></div>
+
+    <!-- ================= COMMENTS + REACTIONS ================= -->
+    <section id="post-comments" class="post-comments" hidden>
+      <h3>Reactions</h3>
+      <div class="reactions" id="reactions"></div>
+      <h3>Comments</h3>
+      <p class="comment-status" id="comment-status">Loading comments…</p>
+      <ul class="comment-list" id="comment-list"></ul>
+      <form class="comment-form" id="comment-form">
+        <input type="text" id="comment-name" maxlength="50" placeholder="Your name (pick any display name)" aria-label="Your display name" autocomplete="off">
+        <textarea id="comment-body" maxlength="2000" placeholder="Leave a comment…" aria-label="Your comment"></textarea>
+        <button type="submit" id="comment-submit">Post comment</button>
+      </form>
+      <p class="comment-note">No sign-in needed — just pick a display name. It shows next to your comment.</p>
+    </section>
   </section>
 
 </main>`;
@@ -69,6 +102,16 @@
   var listView = document.getElementById("view-list") as HTMLElement;
   var postView = document.getElementById("view-post") as HTMLElement;
   var allPosts: any[] = [];
+
+  /* Comments + reactions (Supabase, amandata-blog project). No sign-in:
+     anyone can read and post with a display name; RLS allows anon SELECT +
+     INSERT only, no update/delete. The config script is loaded by blog.html;
+     until the blog_comments / blog_reactions tables exist, the section
+     stays hidden. */
+  var SB = window.SUPABASE_CONFIG;
+  var COMMENTS_ON = !!(SB && SB.SUPABASE_URL && SB.SUPABASE_ANON_KEY);
+  var REACTION_EMOJIS = ["👍", "❤️", "🎉", "🤔"];
+  var currentSlug = "";
 
   interface PostMeta { slug: string; title: string; date: string; }
 
@@ -242,12 +285,160 @@
               h.id = slug;
             }
           })();
+          initComments(slug);
         });
       })
       .catch(function () {
         (document.getElementById("post-body") as HTMLElement).innerHTML = "<p>couldn't load the post, try refreshing.</p>";
       })
       .finally(function () { setLoading(false); });
+  }
+
+  /* ---------- comments + reactions ---------- */
+
+  function sbHeaders(): { [k: string]: string } {
+    return {
+      "apikey": SB!.SUPABASE_ANON_KEY,
+      "Authorization": "Bearer " + SB!.SUPABASE_ANON_KEY,
+      "Content-Type": "application/json"
+    };
+  }
+
+  function sbGet(table: string, query: string): Promise<any[]> {
+    return fetch(SB!.SUPABASE_URL + "/rest/v1/" + table + "?" + query, { headers: sbHeaders() })
+      .then(function (res) {
+        if (!res.ok) throw new Error("request failed");
+        return res.json();
+      });
+  }
+
+  function sbPost(table: string, row: any): Promise<any[]> {
+    var headers = sbHeaders();
+    headers["Prefer"] = "return=representation";
+    return fetch(SB!.SUPABASE_URL + "/rest/v1/" + table, {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify(row)
+    }).then(function (res) {
+      if (!res.ok) throw new Error("request failed");
+      return res.json();
+    });
+  }
+
+  function setCommentStatus(text: string): void {
+    var statusEl = document.getElementById("comment-status") as HTMLElement;
+    statusEl.textContent = text;
+    statusEl.hidden = !text;
+  }
+
+  function commentHtml(c: any): string {
+    return '<li class="comment"><div class="comment__meta">' + escapeHtml(c.author_name) +
+      " · " + fmtDate(c.created_at) + '</div><p class="comment__body">' +
+      escapeHtml(c.body).replace(/\n/g, "<br>") + "</p></li>";
+  }
+
+  function loadComments(slug: string): void {
+    var section = document.getElementById("post-comments") as HTMLElement;
+    var listEl = document.getElementById("comment-list") as HTMLElement;
+    sbGet("blog_comments", "select=id,author_name,body,created_at&post_slug=eq." +
+      encodeURIComponent(slug) + "&order=created_at.asc")
+      .then(function (rows) {
+        listEl.innerHTML = rows.map(commentHtml).join("");
+        if (!rows.length) setCommentStatus("No comments yet — be the first.");
+        else setCommentStatus("");
+        section.hidden = false;
+        loadReactions(slug);
+      })
+      .catch(function () { section.hidden = true; });
+  }
+
+  function loadReactions(slug: string): void {
+    sbGet("blog_reactions", "select=emoji&post_slug=eq." + encodeURIComponent(slug))
+      .then(function (rows) {
+        var counts: { [k: string]: number } = {};
+        rows.forEach(function (r: any) { counts[r.emoji] = (counts[r.emoji] || 0) + 1; });
+        renderReactions(counts);
+      })
+      .catch(function () { renderReactions({}); });
+  }
+
+  function renderReactions(counts: { [k: string]: number }): void {
+    var box = document.getElementById("reactions") as HTMLElement;
+    var reacted: string[] = [];
+    try { reacted = JSON.parse(localStorage.getItem("amandata-reacted-" + currentSlug) || "[]"); } catch (e) { /* ignore */ }
+    box.innerHTML = REACTION_EMOJIS.map(function (em) {
+      var n = counts[em] || 0;
+      var active = reacted.indexOf(em) !== -1;
+      return '<button type="button" class="reaction-btn' + (active ? " is-active" : "") +
+        '" data-emoji="' + em + '"' + (active ? " disabled" : "") + ">" + em + " " + n + "</button>";
+    }).join("");
+  }
+
+  function initComments(slug: string): void {
+    if (!COMMENTS_ON) return;
+    currentSlug = slug;
+    var nameInput = document.getElementById("comment-name") as HTMLInputElement;
+    try {
+      var saved = localStorage.getItem("amandata-comment-name");
+      if (saved && nameInput) nameInput.value = saved;
+    } catch (e) { /* private mode */ }
+    loadComments(slug);
+  }
+
+  /* Reaction taps: one per emoji per browser (soft guard via localStorage). */
+  var reactionsBox = document.getElementById("reactions") as HTMLElement | null;
+  if (reactionsBox) {
+    reactionsBox.addEventListener("click", function (ev) {
+      var btn = (ev.target as HTMLElement).closest(".reaction-btn") as HTMLButtonElement | null;
+      if (!btn || btn.disabled || !COMMENTS_ON || !currentSlug) return;
+      var emoji = btn.getAttribute("data-emoji") || "";
+      var clickedBtn = btn;
+      clickedBtn.disabled = true;
+      sbPost("blog_reactions", { post_slug: currentSlug, emoji: emoji })
+        .then(function () {
+          try {
+            var reacted: string[] = JSON.parse(localStorage.getItem("amandata-reacted-" + currentSlug) || "[]");
+            reacted.push(emoji);
+            localStorage.setItem("amandata-reacted-" + currentSlug, JSON.stringify(reacted));
+          } catch (e) { /* private mode */ }
+          clickedBtn.classList.add("is-active");
+          var n = parseInt((clickedBtn.textContent || "").replace(/[^\d]/g, ""), 10) || 0;
+          clickedBtn.textContent = emoji + " " + (n + 1);
+        })
+        .catch(function () { clickedBtn.disabled = false; });
+    });
+  }
+
+  /* Comment submit: display name + text, no account. Name is remembered
+     on this device so repeat commenters don't retype it. */
+  var commentForm = document.getElementById("comment-form") as HTMLFormElement | null;
+  if (commentForm) {
+    commentForm.addEventListener("submit", function (ev) {
+      ev.preventDefault();
+      if (!COMMENTS_ON || !currentSlug) return;
+      var nameEl = document.getElementById("comment-name") as HTMLInputElement;
+      var bodyEl = document.getElementById("comment-body") as HTMLTextAreaElement;
+      var submitEl = document.getElementById("comment-submit") as HTMLButtonElement;
+      var name = (nameEl.value || "").trim();
+      var body = (bodyEl.value || "").trim();
+      if (!name) { setCommentStatus("Add a display name first."); nameEl.focus(); return; }
+      if (!body) { setCommentStatus("Write a comment first."); bodyEl.focus(); return; }
+      submitEl.disabled = true;
+      sbPost("blog_comments", { post_slug: currentSlug, author_name: name, body: body })
+        .then(function (rows) {
+          try { localStorage.setItem("amandata-comment-name", name); } catch (e) { /* private mode */ }
+          bodyEl.value = "";
+          setCommentStatus("");
+          var listEl = document.getElementById("comment-list") as HTMLElement;
+          if (rows && rows.length) {
+            listEl.insertAdjacentHTML("beforeend", commentHtml(rows[0]));
+          } else {
+            loadComments(currentSlug);
+          }
+        })
+        .catch(function () { setCommentStatus("Couldn't post — try again in a bit."); })
+        .finally(function () { submitEl.disabled = false; });
+    });
   }
 
   var slug = new URLSearchParams(location.search).get("p");

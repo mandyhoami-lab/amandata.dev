@@ -59,6 +59,7 @@ interface Window {
   othelloExInit: () => void;
   FLASHCARD_DECK?: FlashcardDeck;
   SiteLoading: SiteLoadingApi;
+  SUPABASE_CONFIG?: { SUPABASE_URL: string; SUPABASE_ANON_KEY: string; };
   Synergy: SynergyApi;
   STAT200: { units: any[] };
   StatDrills: { init(c: HTMLElement, items: any[]): void };
