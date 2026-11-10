@@ -18,6 +18,10 @@
     </div>
     <div class="section__body">
     <div class="proj-grid">
+      <a class="proj-box" href="https://mandyhoami-lab.github.io/pm-sentences/" target="_blank" rel="noopener">
+        <span class="proj-box__title">PM Sentences Task</span>
+        <span class="proj-box__desc">Prospective memory task · built for a short-form content study</span>
+      </a>
       <a class="proj-box" href="/synergy.html">
         <span class="proj-box__title">Synergy</span>
         <span class="proj-box__desc">The corporate-buzzword esolang</span>
