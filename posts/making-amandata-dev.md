@@ -18,7 +18,7 @@ The site originated as a Carrd site, a hosted site-builder page. My workflow beg
 
 ### The rebuild
 
-Working from the mirror, Kori and I rebuilt the site completely as hand-written files: index.html, styles.css, script.js, and README.md. The rebuild introduced a black, turquoise, and magenta "clinical cyber-pop" theme and removed the build step entirely. The Carrd-era site was superseded on the main branch while remaining available on the archive branch as a historical record.
+Working from the mirror, [Kori](https://korikosmos.dev) and I rebuilt the site completely as hand-written files: index.html, styles.css, script.js, and README.md. The rebuild introduced a black, turquoise, and magenta "clinical cyber-pop" theme and removed the build step entirely. The Carrd-era site was superseded on the main branch while remaining available on the archive branch as a historical record.
 
 ## Development workflow
 
@@ -27,8 +27,8 @@ The site's production follows a five-stage workflow, with creative direction hel
 | Stage | Description | Principal |
 |---|---|---|
 | 1. Builder | Initial site created on Carrd; creative direction established | Mandy |
-| 2. Mirror | Static copy of the rendered site produced as a reference artifact | KoriKosmos |
-| 3. Rebuild | Complete rewrite as hand-written HTML/CSS/JS; no build step | Mandy and KoriKosmos |
+| 2. Mirror | Static copy of the rendered site produced as a reference artifact | [KoriKosmos](https://korikosmos.dev) |
+| 3. Rebuild | Complete rewrite as hand-written HTML/CSS/JS; no build step | Mandy and [KoriKosmos](https://korikosmos.dev) |
 | 4. Direction | Interactive elements and UX improvements added; personality and aesthetics preserved | Mandy |
 | 5. Extension | Aesthetic system extended: theme system, type system, and content hubs | Mandy |
 
