@@ -103,7 +103,7 @@
     "</nav>";
 
   var footerHtml =
-    '<footer class="footer"><p>\u00a9 2026 Amanda Ta \u00b7 amandata.dev</p></footer>';
+    '<footer class="footer"><p>\u00a9 2026 Amanda Ta \u00b7 amandata.dev \u00b7 <a href="/rss.xml">RSS</a></p></footer>';
 
   /* canvas first (fixed background), nav right after it, footer last */
   var canvas = document.createElement("canvas");

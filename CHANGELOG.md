@@ -3,6 +3,18 @@
 A catalog of the notable commits on this repo's `main` branch.
 Full history: `git log` on the repo, or the Commits page on GitHub.
 
+## 2026-11-13
+
+- **Blog reading tools (from korikosmos.dev)**: each post heading gets a
+  `#` button that copies a link straight to that section, code blocks get
+  a copy button, and a progress strip under the nav tracks the article.
+  Opening a `#section` link now lands on the section even though posts
+  render after load. The copy-link button shares the same copy helper.
+- **RSS feed**: `/rss.xml`, built from `posts/index.json` and the post
+  files by `scripts/build-rss.mjs` (`npm run rss`). The Build workflow now
+  also runs on `posts/**` and commits the refreshed feed, so publishing a
+  post is unchanged. Linked from the blog and home `<head>` and the footer.
+
 ## 2026-10-14
 
 - **Sticky footer** — body is now a full-height flex column

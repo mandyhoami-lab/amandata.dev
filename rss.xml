@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Amanda Ta, blog</title>
+    <link>https://amandata.dev/blog.html</link>
+    <description>Notes and essays by Amanda Ta.</description>
+    <language>en</language>
+    <atom:link href="https://amandata.dev/rss.xml" rel="self" type="application/rss+xml"/>
+    <lastBuildDate>Sun, 18 Oct 2026 12:00:00 GMT</lastBuildDate>
+    <item>
+      <title>a programming language but it&apos;s all corporate buzzword</title>
+      <link>https://amandata.dev/blog.html?p=synergy-corporate-buzzword-esolang</link>
+      <guid isPermaLink="true">https://amandata.dev/blog.html?p=synergy-corporate-buzzword-esolang</guid>
+      <pubDate>Sun, 18 Oct 2026 12:00:00 GMT</pubDate>
+      <description>Esoslangs are short for &quot;esoteric programming languages&quot;, and they live on a wiki called esolangs.org. I like to imagine them as.. fully functioning satirical programming languages or coding art projects rather than any practical applications.  Some famous ones include brainfuck,…</description>
+    </item>
+    <item>
+      <title>Building the Reversi Coach: turning the Othello bot into a learning system</title>
+      <link>https://amandata.dev/blog.html?p=building-the-reversi-coach-turning-the-othello-bot-into-a-learning-system</link>
+      <guid isPermaLink="true">https://amandata.dev/blog.html?p=building-the-reversi-coach-turning-the-othello-bot-into-a-learning-system</guid>
+      <pubDate>Thu, 01 Oct 2026 12:00:00 GMT</pubDate>
+      <description>By tarotams From a teachable robot to a study mode that grades every move: how a childhood favorite became the site&apos;s learning system.  Why othello Othello has been one of my favorite abstract strategy board games since I was a kid, the kind of game that takes a minute to learn a…</description>
+    </item>
+    <item>
+      <title>Making amandata.dev</title>
+      <link>https://amandata.dev/blog.html?p=making-amandata-dev</link>
+      <guid isPermaLink="true">https://amandata.dev/blog.html?p=making-amandata-dev</guid>
+      <pubDate>Thu, 01 Oct 2026 12:00:00 GMT</pubDate>
+      <description>By tarotams This is the first of many blog posts, and I wanted it to be about the site you are reading it on. amandata.dev started as a Carrd page I was renting space on and became something I built file by file, with help from KoriKosmos. What follows includes a lot of dates, st…</description>
+    </item>
+  </channel>
+</rss>

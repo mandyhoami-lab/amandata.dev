@@ -2,13 +2,16 @@ name: Build TypeScript
 
 # When a .ts file (or tsconfig) is pushed, compile it in the cloud and commit
 # the compiled .js back, so editing TypeScript from a phone is enough — no
-# local tsc run needed. Pushes made by this workflow do not re-trigger it.
+# local tsc run needed. It also rebuilds rss.xml when posts change.
+# Pushes made by this workflow do not re-trigger it.
 on:
   push:
     branches: [main]
     paths:
       - '**.ts'
       - 'tsconfig.json'
+      - 'posts/**'
+      - 'scripts/build-rss.mjs'
   workflow_dispatch:
 
 permissions:
@@ -24,10 +27,12 @@ jobs:
           node-version: 20
       - name: Compile TypeScript
         run: npx -y -p typescript@5.6.3 tsc -p tsconfig.json
-      - name: Commit compiled JS
+      - name: Build RSS feed
+        run: node scripts/build-rss.mjs
+      - name: Commit compiled JS and feed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add '*.js'
+          git add '*.js' rss.xml
           git diff --cached --quiet || git commit -m "chore: rebuild compiled JS from TypeScript [skip ci]"
           git push

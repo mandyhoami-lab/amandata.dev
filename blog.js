@@ -47,7 +47,17 @@
   .comment-form button{background:var(--green);color:#fff;border:none;border-radius:4px;padding:0.55rem 1.1rem;font-family:var(--micro);font-size:1.1rem;letter-spacing:0.05em;cursor:pointer}
   .comment-form button:disabled{opacity:0.6;cursor:default}
   .comment-note{font-size:0.9rem;color:var(--dim);margin:0.5rem 0 0}
-  .comment-status{color:var(--dim);font-size:0.95rem;margin:0 0 0.75rem}`;
+  .comment-status{color:var(--dim);font-size:0.95rem;margin:0 0 0.75rem}
+  #post-body h2[id],#post-body h3[id],#post-body h4[id]{scroll-margin-top:4.5rem}
+  .heading-link{margin-left:0.4rem;padding:0 0.3rem;background:none;border:1px solid transparent;border-radius:4px;color:var(--dim);font:inherit;font-size:0.85em;cursor:pointer;opacity:0;transition:opacity 0.15s ease}
+  #post-body h2:hover .heading-link,#post-body h3:hover .heading-link,#post-body h4:hover .heading-link,.heading-link:focus-visible{opacity:1}
+  .heading-link:hover{color:var(--green);border-color:var(--line)}
+  @media (hover:none){.heading-link{opacity:0.6}}
+  .code-wrap{position:relative}
+  .code-wrap pre{padding-right:4.5rem}
+  .code-copy{position:absolute;top:0.4rem;right:0.4rem;padding:0.15rem 0.6rem;background:var(--card-bg);border:1px solid var(--line);border-radius:4px;color:var(--dim);font-family:var(--micro);font-size:1rem;letter-spacing:0.04em;cursor:pointer}
+  .code-copy:hover{border-color:var(--green);color:var(--green)}
+  @media (prefers-reduced-motion:reduce){.heading-link{transition:none}}`;
         document.head.appendChild(style);
         mount.outerHTML = `<div class="vignette" aria-hidden="true"></div>
 
@@ -289,6 +299,7 @@
                         h.id = slug;
                     }
                 })();
+                readingTools();
                 initComments(slug);
             });
         })
@@ -296,6 +307,122 @@
             document.getElementById("post-body").innerHTML = "<p>couldn't load the post, try refreshing.</p>";
         })
             .finally(function () { setLoading(false); });
+    }
+    /* ---------- reading tools (borrowed from korikosmos.dev) ----------
+       After a post renders: a # button on each heading that copies a link to
+       that section, a copy button on code blocks, and a progress strip under
+       the nav that tracks the article. */
+    function copyText(text) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            return navigator.clipboard.writeText(text).then(function () { return true; }, function () { return false; });
+        }
+        var ta = document.createElement("textarea");
+        ta.value = text;
+        ta.setAttribute("readonly", "");
+        ta.style.position = "fixed";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        var ok = false;
+        try {
+            ok = document.execCommand("copy");
+        }
+        catch (e) {
+            ok = false;
+        }
+        document.body.removeChild(ta);
+        return Promise.resolve(ok);
+    }
+    /* Swap a button's label briefly to report the copy result. */
+    function flash(btn, ok, idle) {
+        btn.textContent = ok ? "copied!" : "copy failed";
+        setTimeout(function () { btn.textContent = idle; }, 1500);
+    }
+    function readingTools() {
+        var body = document.getElementById("post-body");
+        /* "#" buttons: copy a link straight to that section. */
+        var linkable = body.querySelectorAll("h2[id],h3[id],h4[id]");
+        for (var j = 0; j < linkable.length; j++) {
+            (function (h) {
+                var btn = document.createElement("button");
+                btn.type = "button";
+                btn.className = "heading-link";
+                btn.textContent = "#";
+                btn.setAttribute("aria-label", "Copy link to section: " + (h.textContent || ""));
+                btn.addEventListener("click", function () {
+                    var url = location.href.split("#")[0] + "#" + h.id;
+                    try {
+                        history.replaceState(null, "", url);
+                    }
+                    catch (e) { /* file:// etc. */ }
+                    copyText(url).then(function (ok) {
+                        btn.textContent = ok ? "\u2713" : "!";
+                        setTimeout(function () { btn.textContent = "#"; }, 1500);
+                    });
+                });
+                h.appendChild(btn);
+            })(linkable[j]);
+        }
+        /* Copy buttons on code blocks. */
+        var blocks = body.querySelectorAll("pre");
+        for (var k = 0; k < blocks.length; k++) {
+            (function (pre) {
+                var wrap = document.createElement("div");
+                wrap.className = "code-wrap";
+                pre.parentNode.insertBefore(wrap, pre);
+                wrap.appendChild(pre);
+                var btn = document.createElement("button");
+                btn.type = "button";
+                btn.className = "code-copy";
+                btn.textContent = "copy";
+                btn.setAttribute("aria-label", "Copy code");
+                btn.addEventListener("click", function () {
+                    copyText(pre.textContent || "").then(function (ok) { flash(btn, ok, "copy"); });
+                });
+                wrap.appendChild(btn);
+            })(blocks[k]);
+        }
+        postProgress();
+        /* The post renders after load, so the browser's own jump to #section
+           already missed. Do it now that the heading exists. */
+        if (location.hash) {
+            var target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+            if (target)
+                target.scrollIntoView();
+        }
+    }
+    /* Progress strip under the sticky nav, tracking the article (title to the
+       end of the post body), not the comments below it. */
+    var progressBound = false;
+    function postProgress() {
+        var nav = document.querySelector(".nav");
+        if (!nav || progressBound)
+            return;
+        progressBound = true;
+        var bar = document.createElement("div");
+        bar.className = "progress";
+        bar.setAttribute("aria-hidden", "true");
+        nav.appendChild(bar);
+        var article = document.getElementById("post-body");
+        var queued = false;
+        function update() {
+            queued = false;
+            var rect = article.getBoundingClientRect();
+            var start = postView.getBoundingClientRect().top + window.scrollY;
+            var end = rect.bottom + window.scrollY - window.innerHeight;
+            var span = end - start;
+            var pct = span > 0 ? (window.scrollY - start) / span : 1;
+            bar.style.width = Math.max(0, Math.min(1, pct)) * 100 + "%";
+        }
+        function request() {
+            if (queued)
+                return;
+            queued = true;
+            requestAnimationFrame(update);
+        }
+        window.addEventListener("scroll", request, { passive: true });
+        window.addEventListener("resize", request);
+        update();
     }
     /* ---------- comments + reactions ---------- */
     function sbHeaders() {
@@ -495,27 +622,7 @@
     var copyBtn = document.getElementById("copy-link");
     if (copyBtn) {
         copyBtn.addEventListener("click", function () {
-            var url = window.location.href;
-            function done(ok) {
-                copyBtn.textContent = ok ? "copied!" : "copy failed";
-                setTimeout(function () { copyBtn.textContent = "copy link"; }, 1500);
-            }
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(url).then(function () { done(true); }, function () { done(false); });
-            }
-            else {
-                var ta = document.createElement("textarea");
-                ta.value = url;
-                document.body.appendChild(ta);
-                ta.select();
-                try {
-                    done(document.execCommand("copy"));
-                }
-                catch (e) {
-                    done(false);
-                }
-                document.body.removeChild(ta);
-            }
+            copyText(window.location.href).then(function (ok) { flash(copyBtn, ok, "copy link"); });
         });
     }
 })();

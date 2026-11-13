@@ -935,6 +935,8 @@ mark.key{
   color: var(--nav-ink);
 }
 .footer p{ margin: 0; }
+.footer a{ color: inherit; text-underline-offset: 3px; }
+.footer a:hover{ color: var(--sand); }
 
 /* ================= responsive ================= */
 @media (max-width: 640px){
